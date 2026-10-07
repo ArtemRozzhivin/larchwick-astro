@@ -1,0 +1,18 @@
+#!/bin/sh
+
+echo "▶️ Running pre-commit checks on staged files..."
+
+npx lint-staged
+if [ $? -ne 0 ]; then
+  echo "❌ Prettier/ESLint checks failed."
+  exit 1
+fi
+
+echo "🔷 Checking types and Astro templates..."
+npm run check
+if [ $? -ne 0 ]; then
+  echo "❌ astro check failed."
+  exit 1
+fi
+
+echo "✅ Pre-commit checks passed!"

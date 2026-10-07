@@ -1,0 +1,51 @@
+---
+/**
+ * Uses native <details>/<summary>, so the accordion works with zero JavaScript
+ * and stays keyboard accessible for free.
+ */
+import Section from './Section.astro'
+
+interface FaqItem {
+  question: string
+  answer: string
+}
+
+interface Props {
+  id?: string
+  eyebrow?: string
+  title?: string
+  subtitle?: string
+  items: readonly FaqItem[]
+}
+
+const { id = 'faq', eyebrow, title, subtitle, items } = Astro.props
+---
+
+<Section id={id} eyebrow={eyebrow} title={title} subtitle={subtitle} tone="muted">
+  <div
+    class="mx-auto max-w-3xl divide-y divide-gray-200 rounded-2xl border border-gray-200 bg-white"
+  >
+    {
+      items.map((item) => (
+        <details class="group px-6 py-5 [&_summary::-webkit-details-marker]:hidden">
+          <summary class="focus-visible:ring-primary-600 flex cursor-pointer items-center justify-between gap-4 rounded-lg font-medium text-gray-900 focus-visible:ring-2 focus-visible:ring-offset-4 focus-visible:outline-none">
+            {item.question}
+            <svg
+              class="size-5 shrink-0 text-gray-400 transition-transform group-open:rotate-180"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+              aria-hidden="true"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M5.23 7.21a.75.75 0 0 1 1.06.02L10 11.17l3.71-3.94a.75.75 0 1 1 1.08 1.04l-4.25 4.5a.75.75 0 0 1-1.08 0l-4.25-4.5a.75.75 0 0 1 .02-1.06Z"
+                clip-rule="evenodd"
+              />
+            </svg>
+          </summary>
+          <p class="mt-3 text-gray-600">{item.answer}</p>
+        </details>
+      ))
+    }
+  </div>
+</Section>

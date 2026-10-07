@@ -1,0 +1,22 @@
+services:
+  # Development — hot reload via Vite, source mounted as a volume
+  # Usage: docker compose up dev
+  dev:
+    image: node:20-alpine
+    working_dir: /app
+    volumes:
+      - .:/app
+      - /app/node_modules
+    ports:
+      - '4321:4321'
+    env_file: .env
+    command: sh -c "npm install && npm run dev -- --host"
+
+  # Production — builds with @astrojs/node adapter, runs the compiled server
+  # Usage: docker compose up app
+  app:
+    build: .
+    ports:
+      - '4321:4321'
+    env_file: .env
+    restart: unless-stopped

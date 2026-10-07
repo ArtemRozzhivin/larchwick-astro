@@ -1,0 +1,50 @@
+---
+import { siteConfig } from '@lib/config/site'
+
+const socialEntries = Object.entries(siteConfig.social) as [string, string][]
+---
+
+<footer class="border-t border-gray-100 bg-white py-12">
+  <div class="container-wide">
+    <div class="flex flex-col items-center justify-between gap-6 md:flex-row">
+      <a
+        href="/"
+        class="focus-visible:ring-primary-600 rounded font-semibold tracking-tight text-gray-900 focus-visible:ring-2 focus-visible:ring-offset-4 focus-visible:outline-none"
+      >
+        {siteConfig.name}
+      </a>
+
+      <nav aria-label="Footer" class="flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
+        {
+          siteConfig.footer.links.map((link) => (
+            <a
+              href={link.href}
+              class="hover:text-primary-600 focus-visible:ring-primary-600 rounded text-sm text-gray-600 transition-colors focus-visible:ring-2 focus-visible:ring-offset-4 focus-visible:outline-none"
+            >
+              {link.label}
+            </a>
+          ))
+        }
+      </nav>
+
+      <ul class="flex items-center gap-4">
+        {
+          socialEntries.map(([name, href]) => (
+            <li>
+              <a
+                href={href}
+                rel="noopener noreferrer"
+                target="_blank"
+                class="hover:text-primary-600 focus-visible:ring-primary-600 rounded text-sm text-gray-500 capitalize transition-colors focus-visible:ring-2 focus-visible:ring-offset-4 focus-visible:outline-none"
+              >
+                {name}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    <p class="mt-8 text-center text-sm text-gray-500">{siteConfig.footer.copyright}</p>
+  </div>
+</footer>

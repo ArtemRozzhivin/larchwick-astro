@@ -1,0 +1,14 @@
+node_modules/
+dist/
+.astro/
+.env
+.env.*
+!.env.example
+.git/
+.github/
+.vercel/
+.claude/
+.husky/
+*.log
+npm-debug.log*
+.DS_Store

@@ -1,0 +1,24 @@
+---
+/**
+ * A landing page is just a Layout plus an ordered list of sections.
+ * All copy comes from src/lib/content/home.ts — reorder, drop, or duplicate the
+ * blocks below to reshape the page without touching a component.
+ */
+import { home } from '@lib/content/home'
+import CTA from '@components/sections/CTA.astro'
+import FAQ from '@components/sections/FAQ.astro'
+import Features from '@components/sections/Features.astro'
+import Hero from '@components/sections/Hero.astro'
+import Logos from '@components/sections/Logos.astro'
+import Testimonials from '@components/sections/Testimonials.astro'
+import Layout from '@layouts/Layout.astro'
+---
+
+<Layout headerCta={home.hero.primaryCta}>
+  <Hero {...home.hero} />
+  <Logos {...home.logos} />
+  <Features {...home.features} />
+  <Testimonials {...home.testimonials} />
+  <FAQ {...home.faq} />
+  <CTA {...home.cta} />
+</Layout>

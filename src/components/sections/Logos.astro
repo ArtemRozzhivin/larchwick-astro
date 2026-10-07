@@ -1,0 +1,39 @@
+---
+interface Props {
+  id?: string
+  title?: string
+  /** Plain text names, or `{ name, src }` to render a real logo image. */
+  items: readonly (string | { name: string; src: string })[]
+}
+
+const { id, title, items } = Astro.props
+
+const normalized = items.map((item) => (typeof item === 'string' ? { name: item } : item))
+---
+
+<section id={id} class="border-y border-gray-100 bg-white py-12">
+  <div class="container-wide">
+    {title && <p class="mb-8 text-center text-sm font-medium text-gray-500">{title}</p>}
+    <ul class="flex flex-wrap items-center justify-center gap-x-12 gap-y-6">
+      {
+        normalized.map((item) => (
+          <li>
+            {'src' in item && item.src ? (
+              <img
+                src={item.src}
+                alt={item.name}
+                width="120"
+                height="32"
+                loading="lazy"
+                decoding="async"
+                class="h-8 w-auto opacity-60 grayscale transition-opacity hover:opacity-100"
+              />
+            ) : (
+              <span class="text-xl font-semibold tracking-tight text-gray-400">{item.name}</span>
+            )}
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>

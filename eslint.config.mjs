@@ -1,0 +1,81 @@
+import eslintPluginAstro from 'eslint-plugin-astro'
+import eslintPluginPrettier from 'eslint-plugin-prettier/recommended'
+import unusedImports from 'eslint-plugin-unused-imports'
+import simpleImportSort from 'eslint-plugin-simple-import-sort'
+import tsParser from '@typescript-eslint/parser'
+import prettierConfig from './prettier.config.mjs'
+
+export default [
+  {
+    ignores: [
+      'dist/**',
+      'node_modules/**',
+      '.astro/**',
+      '.vercel/**',
+      'build/**',
+      'public/**',
+      '.cache/**',
+    ],
+  },
+
+  ...eslintPluginAstro.configs['flat/recommended'],
+
+  {
+    files: ['**/*.{ts,tsx}'],
+    languageOptions: {
+      parser: tsParser,
+      parserOptions: {
+        ecmaVersion: 'latest',
+        sourceType: 'module',
+      },
+    },
+  },
+
+  {
+    files: ['**/*.{js,jsx,ts,tsx,astro}'],
+    plugins: {
+      'unused-imports': unusedImports,
+      'simple-import-sort': simpleImportSort,
+    },
+    rules: {
+      'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
+      // 'no-unused-vars': 'off',
+
+      'simple-import-sort/imports': [
+        'error',
+        {
+          groups: [
+            ['^\\u0000'],
+            ['^react$', '^@?\\w'],
+            ['^@services', '^@lib', '^@components', '^@content', '^@layouts', '^@assets', '^@'],
+            ['^\\.'],
+            ['^.+\\.(module.css|module.scss)$'],
+            ['^.+\\.(gif|png|svg|jpg|jpeg)$'],
+          ],
+        },
+      ],
+
+      'simple-import-sort/exports': 'error',
+
+      'unused-imports/no-unused-imports': 'warn',
+      'unused-imports/no-unused-vars': [
+        'error',
+        {
+          vars: 'all',
+          varsIgnorePattern: '^_',
+          args: 'after-used',
+          argsIgnorePattern: '^_',
+        },
+      ],
+    },
+  },
+
+  {
+    ...eslintPluginPrettier,
+    files: ['**/*.{js,jsx,ts,tsx}'],
+    rules: {
+      ...eslintPluginPrettier.rules,
+      'prettier/prettier': ['error', prettierConfig],
+    },
+  },
+]

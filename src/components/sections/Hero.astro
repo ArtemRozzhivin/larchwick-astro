@@ -1,0 +1,67 @@
+---
+interface Cta {
+  label: string
+  href: string
+}
+
+interface Props {
+  id?: string
+  eyebrow?: string
+  title: string
+  subtitle?: string
+  primaryCta?: Cta
+  secondaryCta?: Cta
+  note?: string
+}
+
+const { id = 'hero', eyebrow, title, subtitle, primaryCta, secondaryCta, note } = Astro.props
+---
+
+<section id={id} class="bg-white pt-20 pb-20 md:pt-28 md:pb-28">
+  <div class="container-wide">
+    <div class="mx-auto max-w-3xl text-center">
+      {
+        eyebrow && (
+          <p class="border-primary-200 bg-primary-50 text-primary-700 mb-6 inline-flex items-center rounded-full border px-3 py-1 text-sm font-medium">
+            {eyebrow}
+          </p>
+        )
+      }
+
+      <h1
+        class="text-4xl font-semibold tracking-tight text-balance text-gray-900 md:text-6xl md:leading-[1.1]"
+      >
+        {title}
+      </h1>
+
+      {subtitle && <p class="mt-6 text-lg text-pretty text-gray-600 md:text-xl">{subtitle}</p>}
+
+      {
+        (primaryCta || secondaryCta) && (
+          <div class="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
+            {primaryCta && (
+              <a
+                href={primaryCta.href}
+                class="bg-primary-600 hover:bg-primary-700 focus-visible:ring-primary-600 inline-flex w-full items-center justify-center rounded-2xl px-8 py-4 text-lg font-medium text-white transition-colors focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none sm:w-auto"
+              >
+                {primaryCta.label}
+              </a>
+            )}
+            {secondaryCta && (
+              <a
+                href={secondaryCta.href}
+                class="focus-visible:ring-primary-600 inline-flex w-full items-center justify-center rounded-2xl border border-gray-300 px-8 py-4 text-lg font-medium text-gray-900 transition-colors hover:bg-gray-50 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none sm:w-auto"
+              >
+                {secondaryCta.label}
+              </a>
+            )}
+          </div>
+        )
+      }
+
+      {note && <p class="mt-4 text-sm text-gray-500">{note}</p>}
+    </div>
+
+    <slot />
+  </div>
+</section>

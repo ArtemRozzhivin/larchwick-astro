@@ -1,0 +1,151 @@
+# Project Structure
+
+A landing page here is **a Layout plus an ordered list of sections, with all copy
+in a content file**. That split is the whole point: the next page takes an hour.
+
+---
+
+## Root
+
+```
+astro-template/
+├── .github/         CI workflow
+├── docs/            Documentation
+│   ├── internal/    Pages, status, what is still placeholder
+│   ├── pages/       One doc per page, for PM/QA/clients + index
+│   └── STRUCTURE.md this file
+├── public/          Served as-is (favicon, og.png, fonts you self-host)
+├── src/             Source
+└── astro.config.ts  Default build (Vercel). astro.config.docker.ts = Node/Docker
+```
+
+---
+
+## Source
+
+```
+src/
+├── pages/                      Routes. One file = one URL.
+│   ├── index.astro             Home — Layout + sections, no copy
+│   ├── 404.astro               Full-screen, header/footer hidden
+│   └── robots.txt.ts           Generated from siteConfig at build time
+│
+├── layouts/
+│   └── Layout.astro            <head>, SEO, JSON-LD, Header, Footer
+│
+├── components/
+│   ├── sections/               The page blocks
+│   │   ├── Section.astro       Layout primitive: container, rhythm, header
+│   │   ├── Header.astro        Sticky nav + mobile menu (zero JS)
+│   │   ├── Hero.astro
+│   │   ├── Logos.astro
+│   │   ├── Features.astro
+│   │   ├── Testimonials.astro
+│   │   ├── FAQ.astro           <details> accordion (zero JS)
+│   │   ├── CTA.astro
+│   │   └── Footer.astro
+│   └── ui/                     Primitives
+│       ├── button.tsx          cva variants; .astro uses buttonVariants()
+│       ├── input.tsx
+│       └── Icon.astro          lucide icon by name, server-rendered
+│
+├── lib/
+│   ├── config/site.ts          Brand, URL, nav, social, footer — single source
+│   ├── content/home.ts         All copy for the home page
+│   ├── types/icon.ts           Allowed icon names
+│   └── utils/                  cn() and friends
+│
+└── styles/global.css           Tailwind v4 @theme tokens, keyframes, container
+```
+
+---
+
+## Building a page
+
+1. **Copy** → `src/lib/content/<page>.ts`, one exported object, `as const`.
+2. **Page** → `src/pages/<page>.astro`: a Layout and the sections you need.
+3. **New block** → only if nothing in `sections/` fits.
+
+```astro
+---
+import Hero from '@components/sections/Hero.astro'
+import FAQ from '@components/sections/FAQ.astro'
+import { pricing } from '@lib/content/pricing'
+import Layout from '@layouts/Layout.astro'
+---
+
+<Layout title="Pricing" description="Simple plans for every team.">
+  <Hero {...pricing.hero} />
+  <FAQ {...pricing.faq} />
+</Layout>
+```
+
+`Layout` already renders the header and footer. Turn them off per page with
+`showHeader={false}` / `showFooter={false}`.
+
+---
+
+## Section contract
+
+Every block in `sections/` follows the same shape, so they stay interchangeable:
+
+- a typed `interface Props` in the frontmatter, `readonly` arrays for lists
+- **all copy arrives via props** — never baked into the component
+- an optional `id` with a default, so in-page anchors work
+- built on `Section.astro` unless it needs a full-bleed layout
+- static markup, no `client:` directive
+- colour from tokens only
+
+Copy the closest existing section rather than starting from scratch.
+
+---
+
+## Where does this go?
+
+| What                                       | Where                       |
+| ------------------------------------------ | --------------------------- |
+| Words a visitor reads on one page          | `src/lib/content/<page>.ts` |
+| Brand name, URL, nav, social, footer links | `src/lib/config/site.ts`    |
+| A reusable page block                      | `src/components/sections/`  |
+| A small reusable element (button, input)   | `src/components/ui/`        |
+| A colour, shadow, or font token            | `src/styles/global.css`     |
+| A route                                    | `src/pages/`                |
+
+---
+
+## JavaScript
+
+The default page ships **~4.5 kB gzip** (view transitions) and nothing else — or
+zero, with `viewTransitions={false}`.
+
+Order of preference: HTML → CSS → a React island. The FAQ accordion and the mobile
+menu are `<details>`/`<summary>`; icons are `lucide-react` rendered on the server
+as inline SVG. React is available, but a component only hydrates when a page adds
+an explicit `client:` directive — prefer `client:visible` or `client:idle` over
+`client:load`.
+
+---
+
+## Aliases
+
+Defined in `tsconfig.json`. Use them whenever an import crosses a folder; keep
+relative imports inside one folder.
+
+```
+@lib  @lib/*  @components/*  @layouts/*  @assets/*  @content/*
+```
+
+---
+
+## Conventions
+
+1. **One `<h1>` per page** — the Hero title. Section headings are `<h2>`.
+2. **Tokens only for colour** — `primary-*`, `secondary-*`, `accent-*`,
+   `shadow-soft`, `shadow-card`. No hex or arbitrary values in components, so a
+   rebrand stays a one-file change.
+3. **`Section.astro` owns spacing** — do not re-do padding inside a block that
+   already sits in it.
+4. **`siteConfig` owns the brand** — never hardcode a name, URL, or social link.
+5. **Images** — `astro:assets` `<Image>` for anything in `src/assets/`; a raw
+   `<img>` only for files already in `public/`, always with `width`, `height`,
+   `loading`, and `decoding`.

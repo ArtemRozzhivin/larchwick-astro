@@ -1,0 +1,48 @@
+#!/bin/sh
+
+# Block direct push to main
+current_branch=$(git rev-parse --abbrev-ref HEAD)
+if [ "$current_branch" = "main" ]; then
+  echo "❌ Direct push to 'main' is not allowed."
+  echo ""
+  echo "👉 Create a branch for your changes:"
+  echo "   feat/your-feature     — new section, page, or capability"
+  echo "   fix/your-bug          — bug fix"
+  echo "   refactor/your-change  — restructure without behaviour change"
+  echo "   chore/your-task       — tooling / config"
+  echo ""
+  echo "   git checkout -b feat/your-feature-name"
+  exit 1
+fi
+
+echo "▶️ Running pre-push checks..."
+
+echo "🎨 Checking formatting..."
+npm run format:check
+if [ $? -ne 0 ]; then
+  echo "❌ Formatting check failed. Run 'npm run format' to fix."
+  exit 1
+fi
+
+echo "🔍 Running ESLint..."
+npm run lint
+if [ $? -ne 0 ]; then
+  echo "❌ ESLint check failed."
+  exit 1
+fi
+
+echo "🔷 Checking types and Astro templates..."
+npm run check
+if [ $? -ne 0 ]; then
+  echo "❌ astro check failed."
+  exit 1
+fi
+
+echo "🏗️ Running build..."
+npm run build
+if [ $? -ne 0 ]; then
+  echo "❌ Build failed. Fix the errors above before pushing."
+  exit 1
+fi
+
+echo "✅ Pre-push checks passed!"

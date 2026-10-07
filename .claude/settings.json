@@ -1,0 +1,63 @@
+{
+  "permissions": {
+    "allow": [
+      "Edit(docs/internal/**)",
+      "Write(docs/internal/**)",
+      "Edit(docs/pages/**)",
+      "Write(docs/pages/**)",
+      "Edit(docs/**)",
+      "Write(docs/**)",
+      "Edit(.claude/docs/**)",
+      "Write(.claude/docs/**)",
+      "Bash(npm run check:*)",
+      "Bash(npm run lint:*)",
+      "Bash(npm run format:*)",
+      "Bash(npm run verify:*)",
+      "Bash(npm run build:*)",
+      "Bash(npx astro check:*)",
+      "Bash(git status:*)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)",
+      "Bash(git branch:*)",
+      "Bash(git show:*)"
+    ],
+    "deny": ["Read(./.env)", "Read(./.env.production)", "Read(./.env.*.local)"]
+  },
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR/.claude/hooks/session-start.sh\""
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR/.claude/hooks/format-file.sh\"",
+            "statusMessage": "Formatting the edited file with Prettier..."
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR/.claude/hooks/check-docs-sync.sh\"",
+            "statusMessage": "Checking WORKLOG/PROJECT/pages docs are in sync..."
+          }
+        ]
+      }
+    ]
+  }
+}

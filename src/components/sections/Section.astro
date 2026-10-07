@@ -1,0 +1,72 @@
+---
+/**
+ * Layout primitive every section is built on.
+ *
+ * Owns the container width, vertical rhythm, and the optional eyebrow/title/
+ * subtitle header, so sections stay consistent without repeating the markup.
+ */
+interface Props {
+  id?: string
+  eyebrow?: string
+  title?: string
+  subtitle?: string
+  align?: 'left' | 'center'
+  tone?: 'default' | 'muted' | 'inverted'
+  class?: string
+}
+
+const {
+  id,
+  eyebrow,
+  title,
+  subtitle,
+  align = 'center',
+  tone = 'default',
+  class: className = '',
+} = Astro.props
+
+const TONE_CLASSES: Record<NonNullable<Props['tone']>, string> = {
+  default: 'bg-white text-gray-900',
+  muted: 'bg-gray-50 text-gray-900',
+  inverted: 'bg-gray-900 text-white',
+}
+
+const hasHeader = Boolean(eyebrow || title || subtitle)
+const isCentered = align === 'center'
+const isInverted = tone === 'inverted'
+---
+
+<section id={id} class:list={['py-20 md:py-28', TONE_CLASSES[tone], className]}>
+  <div class="container-wide">
+    {
+      hasHeader && (
+        <header class:list={['mb-12 md:mb-16', isCentered && 'mx-auto max-w-2xl text-center']}>
+          {eyebrow && (
+            <p
+              class:list={[
+                'mb-3 text-sm font-semibold tracking-wide uppercase',
+                isInverted ? 'text-primary-300' : 'text-primary-600',
+              ]}
+            >
+              {eyebrow}
+            </p>
+          )}
+          {title && (
+            <h2 class="text-3xl font-semibold tracking-tight text-balance md:text-4xl">{title}</h2>
+          )}
+          {subtitle && (
+            <p
+              class:list={[
+                'mt-4 text-lg text-pretty',
+                isInverted ? 'text-gray-300' : 'text-gray-600',
+              ]}
+            >
+              {subtitle}
+            </p>
+          )}
+        </header>
+      )
+    }
+    <slot />
+  </div>
+</section>

@@ -1,0 +1,44 @@
+---
+/**
+ * Renders a lucide icon by name.
+ *
+ * lucide-react components are rendered on the server here — no `client:` directive
+ * means Astro emits plain inline SVG and ships zero JavaScript for them.
+ */
+import {
+  Check,
+  LayoutGrid,
+  Palette,
+  Rocket,
+  Search,
+  ShieldCheck,
+  Sparkles,
+  Star,
+  Zap,
+} from 'lucide-react'
+
+import type { IconName } from '@lib/types'
+
+interface Props {
+  name: IconName
+  class?: string
+}
+
+const { name, class: className = 'size-6' } = Astro.props
+
+const ICONS = {
+  zap: Zap,
+  search: Search,
+  layout: LayoutGrid,
+  palette: Palette,
+  shield: ShieldCheck,
+  rocket: Rocket,
+  check: Check,
+  star: Star,
+  sparkles: Sparkles,
+} as const
+
+const Component = ICONS[name]
+---
+
+<Component className={className} aria-hidden="true" />
