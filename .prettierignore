@@ -7,6 +7,10 @@ dist/
 node_modules/
 package-lock.json
 
+# Measured evidence (Lighthouse JSON, exports) — must stay byte-identical to what was recorded.
+docs/before/
+docs/after/
+
 # Agent instruction files — XML-tagged prose with intentional column alignment
 # that Prettier's markdown printer flattens.
 .claude/
