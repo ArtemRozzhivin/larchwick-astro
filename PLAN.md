@@ -5,12 +5,12 @@ time**. Each phase ends with a short "what we did / what's next" and Artem's go-
 next one starts. Tick the boxes as work lands, and log every decision in
 [Decisions](#3-decisions).
 
-Last updated: 2026-10-12 · Current phase: **Phase 0 — in review** (PR into `dev`)
+Last updated: 2026-10-12 · Current phase: **Phase 1 — in progress**
 
 | #   | Phase                                    | Status      |
 | --- | ---------------------------------------- | ----------- |
-| 0   | Repo hygiene and open decisions          | in review   |
-| 1   | Measure the "before" site properly       | not started |
+| 0   | Repo hygiene and open decisions          | done        |
+| 1   | Measure the "before" site properly       | in progress |
 | 2a  | Astro 7 upgrade and template cleanup     | not started |
 | 2b  | Brand foundation (tokens, fonts, layout) | not started |
 | 2c  | First Cloudflare deploy                  | not started |
@@ -277,7 +277,7 @@ redirect is a **301** that lands on the final URL in **one hop**.
 | `/category/<x>/`                                                              | 3       | `/blog/category/<x>/`                                 | dynamic, literal `/category/` prefix                                                                                            |
 | `/tag/<x>/`                                                                   | 8       | `/blog/tag/<x>/`                                      | dynamic, literal `/tag/` prefix                                                                                                 |
 | Date archives `/2025/…`, `/2026/…`                                            | 18      | `/blog/`                                              | `/2025/*` and `/2026/*`. **Never bare `:year/:month` placeholders**: they would also match live routes such as `/blog/<slug>/`. |
-| `/author/<login>/`                                                            | 1       | `/about/`                                             | static                                                                                                                          |
+| `/author/<login>/`                                                            | 1       | `/about/`                                             | dynamic `/author/*`, so the login is never written into any file (D-11)                                                         |
 | Feeds `/feed/`, `…/feed/`                                                     | 24      | `/blog/` (no RSS, D-8)                                | static, plus dynamic with literal prefixes                                                                                      |
 | Attachment pages                                                              | 30      | the parent page or post (28); `/` for ids 180 and 181 | static. This is an intended change: WordPress sent them to the image file.                                                      |
 | `/sitemap_index.xml`, `/sitemap.xml`, `/wp-sitemap.xml`, 5 Yoast sub-sitemaps | 8       | `/sitemap-index.xml`                                  | static, in code                                                                                                                 |
@@ -343,10 +343,14 @@ formatting.
 - [ ] Scaffold `scripts/`:
   - `package.json` with `type: module` and `engines.node >= 22.19`.
   - Exact versions and a committed lockfile.
-  - Dependencies, each listed for Artem's OK: `lighthouse` 13.5.0, `chrome-launcher`,
-    `@puppeteer/browsers` (for a pinned Chrome for Testing) and `jsdom`.
-  - Add `scripts/` and `studio/` to the root `tsconfig` `exclude` and to the ESLint ignores, so
-    the root `astro check`, the hooks and CI stay green.
+  - One dependency, approved 2026-10-12: `lighthouse` 13.5.0 (dev-only, never shipped). It already
+    includes `chrome-launcher`. No pinned Chrome build (the Phase 8 paired session uses one Chrome
+    for both sides; its version is recorded), and no `jsdom` until the importer needs it (Phase 4).
+  - `scripts/` gets its own `tsconfig.json`, type-checked with the root TypeScript
+    (`npm run check:scripts`). Add `scripts/` and `studio/` to the root `tsconfig` `exclude`, so
+    `astro check` doesn't depend on `scripts/node_modules`. CI installs `scripts/` too.
+  - Page screenshots use Chrome directly through the DevTools Protocol, with Node's built-in
+    WebSocket: no extra package.
 - [ ] **Leave every WordPress flaw as it is** (missing alt, no H1, contrast). They are the
       "before".
 - [ ] **Record the versions** (read-only: REST index, page source, response headers): WordPress,
@@ -775,7 +779,8 @@ The same protocol runs for before and after. It is automated by `scripts/measure
 - **Pinned toolchain:**
   - `lighthouse` 13.5.0 from `scripts/`'s lockfile, not a bare `npx`: its own dependencies,
     including axe-core, use caret ranges.
-  - A pinned Chrome for Testing build, passed as `CHROME_PATH`.
+  - The installed Google Chrome. Both sides of the headline table come from one paired session
+    (Phase 8), so they share one Chrome version.
   - The Chrome, Lighthouse and axe versions are written into every summary.
   - LHCI is not used, because `@lhci/cli` 0.15.1 bundles Lighthouse 12.
 - **Form factors:**
@@ -806,7 +811,9 @@ The same protocol runs for before and after. It is automated by `scripts/measure
   never mixed with the primary one.
 - **Headline numbers:** fixed by D-13 before the first run.
 - **Storage:**
-  - Runs: `docs/{before,after}/lighthouse/<page>/<mobile|desktop>/run-N.json`.
+  - Runs: `docs/{before,after}/lighthouse/<page>/<mobile|desktop>/run-N.json.gz` (gzipped to keep
+    the repo small; every run is kept).
+  - Metrics of every run: `docs/{before,after}/lighthouse/metrics.json`.
   - Summary: `docs/{before,after}/lighthouse/summary.md`.
   - Conditions: `docs/{before,after}/README.md`.
 
