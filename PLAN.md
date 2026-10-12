@@ -5,12 +5,12 @@ time**. Each phase ends with a short "what we did / what's next" and Artem's go-
 next one starts. Tick the boxes as work lands, and log every decision in
 [Decisions](#3-decisions).
 
-Last updated: 2026-10-12 · Current phase: **Phase 0 — not started**
+Last updated: 2026-10-12 · Current phase: **Phase 0 — in review** (PR into `dev`)
 
 | #   | Phase                                    | Status      |
 | --- | ---------------------------------------- | ----------- |
-| 0   | Repo hygiene and open decisions          | not started |
-| 1   | Freeze the "before" site and measure it  | not started |
+| 0   | Repo hygiene and open decisions          | in review   |
+| 1   | Measure the "before" site properly       | not started |
 | 2a  | Astro 7 upgrade and template cleanup     | not started |
 | 2b  | Brand foundation (tokens, fonts, layout) | not started |
 | 2c  | First Cloudflare deploy                  | not started |
@@ -60,7 +60,7 @@ means rewriting history. Phase 0 makes it compliant before anything else is push
 - **No private data in the public repo or on the live site:** no emails, logins, passwords, tokens
   or deploy-hook URLs.
 - **Improve on WordPress where it is weak**, for example alt text, H1s, contrast and meta, and
-  record each improvement as a before/after fact. The "before" site itself is never fixed: it stays
+  record each improvement as a before/after fact. The "before" site itself is never edited: it stays
   the baseline.
 - **Ask before** adding a dependency, a paid service or a plugin, changing the stack, deleting
   anything, or pushing.
@@ -69,30 +69,30 @@ means rewriting history. Phase 0 makes it compliant before anything else is push
 
 ### Made
 
-| Date       | Decision                                                                                                                                                 | Why                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-| ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 2026-10-12 | Full scope: Astro + Sanity, with the WordPress import script                                                                                             | The import script is the main selling point, and the project covers both target Upwork pools (Astro migrations and headless CMS).                                                                                                                                                                                                                                                                                                              |
-| 2026-10-12 | Astro stays at the repo root; `studio/` and `scripts/` sit beside it, each with its own `package.json`                                                   | Git hooks, CI and the Claude hooks keep working, and Sanity's dependency tree stays separate from Astro's. This deviates from the original brief's `web/` layout, so the README notes it.                                                                                                                                                                                                                                                      |
-| 2026-10-12 | Design: same brand, refined, not a redesign                                                                                                              | It keeps the before/after a fair "same site, rebuilt" comparison. We fix the weaknesses (contrast, hierarchy, spacing) without changing the identity.                                                                                                                                                                                                                                                                                          |
-| 2026-10-12 | The WordPress export (WXR) is committed after the email and login are scrubbed                                                                           | It is evidence, and a fallback source.                                                                                                                                                                                                                                                                                                                                                                                                         |
-| 2026-10-12 | Not Vercel. Hosting is on Cloudflare (product choice in D-0)                                                                                             | Artem wants a platform that is new to his portfolio.                                                                                                                                                                                                                                                                                                                                                                                           |
-| 2026-10-12 | No `PROGRESS.md`; this file is the plan and the tracker                                                                                                  | One place to look. The values the plan needs from the original brief are copied into the [appendix](#appendix-a--reference-values-from-the-original-brief).                                                                                                                                                                                                                                                                                    |
-| 2026-10-12 | `CREDITS.md` source links are rebuilt from the image filenames                                                                                           | All 30 filenames keep the Unsplash photo ID (`<photographer>-<id>-unsplash.jpg`), and `unsplash.com/photos/<id>` resolves (checked for 3 IDs).                                                                                                                                                                                                                                                                                                 |
-| 2026-10-12 | **D-1** Upgrade to Astro 7 (Phase 2a)                                                                                                                    | A trial copy built and passed `astro check` with 0 errors. It brings the stable Fonts API. Costs: Node ≥ 22.12, and Astro's own zod becomes v4 (our code imports none).                                                                                                                                                                                                                                                                        |
-| 2026-10-12 | **D-2 / D-12** No YouTube or video anywhere: no WordPress edits, no `youtube` content type, no embed renderer                                            | Not needed for this site. The brief's "Post 7 YouTube" edge case is dropped. We don't add a pull quote to WordPress either: the importer's pull-quote and "CF7 shortcode in a post" rules are covered by test fixtures. WordPress content stays exactly as it is.                                                                                                                                                                              |
-| 2026-10-12 | **D-4** Contact form sends email through **Resend**, from a small Cloudflare Worker endpoint (`/api/contact`)                                            | Resend is an email API, so the secret key must live on a server. The Worker is that server. The form stays a plain HTML POST with zero client JS. Free plan: 3,000 emails/month and 100/day. Without a domain, Resend's test sender delivers only to the account owner's address, which is all a contact form needs (it notifies Artem). Web3Forms is dropped.                                                                                 |
-| 2026-10-12 | **D-5** Licence: MIT, in Artem's name                                                                                                                    | The repo stays public.                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| 2026-10-12 | **D-6** Remove Docker and the unused dependencies                                                                                                        | Docker isn't needed on Cloudflare, and `build:docker` already points at a missing `.mjs` config. The unused dependencies are `@base-ui/react`, `@radix-ui/*`, `react-hook-form`, `@hookform/resolvers`, `zod`, `tw-animate-css`, `@astrojs/node` and `@astrojs/vercel`.                                                                                                                                                                        |
-| 2026-10-12 | **D-7** Remove React from the site: `react`, `react-dom`, `@astrojs/react`, `@types/react*`, `lucide-react`, `button.tsx`, `input.tsx`                   | Nothing on the site needs it; we add it back only if a component ever does. Icons move to an Astro-native approach (ask before adding a package). `buttonVariants` (cva) moves to a plain `.ts` file. Sanity Studio keeps its own React inside `studio/`: that is the CMS app, not the website.                                                                                                                                                |
-| 2026-10-12 | **D-8** No RSS, subscriptions, likes or comments. Only posts                                                                                             | The old feed URLs 301 to `/blog/`.                                                                                                                                                                                                                                                                                                                                                                                                             |
-| 2026-10-12 | **D-9** Unit tests for the import script                                                                                                                 | Vitest in `scripts/import-wp/` only. Small, real WordPress HTML snippets are fed through the converter, and the tests check the Sanity output. Each edge case gets a test, so a fix for one never silently breaks another.                                                                                                                                                                                                                     |
-| 2026-10-12 | **D-10** Commit web-size copies of the before screenshots                                                                                                | About 44 MB of PNG otherwise. Screenshots that show the WordPress login are not committed; Phase 1 retakes them after the rename (D-11).                                                                                                                                                                                                                                                                                                       |
-| 2026-10-12 | **D-11** Replace the WordPress login with a fictional author before the baseline                                                                         | The login is served on the live site (30 times on `/blog/`, every byline, the author archive and the Yoast schema), so scrubbing only the WXR would achieve nothing. Default name: display name **"Larchwick Team"**, author slug `larchwick-team`. It's a brand byline, not an invented person. Artem can swap in a fictional staff name.                                                                                                     |
-| 2026-10-12 | **D-14** SEO-friendly alt text for all 30 images                                                                                                         | Drafted by looking at each image and the page it sits on: describe what's in the photo first, and use a page keyword only where it reads naturally. About 125 characters, no "image of". Artem reviews. Stored on the Sanity image asset (`altText`); the source of truth is a committed `scripts/import-wp/alt-text.json` keyed by WordPress media ID. Pure backgrounds behind text get `alt=""` for that usage. Before: 0/30, target: 30/30. |
-| 2026-10-12 | **D-0** Cloudflare **Workers** with Static Assets, plus one small script for `/api/contact` (D-4), built by Workers Builds from GitHub. No Astro adapter | Workers is Cloudflare's main platform and now serves whole static sites; Pages is the older static-only product. Only Workers keeps the static site and the Resend endpoint in one project. Static requests are free and unlimited.                                                                                                                                                                                                            |
-| 2026-10-12 | **D-3** Start on the free `*.workers.dev` address; a custom domain is optional later                                                                     | A domain needs its DNS on Cloudflare. With Resend it would add `hello@<domain>` as the sender and allow visitor auto-replies.                                                                                                                                                                                                                                                                                                                  |
-| 2026-10-12 | **D-13** Headline numbers: Home `/`, mobile, primary (local) environment, median of 5 runs. Performance score gives X→Y; total byte weight gives A→B     | Fixed before measuring, so the headline can't be cherry-picked from the 36 sets (9 pages × mobile/desktop × local/deployed). All 9 pages appear in the full table. Artem also compares the deployed Cloudflare results for his own reference; those stay in their own table and never feed the headline.                                                                                                                                       |
-| 2026-10-12 | Defaults accepted: author "Larchwick Team" (`/author/larchwick-team/`, D-11); no pull quote added to WordPress (D-2)                                     | Artem agreed to all remaining recommendations.                                                                                                                                                                                                                                                                                                                                                                                                 |
+| Date       | Decision                                                                                                                                                 | Why                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| 2026-10-12 | Full scope: Astro + Sanity, with the WordPress import script                                                                                             | The import script is the main selling point, and the project covers both target Upwork pools (Astro migrations and headless CMS).                                                                                                                                                                                                                                                                                                                                                                            |
+| 2026-10-12 | Astro stays at the repo root; `studio/` and `scripts/` sit beside it, each with its own `package.json`                                                   | Git hooks, CI and the Claude hooks keep working, and Sanity's dependency tree stays separate from Astro's. This deviates from the original brief's `web/` layout, so the README notes it.                                                                                                                                                                                                                                                                                                                    |
+| 2026-10-12 | Design: same brand, refined, not a redesign                                                                                                              | It keeps the before/after a fair "same site, rebuilt" comparison. We fix the weaknesses (contrast, hierarchy, spacing) without changing the identity.                                                                                                                                                                                                                                                                                                                                                        |
+| 2026-10-12 | The WordPress export (WXR) is committed after the email and login are scrubbed                                                                           | It is evidence, and a fallback source.                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| 2026-10-12 | Not Vercel. Hosting is on Cloudflare (product choice in D-0)                                                                                             | Artem wants a platform that is new to his portfolio.                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| 2026-10-12 | No `PROGRESS.md`; this file is the plan and the tracker                                                                                                  | One place to look. The values the plan needs from the original brief are copied into the [appendix](#appendix-a--reference-values-from-the-original-brief).                                                                                                                                                                                                                                                                                                                                                  |
+| 2026-10-12 | `CREDITS.md` source links are rebuilt from the image filenames                                                                                           | All 30 filenames keep the Unsplash photo ID (`<photographer>-<id>-unsplash.jpg`), and `unsplash.com/photos/<id>` resolves (checked for 3 IDs).                                                                                                                                                                                                                                                                                                                                                               |
+| 2026-10-12 | **D-1** Upgrade to Astro 7 (Phase 2a)                                                                                                                    | A trial copy built and passed `astro check` with 0 errors. It brings the stable Fonts API. Costs: Node ≥ 22.12, and Astro's own zod becomes v4 (our code imports none).                                                                                                                                                                                                                                                                                                                                      |
+| 2026-10-12 | **D-2 / D-12** No YouTube or video anywhere: no WordPress edits, no `youtube` content type, no embed renderer                                            | Not needed for this site. The brief's "Post 7 YouTube" edge case is dropped. We don't add a pull quote to WordPress either: the importer's pull-quote and "CF7 shortcode in a post" rules are covered by test fixtures. WordPress content stays exactly as it is.                                                                                                                                                                                                                                            |
+| 2026-10-12 | **D-4** Contact form sends email through **Resend**, from a small Cloudflare Worker endpoint (`/api/contact`)                                            | Resend is an email API, so the secret key must live on a server. The Worker is that server. The form stays a plain HTML POST with zero client JS. Free plan: 3,000 emails/month and 100/day. Without a domain, Resend's test sender delivers only to the account owner's address, which is all a contact form needs (it notifies Artem). Web3Forms is dropped.                                                                                                                                               |
+| 2026-10-12 | **D-5** Licence: MIT, in Artem's name                                                                                                                    | The repo stays public.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| 2026-10-12 | **D-6** Remove Docker and the unused dependencies                                                                                                        | Docker isn't needed on Cloudflare, and `build:docker` already points at a missing `.mjs` config. The unused dependencies are `@base-ui/react`, `@radix-ui/*`, `react-hook-form`, `@hookform/resolvers`, `zod`, `tw-animate-css`, `@astrojs/node` and `@astrojs/vercel`.                                                                                                                                                                                                                                      |
+| 2026-10-12 | **D-7** Remove React from the site: `react`, `react-dom`, `@astrojs/react`, `@types/react*`, `lucide-react`, `button.tsx`, `input.tsx`                   | Nothing on the site needs it; we add it back only if a component ever does. Icons move to an Astro-native approach (ask before adding a package). `buttonVariants` (cva) moves to a plain `.ts` file. Sanity Studio keeps its own React inside `studio/`: that is the CMS app, not the website.                                                                                                                                                                                                              |
+| 2026-10-12 | **D-8** No RSS, subscriptions, likes or comments. Only posts                                                                                             | The old feed URLs 301 to `/blog/`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| 2026-10-12 | **D-9** Unit tests for the import script                                                                                                                 | Vitest in `scripts/import-wp/` only. Small, real WordPress HTML snippets are fed through the converter, and the tests check the Sanity output. Each edge case gets a test, so a fix for one never silently breaks another.                                                                                                                                                                                                                                                                                   |
+| 2026-10-12 | **D-10** Commit web-size copies of the before screenshots                                                                                                | About 44 MB of PNG otherwise. Screenshots that show the WordPress login are not committed; Phase 1 retakes them with the byline replaced at capture time (D-11).                                                                                                                                                                                                                                                                                                                                             |
+| 2026-10-12 | **D-11** The WordPress login never reaches a public file; the new site's byline is the fictional **"Larchwick Team"**                                    | WordPress itself is **not edited** (Artem, 2026-10-12: "we work here"). The login is served on the live site (30 times on `/blog/`, every byline, the author archive and the Yoast schema), so our tools remove it when they capture: crawl data and Lighthouse JSON are text-scrubbed; Lighthouse screenshots are turned off; page screenshots replace the byline text in the browser before capture. Each scrub is documented in `docs/before/README.md`. The importer never copies WordPress author data. |
+| 2026-10-12 | **D-14** SEO-friendly alt text for all 30 images                                                                                                         | Drafted by looking at each image and the page it sits on: describe what's in the photo first, and use a page keyword only where it reads naturally. About 125 characters, no "image of". Artem reviews. Stored on the Sanity image asset (`altText`); the source of truth is a committed `scripts/import-wp/alt-text.json` keyed by WordPress media ID. Pure backgrounds behind text get `alt=""` for that usage. Before: 0/30, target: 30/30.                                                               |
+| 2026-10-12 | **D-0** Cloudflare **Workers** with Static Assets, plus one small script for `/api/contact` (D-4), built by Workers Builds from GitHub. No Astro adapter | Workers is Cloudflare's main platform and now serves whole static sites; Pages is the older static-only product. Only Workers keeps the static site and the Resend endpoint in one project. Static requests are free and unlimited.                                                                                                                                                                                                                                                                          |
+| 2026-10-12 | **D-3** Start on the free `*.workers.dev` address; a custom domain is optional later                                                                     | A domain needs its DNS on Cloudflare. With Resend it would add `hello@<domain>` as the sender and allow visitor auto-replies.                                                                                                                                                                                                                                                                                                                                                                                |
+| 2026-10-12 | **D-13** Headline numbers: Home `/`, mobile, primary (local) environment, median of 5 runs. Performance score gives X→Y; total byte weight gives A→B     | Fixed before measuring, so the headline can't be cherry-picked from the 36 sets (9 pages × mobile/desktop × local/deployed). All 9 pages appear in the full table. Artem also compares the deployed Cloudflare results for his own reference; those stay in their own table and never feed the headline.                                                                                                                                                                                                     |
+| 2026-10-12 | Defaults accepted: byline "Larchwick Team" (D-11); no pull quote added to WordPress (D-2)                                                                | Artem agreed to all remaining recommendations.                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 
 ### Open
 
@@ -310,32 +310,35 @@ able to explain on a client call.
 ### Phase 0 — Repo hygiene and open decisions
 
 - [x] D-5: MIT licence; the repo stays public (2026-10-12).
-- [ ] Add `LICENSE` (MIT, Artem) as the first commit.
+- [x] Add `LICENSE` (MIT, Artem) as the first commit.
 - [x] Settle the decisions needed by Phases 0–2 (2026-10-12: all decided).
-- [ ] Scrub the WXR: replace the email (1×) and the login (76×) with the fictional author (D-11).
+- [x] Scrub the WXR: replace the email (1×) and the login (76×) with the fictional author (D-11).
       Then commit `docs/before/`. The Lighthouse JSON has 0 login occurrences, so it is committed as
       is.
-- [ ] Shrink the before screenshots to web-size copies (D-10). **Don't commit the 11 that show the
+- [x] Shrink the before screenshots to web-size copies (D-10). **Don't commit the 11 that show the
       login** (10 posts and the blog index); Phase 1 retakes them. Keep the originals outside the
       repo.
 - [x] Add `docs/before/` and `docs/after/` to `.prettierignore`, so the evidence JSON is never
       reformatted (2026-10-12).
-- [ ] `.gitignore`: add `.env.local`, `.env.*.local`, `.sanity/` and `.wrangler/`.
-- [ ] `scripts/credits/`, a tiny script with no dependencies:
+- [x] `.gitignore`: add `.env.local`, `.env.*.local`, `.sanity/` and `.wrangler/`.
+- [x] `scripts/credits/`, a tiny script with no dependencies:
   - It extracts each Unsplash ID as the **11 characters before `-unsplash`**
-    (`/([A-Za-z0-9_-]{11})-unsplash\.jpe?g$/`). Never split on `-`: 4 of the IDs contain one.
+    (`/([A-Za-z0-9_-]{11})-unsplash(?:-scaled)?\.jpe?g$/`; every file ends in `-unsplash-scaled.jpg`).
+    Never split on `-`: 4 of the IDs contain one.
   - It follows the redirect to the canonical URL and records the photographer and the URL.
   - It writes `CREDITS.md`.
   - `CREDITS.md` also lists the fonts (OFL) and the icons.
     `og.png` is added when it arrives.
-- [ ] README: a "Demo project — fictional business" header. The full rewrite comes in Phase 9.
+- [x] README: a "Demo project — fictional business" header. The full rewrite comes in Phase 9.
 
 **Exit:** the already-public repo is compliant: a licence, credits, no private data, and the
 evidence committed.
 **Talking points:** why credits are rebuilt from filenames; why evidence files are excluded from
 formatting.
 
-### Phase 1 — Freeze the "before" site and measure it properly
+### Phase 1 — Measure the "before" site properly
+
+**WordPress is never edited.** Everything below is read-only against `http://larchwick.local`.
 
 - [ ] Scaffold `scripts/`:
   - `package.json` with `type: module` and `engines.node >= 22.19`.
@@ -344,20 +347,17 @@ formatting.
     `@puppeteer/browsers` (for a pinned Chrome for Testing) and `jsdom`.
   - Add `scripts/` and `studio/` to the root `tsconfig` `exclude` and to the ESLint ignores, so
     the root `astro check`, the hooks and CI stay green.
-- [ ] D-11: rename the WordPress author to the fictional one:
-      `wp user update 1 --display_name="Larchwick Team" --nickname="Larchwick Team" --user_nicename=larchwick-team`
-      (in LocalWP's site shell). WordPress can't change the login itself, but it never appears
-      publicly once these are set; the WXR is scrubbed by text. Check:
-      `curl -s http://larchwick.local/blog/ | grep -c <login>` → 0. This is the only edit made to
-      WordPress content.
-- [ ] **Leave every other WordPress flaw as it is** (missing alt, no H1, contrast). They are the
+- [ ] **Leave every WordPress flaw as it is** (missing alt, no H1, contrast). They are the
       "before".
-- [ ] **Freeze content and code:**
-  - Add `AUTOMATIC_UPDATER_DISABLED` to `wp-config.php`.
-  - Turn off plugin and theme auto-updates.
-  - Record the WordPress, plugin, theme, PHP and nginx versions.
-  - Export the site from LocalWP to a zip kept outside the repo.
-- [ ] Re-export the WXR, scrub it, and replace the file in `docs/before/`.
+- [ ] **Record the versions** (read-only: REST index, page source, response headers): WordPress,
+      plugins, theme, PHP and nginx. Phase 8 checks them again before the paired re-run and reports
+      any difference.
+- [ ] Confirm the 2026-10-07 export is still current: no post or page `modified` date in the REST
+      API is later than the export. Otherwise note what changed.
+- [ ] **Scrub the login at capture time** (D-11), never in WordPress:
+  - crawl data and Lighthouse JSON: text replacement, done by the scripts
+  - Lighthouse's own screenshots: turned off (they don't affect scores)
+  - page screenshots: the byline text is replaced in the browser before capture
 - [ ] `scripts/seo-check/`, crawl mode:
   - Input: the 130 URLs in §8.
   - Recorded per URL: status, final URL, hop count, `<title>`, meta description, canonical, H1 and
@@ -367,23 +367,25 @@ formatting.
     re-crawling.
 - [ ] `scripts/measure/`: the Lighthouse runner per the [protocol](#10-measurement-protocol). Run
       the before set into `docs/before/lighthouse/`.
-- [ ] Before screenshots of the 9 measured URLs at 360, 768 and 1280 px, saved in
+- [ ] Before screenshots of the 9 measured URLs at 360, 768 and 1280 px, with one fixed viewport per
+      width, scrolling the page first so lazy-loaded images render (the 2026-10-07 captures have
+      blank image areas on Home and About), saved in
       `docs/before/screenshots/<width>/`.
 - [ ] Write `docs/before/README.md`: what was measured, when, on which machine and with which
-      versions, the D-11 author rename with its date, and the headline choice (D-13).
+      versions, how the login was scrubbed (D-11), and the headline choice (D-13).
 
-**Exit:** the before numbers exist as files, WordPress is frozen (content and code), and a restore
-zip exists.
+**Exit:** the before numbers exist as files, with the versions they were measured on, and no
+file contains the login.
 **Talking points:**
 
 - Why median-of-5.
 - Why both sides are served on a `.local` hostname over http, never on `localhost`.
-- Why the baseline is frozen before any change.
+- Why the "before" site is never edited, and how private data is kept out of the evidence.
 
 ### Phase 2a — Astro 7 upgrade and template cleanup
 
 - [ ] Decide D-6 and D-7 before touching code.
-- [ ] Upgrade to Astro 7.3.x and the matching integrations. Set `engines.node >= 22.12`, and add
+- [ ] Upgrade to Astro 7.3.x and the matching integrations. Set `engines.node >= 22.18` (the credits script runs `.ts` natively), and add
       `.node-version` for the Cloudflare build.
 - [ ] Config:
   - Remove `@astrojs/vercel` and keep `output: 'static'`.
@@ -706,7 +708,7 @@ URL is treated as a secret.
 
 ### Phase 8 — Performance and accessibility pass
 
-- [ ] **Paired session:** re-run the before set (WordPress is frozen) and the after set on the
+- [ ] **Paired session:** re-run the before set (after checking the WordPress versions are unchanged) and the after set on the
       same machine, with the same pinned binaries, on the same day. The primary table uses this
       session; the Phase 1 numbers stay as the archived first baseline.
 - [ ] Targets (mobile), on the primary set for all 9 URLs:
@@ -792,8 +794,8 @@ The same protocol runs for before and after. It is automated by `scripts/measure
     external link.
 - **Primary environment: local vs local, under the same conditions.**
   - Both sides run over plain http on a **non-localhost `.local` hostname**: WordPress at
-    `http://larchwick.local`, Astro at, e.g., `http://larchwick-astro.local` via an `/etc/hosts`
-    entry.
+    `http://larchwick.local`, Astro at `http://larchwick-astro.local`. Chrome maps that name to the
+    local preview server with `--host-resolver-rules`, so no system file (`/etc/hosts`) changes.
   - **Never measure on `localhost` or `127.0.0.1`.** Lighthouse treats localhost as secure and
     skips the https audits, which would make a fake Best Practices gain.
   - Same protocol and compression as LocalWP's nginx (HTTP/1.1, gzip). Check with `curl -I` before

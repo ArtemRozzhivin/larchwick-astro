@@ -25,6 +25,12 @@ pnpm-debug.log*
 # environment variables
 .env
 .env.production
+.env.local
+.env.*.local
+
+# Sanity and Cloudflare (wrangler) local state
+.sanity/
+.wrangler/
 
 # macOS-specific files
 .DS_Store
