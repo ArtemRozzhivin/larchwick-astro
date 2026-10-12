@@ -35,7 +35,8 @@ chore: bump astro to 5.3
 refactor: build Features on the Section primitive
 
 Subject line only. No body unless the user asks.
-Never add Co-Authored-By or any AI attribution.
+Never add Co-Authored-By or any AI attribution, in commit messages or in PR
+descriptions.
 </commit_style>
 
 <branch_names>
@@ -44,13 +45,16 @@ fix/<slug>      bug fix
 refactor/<slug> restructure without behaviour change
 chore/<slug>    tooling and config
 
-Direct pushes to main are blocked by pre-push. Base branch for PRs is main.
+Branch off dev. Base branch for PRs is dev, not main. main only receives merges
+from dev (releases). Direct pushes to main are blocked by pre-push.
 </branch_names>
 
 <pr_workflow>
 Never push and never open a PR on your own initiative. It requires the user's
 explicit instruction, given fresh for that specific task. Permission from a
 previous task does not carry over.
+
+PRs target dev. main only receives merges from dev.
 
 After finishing a task:
 1. List every file created or modified, path only, one per line.

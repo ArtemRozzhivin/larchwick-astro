@@ -139,6 +139,7 @@ A `Stop` hook checks the doc files above against the working-tree diff and remin
 
 <pr_workflow>
 Never create a PR and never push automatically. This requires the user's explicit instruction, given fresh for that specific task. Do not infer permission from a previous task, from context, or from how earlier tasks in the same session were handled.
+PRs target `dev`; `main` only receives merges from `dev`.
 
 After completing every task:
 
@@ -149,5 +150,5 @@ After completing every task:
 <commit_style>
 Conventional Commits, enforced by commitlint (`feat:`, `fix:`, `chore:`, `refactor:`, `docs:`, `style:`).
 Subject line only — no body, no description, unless the user asks.
-Never add `Co-Authored-By:` or any AI attribution.
+Never add `Co-Authored-By:` or any AI attribution, in commit messages or PR descriptions.
 </commit_style>

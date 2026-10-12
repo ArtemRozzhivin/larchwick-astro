@@ -1,4 +1,14 @@
-# Astro Landing Template
+# Larchwick Coffee Roasters — WordPress → Astro + Sanity
+
+> **Demo project — fictional business.** Larchwick Coffee Roasters is not a real company. This is
+> a personal portfolio project: a WordPress site migrated to Astro + Sanity on Cloudflare Workers.
+
+The migration is in progress: see [PLAN.md](./PLAN.md) for the plan and the tracker. Image and
+font credits are in [CREDITS.md](./CREDITS.md), and the code is MIT-licensed ([LICENSE](./LICENSE)).
+
+---
+
+## Built on: Astro landing template
 
 A starter for marketing sites and landing pages. Static-first Astro with
 ready-made section blocks, SEO already wired, and quality gates in place.
@@ -209,7 +219,8 @@ replacing it.
 
 `feat/…` · `fix/…` · `refactor/…` · `docs/…` · `chore/…`
 
-Direct pushes to `main` are blocked by the pre-push hook.
+Branch off `dev` and open the pull request against `dev`. `dev` is merged into
+`main` for a release. Direct pushes to `main` are blocked by the pre-push hook.
 
 ### Commits
 
@@ -224,12 +235,12 @@ chore: update dependencies
 
 ### Quality gates
 
-| Stage      | Runs                                                      |
-| ---------- | --------------------------------------------------------- |
-| pre-commit | lint-staged (eslint --fix + prettier), then `astro check` |
-| commit-msg | commitlint — Conventional Commits                         |
-| pre-push   | blocks push to `main`, then format + lint + check + build |
-| CI         | check + lint + format + build on every pull request       |
+| Stage      | Runs                                                                              |
+| ---------- | --------------------------------------------------------------------------------- |
+| pre-commit | lint-staged (eslint --fix + prettier), then `astro check`                         |
+| commit-msg | commitlint — Conventional Commits                                                 |
+| pre-push   | blocks push to `main`, then format + lint + check + build                         |
+| CI         | check + lint + format + build on every pull request and on push to `main` / `dev` |
 
 ---
 
