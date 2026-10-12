@@ -49,6 +49,7 @@ structure=docs/STRUCTURE.md
 worklog=.claude/docs/WORKLOG.md
 project=docs/internal/PROJECT.md
 pages=docs/pages/
+plan=PLAN.md — WordPress → Astro + Sanity migration: phases, decisions, progress. Read before starting any migration work; tick boxes as work lands.
 </references>
 
 <global_rules>

@@ -34,6 +34,10 @@ Everything below has to be replaced before a real site launches:
 
 ## Notes
 
+A migration of the Larchwick Coffee Roasters WordPress demo site onto this template (Astro +
+Sanity, hosted on Cloudflare) is planned in [PLAN.md](../../PLAN.md). Until its Phase 2 lands,
+everything above still describes the unmodified template.
+
 Static output: every page is prerendered at build time. A page opts into
 on-demand rendering individually; the site mode is never flipped to server.
 
