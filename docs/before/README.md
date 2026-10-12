@@ -16,8 +16,8 @@ kept exactly as recorded, and `.prettierignore` stops them from being reformatte
   the Phase 1 protocol.
 - `network/`: DevTools Network panel screenshots from 2026-10-07.
 - `screenshots/`: web-size JPEG copies of 6 pages. The 11 screenshots that showed the WordPress
-  login (the blog index and 10 posts) are not committed; Phase 1 retakes them after the author
-  rename. The full-size originals are kept outside the repo.
+  login (the blog index and 10 posts) are not committed; Phase 1 retakes them with the byline text
+  replaced at capture time (WordPress itself is never edited). The full-size originals are kept outside the repo.
 
 ## Phase 1 will add
 
@@ -28,5 +28,4 @@ kept exactly as recorded, and `.prettierignore` stops them from being reformatte
   every old URL.
 - Screenshots of the 9 measured pages at 360, 768 and 1280 px.
 - The measurement conditions: date, machine, and the WordPress, Chrome and Lighthouse versions,
-  plus the date of the author rename.
-- A fresh WXR export taken after the author rename, scrubbed the same way, replacing this one.
+  plus how the login was kept out of every captured file.
