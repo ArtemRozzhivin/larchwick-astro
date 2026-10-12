@@ -260,7 +260,8 @@ GitHub (public repo) ──PR merge──▶ Workers Builds: npm run build ─�
   - The script sends the message through Resend, then 303-redirects to a static thank-you page.
   - Only `/api/*` reaches the script (`run_worker_first`); every page is a free static request.
 - **Repo:** Astro at the root, plus `studio/` (Sanity 6) and `scripts/`, which holds `credits/`,
-  `measure/`, `seo-check/` and `import-wp/` and shares one `package.json`.
+  `seo-check/`, `lighthouse-import/` and later `import-wp/`. Scripts use Node built-ins until one
+  needs a package; `scripts/` then gets its own `package.json`.
 
 ## 8. URL and redirect map
 
@@ -338,53 +339,51 @@ formatting.
 
 ### Phase 1 — Measure the "before" site properly
 
-**WordPress is never edited.** Everything below is read-only against `http://larchwick.local`.
+**WordPress is never edited.** Everything below only reads `http://larchwick.local`. Lighthouse runs
+are done **by Artem, by hand**, in his browser (decided 2026-10-12). The tools only collect, clean
+and summarise his exports.
 
-- [ ] Scaffold `scripts/`:
-  - `package.json` with `type: module` and `engines.node >= 22.19`.
-  - Exact versions and a committed lockfile.
-  - One dependency, approved 2026-10-12: `lighthouse` 13.5.0 (dev-only, never shipped). It already
-    includes `chrome-launcher`. No pinned Chrome build (the Phase 8 paired session uses one Chrome
-    for both sides; its version is recorded), and no `jsdom` until the importer needs it (Phase 4).
-  - `scripts/` gets its own `tsconfig.json`, type-checked with the root TypeScript
-    (`npm run check:scripts`). Add `scripts/` and `studio/` to the root `tsconfig` `exclude`, so
-    `astro check` doesn't depend on `scripts/node_modules`. CI installs `scripts/` too.
-  - Page screenshots use Chrome directly through the DevTools Protocol, with Node's built-in
-    WebSocket: no extra package.
+- [x] Toolchain (2026-10-12): no `lighthouse` package and no automated browser (only Brave is
+      installed). Every script in `scripts/` uses Node built-ins only, so there is no
+      `scripts/package.json` yet.
 - [ ] **Leave every WordPress flaw as it is** (missing alt, no H1, contrast). They are the
       "before".
-- [ ] **Record the versions** (read-only: REST index, page source, response headers): WordPress,
-      plugins, theme, PHP and nginx. Phase 8 checks them again before the paired re-run and reports
-      any difference.
+- [ ] **Record the versions** (read-only: the LocalWP files, page source, response headers):
+      WordPress, plugins, theme, PHP and nginx. Phase 8 checks them again before the paired re-run
+      and reports any difference.
 - [ ] Confirm the 2026-10-07 export is still current: no post or page `modified` date in the REST
-      API is later than the export. Otherwise note what changed.
-- [ ] **Scrub the login at capture time** (D-11), never in WordPress:
-  - crawl data and Lighthouse JSON: text replacement, done by the scripts
-  - Lighthouse's own screenshots: turned off (they don't affect scores)
-  - page screenshots: the byline text is replaced in the browser before capture
-- [ ] `scripts/seo-check/`, crawl mode:
-  - Input: the 130 URLs in §8.
-  - Recorded per URL: status, final URL, hop count, `<title>`, meta description, canonical, H1 and
-    robots.
-  - Output: `docs/before/seo-snapshot.json`.
-  - Keep the raw responses locally (gitignored), so an extraction bug can be fixed without
-    re-crawling.
-- [ ] `scripts/measure/`: the Lighthouse runner per the [protocol](#10-measurement-protocol). Run
-      the before set into `docs/before/lighthouse/`.
-- [ ] Before screenshots of the 9 measured URLs at 360, 768 and 1280 px, with one fixed viewport per
-      width, scrolling the page first so lazy-loaded images render (the 2026-10-07 captures have
-      blank image areas on Home and About), saved in
-      `docs/before/screenshots/<width>/`.
-- [ ] Write `docs/before/README.md`: what was measured, when, on which machine and with which
-      versions, how the login was scrubbed (D-11), and the headline choice (D-13).
+      API is later than the export.
+- [ ] `scripts/seo-check/`, crawl mode (Node `fetch`, no dependencies):
+  - The URL inventory is built from the committed WXR, plus the live REST API for the author
+    (§8): 130 URLs.
+  - Recorded per URL: status, every redirect hop, final URL, `<title>`, meta description,
+    canonical, H1 and robots.
+  - Output: `docs/before/old-urls.json` and `docs/before/seo-snapshot.json`.
+  - Raw responses stay local (gitignored), so an extraction bug can be fixed without re-crawling.
+  - The login is read at runtime and never written: author URLs are recorded as
+    `/author/<author>/`.
+- [ ] `scripts/lighthouse-import/` (no dependencies). It takes Artem's saved Lighthouse JSON
+      reports from a local inbox, removes the embedded screenshots and the login text, and files
+      them as `docs/before/lighthouse/<page>/<mobile|desktop>/run-N.json.gz`. Then it writes
+      `metrics.json` and `summary.md` with the median run per page and device.
+- [ ] **Artem's manual runs**, per [§10](#10-measurement-protocol), saved into the inbox, then
+      `npm run lighthouse:import`.
+- [ ] Screenshots are optional, taken by Artem. Leave out pages with a byline (blog and posts)
+      unless the byline is cropped.
+- [ ] `docs/before/README.md`:
+  - the measurement conditions (date, machine, browser and Lighthouse versions)
+  - the versions of everything on the WordPress side
+  - how the login is kept out of the files
+  - the headline choice (D-13)
 
-**Exit:** the before numbers exist as files, with the versions they were measured on, and no
-file contains the login.
+**Exit:** the crawl snapshot and the manual Lighthouse runs exist as files, together with the
+versions they were measured on, and no file contains the login.
 **Talking points:**
 
-- Why median-of-5.
-- Why both sides are served on a `.local` hostname over http, never on `localhost`.
-- Why the "before" site is never edited, and how private data is kept out of the evidence.
+- Why median-of-several runs.
+- Why both sites are measured exactly the same way (browser, window, machine, day).
+- Why localhost would fake a Best Practices gain.
+- How private data is kept out of the evidence.
 
 ### Phase 2a — Astro 7 upgrade and template cleanup
 
@@ -713,7 +712,7 @@ URL is treated as a secret.
 ### Phase 8 — Performance and accessibility pass
 
 - [ ] **Paired session:** re-run the before set (after checking the WordPress versions are unchanged) and the after set on the
-      same machine, with the same pinned binaries, on the same day. The primary table uses this
+      same machine, with the same browser version and window, on the same day. The primary table uses this
       session; the Phase 1 numbers stay as the archived first baseline.
 - [ ] Targets (mobile), on the primary set for all 9 URLs:
 
@@ -774,45 +773,54 @@ URL is treated as a secret.
 
 ## 10. Measurement protocol
 
-The same protocol runs for before and after. It is automated by `scripts/measure/`.
+Artem runs Lighthouse by hand, and the same steps apply to before and after.
+`scripts/lighthouse-import/` collects and summarises the saved reports.
 
-- **Pinned toolchain:**
-  - `lighthouse` 13.5.0 from `scripts/`'s lockfile, not a bare `npx`: its own dependencies,
-    including axe-core, use caret ranges.
-  - The installed Google Chrome. Both sides of the headline table come from one paired session
-    (Phase 8), so they share one Chrome version.
-  - The Chrome, Lighthouse and axe versions are written into every summary.
-  - LHCI is not used, because `@lhci/cli` 0.15.1 bundles Lighthouse 12.
-- **Form factors:**
-  - Mobile is the default (simulated throttling, moto g power).
-  - Desktop uses `--preset=desktop`.
+- **Browser:**
+  - Use one browser for both sides; currently Brave, which is Chromium-based.
+  - Turn Shields **off** for the measured site.
+  - Use a private window, with no extensions.
+  - Nothing heavy should be running, and the laptop should be on power.
+  - Record the browser and Chromium version from `brave://version`. The Lighthouse version is
+    inside each report.
+- **Lighthouse panel settings:**
+  - Navigation mode, all four categories, "Simulated throttling" (the default) and "Clear
+    storage" on.
+  - Run Mobile, then Desktop.
+  - **Keep the same window size for every run.** The desktop run lays out at the window width;
+    the 2026-10-07 run was 1197 px wide.
 - **Runs:**
-  - 5 per URL per form factor, keeping every JSON.
-  - The median comes from Lighthouse's `computeMedianRun`.
-  - Reported per page: category scores, LCP, FCP, TBT, CLS, total byte weight, request count and
-    JS bytes.
+  - Home: 5 per device (it is the headline, D-13). The other 8 pages: 3 per device.
+  - The median run is the one with the median Performance score; ties go to the lower LCP.
 - **URLs (9):**
   - Home, About, Services, Products, FAQ, Contact and Blog.
   - Pour-over post (`/how-to-brew-pour-over-at-home/` → `/blog/how-to-brew-pour-over-at-home/`):
     the longest, with a tall image.
   - Ethiopia post (`/ethiopia-yirgacheffe/` → `/blog/ethiopia-yirgacheffe/`): gallery, quote and
     external link.
+- **Saving:**
+  - From the report menu (⋮), choose "Save as JSON".
+  - Name it `<page>-<mobile|desktop>-<n>.json`. Page names: `home`, `about`, `services`,
+    `products`, `faq`, `contact`, `blog`, `post-pour-over`, `post-ethiopia`.
+  - Save it into `docs/before/lighthouse/inbox/` (gitignored), then run
+    `npm run lighthouse:import`.
 - **Primary environment: local vs local, under the same conditions.**
-  - Both sides run over plain http on a **non-localhost `.local` hostname**: WordPress at
-    `http://larchwick.local`, Astro at `http://larchwick-astro.local`. Chrome maps that name to the
-    local preview server with `--host-resolver-rules`, so no system file (`/etc/hosts`) changes.
+  - Both sites run over plain http on a **non-localhost `.local` hostname**: WordPress at
+    `http://larchwick.local`, Astro at `http://larchwick-astro.local`.
+  - For Astro that needs one `/etc/hosts` line, or the browser started with
+    `--host-resolver-rules` (Phase 8).
   - **Never measure on `localhost` or `127.0.0.1`.** Lighthouse treats localhost as secure and
     skips the https audits, which would make a fake Best Practices gain.
-  - Same protocol and compression as LocalWP's nginx (HTTP/1.1, gzip). Check with `curl -I` before
-    each run.
   - `is-on-https` and `redirects-http` are listed separately: they measure the local setup, not
     the stack.
-- **Secondary environment:** the deployed Cloudflare site. It is reported in its own table and
-  never mixed with the primary one.
-- **Headline numbers:** fixed by D-13 before the first run.
+- **Secondary environment:** the deployed Cloudflare site. It is reported in its own table (for
+  Artem's own comparison) and never mixed with the primary one.
+- **Paired session (Phase 8):** the before and after pages are re-run on the same day, with the
+  same browser version and the same window. The headline table uses that session.
+- **Headline numbers:** fixed by D-13.
 - **Storage:**
-  - Runs: `docs/{before,after}/lighthouse/<page>/<mobile|desktop>/run-N.json.gz` (gzipped to keep
-    the repo small; every run is kept).
+  - Runs: `docs/{before,after}/lighthouse/<page>/<mobile|desktop>/run-N.json.gz`, with
+    screenshots and the login removed. Every run is kept.
   - Metrics of every run: `docs/{before,after}/lighthouse/metrics.json`.
   - Summary: `docs/{before,after}/lighthouse/summary.md`.
   - Conditions: `docs/{before,after}/README.md`.
