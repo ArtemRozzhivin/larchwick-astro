@@ -5,11 +5,11 @@ time**. Each phase ends with a short "what we did / what's next" and Artem's go-
 next one starts. Tick the boxes as work lands, and log every decision in
 [Decisions](#3-decisions).
 
-Last updated: 2026-10-12 · Current phase: **Phase 0 — not started**
+Last updated: 2026-10-12 · Current phase: **Phase 0 — in review** (PR into `dev`)
 
 | #   | Phase                                    | Status      |
 | --- | ---------------------------------------- | ----------- |
-| 0   | Repo hygiene and open decisions          | not started |
+| 0   | Repo hygiene and open decisions          | in review   |
 | 1   | Freeze the "before" site and measure it  | not started |
 | 2a  | Astro 7 upgrade and template cleanup     | not started |
 | 2b  | Brand foundation (tokens, fonts, layout) | not started |
@@ -310,25 +310,26 @@ able to explain on a client call.
 ### Phase 0 — Repo hygiene and open decisions
 
 - [x] D-5: MIT licence; the repo stays public (2026-10-12).
-- [ ] Add `LICENSE` (MIT, Artem) as the first commit.
+- [x] Add `LICENSE` (MIT, Artem) as the first commit.
 - [x] Settle the decisions needed by Phases 0–2 (2026-10-12: all decided).
-- [ ] Scrub the WXR: replace the email (1×) and the login (76×) with the fictional author (D-11).
+- [x] Scrub the WXR: replace the email (1×) and the login (76×) with the fictional author (D-11).
       Then commit `docs/before/`. The Lighthouse JSON has 0 login occurrences, so it is committed as
       is.
-- [ ] Shrink the before screenshots to web-size copies (D-10). **Don't commit the 11 that show the
+- [x] Shrink the before screenshots to web-size copies (D-10). **Don't commit the 11 that show the
       login** (10 posts and the blog index); Phase 1 retakes them. Keep the originals outside the
       repo.
 - [x] Add `docs/before/` and `docs/after/` to `.prettierignore`, so the evidence JSON is never
       reformatted (2026-10-12).
-- [ ] `.gitignore`: add `.env.local`, `.env.*.local`, `.sanity/` and `.wrangler/`.
-- [ ] `scripts/credits/`, a tiny script with no dependencies:
+- [x] `.gitignore`: add `.env.local`, `.env.*.local`, `.sanity/` and `.wrangler/`.
+- [x] `scripts/credits/`, a tiny script with no dependencies:
   - It extracts each Unsplash ID as the **11 characters before `-unsplash`**
-    (`/([A-Za-z0-9_-]{11})-unsplash\.jpe?g$/`). Never split on `-`: 4 of the IDs contain one.
+    (`/([A-Za-z0-9_-]{11})-unsplash(?:-scaled)?\.jpe?g$/`; every file ends in `-unsplash-scaled.jpg`).
+    Never split on `-`: 4 of the IDs contain one.
   - It follows the redirect to the canonical URL and records the photographer and the URL.
   - It writes `CREDITS.md`.
   - `CREDITS.md` also lists the fonts (OFL) and the icons.
     `og.png` is added when it arrives.
-- [ ] README: a "Demo project — fictional business" header. The full rewrite comes in Phase 9.
+- [x] README: a "Demo project — fictional business" header. The full rewrite comes in Phase 9.
 
 **Exit:** the already-public repo is compliant: a licence, credits, no private data, and the
 evidence committed.
@@ -367,7 +368,9 @@ formatting.
     re-crawling.
 - [ ] `scripts/measure/`: the Lighthouse runner per the [protocol](#10-measurement-protocol). Run
       the before set into `docs/before/lighthouse/`.
-- [ ] Before screenshots of the 9 measured URLs at 360, 768 and 1280 px, saved in
+- [ ] Before screenshots of the 9 measured URLs at 360, 768 and 1280 px, with one fixed viewport per
+      width, scrolling the page first so lazy-loaded images render (the 2026-10-07 captures have
+      blank image areas on Home and About), saved in
       `docs/before/screenshots/<width>/`.
 - [ ] Write `docs/before/README.md`: what was measured, when, on which machine and with which
       versions, the D-11 author rename with its date, and the headline choice (D-13).
@@ -383,7 +386,7 @@ zip exists.
 ### Phase 2a — Astro 7 upgrade and template cleanup
 
 - [ ] Decide D-6 and D-7 before touching code.
-- [ ] Upgrade to Astro 7.3.x and the matching integrations. Set `engines.node >= 22.12`, and add
+- [ ] Upgrade to Astro 7.3.x and the matching integrations. Set `engines.node >= 22.18` (the credits script runs `.ts` natively), and add
       `.node-version` for the Cloudflare build.
 - [ ] Config:
   - Remove `@astrojs/vercel` and keep `output: 'static'`.
