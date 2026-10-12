@@ -1,0 +1,522 @@
+[
+  {
+    "group": "pages",
+    "path": "/"
+  },
+  {
+    "group": "pages",
+    "path": "/about/"
+  },
+  {
+    "group": "pages",
+    "path": "/blog/"
+  },
+  {
+    "group": "pages",
+    "path": "/contact/"
+  },
+  {
+    "group": "pages",
+    "path": "/faq/"
+  },
+  {
+    "group": "pages",
+    "path": "/products/"
+  },
+  {
+    "group": "pages",
+    "path": "/services/"
+  },
+  {
+    "group": "home-alias",
+    "path": "/home/"
+  },
+  {
+    "group": "posts",
+    "path": "/autumn-seasonal-blend/"
+  },
+  {
+    "group": "posts",
+    "path": "/choosing-the-right-grind-size/"
+  },
+  {
+    "group": "posts",
+    "path": "/cold-brew-four-simple-steps/"
+  },
+  {
+    "group": "posts",
+    "path": "/colombia-huila-house-espresso/"
+  },
+  {
+    "group": "posts",
+    "path": "/ethiopia-yirgacheffe/"
+  },
+  {
+    "group": "posts",
+    "path": "/french-press-5-common-mistakes/"
+  },
+  {
+    "group": "posts",
+    "path": "/how-to-brew-pour-over-at-home/"
+  },
+  {
+    "group": "posts",
+    "path": "/meet-our-new-roaster/"
+  },
+  {
+    "group": "posts",
+    "path": "/now-shipping-across-europe/"
+  },
+  {
+    "group": "posts",
+    "path": "/washed-vs-natural-process/"
+  },
+  {
+    "group": "old-slugs",
+    "path": "/brewing-guides/"
+  },
+  {
+    "group": "old-slugs",
+    "path": "/roastery-news/"
+  },
+  {
+    "group": "categories",
+    "path": "/category/brewing-guides/"
+  },
+  {
+    "group": "categories",
+    "path": "/category/coffee-origins/"
+  },
+  {
+    "group": "categories",
+    "path": "/category/roastery-news/"
+  },
+  {
+    "group": "tags",
+    "path": "/tag/beginner/"
+  },
+  {
+    "group": "tags",
+    "path": "/tag/colombia/"
+  },
+  {
+    "group": "tags",
+    "path": "/tag/equipment/"
+  },
+  {
+    "group": "tags",
+    "path": "/tag/espresso/"
+  },
+  {
+    "group": "tags",
+    "path": "/tag/ethiopia/"
+  },
+  {
+    "group": "tags",
+    "path": "/tag/pour-over/"
+  },
+  {
+    "group": "tags",
+    "path": "/tag/seasonal/"
+  },
+  {
+    "group": "tags",
+    "path": "/tag/single-origin/"
+  },
+  {
+    "group": "date-archives",
+    "path": "/2025/"
+  },
+  {
+    "group": "date-archives",
+    "path": "/2025/03/"
+  },
+  {
+    "group": "date-archives",
+    "path": "/2025/03/09/"
+  },
+  {
+    "group": "date-archives",
+    "path": "/2025/04/"
+  },
+  {
+    "group": "date-archives",
+    "path": "/2025/04/11/"
+  },
+  {
+    "group": "date-archives",
+    "path": "/2026/"
+  },
+  {
+    "group": "date-archives",
+    "path": "/2026/04/"
+  },
+  {
+    "group": "date-archives",
+    "path": "/2026/04/06/"
+  },
+  {
+    "group": "date-archives",
+    "path": "/2026/04/21/"
+  },
+  {
+    "group": "date-archives",
+    "path": "/2026/05/"
+  },
+  {
+    "group": "date-archives",
+    "path": "/2026/05/22/"
+  },
+  {
+    "group": "date-archives",
+    "path": "/2026/06/"
+  },
+  {
+    "group": "date-archives",
+    "path": "/2026/06/16/"
+  },
+  {
+    "group": "date-archives",
+    "path": "/2026/09/"
+  },
+  {
+    "group": "date-archives",
+    "path": "/2026/09/27/"
+  },
+  {
+    "group": "date-archives",
+    "path": "/2026/09/29/"
+  },
+  {
+    "group": "date-archives",
+    "path": "/2026/10/"
+  },
+  {
+    "group": "date-archives",
+    "path": "/2026/10/01/"
+  },
+  {
+    "group": "author",
+    "path": "/author/<author>/"
+  },
+  {
+    "group": "feeds",
+    "path": "/author/<author>/feed/"
+  },
+  {
+    "group": "feeds",
+    "path": "/autumn-seasonal-blend/feed/"
+  },
+  {
+    "group": "feeds",
+    "path": "/category/brewing-guides/feed/"
+  },
+  {
+    "group": "feeds",
+    "path": "/category/coffee-origins/feed/"
+  },
+  {
+    "group": "feeds",
+    "path": "/category/roastery-news/feed/"
+  },
+  {
+    "group": "feeds",
+    "path": "/choosing-the-right-grind-size/feed/"
+  },
+  {
+    "group": "feeds",
+    "path": "/cold-brew-four-simple-steps/feed/"
+  },
+  {
+    "group": "feeds",
+    "path": "/colombia-huila-house-espresso/feed/"
+  },
+  {
+    "group": "feeds",
+    "path": "/comments/feed/"
+  },
+  {
+    "group": "feeds",
+    "path": "/ethiopia-yirgacheffe/feed/"
+  },
+  {
+    "group": "feeds",
+    "path": "/feed/"
+  },
+  {
+    "group": "feeds",
+    "path": "/french-press-5-common-mistakes/feed/"
+  },
+  {
+    "group": "feeds",
+    "path": "/how-to-brew-pour-over-at-home/feed/"
+  },
+  {
+    "group": "feeds",
+    "path": "/meet-our-new-roaster/feed/"
+  },
+  {
+    "group": "feeds",
+    "path": "/now-shipping-across-europe/feed/"
+  },
+  {
+    "group": "feeds",
+    "path": "/tag/beginner/feed/"
+  },
+  {
+    "group": "feeds",
+    "path": "/tag/colombia/feed/"
+  },
+  {
+    "group": "feeds",
+    "path": "/tag/equipment/feed/"
+  },
+  {
+    "group": "feeds",
+    "path": "/tag/espresso/feed/"
+  },
+  {
+    "group": "feeds",
+    "path": "/tag/ethiopia/feed/"
+  },
+  {
+    "group": "feeds",
+    "path": "/tag/pour-over/feed/"
+  },
+  {
+    "group": "feeds",
+    "path": "/tag/seasonal/feed/"
+  },
+  {
+    "group": "feeds",
+    "path": "/tag/single-origin/feed/"
+  },
+  {
+    "group": "feeds",
+    "path": "/washed-vs-natural-process/feed/"
+  },
+  {
+    "group": "attachments",
+    "path": "/about/battlecreek-coffee-roasters-my4hawxna_0-unsplash/"
+  },
+  {
+    "group": "attachments",
+    "path": "/about/brian-zhu-s6fwkrwazzm-unsplash/"
+  },
+  {
+    "group": "attachments",
+    "path": "/about/brooke-cagle-9fhmo1-5io8-unsplash/"
+  },
+  {
+    "group": "attachments",
+    "path": "/about/oguz-tombul-zklrgmn_4vg-unsplash/"
+  },
+  {
+    "group": "attachments",
+    "path": "/about/rawkkim-amvy17jgeug-unsplash/"
+  },
+  {
+    "group": "attachments",
+    "path": "/autumn-seasonal-blend/alisa-anton-jhxgkggd3sw-unsplash/"
+  },
+  {
+    "group": "attachments",
+    "path": "/benjaminrobyn-jespersen-ggsargszqho-unsplash/"
+  },
+  {
+    "group": "attachments",
+    "path": "/caio-arbulu-9v5vxxnksf4-unsplash/"
+  },
+  {
+    "group": "attachments",
+    "path": "/choosing-the-right-grind-size/milo-miloezger-rkyrju0n06y-unsplash/"
+  },
+  {
+    "group": "attachments",
+    "path": "/cold-brew-four-simple-steps/demi-deherrera-l-sm1b4l1ns-unsplash/"
+  },
+  {
+    "group": "attachments",
+    "path": "/cold-brew-four-simple-steps/wade-austin-ellis-evcukbdewss-unsplash/"
+  },
+  {
+    "group": "attachments",
+    "path": "/colombia-huila-house-espresso/matt-hoffman-ie-gdqeg45m-unsplash/"
+  },
+  {
+    "group": "attachments",
+    "path": "/contact/egor-komarov-pdbnb5j0zge-unsplash/"
+  },
+  {
+    "group": "attachments",
+    "path": "/ethiopia-yirgacheffe/dang-cong-jqf4is65xeg-unsplash/"
+  },
+  {
+    "group": "attachments",
+    "path": "/ethiopia-yirgacheffe/dimitry-b-i9hgm8cf-20-unsplash/"
+  },
+  {
+    "group": "attachments",
+    "path": "/ethiopia-yirgacheffe/katya-ross-adg9b8ntxj0-unsplash/"
+  },
+  {
+    "group": "attachments",
+    "path": "/ethiopia-yirgacheffe/projeto-cafe-gato-mourisco-zovrgigqmqa-unsplash/"
+  },
+  {
+    "group": "attachments",
+    "path": "/faq/kari-shea-pjn9whmqfis-unsplash/"
+  },
+  {
+    "group": "attachments",
+    "path": "/french-press-5-common-mistakes/sorin-gheorghita-flrcfg0rvzu-unsplash/"
+  },
+  {
+    "group": "attachments",
+    "path": "/home/lazarescu-alexandra-hfpqg9ku5gc-unsplash/"
+  },
+  {
+    "group": "attachments",
+    "path": "/how-to-brew-pour-over-at-home/charlie-firth-nta2s1hgqsc-unsplash/"
+  },
+  {
+    "group": "attachments",
+    "path": "/how-to-brew-pour-over-at-home/karl-fredrickson-tyizeciz_60-unsplash/"
+  },
+  {
+    "group": "attachments",
+    "path": "/meet-our-new-roaster/tim-mossholder-yc6rvdottik-unsplash/"
+  },
+  {
+    "group": "attachments",
+    "path": "/meet-our-new-roaster/yanapi-senaud-6hr8vpjyuho-unsplash/"
+  },
+  {
+    "group": "attachments",
+    "path": "/now-shipping-across-europe/point-normal-pgctpzuz65i-unsplash/"
+  },
+  {
+    "group": "attachments",
+    "path": "/products/declan-sun-paj9ibnklwi-unsplash/"
+  },
+  {
+    "group": "attachments",
+    "path": "/products/mike-kenneally-zlwdjoktua8-unsplash/"
+  },
+  {
+    "group": "attachments",
+    "path": "/services/di-bella-coffee-gtsfmwwq2xk-unsplash/"
+  },
+  {
+    "group": "attachments",
+    "path": "/services/yifei-wong-0q0qsjddzb0-unsplash/"
+  },
+  {
+    "group": "attachments",
+    "path": "/washed-vs-natural-process/dimitry-b-vwg92utkdgc-unsplash/"
+  },
+  {
+    "group": "sitemaps",
+    "path": "/author-sitemap.xml"
+  },
+  {
+    "group": "sitemaps",
+    "path": "/category-sitemap.xml"
+  },
+  {
+    "group": "sitemaps",
+    "path": "/page-sitemap.xml"
+  },
+  {
+    "group": "sitemaps",
+    "path": "/post-sitemap.xml"
+  },
+  {
+    "group": "sitemaps",
+    "path": "/post_tag-sitemap.xml"
+  },
+  {
+    "group": "sitemaps",
+    "path": "/sitemap.xml"
+  },
+  {
+    "group": "sitemaps",
+    "path": "/sitemap_index.xml"
+  },
+  {
+    "group": "sitemaps",
+    "path": "/wp-sitemap.xml"
+  },
+  {
+    "group": "robots",
+    "path": "/robots.txt"
+  },
+  {
+    "group": "shortlinks",
+    "path": "/?p=11"
+  },
+  {
+    "group": "shortlinks",
+    "path": "/?p=13"
+  },
+  {
+    "group": "shortlinks",
+    "path": "/?p=15"
+  },
+  {
+    "group": "shortlinks",
+    "path": "/?p=17"
+  },
+  {
+    "group": "shortlinks",
+    "path": "/?p=22"
+  },
+  {
+    "group": "shortlinks",
+    "path": "/?p=24"
+  },
+  {
+    "group": "shortlinks",
+    "path": "/?p=26"
+  },
+  {
+    "group": "shortlinks",
+    "path": "/?p=28"
+  },
+  {
+    "group": "shortlinks",
+    "path": "/?p=30"
+  },
+  {
+    "group": "shortlinks",
+    "path": "/?p=8"
+  },
+  {
+    "group": "shortlinks",
+    "path": "/?page_id=122"
+  },
+  {
+    "group": "shortlinks",
+    "path": "/?page_id=63"
+  },
+  {
+    "group": "shortlinks",
+    "path": "/?page_id=65"
+  },
+  {
+    "group": "shortlinks",
+    "path": "/?page_id=67"
+  },
+  {
+    "group": "shortlinks",
+    "path": "/?page_id=69"
+  },
+  {
+    "group": "shortlinks",
+    "path": "/?page_id=71"
+  },
+  {
+    "group": "shortlinks",
+    "path": "/?page_id=73"
+  }
+]

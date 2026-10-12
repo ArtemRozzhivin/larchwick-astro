@@ -1,0 +1,2235 @@
+{
+  "crawledAt": "2026-10-12T18:20:33Z",
+  "base": "http://larchwick.local",
+  "counts": {
+    "total": 130,
+    "groups": {
+      "pages": 7,
+      "home-alias": 1,
+      "posts": 10,
+      "old-slugs": 2,
+      "categories": 3,
+      "tags": 8,
+      "date-archives": 18,
+      "author": 1,
+      "feeds": 24,
+      "attachments": 30,
+      "sitemaps": 8,
+      "robots": 1,
+      "shortlinks": 17
+    },
+    "finalStatus": {
+      "200": 130
+    }
+  },
+  "records": [
+    {
+      "group": "pages",
+      "path": "/",
+      "hops": [],
+      "finalUrl": "/",
+      "finalStatus": 200,
+      "contentType": "text/html; charset=UTF-8",
+      "title": "Larchwick Coffee Roasters | Fresh Small-Batch Coffee",
+      "description": "Fresh, small-batch coffee roasted twice a week. Single origins, blends, brewing guides, classes and EU shipping from Larchwick Coffee Roasters.",
+      "canonical": "/",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "xRobotsTag": null,
+      "h1": []
+    },
+    {
+      "group": "pages",
+      "path": "/about/",
+      "hops": [],
+      "finalUrl": "/about/",
+      "finalStatus": 200,
+      "contentType": "text/html; charset=UTF-8",
+      "title": "About Us: Small-Batch Coffee Roasters | Larchwick",
+      "description": "Larchwick is a small-batch coffee roastery. Meet the team, learn how we source our beans, and why we roast in small batches.",
+      "canonical": "/about/",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "xRobotsTag": null,
+      "h1": []
+    },
+    {
+      "group": "pages",
+      "path": "/blog/",
+      "hops": [],
+      "finalUrl": "/blog/",
+      "finalStatus": 200,
+      "contentType": "text/html; charset=UTF-8",
+      "title": "Blog - Larchwick",
+      "description": null,
+      "canonical": "/blog/",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "xRobotsTag": null,
+      "h1": []
+    },
+    {
+      "group": "pages",
+      "path": "/contact/",
+      "hops": [],
+      "finalUrl": "/contact/",
+      "finalStatus": 200,
+      "contentType": "text/html; charset=UTF-8",
+      "title": "Contact Us | Larchwick Coffee Roasters",
+      "description": "Contact Larchwick Coffee Roasters about orders, wholesale, brewing classes or office coffee. We reply within two working days.",
+      "canonical": "/contact/",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "xRobotsTag": null,
+      "h1": [
+        "Get in touch"
+      ]
+    },
+    {
+      "group": "pages",
+      "path": "/faq/",
+      "hops": [],
+      "finalUrl": "/faq/",
+      "finalStatus": 200,
+      "contentType": "text/html; charset=UTF-8",
+      "title": "Frequently Asked Questions | Larchwick Coffee Roasters",
+      "description": "Answers about Larchwick coffee: freshness, grind options, storage, EU shipping, subscriptions, wholesale and brewing classes.",
+      "canonical": "/faq/",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "xRobotsTag": null,
+      "h1": [
+        "Frequently asked questions"
+      ]
+    },
+    {
+      "group": "pages",
+      "path": "/products/",
+      "hops": [],
+      "finalUrl": "/products/",
+      "finalStatus": 200,
+      "contentType": "text/html; charset=UTF-8",
+      "title": "Our Coffees: Single Origins and Blends | Larchwick",
+      "description": "Explore Larchwick coffees: Ethiopia Yirgacheffe, Colombia Huila, House Espresso and the seasonal Autumn Blend. Origins, tasting notes and prices.",
+      "canonical": "/products/",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "xRobotsTag": null,
+      "h1": [
+        "Our coffees"
+      ]
+    },
+    {
+      "group": "pages",
+      "path": "/services/",
+      "hops": [],
+      "finalUrl": "/services/",
+      "finalStatus": 200,
+      "contentType": "text/html; charset=UTF-8",
+      "title": "Wholesale Coffee, Brewing Classes and Office Coffee | Larchwick",
+      "description": "Wholesale coffee for cafés, small-group brewing classes and office coffee subscriptions from Larchwick Coffee Roasters.",
+      "canonical": "/services/",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "xRobotsTag": null,
+      "h1": [
+        "Services"
+      ]
+    },
+    {
+      "group": "home-alias",
+      "path": "/home/",
+      "hops": [
+        {
+          "status": 301,
+          "location": "/"
+        }
+      ],
+      "finalUrl": "/",
+      "finalStatus": 200,
+      "contentType": "text/html; charset=UTF-8",
+      "title": "Larchwick Coffee Roasters | Fresh Small-Batch Coffee",
+      "description": "Fresh, small-batch coffee roasted twice a week. Single origins, blends, brewing guides, classes and EU shipping from Larchwick Coffee Roasters.",
+      "canonical": "/",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "xRobotsTag": null,
+      "h1": []
+    },
+    {
+      "group": "posts",
+      "path": "/autumn-seasonal-blend/",
+      "hops": [],
+      "finalUrl": "/autumn-seasonal-blend/",
+      "finalStatus": 200,
+      "contentType": "text/html; charset=UTF-8",
+      "title": "Autumn Seasonal Coffee Blend Is Back | Larchwick",
+      "description": "Our limited autumn blend is back: cocoa, baked apple and a hint of spice. What's in it, how to brew it, and how long it's available.",
+      "canonical": "/autumn-seasonal-blend/",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "xRobotsTag": null,
+      "h1": [
+        "Our Autumn Seasonal Blend"
+      ]
+    },
+    {
+      "group": "posts",
+      "path": "/choosing-the-right-grind-size/",
+      "hops": [],
+      "finalUrl": "/choosing-the-right-grind-size/",
+      "finalStatus": 200,
+      "contentType": "text/html; charset=UTF-8",
+      "title": "Coffee Grind Size Chart for Every Brew Method | Larchwick",
+      "description": "Which grind size for espresso, pour-over, French press or cold brew? A simple chart, plus how to tell if your grind is too fine or too coarse.",
+      "canonical": "/choosing-the-right-grind-size/",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "xRobotsTag": null,
+      "h1": [
+        "Choosing the Right Grind Size"
+      ]
+    },
+    {
+      "group": "posts",
+      "path": "/cold-brew-four-simple-steps/",
+      "hops": [],
+      "finalUrl": "/cold-brew-four-simple-steps/",
+      "finalStatus": 200,
+      "contentType": "text/html; charset=UTF-8",
+      "title": "Easy Cold Brew Coffee Recipe in 4 Steps | Larchwick",
+      "description": "Make smooth, low-acid cold brew at home with just coffee, water and a jar. Our simple 4-step recipe, ratio and steeping time.",
+      "canonical": "/cold-brew-four-simple-steps/",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "xRobotsTag": null,
+      "h1": [
+        "Cold Brew in 4 Simple Steps"
+      ]
+    },
+    {
+      "group": "posts",
+      "path": "/colombia-huila-house-espresso/",
+      "hops": [],
+      "finalUrl": "/colombia-huila-house-espresso/",
+      "finalStatus": 200,
+      "contentType": "text/html; charset=UTF-8",
+      "title": "Colombia Huila: Our House Espresso Coffee | Larchwick",
+      "description": "Meet Colombia Huila, the coffee behind our house espresso: where it grows, how it tastes, and why it works so well with milk.",
+      "canonical": "/colombia-huila-house-espresso/",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "xRobotsTag": null,
+      "h1": [
+        "Colombia Huila: Our House Espresso Bean"
+      ]
+    },
+    {
+      "group": "posts",
+      "path": "/ethiopia-yirgacheffe/",
+      "hops": [],
+      "finalUrl": "/ethiopia-yirgacheffe/",
+      "finalStatus": 200,
+      "contentType": "text/html; charset=UTF-8",
+      "title": "Ethiopia Yirgacheffe Coffee: Origin and Flavor | Larchwick",
+      "description": "Why Ethiopia Yirgacheffe coffee tastes floral and bright: altitude, heirloom varieties and washed processing, plus how we brew it.",
+      "canonical": "/ethiopia-yirgacheffe/",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "xRobotsTag": null,
+      "h1": [
+        "Ethiopia Yirgacheffe: Bright and Floral"
+      ]
+    },
+    {
+      "group": "posts",
+      "path": "/french-press-5-common-mistakes/",
+      "hops": [],
+      "finalUrl": "/french-press-5-common-mistakes/",
+      "finalStatus": 200,
+      "contentType": "text/html; charset=UTF-8",
+      "title": "French Press Coffee: 5 Common Mistakes to Avoid | Larchwick",
+      "description": "Bitter or muddy French press coffee? Learn the five most common mistakes, from grind size to timing, and how to fix each one.",
+      "canonical": "/french-press-5-common-mistakes/",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "xRobotsTag": null,
+      "h1": [
+        "French Press: 5 Common Mistakes"
+      ]
+    },
+    {
+      "group": "posts",
+      "path": "/how-to-brew-pour-over-at-home/",
+      "hops": [],
+      "finalUrl": "/how-to-brew-pour-over-at-home/",
+      "finalStatus": 200,
+      "contentType": "text/html; charset=UTF-8",
+      "title": "How to Brew Pour-Over Coffee at Home | Larchwick",
+      "description": "A simple step-by-step pour-over guide: ratio, water temperature, grind size and timing for a clean, sweet cup every morning.",
+      "canonical": "/how-to-brew-pour-over-at-home/",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "xRobotsTag": null,
+      "h1": [
+        "How to Brew Pour-Over at Home"
+      ]
+    },
+    {
+      "group": "posts",
+      "path": "/meet-our-new-roaster/",
+      "hops": [],
+      "finalUrl": "/meet-our-new-roaster/",
+      "finalStatus": 200,
+      "contentType": "text/html; charset=UTF-8",
+      "title": "Meet Mira, Our New Head Roaster | Larchwick",
+      "description": "Meet Mira, the new head roaster at Larchwick Coffee Roasters: her background, her roasting style and the coffee she drinks every day.",
+      "canonical": "/meet-our-new-roaster/",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "xRobotsTag": null,
+      "h1": [
+        "Meet Our New Roaster"
+      ]
+    },
+    {
+      "group": "posts",
+      "path": "/now-shipping-across-europe/",
+      "hops": [],
+      "finalUrl": "/now-shipping-across-europe/",
+      "finalStatus": 200,
+      "contentType": "text/html; charset=UTF-8",
+      "title": "Now Shipping Fresh Coffee Across Europe | Larchwick",
+      "description": "Larchwick Coffee Roasters now ships fresh-roasted coffee across the EU. Delivery times, roast dates and wholesale enquiries.",
+      "canonical": "/now-shipping-across-europe/",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "xRobotsTag": null,
+      "h1": [
+        "Larchwick Now Ships Across Europe"
+      ]
+    },
+    {
+      "group": "posts",
+      "path": "/washed-vs-natural-process/",
+      "hops": [],
+      "finalUrl": "/washed-vs-natural-process/",
+      "finalStatus": 200,
+      "contentType": "text/html; charset=UTF-8",
+      "title": "Washed vs Natural Coffee Processing Explained | Larchwick",
+      "description": "What do \"washed\" and \"natural\" mean on a coffee bag? A simple guide to coffee processing and how each method changes flavor.",
+      "canonical": "/washed-vs-natural-process/",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "xRobotsTag": null,
+      "h1": [
+        "Washed vs Natural Process, Explained"
+      ]
+    },
+    {
+      "group": "old-slugs",
+      "path": "/brewing-guides/",
+      "hops": [
+        {
+          "status": 301,
+          "location": "/ethiopia-yirgacheffe/"
+        }
+      ],
+      "finalUrl": "/ethiopia-yirgacheffe/",
+      "finalStatus": 200,
+      "contentType": "text/html; charset=UTF-8",
+      "title": "Ethiopia Yirgacheffe Coffee: Origin and Flavor | Larchwick",
+      "description": "Why Ethiopia Yirgacheffe coffee tastes floral and bright: altitude, heirloom varieties and washed processing, plus how we brew it.",
+      "canonical": "/ethiopia-yirgacheffe/",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "xRobotsTag": null,
+      "h1": [
+        "Ethiopia Yirgacheffe: Bright and Floral"
+      ]
+    },
+    {
+      "group": "old-slugs",
+      "path": "/roastery-news/",
+      "hops": [
+        {
+          "status": 301,
+          "location": "/choosing-the-right-grind-size/"
+        }
+      ],
+      "finalUrl": "/choosing-the-right-grind-size/",
+      "finalStatus": 200,
+      "contentType": "text/html; charset=UTF-8",
+      "title": "Coffee Grind Size Chart for Every Brew Method | Larchwick",
+      "description": "Which grind size for espresso, pour-over, French press or cold brew? A simple chart, plus how to tell if your grind is too fine or too coarse.",
+      "canonical": "/choosing-the-right-grind-size/",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "xRobotsTag": null,
+      "h1": [
+        "Choosing the Right Grind Size"
+      ]
+    },
+    {
+      "group": "categories",
+      "path": "/category/brewing-guides/",
+      "hops": [],
+      "finalUrl": "/category/brewing-guides/",
+      "finalStatus": 200,
+      "contentType": "text/html; charset=UTF-8",
+      "title": "Brewing Guides Archives - Larchwick",
+      "description": null,
+      "canonical": "/category/brewing-guides/",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "xRobotsTag": null,
+      "h1": [
+        "Brewing Guides"
+      ]
+    },
+    {
+      "group": "categories",
+      "path": "/category/coffee-origins/",
+      "hops": [],
+      "finalUrl": "/category/coffee-origins/",
+      "finalStatus": 200,
+      "contentType": "text/html; charset=UTF-8",
+      "title": "Coffee Origins Archives - Larchwick",
+      "description": null,
+      "canonical": "/category/coffee-origins/",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "xRobotsTag": null,
+      "h1": [
+        "Coffee Origins"
+      ]
+    },
+    {
+      "group": "categories",
+      "path": "/category/roastery-news/",
+      "hops": [],
+      "finalUrl": "/category/roastery-news/",
+      "finalStatus": 200,
+      "contentType": "text/html; charset=UTF-8",
+      "title": "Roastery News Archives - Larchwick",
+      "description": null,
+      "canonical": "/category/roastery-news/",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "xRobotsTag": null,
+      "h1": [
+        "Roastery News"
+      ]
+    },
+    {
+      "group": "tags",
+      "path": "/tag/beginner/",
+      "hops": [],
+      "finalUrl": "/tag/beginner/",
+      "finalStatus": 200,
+      "contentType": "text/html; charset=UTF-8",
+      "title": "beginner Archives - Larchwick",
+      "description": null,
+      "canonical": "/tag/beginner/",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "xRobotsTag": null,
+      "h1": [
+        "beginner"
+      ]
+    },
+    {
+      "group": "tags",
+      "path": "/tag/colombia/",
+      "hops": [],
+      "finalUrl": "/tag/colombia/",
+      "finalStatus": 200,
+      "contentType": "text/html; charset=UTF-8",
+      "title": "colombia Archives - Larchwick",
+      "description": null,
+      "canonical": "/tag/colombia/",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "xRobotsTag": null,
+      "h1": [
+        "colombia"
+      ]
+    },
+    {
+      "group": "tags",
+      "path": "/tag/equipment/",
+      "hops": [],
+      "finalUrl": "/tag/equipment/",
+      "finalStatus": 200,
+      "contentType": "text/html; charset=UTF-8",
+      "title": "equipment Archives - Larchwick",
+      "description": null,
+      "canonical": "/tag/equipment/",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "xRobotsTag": null,
+      "h1": [
+        "equipment"
+      ]
+    },
+    {
+      "group": "tags",
+      "path": "/tag/espresso/",
+      "hops": [],
+      "finalUrl": "/tag/espresso/",
+      "finalStatus": 200,
+      "contentType": "text/html; charset=UTF-8",
+      "title": "espresso Archives - Larchwick",
+      "description": null,
+      "canonical": "/tag/espresso/",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "xRobotsTag": null,
+      "h1": [
+        "espresso"
+      ]
+    },
+    {
+      "group": "tags",
+      "path": "/tag/ethiopia/",
+      "hops": [],
+      "finalUrl": "/tag/ethiopia/",
+      "finalStatus": 200,
+      "contentType": "text/html; charset=UTF-8",
+      "title": "ethiopia Archives - Larchwick",
+      "description": null,
+      "canonical": "/tag/ethiopia/",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "xRobotsTag": null,
+      "h1": [
+        "ethiopia"
+      ]
+    },
+    {
+      "group": "tags",
+      "path": "/tag/pour-over/",
+      "hops": [],
+      "finalUrl": "/tag/pour-over/",
+      "finalStatus": 200,
+      "contentType": "text/html; charset=UTF-8",
+      "title": "pour-over Archives - Larchwick",
+      "description": null,
+      "canonical": "/tag/pour-over/",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "xRobotsTag": null,
+      "h1": [
+        "pour-over"
+      ]
+    },
+    {
+      "group": "tags",
+      "path": "/tag/seasonal/",
+      "hops": [],
+      "finalUrl": "/tag/seasonal/",
+      "finalStatus": 200,
+      "contentType": "text/html; charset=UTF-8",
+      "title": "seasonal Archives - Larchwick",
+      "description": null,
+      "canonical": "/tag/seasonal/",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "xRobotsTag": null,
+      "h1": [
+        "seasonal"
+      ]
+    },
+    {
+      "group": "tags",
+      "path": "/tag/single-origin/",
+      "hops": [],
+      "finalUrl": "/tag/single-origin/",
+      "finalStatus": 200,
+      "contentType": "text/html; charset=UTF-8",
+      "title": "single-origin Archives - Larchwick",
+      "description": null,
+      "canonical": "/tag/single-origin/",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "xRobotsTag": null,
+      "h1": [
+        "single-origin"
+      ]
+    },
+    {
+      "group": "date-archives",
+      "path": "/2025/",
+      "hops": [],
+      "finalUrl": "/2025/",
+      "finalStatus": 200,
+      "contentType": "text/html; charset=UTF-8",
+      "title": "2025 - Larchwick",
+      "description": null,
+      "canonical": null,
+      "robots": "noindex, follow",
+      "xRobotsTag": null,
+      "h1": [
+        "2025"
+      ]
+    },
+    {
+      "group": "date-archives",
+      "path": "/2025/03/",
+      "hops": [],
+      "finalUrl": "/2025/03/",
+      "finalStatus": 200,
+      "contentType": "text/html; charset=UTF-8",
+      "title": "March 2025 - Larchwick",
+      "description": null,
+      "canonical": null,
+      "robots": "noindex, follow",
+      "xRobotsTag": null,
+      "h1": [
+        "March 2025"
+      ]
+    },
+    {
+      "group": "date-archives",
+      "path": "/2025/03/09/",
+      "hops": [],
+      "finalUrl": "/2025/03/09/",
+      "finalStatus": 200,
+      "contentType": "text/html; charset=UTF-8",
+      "title": "March 9, 2025 - Larchwick",
+      "description": null,
+      "canonical": null,
+      "robots": "noindex, follow",
+      "xRobotsTag": null,
+      "h1": [
+        "March 9, 2025"
+      ]
+    },
+    {
+      "group": "date-archives",
+      "path": "/2025/04/",
+      "hops": [],
+      "finalUrl": "/2025/04/",
+      "finalStatus": 200,
+      "contentType": "text/html; charset=UTF-8",
+      "title": "April 2025 - Larchwick",
+      "description": null,
+      "canonical": null,
+      "robots": "noindex, follow",
+      "xRobotsTag": null,
+      "h1": [
+        "April 2025"
+      ]
+    },
+    {
+      "group": "date-archives",
+      "path": "/2025/04/11/",
+      "hops": [],
+      "finalUrl": "/2025/04/11/",
+      "finalStatus": 200,
+      "contentType": "text/html; charset=UTF-8",
+      "title": "April 11, 2025 - Larchwick",
+      "description": null,
+      "canonical": null,
+      "robots": "noindex, follow",
+      "xRobotsTag": null,
+      "h1": [
+        "April 11, 2025"
+      ]
+    },
+    {
+      "group": "date-archives",
+      "path": "/2026/",
+      "hops": [],
+      "finalUrl": "/2026/",
+      "finalStatus": 200,
+      "contentType": "text/html; charset=UTF-8",
+      "title": "2026 - Larchwick",
+      "description": null,
+      "canonical": null,
+      "robots": "noindex, follow",
+      "xRobotsTag": null,
+      "h1": [
+        "2026"
+      ]
+    },
+    {
+      "group": "date-archives",
+      "path": "/2026/04/",
+      "hops": [],
+      "finalUrl": "/2026/04/",
+      "finalStatus": 200,
+      "contentType": "text/html; charset=UTF-8",
+      "title": "April 2026 - Larchwick",
+      "description": null,
+      "canonical": null,
+      "robots": "noindex, follow",
+      "xRobotsTag": null,
+      "h1": [
+        "April 2026"
+      ]
+    },
+    {
+      "group": "date-archives",
+      "path": "/2026/04/06/",
+      "hops": [],
+      "finalUrl": "/2026/04/06/",
+      "finalStatus": 200,
+      "contentType": "text/html; charset=UTF-8",
+      "title": "April 6, 2026 - Larchwick",
+      "description": null,
+      "canonical": null,
+      "robots": "noindex, follow",
+      "xRobotsTag": null,
+      "h1": [
+        "April 6, 2026"
+      ]
+    },
+    {
+      "group": "date-archives",
+      "path": "/2026/04/21/",
+      "hops": [],
+      "finalUrl": "/2026/04/21/",
+      "finalStatus": 200,
+      "contentType": "text/html; charset=UTF-8",
+      "title": "April 21, 2026 - Larchwick",
+      "description": null,
+      "canonical": null,
+      "robots": "noindex, follow",
+      "xRobotsTag": null,
+      "h1": [
+        "April 21, 2026"
+      ]
+    },
+    {
+      "group": "date-archives",
+      "path": "/2026/05/",
+      "hops": [],
+      "finalUrl": "/2026/05/",
+      "finalStatus": 200,
+      "contentType": "text/html; charset=UTF-8",
+      "title": "May 2026 - Larchwick",
+      "description": null,
+      "canonical": null,
+      "robots": "noindex, follow",
+      "xRobotsTag": null,
+      "h1": [
+        "May 2026"
+      ]
+    },
+    {
+      "group": "date-archives",
+      "path": "/2026/05/22/",
+      "hops": [],
+      "finalUrl": "/2026/05/22/",
+      "finalStatus": 200,
+      "contentType": "text/html; charset=UTF-8",
+      "title": "May 22, 2026 - Larchwick",
+      "description": null,
+      "canonical": null,
+      "robots": "noindex, follow",
+      "xRobotsTag": null,
+      "h1": [
+        "May 22, 2026"
+      ]
+    },
+    {
+      "group": "date-archives",
+      "path": "/2026/06/",
+      "hops": [],
+      "finalUrl": "/2026/06/",
+      "finalStatus": 200,
+      "contentType": "text/html; charset=UTF-8",
+      "title": "June 2026 - Larchwick",
+      "description": null,
+      "canonical": null,
+      "robots": "noindex, follow",
+      "xRobotsTag": null,
+      "h1": [
+        "June 2026"
+      ]
+    },
+    {
+      "group": "date-archives",
+      "path": "/2026/06/16/",
+      "hops": [],
+      "finalUrl": "/2026/06/16/",
+      "finalStatus": 200,
+      "contentType": "text/html; charset=UTF-8",
+      "title": "June 16, 2026 - Larchwick",
+      "description": null,
+      "canonical": null,
+      "robots": "noindex, follow",
+      "xRobotsTag": null,
+      "h1": [
+        "June 16, 2026"
+      ]
+    },
+    {
+      "group": "date-archives",
+      "path": "/2026/09/",
+      "hops": [],
+      "finalUrl": "/2026/09/",
+      "finalStatus": 200,
+      "contentType": "text/html; charset=UTF-8",
+      "title": "September 2026 - Larchwick",
+      "description": null,
+      "canonical": null,
+      "robots": "noindex, follow",
+      "xRobotsTag": null,
+      "h1": [
+        "September 2026"
+      ]
+    },
+    {
+      "group": "date-archives",
+      "path": "/2026/09/27/",
+      "hops": [],
+      "finalUrl": "/2026/09/27/",
+      "finalStatus": 200,
+      "contentType": "text/html; charset=UTF-8",
+      "title": "September 27, 2026 - Larchwick",
+      "description": null,
+      "canonical": null,
+      "robots": "noindex, follow",
+      "xRobotsTag": null,
+      "h1": [
+        "September 27, 2026"
+      ]
+    },
+    {
+      "group": "date-archives",
+      "path": "/2026/09/29/",
+      "hops": [],
+      "finalUrl": "/2026/09/29/",
+      "finalStatus": 200,
+      "contentType": "text/html; charset=UTF-8",
+      "title": "September 29, 2026 - Larchwick",
+      "description": null,
+      "canonical": null,
+      "robots": "noindex, follow",
+      "xRobotsTag": null,
+      "h1": [
+        "September 29, 2026"
+      ]
+    },
+    {
+      "group": "date-archives",
+      "path": "/2026/10/",
+      "hops": [],
+      "finalUrl": "/2026/10/",
+      "finalStatus": 200,
+      "contentType": "text/html; charset=UTF-8",
+      "title": "October 2026 - Larchwick",
+      "description": null,
+      "canonical": null,
+      "robots": "noindex, follow",
+      "xRobotsTag": null,
+      "h1": [
+        "October 2026"
+      ]
+    },
+    {
+      "group": "date-archives",
+      "path": "/2026/10/01/",
+      "hops": [],
+      "finalUrl": "/2026/10/01/",
+      "finalStatus": 200,
+      "contentType": "text/html; charset=UTF-8",
+      "title": "October 1, 2026 - Larchwick",
+      "description": null,
+      "canonical": null,
+      "robots": "noindex, follow",
+      "xRobotsTag": null,
+      "h1": [
+        "October 1, 2026"
+      ]
+    },
+    {
+      "group": "author",
+      "path": "/author/<author>/",
+      "hops": [],
+      "finalUrl": "/author/<author>/",
+      "finalStatus": 200,
+      "contentType": "text/html; charset=UTF-8",
+      "title": "larchwick-team, Author at Larchwick",
+      "description": null,
+      "canonical": "/author/<author>/",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "xRobotsTag": null,
+      "h1": [
+        "Author name: larchwick-team"
+      ]
+    },
+    {
+      "group": "feeds",
+      "path": "/author/<author>/feed/",
+      "hops": [],
+      "finalUrl": "/author/<author>/feed/",
+      "finalStatus": 200,
+      "contentType": "application/rss+xml; charset=UTF-8",
+      "title": null,
+      "description": null,
+      "canonical": null,
+      "robots": null,
+      "xRobotsTag": null,
+      "h1": null
+    },
+    {
+      "group": "feeds",
+      "path": "/autumn-seasonal-blend/feed/",
+      "hops": [],
+      "finalUrl": "/autumn-seasonal-blend/feed/",
+      "finalStatus": 200,
+      "contentType": "application/rss+xml; charset=UTF-8",
+      "title": null,
+      "description": null,
+      "canonical": null,
+      "robots": null,
+      "xRobotsTag": "noindex, follow",
+      "h1": null
+    },
+    {
+      "group": "feeds",
+      "path": "/category/brewing-guides/feed/",
+      "hops": [],
+      "finalUrl": "/category/brewing-guides/feed/",
+      "finalStatus": 200,
+      "contentType": "application/rss+xml; charset=UTF-8",
+      "title": null,
+      "description": null,
+      "canonical": null,
+      "robots": null,
+      "xRobotsTag": null,
+      "h1": null
+    },
+    {
+      "group": "feeds",
+      "path": "/category/coffee-origins/feed/",
+      "hops": [],
+      "finalUrl": "/category/coffee-origins/feed/",
+      "finalStatus": 200,
+      "contentType": "application/rss+xml; charset=UTF-8",
+      "title": null,
+      "description": null,
+      "canonical": null,
+      "robots": null,
+      "xRobotsTag": null,
+      "h1": null
+    },
+    {
+      "group": "feeds",
+      "path": "/category/roastery-news/feed/",
+      "hops": [],
+      "finalUrl": "/category/roastery-news/feed/",
+      "finalStatus": 200,
+      "contentType": "application/rss+xml; charset=UTF-8",
+      "title": null,
+      "description": null,
+      "canonical": null,
+      "robots": null,
+      "xRobotsTag": null,
+      "h1": null
+    },
+    {
+      "group": "feeds",
+      "path": "/choosing-the-right-grind-size/feed/",
+      "hops": [],
+      "finalUrl": "/choosing-the-right-grind-size/feed/",
+      "finalStatus": 200,
+      "contentType": "application/rss+xml; charset=UTF-8",
+      "title": null,
+      "description": null,
+      "canonical": null,
+      "robots": null,
+      "xRobotsTag": "noindex, follow",
+      "h1": null
+    },
+    {
+      "group": "feeds",
+      "path": "/cold-brew-four-simple-steps/feed/",
+      "hops": [],
+      "finalUrl": "/cold-brew-four-simple-steps/feed/",
+      "finalStatus": 200,
+      "contentType": "application/rss+xml; charset=UTF-8",
+      "title": null,
+      "description": null,
+      "canonical": null,
+      "robots": null,
+      "xRobotsTag": "noindex, follow",
+      "h1": null
+    },
+    {
+      "group": "feeds",
+      "path": "/colombia-huila-house-espresso/feed/",
+      "hops": [],
+      "finalUrl": "/colombia-huila-house-espresso/feed/",
+      "finalStatus": 200,
+      "contentType": "application/rss+xml; charset=UTF-8",
+      "title": null,
+      "description": null,
+      "canonical": null,
+      "robots": null,
+      "xRobotsTag": "noindex, follow",
+      "h1": null
+    },
+    {
+      "group": "feeds",
+      "path": "/comments/feed/",
+      "hops": [],
+      "finalUrl": "/comments/feed/",
+      "finalStatus": 200,
+      "contentType": "application/rss+xml; charset=UTF-8",
+      "title": null,
+      "description": null,
+      "canonical": null,
+      "robots": null,
+      "xRobotsTag": "noindex, follow",
+      "h1": null
+    },
+    {
+      "group": "feeds",
+      "path": "/ethiopia-yirgacheffe/feed/",
+      "hops": [],
+      "finalUrl": "/ethiopia-yirgacheffe/feed/",
+      "finalStatus": 200,
+      "contentType": "application/rss+xml; charset=UTF-8",
+      "title": null,
+      "description": null,
+      "canonical": null,
+      "robots": null,
+      "xRobotsTag": "noindex, follow",
+      "h1": null
+    },
+    {
+      "group": "feeds",
+      "path": "/feed/",
+      "hops": [],
+      "finalUrl": "/feed/",
+      "finalStatus": 200,
+      "contentType": "application/rss+xml; charset=UTF-8",
+      "title": null,
+      "description": null,
+      "canonical": null,
+      "robots": null,
+      "xRobotsTag": null,
+      "h1": null
+    },
+    {
+      "group": "feeds",
+      "path": "/french-press-5-common-mistakes/feed/",
+      "hops": [],
+      "finalUrl": "/french-press-5-common-mistakes/feed/",
+      "finalStatus": 200,
+      "contentType": "application/rss+xml; charset=UTF-8",
+      "title": null,
+      "description": null,
+      "canonical": null,
+      "robots": null,
+      "xRobotsTag": "noindex, follow",
+      "h1": null
+    },
+    {
+      "group": "feeds",
+      "path": "/how-to-brew-pour-over-at-home/feed/",
+      "hops": [],
+      "finalUrl": "/how-to-brew-pour-over-at-home/feed/",
+      "finalStatus": 200,
+      "contentType": "application/rss+xml; charset=UTF-8",
+      "title": null,
+      "description": null,
+      "canonical": null,
+      "robots": null,
+      "xRobotsTag": "noindex, follow",
+      "h1": null
+    },
+    {
+      "group": "feeds",
+      "path": "/meet-our-new-roaster/feed/",
+      "hops": [],
+      "finalUrl": "/meet-our-new-roaster/feed/",
+      "finalStatus": 200,
+      "contentType": "application/rss+xml; charset=UTF-8",
+      "title": null,
+      "description": null,
+      "canonical": null,
+      "robots": null,
+      "xRobotsTag": "noindex, follow",
+      "h1": null
+    },
+    {
+      "group": "feeds",
+      "path": "/now-shipping-across-europe/feed/",
+      "hops": [],
+      "finalUrl": "/now-shipping-across-europe/feed/",
+      "finalStatus": 200,
+      "contentType": "application/rss+xml; charset=UTF-8",
+      "title": null,
+      "description": null,
+      "canonical": null,
+      "robots": null,
+      "xRobotsTag": "noindex, follow",
+      "h1": null
+    },
+    {
+      "group": "feeds",
+      "path": "/tag/beginner/feed/",
+      "hops": [],
+      "finalUrl": "/tag/beginner/feed/",
+      "finalStatus": 200,
+      "contentType": "application/rss+xml; charset=UTF-8",
+      "title": null,
+      "description": null,
+      "canonical": null,
+      "robots": null,
+      "xRobotsTag": null,
+      "h1": null
+    },
+    {
+      "group": "feeds",
+      "path": "/tag/colombia/feed/",
+      "hops": [],
+      "finalUrl": "/tag/colombia/feed/",
+      "finalStatus": 200,
+      "contentType": "application/rss+xml; charset=UTF-8",
+      "title": null,
+      "description": null,
+      "canonical": null,
+      "robots": null,
+      "xRobotsTag": null,
+      "h1": null
+    },
+    {
+      "group": "feeds",
+      "path": "/tag/equipment/feed/",
+      "hops": [],
+      "finalUrl": "/tag/equipment/feed/",
+      "finalStatus": 200,
+      "contentType": "application/rss+xml; charset=UTF-8",
+      "title": null,
+      "description": null,
+      "canonical": null,
+      "robots": null,
+      "xRobotsTag": null,
+      "h1": null
+    },
+    {
+      "group": "feeds",
+      "path": "/tag/espresso/feed/",
+      "hops": [],
+      "finalUrl": "/tag/espresso/feed/",
+      "finalStatus": 200,
+      "contentType": "application/rss+xml; charset=UTF-8",
+      "title": null,
+      "description": null,
+      "canonical": null,
+      "robots": null,
+      "xRobotsTag": null,
+      "h1": null
+    },
+    {
+      "group": "feeds",
+      "path": "/tag/ethiopia/feed/",
+      "hops": [],
+      "finalUrl": "/tag/ethiopia/feed/",
+      "finalStatus": 200,
+      "contentType": "application/rss+xml; charset=UTF-8",
+      "title": null,
+      "description": null,
+      "canonical": null,
+      "robots": null,
+      "xRobotsTag": null,
+      "h1": null
+    },
+    {
+      "group": "feeds",
+      "path": "/tag/pour-over/feed/",
+      "hops": [],
+      "finalUrl": "/tag/pour-over/feed/",
+      "finalStatus": 200,
+      "contentType": "application/rss+xml; charset=UTF-8",
+      "title": null,
+      "description": null,
+      "canonical": null,
+      "robots": null,
+      "xRobotsTag": null,
+      "h1": null
+    },
+    {
+      "group": "feeds",
+      "path": "/tag/seasonal/feed/",
+      "hops": [],
+      "finalUrl": "/tag/seasonal/feed/",
+      "finalStatus": 200,
+      "contentType": "application/rss+xml; charset=UTF-8",
+      "title": null,
+      "description": null,
+      "canonical": null,
+      "robots": null,
+      "xRobotsTag": null,
+      "h1": null
+    },
+    {
+      "group": "feeds",
+      "path": "/tag/single-origin/feed/",
+      "hops": [],
+      "finalUrl": "/tag/single-origin/feed/",
+      "finalStatus": 200,
+      "contentType": "application/rss+xml; charset=UTF-8",
+      "title": null,
+      "description": null,
+      "canonical": null,
+      "robots": null,
+      "xRobotsTag": null,
+      "h1": null
+    },
+    {
+      "group": "feeds",
+      "path": "/washed-vs-natural-process/feed/",
+      "hops": [],
+      "finalUrl": "/washed-vs-natural-process/feed/",
+      "finalStatus": 200,
+      "contentType": "application/rss+xml; charset=UTF-8",
+      "title": null,
+      "description": null,
+      "canonical": null,
+      "robots": null,
+      "xRobotsTag": "noindex, follow",
+      "h1": null
+    },
+    {
+      "group": "attachments",
+      "path": "/about/battlecreek-coffee-roasters-my4hawxna_0-unsplash/",
+      "hops": [
+        {
+          "status": 301,
+          "location": "/wp-content/uploads/2026/10/battlecreek-coffee-roasters-mY4hAwxNA_0-unsplash-scaled.jpg"
+        }
+      ],
+      "finalUrl": "/wp-content/uploads/2026/10/battlecreek-coffee-roasters-mY4hAwxNA_0-unsplash-scaled.jpg",
+      "finalStatus": 200,
+      "contentType": "image/jpeg",
+      "title": null,
+      "description": null,
+      "canonical": null,
+      "robots": null,
+      "xRobotsTag": null,
+      "h1": null
+    },
+    {
+      "group": "attachments",
+      "path": "/about/brian-zhu-s6fwkrwazzm-unsplash/",
+      "hops": [
+        {
+          "status": 301,
+          "location": "/wp-content/uploads/2026/10/brian-zhu-S6fwkRwAzzM-unsplash-scaled.jpg"
+        }
+      ],
+      "finalUrl": "/wp-content/uploads/2026/10/brian-zhu-S6fwkRwAzzM-unsplash-scaled.jpg",
+      "finalStatus": 200,
+      "contentType": "image/jpeg",
+      "title": null,
+      "description": null,
+      "canonical": null,
+      "robots": null,
+      "xRobotsTag": null,
+      "h1": null
+    },
+    {
+      "group": "attachments",
+      "path": "/about/brooke-cagle-9fhmo1-5io8-unsplash/",
+      "hops": [
+        {
+          "status": 301,
+          "location": "/wp-content/uploads/2026/10/brooke-cagle-9fHMo1-5Io8-unsplash-scaled.jpg"
+        }
+      ],
+      "finalUrl": "/wp-content/uploads/2026/10/brooke-cagle-9fHMo1-5Io8-unsplash-scaled.jpg",
+      "finalStatus": 200,
+      "contentType": "image/jpeg",
+      "title": null,
+      "description": null,
+      "canonical": null,
+      "robots": null,
+      "xRobotsTag": null,
+      "h1": null
+    },
+    {
+      "group": "attachments",
+      "path": "/about/oguz-tombul-zklrgmn_4vg-unsplash/",
+      "hops": [
+        {
+          "status": 301,
+          "location": "/wp-content/uploads/2026/10/oguz-tombul-zKLRgmN_4vg-unsplash-scaled.jpg"
+        }
+      ],
+      "finalUrl": "/wp-content/uploads/2026/10/oguz-tombul-zKLRgmN_4vg-unsplash-scaled.jpg",
+      "finalStatus": 200,
+      "contentType": "image/jpeg",
+      "title": null,
+      "description": null,
+      "canonical": null,
+      "robots": null,
+      "xRobotsTag": null,
+      "h1": null
+    },
+    {
+      "group": "attachments",
+      "path": "/about/rawkkim-amvy17jgeug-unsplash/",
+      "hops": [
+        {
+          "status": 301,
+          "location": "/wp-content/uploads/2026/10/rawkkim-aMVy17JGeug-unsplash-scaled.jpg"
+        }
+      ],
+      "finalUrl": "/wp-content/uploads/2026/10/rawkkim-aMVy17JGeug-unsplash-scaled.jpg",
+      "finalStatus": 200,
+      "contentType": "image/jpeg",
+      "title": null,
+      "description": null,
+      "canonical": null,
+      "robots": null,
+      "xRobotsTag": null,
+      "h1": null
+    },
+    {
+      "group": "attachments",
+      "path": "/autumn-seasonal-blend/alisa-anton-jhxgkggd3sw-unsplash/",
+      "hops": [
+        {
+          "status": 301,
+          "location": "/wp-content/uploads/2026/09/alisa-anton-JhxGkGgd3Sw-unsplash-scaled.jpg"
+        }
+      ],
+      "finalUrl": "/wp-content/uploads/2026/09/alisa-anton-JhxGkGgd3Sw-unsplash-scaled.jpg",
+      "finalStatus": 200,
+      "contentType": "image/jpeg",
+      "title": null,
+      "description": null,
+      "canonical": null,
+      "robots": null,
+      "xRobotsTag": null,
+      "h1": null
+    },
+    {
+      "group": "attachments",
+      "path": "/benjaminrobyn-jespersen-ggsargszqho-unsplash/",
+      "hops": [
+        {
+          "status": 301,
+          "location": "/wp-content/uploads/2026/10/benjaminrobyn-jespersen-gGsarGszQHo-unsplash-scaled.jpg"
+        }
+      ],
+      "finalUrl": "/wp-content/uploads/2026/10/benjaminrobyn-jespersen-gGsarGszQHo-unsplash-scaled.jpg",
+      "finalStatus": 200,
+      "contentType": "image/jpeg",
+      "title": null,
+      "description": null,
+      "canonical": null,
+      "robots": null,
+      "xRobotsTag": null,
+      "h1": null
+    },
+    {
+      "group": "attachments",
+      "path": "/caio-arbulu-9v5vxxnksf4-unsplash/",
+      "hops": [
+        {
+          "status": 301,
+          "location": "/wp-content/uploads/2026/10/caio-arbulu-9V5vXxnksf4-unsplash-scaled.jpg"
+        }
+      ],
+      "finalUrl": "/wp-content/uploads/2026/10/caio-arbulu-9V5vXxnksf4-unsplash-scaled.jpg",
+      "finalStatus": 200,
+      "contentType": "image/jpeg",
+      "title": null,
+      "description": null,
+      "canonical": null,
+      "robots": null,
+      "xRobotsTag": null,
+      "h1": null
+    },
+    {
+      "group": "attachments",
+      "path": "/choosing-the-right-grind-size/milo-miloezger-rkyrju0n06y-unsplash/",
+      "hops": [
+        {
+          "status": 301,
+          "location": "/wp-content/uploads/2026/10/milo-miloezger-rKYRJu0n06Y-unsplash-scaled.jpg"
+        }
+      ],
+      "finalUrl": "/wp-content/uploads/2026/10/milo-miloezger-rKYRJu0n06Y-unsplash-scaled.jpg",
+      "finalStatus": 200,
+      "contentType": "image/jpeg",
+      "title": null,
+      "description": null,
+      "canonical": null,
+      "robots": null,
+      "xRobotsTag": null,
+      "h1": null
+    },
+    {
+      "group": "attachments",
+      "path": "/cold-brew-four-simple-steps/demi-deherrera-l-sm1b4l1ns-unsplash/",
+      "hops": [
+        {
+          "status": 301,
+          "location": "/wp-content/uploads/2026/12/demi-deherrera-L-sm1B4L1Ns-unsplash-scaled.jpg"
+        }
+      ],
+      "finalUrl": "/wp-content/uploads/2026/12/demi-deherrera-L-sm1B4L1Ns-unsplash-scaled.jpg",
+      "finalStatus": 200,
+      "contentType": "image/jpeg",
+      "title": null,
+      "description": null,
+      "canonical": null,
+      "robots": null,
+      "xRobotsTag": null,
+      "h1": null
+    },
+    {
+      "group": "attachments",
+      "path": "/cold-brew-four-simple-steps/wade-austin-ellis-evcukbdewss-unsplash/",
+      "hops": [
+        {
+          "status": 301,
+          "location": "/wp-content/uploads/2026/12/wade-austin-ellis-EVCUKBdewSs-unsplash-scaled.jpg"
+        }
+      ],
+      "finalUrl": "/wp-content/uploads/2026/12/wade-austin-ellis-EVCUKBdewSs-unsplash-scaled.jpg",
+      "finalStatus": 200,
+      "contentType": "image/jpeg",
+      "title": null,
+      "description": null,
+      "canonical": null,
+      "robots": null,
+      "xRobotsTag": null,
+      "h1": null
+    },
+    {
+      "group": "attachments",
+      "path": "/colombia-huila-house-espresso/matt-hoffman-ie-gdqeg45m-unsplash/",
+      "hops": [
+        {
+          "status": 301,
+          "location": "/wp-content/uploads/2026/11/matt-hoffman-IE-gdqEg45M-unsplash-scaled.jpg"
+        }
+      ],
+      "finalUrl": "/wp-content/uploads/2026/11/matt-hoffman-IE-gdqEg45M-unsplash-scaled.jpg",
+      "finalStatus": 200,
+      "contentType": "image/jpeg",
+      "title": null,
+      "description": null,
+      "canonical": null,
+      "robots": null,
+      "xRobotsTag": null,
+      "h1": null
+    },
+    {
+      "group": "attachments",
+      "path": "/contact/egor-komarov-pdbnb5j0zge-unsplash/",
+      "hops": [
+        {
+          "status": 301,
+          "location": "/wp-content/uploads/2026/10/egor-komarov-PDbNb5j0zGE-unsplash-scaled.jpg"
+        }
+      ],
+      "finalUrl": "/wp-content/uploads/2026/10/egor-komarov-PDbNb5j0zGE-unsplash-scaled.jpg",
+      "finalStatus": 200,
+      "contentType": "image/jpeg",
+      "title": null,
+      "description": null,
+      "canonical": null,
+      "robots": null,
+      "xRobotsTag": null,
+      "h1": null
+    },
+    {
+      "group": "attachments",
+      "path": "/ethiopia-yirgacheffe/dang-cong-jqf4is65xeg-unsplash/",
+      "hops": [
+        {
+          "status": 301,
+          "location": "/wp-content/uploads/2026/05/dang-cong-JqF4IS65xEg-unsplash-scaled.jpg"
+        }
+      ],
+      "finalUrl": "/wp-content/uploads/2026/05/dang-cong-JqF4IS65xEg-unsplash-scaled.jpg",
+      "finalStatus": 200,
+      "contentType": "image/jpeg",
+      "title": null,
+      "description": null,
+      "canonical": null,
+      "robots": null,
+      "xRobotsTag": null,
+      "h1": null
+    },
+    {
+      "group": "attachments",
+      "path": "/ethiopia-yirgacheffe/dimitry-b-i9hgm8cf-20-unsplash/",
+      "hops": [
+        {
+          "status": 301,
+          "location": "/wp-content/uploads/2026/05/dimitry-b-i9Hgm8Cf-20-unsplash-scaled.jpg"
+        }
+      ],
+      "finalUrl": "/wp-content/uploads/2026/05/dimitry-b-i9Hgm8Cf-20-unsplash-scaled.jpg",
+      "finalStatus": 200,
+      "contentType": "image/jpeg",
+      "title": null,
+      "description": null,
+      "canonical": null,
+      "robots": null,
+      "xRobotsTag": null,
+      "h1": null
+    },
+    {
+      "group": "attachments",
+      "path": "/ethiopia-yirgacheffe/katya-ross-adg9b8ntxj0-unsplash/",
+      "hops": [
+        {
+          "status": 301,
+          "location": "/wp-content/uploads/2026/05/katya-ross-Adg9B8NTxj0-unsplash-scaled.jpg"
+        }
+      ],
+      "finalUrl": "/wp-content/uploads/2026/05/katya-ross-Adg9B8NTxj0-unsplash-scaled.jpg",
+      "finalStatus": 200,
+      "contentType": "image/jpeg",
+      "title": null,
+      "description": null,
+      "canonical": null,
+      "robots": null,
+      "xRobotsTag": null,
+      "h1": null
+    },
+    {
+      "group": "attachments",
+      "path": "/ethiopia-yirgacheffe/projeto-cafe-gato-mourisco-zovrgigqmqa-unsplash/",
+      "hops": [
+        {
+          "status": 301,
+          "location": "/wp-content/uploads/2026/05/projeto-cafe-gato-mourisco-zOVRgigQMQA-unsplash-scaled.jpg"
+        }
+      ],
+      "finalUrl": "/wp-content/uploads/2026/05/projeto-cafe-gato-mourisco-zOVRgigQMQA-unsplash-scaled.jpg",
+      "finalStatus": 200,
+      "contentType": "image/jpeg",
+      "title": null,
+      "description": null,
+      "canonical": null,
+      "robots": null,
+      "xRobotsTag": null,
+      "h1": null
+    },
+    {
+      "group": "attachments",
+      "path": "/faq/kari-shea-pjn9whmqfis-unsplash/",
+      "hops": [
+        {
+          "status": 301,
+          "location": "/wp-content/uploads/2026/10/kari-shea-pJn9WhMqFIs-unsplash-scaled.jpg"
+        }
+      ],
+      "finalUrl": "/wp-content/uploads/2026/10/kari-shea-pJn9WhMqFIs-unsplash-scaled.jpg",
+      "finalStatus": 200,
+      "contentType": "image/jpeg",
+      "title": null,
+      "description": null,
+      "canonical": null,
+      "robots": null,
+      "xRobotsTag": null,
+      "h1": null
+    },
+    {
+      "group": "attachments",
+      "path": "/french-press-5-common-mistakes/sorin-gheorghita-flrcfg0rvzu-unsplash/",
+      "hops": [
+        {
+          "status": 301,
+          "location": "/wp-content/uploads/2025/03/sorin-gheorghita-flrcFG0rvZU-unsplash-scaled.jpg"
+        }
+      ],
+      "finalUrl": "/wp-content/uploads/2025/03/sorin-gheorghita-flrcFG0rvZU-unsplash-scaled.jpg",
+      "finalStatus": 200,
+      "contentType": "image/jpeg",
+      "title": null,
+      "description": null,
+      "canonical": null,
+      "robots": null,
+      "xRobotsTag": null,
+      "h1": null
+    },
+    {
+      "group": "attachments",
+      "path": "/home/lazarescu-alexandra-hfpqg9ku5gc-unsplash/",
+      "hops": [
+        {
+          "status": 301,
+          "location": "/wp-content/uploads/2026/10/lazarescu-alexandra-hFpqG9KU5Gc-unsplash-scaled.jpg"
+        }
+      ],
+      "finalUrl": "/wp-content/uploads/2026/10/lazarescu-alexandra-hFpqG9KU5Gc-unsplash-scaled.jpg",
+      "finalStatus": 200,
+      "contentType": "image/jpeg",
+      "title": null,
+      "description": null,
+      "canonical": null,
+      "robots": null,
+      "xRobotsTag": null,
+      "h1": null
+    },
+    {
+      "group": "attachments",
+      "path": "/how-to-brew-pour-over-at-home/charlie-firth-nta2s1hgqsc-unsplash/",
+      "hops": [
+        {
+          "status": 301,
+          "location": "/wp-content/uploads/2025/04/charlie-firth-NTa2s1hgqSc-unsplash-scaled.jpg"
+        }
+      ],
+      "finalUrl": "/wp-content/uploads/2025/04/charlie-firth-NTa2s1hgqSc-unsplash-scaled.jpg",
+      "finalStatus": 200,
+      "contentType": "image/jpeg",
+      "title": null,
+      "description": null,
+      "canonical": null,
+      "robots": null,
+      "xRobotsTag": null,
+      "h1": null
+    },
+    {
+      "group": "attachments",
+      "path": "/how-to-brew-pour-over-at-home/karl-fredrickson-tyizeciz_60-unsplash/",
+      "hops": [
+        {
+          "status": 301,
+          "location": "/wp-content/uploads/2025/04/karl-fredrickson-TYIzeCiZ_60-unsplash-scaled.jpg"
+        }
+      ],
+      "finalUrl": "/wp-content/uploads/2025/04/karl-fredrickson-TYIzeCiZ_60-unsplash-scaled.jpg",
+      "finalStatus": 200,
+      "contentType": "image/jpeg",
+      "title": null,
+      "description": null,
+      "canonical": null,
+      "robots": null,
+      "xRobotsTag": null,
+      "h1": null
+    },
+    {
+      "group": "attachments",
+      "path": "/meet-our-new-roaster/tim-mossholder-yc6rvdottik-unsplash/",
+      "hops": [
+        {
+          "status": 301,
+          "location": "/wp-content/uploads/2026/06/tim-mossholder-YC6RVdoTtIk-unsplash-scaled.jpg"
+        }
+      ],
+      "finalUrl": "/wp-content/uploads/2026/06/tim-mossholder-YC6RVdoTtIk-unsplash-scaled.jpg",
+      "finalStatus": 200,
+      "contentType": "image/jpeg",
+      "title": null,
+      "description": null,
+      "canonical": null,
+      "robots": null,
+      "xRobotsTag": null,
+      "h1": null
+    },
+    {
+      "group": "attachments",
+      "path": "/meet-our-new-roaster/yanapi-senaud-6hr8vpjyuho-unsplash/",
+      "hops": [
+        {
+          "status": 301,
+          "location": "/wp-content/uploads/2026/06/yanapi-senaud-6HR8vpjYUHo-unsplash-scaled.jpg"
+        }
+      ],
+      "finalUrl": "/wp-content/uploads/2026/06/yanapi-senaud-6HR8vpjYUHo-unsplash-scaled.jpg",
+      "finalStatus": 200,
+      "contentType": "image/jpeg",
+      "title": null,
+      "description": null,
+      "canonical": null,
+      "robots": null,
+      "xRobotsTag": null,
+      "h1": null
+    },
+    {
+      "group": "attachments",
+      "path": "/now-shipping-across-europe/point-normal-pgctpzuz65i-unsplash/",
+      "hops": [
+        {
+          "status": 301,
+          "location": "/wp-content/uploads/2026/09/point-normal-PGctPZuz65I-unsplash-scaled.jpg"
+        }
+      ],
+      "finalUrl": "/wp-content/uploads/2026/09/point-normal-PGctPZuz65I-unsplash-scaled.jpg",
+      "finalStatus": 200,
+      "contentType": "image/jpeg",
+      "title": null,
+      "description": null,
+      "canonical": null,
+      "robots": null,
+      "xRobotsTag": null,
+      "h1": null
+    },
+    {
+      "group": "attachments",
+      "path": "/products/declan-sun-paj9ibnklwi-unsplash/",
+      "hops": [
+        {
+          "status": 301,
+          "location": "/wp-content/uploads/2026/10/declan-sun-pAj9ibNKLwI-unsplash-scaled.jpg"
+        }
+      ],
+      "finalUrl": "/wp-content/uploads/2026/10/declan-sun-pAj9ibNKLwI-unsplash-scaled.jpg",
+      "finalStatus": 200,
+      "contentType": "image/jpeg",
+      "title": null,
+      "description": null,
+      "canonical": null,
+      "robots": null,
+      "xRobotsTag": null,
+      "h1": null
+    },
+    {
+      "group": "attachments",
+      "path": "/products/mike-kenneally-zlwdjoktua8-unsplash/",
+      "hops": [
+        {
+          "status": 301,
+          "location": "/wp-content/uploads/2026/10/mike-kenneally-zlwDJoKTuA8-unsplash-scaled.jpg"
+        }
+      ],
+      "finalUrl": "/wp-content/uploads/2026/10/mike-kenneally-zlwDJoKTuA8-unsplash-scaled.jpg",
+      "finalStatus": 200,
+      "contentType": "image/jpeg",
+      "title": null,
+      "description": null,
+      "canonical": null,
+      "robots": null,
+      "xRobotsTag": null,
+      "h1": null
+    },
+    {
+      "group": "attachments",
+      "path": "/services/di-bella-coffee-gtsfmwwq2xk-unsplash/",
+      "hops": [
+        {
+          "status": 301,
+          "location": "/wp-content/uploads/2026/10/di-bella-coffee-GtsfmwWq2xk-unsplash-scaled.jpg"
+        }
+      ],
+      "finalUrl": "/wp-content/uploads/2026/10/di-bella-coffee-GtsfmwWq2xk-unsplash-scaled.jpg",
+      "finalStatus": 200,
+      "contentType": "image/jpeg",
+      "title": null,
+      "description": null,
+      "canonical": null,
+      "robots": null,
+      "xRobotsTag": null,
+      "h1": null
+    },
+    {
+      "group": "attachments",
+      "path": "/services/yifei-wong-0q0qsjddzb0-unsplash/",
+      "hops": [
+        {
+          "status": 301,
+          "location": "/wp-content/uploads/2026/10/yifei-wong-0q0qSJddzb0-unsplash-scaled.jpg"
+        }
+      ],
+      "finalUrl": "/wp-content/uploads/2026/10/yifei-wong-0q0qSJddzb0-unsplash-scaled.jpg",
+      "finalStatus": 200,
+      "contentType": "image/jpeg",
+      "title": null,
+      "description": null,
+      "canonical": null,
+      "robots": null,
+      "xRobotsTag": null,
+      "h1": null
+    },
+    {
+      "group": "attachments",
+      "path": "/washed-vs-natural-process/dimitry-b-vwg92utkdgc-unsplash/",
+      "hops": [
+        {
+          "status": 301,
+          "location": "/wp-content/uploads/2026/04/dimitry-b-VwG92UTKDGc-unsplash-scaled.jpg"
+        }
+      ],
+      "finalUrl": "/wp-content/uploads/2026/04/dimitry-b-VwG92UTKDGc-unsplash-scaled.jpg",
+      "finalStatus": 200,
+      "contentType": "image/jpeg",
+      "title": null,
+      "description": null,
+      "canonical": null,
+      "robots": null,
+      "xRobotsTag": null,
+      "h1": null
+    },
+    {
+      "group": "sitemaps",
+      "path": "/author-sitemap.xml",
+      "hops": [],
+      "finalUrl": "/author-sitemap.xml",
+      "finalStatus": 200,
+      "contentType": "text/xml; charset=UTF-8",
+      "title": null,
+      "description": null,
+      "canonical": null,
+      "robots": null,
+      "xRobotsTag": "noindex, follow",
+      "h1": null,
+      "locCount": 1
+    },
+    {
+      "group": "sitemaps",
+      "path": "/category-sitemap.xml",
+      "hops": [],
+      "finalUrl": "/category-sitemap.xml",
+      "finalStatus": 200,
+      "contentType": "text/xml; charset=UTF-8",
+      "title": null,
+      "description": null,
+      "canonical": null,
+      "robots": null,
+      "xRobotsTag": "noindex, follow",
+      "h1": null,
+      "locCount": 3
+    },
+    {
+      "group": "sitemaps",
+      "path": "/page-sitemap.xml",
+      "hops": [],
+      "finalUrl": "/page-sitemap.xml",
+      "finalStatus": 200,
+      "contentType": "text/xml; charset=UTF-8",
+      "title": null,
+      "description": null,
+      "canonical": null,
+      "robots": null,
+      "xRobotsTag": "noindex, follow",
+      "h1": null,
+      "locCount": 6
+    },
+    {
+      "group": "sitemaps",
+      "path": "/post-sitemap.xml",
+      "hops": [],
+      "finalUrl": "/post-sitemap.xml",
+      "finalStatus": 200,
+      "contentType": "text/xml; charset=UTF-8",
+      "title": null,
+      "description": null,
+      "canonical": null,
+      "robots": null,
+      "xRobotsTag": "noindex, follow",
+      "h1": null,
+      "locCount": 11
+    },
+    {
+      "group": "sitemaps",
+      "path": "/post_tag-sitemap.xml",
+      "hops": [],
+      "finalUrl": "/post_tag-sitemap.xml",
+      "finalStatus": 200,
+      "contentType": "text/xml; charset=UTF-8",
+      "title": null,
+      "description": null,
+      "canonical": null,
+      "robots": null,
+      "xRobotsTag": "noindex, follow",
+      "h1": null,
+      "locCount": 8
+    },
+    {
+      "group": "sitemaps",
+      "path": "/sitemap.xml",
+      "hops": [
+        {
+          "status": 301,
+          "location": "/sitemap_index.xml"
+        }
+      ],
+      "finalUrl": "/sitemap_index.xml",
+      "finalStatus": 200,
+      "contentType": "text/xml; charset=UTF-8",
+      "title": null,
+      "description": null,
+      "canonical": null,
+      "robots": null,
+      "xRobotsTag": "noindex, follow",
+      "h1": null,
+      "locCount": 5
+    },
+    {
+      "group": "sitemaps",
+      "path": "/sitemap_index.xml",
+      "hops": [],
+      "finalUrl": "/sitemap_index.xml",
+      "finalStatus": 200,
+      "contentType": "text/xml; charset=UTF-8",
+      "title": null,
+      "description": null,
+      "canonical": null,
+      "robots": null,
+      "xRobotsTag": "noindex, follow",
+      "h1": null,
+      "locCount": 5
+    },
+    {
+      "group": "sitemaps",
+      "path": "/wp-sitemap.xml",
+      "hops": [
+        {
+          "status": 301,
+          "location": "/sitemap_index.xml"
+        }
+      ],
+      "finalUrl": "/sitemap_index.xml",
+      "finalStatus": 200,
+      "contentType": "text/xml; charset=UTF-8",
+      "title": null,
+      "description": null,
+      "canonical": null,
+      "robots": null,
+      "xRobotsTag": "noindex, follow",
+      "h1": null,
+      "locCount": 5
+    },
+    {
+      "group": "robots",
+      "path": "/robots.txt",
+      "hops": [],
+      "finalUrl": "/robots.txt",
+      "finalStatus": 200,
+      "contentType": "text/plain; charset=utf-8",
+      "title": null,
+      "description": null,
+      "canonical": null,
+      "robots": null,
+      "xRobotsTag": "noindex, follow",
+      "h1": null
+    },
+    {
+      "group": "shortlinks",
+      "path": "/?p=11",
+      "hops": [
+        {
+          "status": 301,
+          "location": "/cold-brew-four-simple-steps/"
+        }
+      ],
+      "finalUrl": "/cold-brew-four-simple-steps/",
+      "finalStatus": 200,
+      "contentType": "text/html; charset=UTF-8",
+      "title": "Easy Cold Brew Coffee Recipe in 4 Steps | Larchwick",
+      "description": "Make smooth, low-acid cold brew at home with just coffee, water and a jar. Our simple 4-step recipe, ratio and steeping time.",
+      "canonical": "/cold-brew-four-simple-steps/",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "xRobotsTag": null,
+      "h1": [
+        "Cold Brew in 4 Simple Steps"
+      ]
+    },
+    {
+      "group": "shortlinks",
+      "path": "/?p=13",
+      "hops": [
+        {
+          "status": 301,
+          "location": "/choosing-the-right-grind-size/"
+        }
+      ],
+      "finalUrl": "/choosing-the-right-grind-size/",
+      "finalStatus": 200,
+      "contentType": "text/html; charset=UTF-8",
+      "title": "Coffee Grind Size Chart for Every Brew Method | Larchwick",
+      "description": "Which grind size for espresso, pour-over, French press or cold brew? A simple chart, plus how to tell if your grind is too fine or too coarse.",
+      "canonical": "/choosing-the-right-grind-size/",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "xRobotsTag": null,
+      "h1": [
+        "Choosing the Right Grind Size"
+      ]
+    },
+    {
+      "group": "shortlinks",
+      "path": "/?p=15",
+      "hops": [
+        {
+          "status": 301,
+          "location": "/how-to-brew-pour-over-at-home/"
+        }
+      ],
+      "finalUrl": "/how-to-brew-pour-over-at-home/",
+      "finalStatus": 200,
+      "contentType": "text/html; charset=UTF-8",
+      "title": "How to Brew Pour-Over Coffee at Home | Larchwick",
+      "description": "A simple step-by-step pour-over guide: ratio, water temperature, grind size and timing for a clean, sweet cup every morning.",
+      "canonical": "/how-to-brew-pour-over-at-home/",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "xRobotsTag": null,
+      "h1": [
+        "How to Brew Pour-Over at Home"
+      ]
+    },
+    {
+      "group": "shortlinks",
+      "path": "/?p=17",
+      "hops": [
+        {
+          "status": 301,
+          "location": "/french-press-5-common-mistakes/"
+        }
+      ],
+      "finalUrl": "/french-press-5-common-mistakes/",
+      "finalStatus": 200,
+      "contentType": "text/html; charset=UTF-8",
+      "title": "French Press Coffee: 5 Common Mistakes to Avoid | Larchwick",
+      "description": "Bitter or muddy French press coffee? Learn the five most common mistakes, from grind size to timing, and how to fix each one.",
+      "canonical": "/french-press-5-common-mistakes/",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "xRobotsTag": null,
+      "h1": [
+        "French Press: 5 Common Mistakes"
+      ]
+    },
+    {
+      "group": "shortlinks",
+      "path": "/?p=22",
+      "hops": [
+        {
+          "status": 301,
+          "location": "/colombia-huila-house-espresso/"
+        }
+      ],
+      "finalUrl": "/colombia-huila-house-espresso/",
+      "finalStatus": 200,
+      "contentType": "text/html; charset=UTF-8",
+      "title": "Colombia Huila: Our House Espresso Coffee | Larchwick",
+      "description": "Meet Colombia Huila, the coffee behind our house espresso: where it grows, how it tastes, and why it works so well with milk.",
+      "canonical": "/colombia-huila-house-espresso/",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "xRobotsTag": null,
+      "h1": [
+        "Colombia Huila: Our House Espresso Bean"
+      ]
+    },
+    {
+      "group": "shortlinks",
+      "path": "/?p=24",
+      "hops": [
+        {
+          "status": 301,
+          "location": "/washed-vs-natural-process/"
+        }
+      ],
+      "finalUrl": "/washed-vs-natural-process/",
+      "finalStatus": 200,
+      "contentType": "text/html; charset=UTF-8",
+      "title": "Washed vs Natural Coffee Processing Explained | Larchwick",
+      "description": "What do \"washed\" and \"natural\" mean on a coffee bag? A simple guide to coffee processing and how each method changes flavor.",
+      "canonical": "/washed-vs-natural-process/",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "xRobotsTag": null,
+      "h1": [
+        "Washed vs Natural Process, Explained"
+      ]
+    },
+    {
+      "group": "shortlinks",
+      "path": "/?p=26",
+      "hops": [
+        {
+          "status": 301,
+          "location": "/meet-our-new-roaster/"
+        }
+      ],
+      "finalUrl": "/meet-our-new-roaster/",
+      "finalStatus": 200,
+      "contentType": "text/html; charset=UTF-8",
+      "title": "Meet Mira, Our New Head Roaster | Larchwick",
+      "description": "Meet Mira, the new head roaster at Larchwick Coffee Roasters: her background, her roasting style and the coffee she drinks every day.",
+      "canonical": "/meet-our-new-roaster/",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "xRobotsTag": null,
+      "h1": [
+        "Meet Our New Roaster"
+      ]
+    },
+    {
+      "group": "shortlinks",
+      "path": "/?p=28",
+      "hops": [
+        {
+          "status": 301,
+          "location": "/autumn-seasonal-blend/"
+        }
+      ],
+      "finalUrl": "/autumn-seasonal-blend/",
+      "finalStatus": 200,
+      "contentType": "text/html; charset=UTF-8",
+      "title": "Autumn Seasonal Coffee Blend Is Back | Larchwick",
+      "description": "Our limited autumn blend is back: cocoa, baked apple and a hint of spice. What's in it, how to brew it, and how long it's available.",
+      "canonical": "/autumn-seasonal-blend/",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "xRobotsTag": null,
+      "h1": [
+        "Our Autumn Seasonal Blend"
+      ]
+    },
+    {
+      "group": "shortlinks",
+      "path": "/?p=30",
+      "hops": [
+        {
+          "status": 301,
+          "location": "/now-shipping-across-europe/"
+        }
+      ],
+      "finalUrl": "/now-shipping-across-europe/",
+      "finalStatus": 200,
+      "contentType": "text/html; charset=UTF-8",
+      "title": "Now Shipping Fresh Coffee Across Europe | Larchwick",
+      "description": "Larchwick Coffee Roasters now ships fresh-roasted coffee across the EU. Delivery times, roast dates and wholesale enquiries.",
+      "canonical": "/now-shipping-across-europe/",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "xRobotsTag": null,
+      "h1": [
+        "Larchwick Now Ships Across Europe"
+      ]
+    },
+    {
+      "group": "shortlinks",
+      "path": "/?p=8",
+      "hops": [
+        {
+          "status": 301,
+          "location": "/ethiopia-yirgacheffe/"
+        }
+      ],
+      "finalUrl": "/ethiopia-yirgacheffe/",
+      "finalStatus": 200,
+      "contentType": "text/html; charset=UTF-8",
+      "title": "Ethiopia Yirgacheffe Coffee: Origin and Flavor | Larchwick",
+      "description": "Why Ethiopia Yirgacheffe coffee tastes floral and bright: altitude, heirloom varieties and washed processing, plus how we brew it.",
+      "canonical": "/ethiopia-yirgacheffe/",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "xRobotsTag": null,
+      "h1": [
+        "Ethiopia Yirgacheffe: Bright and Floral"
+      ]
+    },
+    {
+      "group": "shortlinks",
+      "path": "/?page_id=122",
+      "hops": [
+        {
+          "status": 301,
+          "location": "/blog/"
+        }
+      ],
+      "finalUrl": "/blog/",
+      "finalStatus": 200,
+      "contentType": "text/html; charset=UTF-8",
+      "title": "Blog - Larchwick",
+      "description": null,
+      "canonical": "/blog/",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "xRobotsTag": null,
+      "h1": []
+    },
+    {
+      "group": "shortlinks",
+      "path": "/?page_id=63",
+      "hops": [
+        {
+          "status": 301,
+          "location": "/"
+        }
+      ],
+      "finalUrl": "/",
+      "finalStatus": 200,
+      "contentType": "text/html; charset=UTF-8",
+      "title": "Larchwick Coffee Roasters | Fresh Small-Batch Coffee",
+      "description": "Fresh, small-batch coffee roasted twice a week. Single origins, blends, brewing guides, classes and EU shipping from Larchwick Coffee Roasters.",
+      "canonical": "/",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "xRobotsTag": null,
+      "h1": []
+    },
+    {
+      "group": "shortlinks",
+      "path": "/?page_id=65",
+      "hops": [
+        {
+          "status": 301,
+          "location": "/about/"
+        }
+      ],
+      "finalUrl": "/about/",
+      "finalStatus": 200,
+      "contentType": "text/html; charset=UTF-8",
+      "title": "About Us: Small-Batch Coffee Roasters | Larchwick",
+      "description": "Larchwick is a small-batch coffee roastery. Meet the team, learn how we source our beans, and why we roast in small batches.",
+      "canonical": "/about/",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "xRobotsTag": null,
+      "h1": []
+    },
+    {
+      "group": "shortlinks",
+      "path": "/?page_id=67",
+      "hops": [
+        {
+          "status": 301,
+          "location": "/services/"
+        }
+      ],
+      "finalUrl": "/services/",
+      "finalStatus": 200,
+      "contentType": "text/html; charset=UTF-8",
+      "title": "Wholesale Coffee, Brewing Classes and Office Coffee | Larchwick",
+      "description": "Wholesale coffee for cafés, small-group brewing classes and office coffee subscriptions from Larchwick Coffee Roasters.",
+      "canonical": "/services/",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "xRobotsTag": null,
+      "h1": [
+        "Services"
+      ]
+    },
+    {
+      "group": "shortlinks",
+      "path": "/?page_id=69",
+      "hops": [
+        {
+          "status": 301,
+          "location": "/products/"
+        }
+      ],
+      "finalUrl": "/products/",
+      "finalStatus": 200,
+      "contentType": "text/html; charset=UTF-8",
+      "title": "Our Coffees: Single Origins and Blends | Larchwick",
+      "description": "Explore Larchwick coffees: Ethiopia Yirgacheffe, Colombia Huila, House Espresso and the seasonal Autumn Blend. Origins, tasting notes and prices.",
+      "canonical": "/products/",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "xRobotsTag": null,
+      "h1": [
+        "Our coffees"
+      ]
+    },
+    {
+      "group": "shortlinks",
+      "path": "/?page_id=71",
+      "hops": [
+        {
+          "status": 301,
+          "location": "/faq/"
+        }
+      ],
+      "finalUrl": "/faq/",
+      "finalStatus": 200,
+      "contentType": "text/html; charset=UTF-8",
+      "title": "Frequently Asked Questions | Larchwick Coffee Roasters",
+      "description": "Answers about Larchwick coffee: freshness, grind options, storage, EU shipping, subscriptions, wholesale and brewing classes.",
+      "canonical": "/faq/",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "xRobotsTag": null,
+      "h1": [
+        "Frequently asked questions"
+      ]
+    },
+    {
+      "group": "shortlinks",
+      "path": "/?page_id=73",
+      "hops": [
+        {
+          "status": 301,
+          "location": "/contact/"
+        }
+      ],
+      "finalUrl": "/contact/",
+      "finalStatus": 200,
+      "contentType": "text/html; charset=UTF-8",
+      "title": "Contact Us | Larchwick Coffee Roasters",
+      "description": "Contact Larchwick Coffee Roasters about orders, wholesale, brewing classes or office coffee. We reply within two working days.",
+      "canonical": "/contact/",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "xRobotsTag": null,
+      "h1": [
+        "Get in touch"
+      ]
+    }
+  ]
+}
