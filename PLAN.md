@@ -346,14 +346,14 @@ and summarise his exports.
 - [x] Toolchain (2026-10-12): no `lighthouse` package and no automated browser (only Brave is
       installed). Every script in `scripts/` uses Node built-ins only, so there is no
       `scripts/package.json` yet.
-- [ ] **Leave every WordPress flaw as it is** (missing alt, no H1, contrast). They are the
+- [x] **Leave every WordPress flaw as it is** (missing alt, no H1, contrast). They are the
       "before".
-- [ ] **Record the versions** (read-only: the LocalWP files, page source, response headers):
+- [x] **Record the versions** (read-only: the LocalWP files, page source, response headers):
       WordPress, plugins, theme, PHP and nginx. Phase 8 checks them again before the paired re-run
       and reports any difference.
-- [ ] Confirm the 2026-10-07 export is still current: no post or page `modified` date in the REST
+- [x] Confirm the 2026-10-07 export is still current: no post or page `modified` date in the REST
       API is later than the export.
-- [ ] `scripts/seo-check/`, crawl mode (Node `fetch`, no dependencies):
+- [x] `scripts/seo-check/`, crawl mode (Node `fetch`, no dependencies):
   - The URL inventory is built from the committed WXR, plus the live REST API for the author
     (§8): 130 URLs.
   - Recorded per URL: status, every redirect hop, final URL, `<title>`, meta description,
@@ -362,7 +362,7 @@ and summarise his exports.
   - Raw responses stay local (gitignored), so an extraction bug can be fixed without re-crawling.
   - The login is read at runtime and never written: author URLs are recorded as
     `/author/<author>/`.
-- [ ] `scripts/lighthouse-import/` (no dependencies). It takes Artem's saved Lighthouse JSON
+- [x] `scripts/lighthouse-import/` (no dependencies). It takes Artem's saved Lighthouse JSON
       reports from a local inbox, removes the embedded screenshots and the login text, and files
       them as `docs/before/lighthouse/<page>/<mobile|desktop>/run-N.json.gz`. Then it writes
       `metrics.json` and `summary.md` with the median run per page and device.
