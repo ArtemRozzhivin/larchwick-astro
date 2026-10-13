@@ -1,7 +1,7 @@
 <identity>
-project=Astro landing-page template — a starter for marketing sites and landings
-stack=Astro 5,TypeScript strict,Tailwind v4,React 19 islands,zod 3,lucide-react
-packages=astro,typescript,tailwindcss,react,react-dom,zod,clsx,tailwind-merge,class-variance-authority,lucide-react,react-hook-form
+project=Larchwick Coffee Roasters — a WordPress → Astro + Sanity migration case study (fictional business)
+stack=Astro 7,TypeScript strict,Tailwind v4,zero client JS
+packages=astro,@astrojs/sitemap,tailwindcss,@tailwindcss/vite,class-variance-authority
 </identity>
 
 <stack_check>verified</stack_check>
@@ -12,25 +12,26 @@ When the session-start hook prints `--- Stack check (marker: pending) ---`:
 - Every package line `ok` and no `MISSING` → flip the marker to `<stack_check>verified</stack_check>` in this file and tell the user in one sentence.
 - Any `MISSING: <pkg>` → ask the user how to reconcile (update `packages=` to match package.json, or install the missing package). Flip to `verified` only after it is resolved.
 - Never flip to `verified` while a mismatch remains.
-  </stack_check_protocol>
+</stack_check_protocol>
 
 <prime_directive>
-This is a landing-page template. The goal is a page that loads fast and is quick to build.
+This is a static marketing site. The goal is a page that loads fast and is quick to build.
 
-Every section is a static `.astro` component. **Shipping JavaScript is the exception, not the default.** Before reaching for React, check whether HTML and CSS already do it: `<details>` for accordions and menus, `:target` or an anchor for tab-like navigation, CSS transitions for motion. The FAQ and the mobile menu in this repo are both zero-JS on purpose.
+Every section is a static `.astro` component and **the site ships zero client JavaScript**. There is no React and no UI framework. HTML and CSS cover what this site needs: `<details>` for accordions and menus, `:target` or an anchor for tab-like navigation, CSS transitions for motion, and a plain HTML `<form>` POST for the contact form. The FAQ and the mobile menu in this repo are both zero-JS on purpose.
 
-Only when a component genuinely needs state or event handling does it become a React island with an explicit `client:` directive — and then prefer `client:visible` or `client:idle` over `client:load`.
+If a component genuinely seems to need interactivity, stop and ask first. Even a small Astro `<script>`, let alone adding a framework, is an architecture decision.
 </prime_directive>
 
 <version_traps>
 
-- **Astro 5** — `output: 'static'` is set and should stay. Opt one page into on-demand rendering with `export const prerender = false`, never by flipping the global mode.
+- **Astro 7** — `output: 'static'` stays, with no adapter: `dist/` is served as static assets. `trailingSlash: 'always'` and `build.format: 'directory'` keep WordPress's URLs, so every internal href ends in `/` (`/about/`, never `/about`); files such as `/robots.txt` and `/sitemap-index.xml` do not. Node ≥ 22.18 (`.node-version` pins 24).
+- **Astro 7 compiler** — the Rust compiler errors on unclosed non-void tags and no longer fixes invalid nesting (no `<div>` inside `<p>`). Astro 7 defaults `compressHTML` to `'jsx'` (whitespace containing a line break between elements is removed). We set `compressHTML: true`, the pre-7 HTML whitespace rules, because `prettier-plugin-astro` 0.14 wraps inline elements assuming HTML whitespace. Don't switch to `'jsx'` until the formatter is upgraded; `prettier-plugin-astro` 1.x currently breaks `prettier-plugin-tailwindcss`.
 - **Tailwind v4** — CSS-first. There is no `tailwind.config.js` and adding one does nothing. Tokens live in `src/styles/global.css` under `@theme`.
-- **zod is v3 here** (`^3.25`), not v4 — use `z.string().url()`, not `z.url()`. Do not copy v4 validation code from other projects without checking.
-- **React 19** — islands only. `ref` is a regular prop; no `forwardRef` in new components.
-- **lucide-react in `.astro`** — rendered on the server, so it emits inline SVG and ships no JS. Do not add a `client:` directive to an icon.
-- **ESLint 10** flat config. `astro.config.ts` and `astro.config.docker.ts` are TypeScript, so they can import `siteConfig`.
-  </version_traps>
+- **Fonts** — the Astro Fonts API (`fonts` in `astro.config.ts`, Fontsource provider) downloads DM Serif Display and Inter at build time and serves them from our own origin; `<Font>` in `Layout.astro` emits the `@font-face` rules and preloads. No font package and no Google Fonts link. DM Serif Display has only weight 400, so never put `font-medium`/`font-semibold`/`font-bold` on a `font-serif` heading (the browser fakes a bold).
+- **No zod in our code.** Astro's own zod is v4 (import it from `astro/zod` if ever needed), so the v4 API applies: `z.email()`, `z.url()`.
+- **Icons** — inline SVG in `src/components/ui/Icon.astro` (Lucide paths, ISC). A new icon is a name in `ICON_NAMES` plus its nodes; no icon package.
+- **ESLint 10** flat config. `astro.config.ts` is TypeScript, so it can import `siteConfig`.
+</version_traps>
 
 <source_of_truth>
 Trust code over docs. If they disagree, fix the doc in the same task.
@@ -49,6 +50,7 @@ structure=docs/STRUCTURE.md
 worklog=.claude/docs/WORKLOG.md
 project=docs/internal/PROJECT.md
 pages=docs/pages/
+plan=PLAN.md — WordPress → Astro + Sanity migration: phases, decisions, progress. Read before starting any migration work; tick boxes as work lands.
 </references>
 
 <global_rules>
@@ -68,15 +70,15 @@ The fast path, in order. A new landing page should take one file plus one conten
 2. Create `src/pages/<page>.astro`: import `Layout`, import the sections you need, spread the content into them.
 3. Only if no existing section fits, create a new one in `src/components/sections/`.
 
-Never inline copy into a section component, and never hardcode a brand name, URL, nav item, or social link — those come from `src/lib/config/site.ts`.
+Never inline copy into a section component, and never hardcode a brand name, URL, nav item, or contact detail — those come from `src/lib/config/site.ts`.
 </building_a_page>
 
 <reuse_before_building>
 **Before creating any component, look for an existing one. Every time, including when the request sounds like a brand-new block.**
 
 ```
-ls src/components/sections   # Header, Hero, Logos, Features, Testimonials, FAQ, CTA, Footer, Section
-ls src/components/ui         # button, input, Icon
+ls src/components/sections   # Header, Hero, Features, FAQ, CTA, Footer, Section
+ls src/components/ui         # button (cva classes), Icon
 grep -ril "<thing>" src/components src/lib
 ```
 
@@ -98,24 +100,26 @@ Every section component follows the same shape, so they stay interchangeable:
 - an optional `id` prop, defaulted, so in-page anchors work
 - built on `Section.astro` unless it needs a full-bleed layout of its own
 - static markup; no `client:` directive
-  </section_contract>
+</section_contract>
 
 <code_style>
 Always destructure props from `Astro.props` in the frontmatter.
 Explicit return types on exported TypeScript functions.
 Extract inline logic — pull anything longer than one short expression into a named variable above the template.
-Use `class:list` for conditional classes in `.astro`, `cn()` in `.tsx`.
+Use `class:list` for conditional classes in `.astro`.
 If a pattern repeats 2+ times across files, flag it and propose a shared abstraction before implementing.
 </code_style>
 
-<comment*style>
-Do not write code comments unless the user explicitly asks. Config files and non-obvious performance decisions are the exception — a one-line note explaining \_why* is welcome there.
+<comment_style>
+Do not write code comments unless the user explicitly asks. Config files and non-obvious performance decisions are the exception — a one-line note explaining _why_ is welcome there.
 </comment_style>
 
 <colors>
-Tokens only, from `src/styles/global.css` (`@theme`): `primary-*`, `secondary-*`, `accent-*`, `shadow-soft`, `shadow-card`. Gray scale and white/black are Tailwind defaults and are fine.
+Tokens only, from `src/styles/global.css` (`@theme`), the old site's 9 brand colours: `brand`, `brand-dark`, `heading`, `body`, `surface`, `canvas`, `dark`, `subtle`, `border`, plus `shadow-soft` and `shadow-card`. `white` is fine for text on a `brand-dark` fill; avoid Tailwind's gray scale (cool greys clash with the warm palette).
 
-Never a hex or arbitrary colour value in a component. If a new colour is needed, add it to `@theme` in `global.css` first. Full rules in `.claude/docs/claude/design-system.md`.
+Contrast rule: text on a coloured fill uses `brand-dark` as the fill with white text (5.73:1). Never white on `brand` (3.49:1), and never `brand` as text on a light background; `brand` is a decorative accent (icons, underlines, borders, eyebrows on `dark`).
+
+Never a hex or arbitrary colour value in a component. If a new colour is needed, add it to `@theme` in `global.css` first. Full rules and the contrast table in `.claude/docs/claude/design-system.md`.
 </colors>
 
 <task_completion>
@@ -138,15 +142,16 @@ A `Stop` hook checks the doc files above against the working-tree diff and remin
 
 <pr_workflow>
 Never create a PR and never push automatically. This requires the user's explicit instruction, given fresh for that specific task. Do not infer permission from a previous task, from context, or from how earlier tasks in the same session were handled.
+PRs target `dev`; `main` only receives merges from `dev`.
 
 After completing every task:
 
 1. List every file created or modified (path only, one per line).
 2. Ask: "Shall I create a PR?" — wait for explicit confirmation before running `git push` or `gh pr create`.
-   </pr_workflow>
+</pr_workflow>
 
 <commit_style>
 Conventional Commits, enforced by commitlint (`feat:`, `fix:`, `chore:`, `refactor:`, `docs:`, `style:`).
 Subject line only — no body, no description, unless the user asks.
-Never add `Co-Authored-By:` or any AI attribution.
+Never add `Co-Authored-By:` or any AI attribution, in commit messages or PR descriptions.
 </commit_style>

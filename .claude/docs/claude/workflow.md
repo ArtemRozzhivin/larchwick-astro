@@ -8,9 +8,13 @@ lint_fix=npm run lint:fix
 format=npm run format
 format_check=npm run format:check
 verify=npm run verify        check + lint + format:check
+credits=npm run credits      rebuild CREDITS.md
+seo_crawl=npm run seo:crawl  crawl the WordPress "before" site
+lighthouse_import=npm run lighthouse:import
+                             file saved Lighthouse JSON reports into docs/
 
-docker_dev=npm run docker:dev
-docker_build=npm run docker:build
+Node >= 22.18 (package.json engines); .node-version pins 24 for CI and the
+Cloudflare build.
 
 There is no test runner in this template. Verification is astro check + lint +
 format + a successful build.
@@ -31,11 +35,12 @@ Conventional Commits, enforced by commitlint:
 
 feat: add pricing page
 fix: give the mobile menu an accessible name
-chore: bump astro to 5.3
+chore: update dependencies
 refactor: build Features on the Section primitive
 
 Subject line only. No body unless the user asks.
-Never add Co-Authored-By or any AI attribution.
+Never add Co-Authored-By or any AI attribution, in commit messages or in PR
+descriptions.
 </commit_style>
 
 <branch_names>
@@ -44,13 +49,16 @@ fix/<slug>      bug fix
 refactor/<slug> restructure without behaviour change
 chore/<slug>    tooling and config
 
-Direct pushes to main are blocked by pre-push. Base branch for PRs is main.
+Branch off dev. Base branch for PRs is dev, not main. main only receives merges
+from dev (releases). Direct pushes to main are blocked by pre-push.
 </branch_names>
 
 <pr_workflow>
 Never push and never open a PR on your own initiative. It requires the user's
 explicit instruction, given fresh for that specific task. Permission from a
 previous task does not carry over.
+
+PRs target dev. main only receives merges from dev.
 
 After finishing a task:
 1. List every file created or modified, path only, one per line.

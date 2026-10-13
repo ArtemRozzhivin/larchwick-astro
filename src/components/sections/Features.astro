@@ -23,22 +23,26 @@ const { id = 'features', eyebrow, title, subtitle, items, columns = 3 } = Astro.
 
 const GRID_CLASSES = {
   2: 'sm:grid-cols-2',
-  3: 'sm:grid-cols-2 lg:grid-cols-3',
+  3: 'md:grid-cols-3',
 } as const
+
+const ItemHeading = title ? 'h3' : 'h2'
 ---
 
-<Section id={id} eyebrow={eyebrow} title={title} subtitle={subtitle} tone="muted">
-  <ul class:list={['grid gap-6', GRID_CLASSES[columns]]}>
+<Section id={id} eyebrow={eyebrow} title={title} subtitle={subtitle}>
+  <ul class:list={['grid gap-x-8 gap-y-10 text-center', GRID_CLASSES[columns]]}>
     {
       items.map((item) => (
-        <li class="shadow-soft hover:shadow-card rounded-2xl border border-gray-200 bg-white p-6 transition-shadow">
+        <li class="mx-auto max-w-sm">
           {item.icon && (
-            <span class="bg-primary-50 text-primary-600 mb-4 inline-flex size-11 items-center justify-center rounded-xl">
-              <Icon name={item.icon} />
+            <span class="text-brand-dark mb-4 inline-flex">
+              <Icon name={item.icon} class="size-9" />
             </span>
           )}
-          <h3 class="text-lg font-semibold text-gray-900">{item.title}</h3>
-          <p class="mt-2 text-gray-600">{item.description}</p>
+          <ItemHeading class="text-heading font-serif text-2xl leading-snug">
+            {item.title}
+          </ItemHeading>
+          <p class="mt-2 leading-relaxed text-pretty">{item.description}</p>
         </li>
       ))
     }

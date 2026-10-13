@@ -5,19 +5,17 @@ Nothing else. That split is what makes the next landing page take an hour.
 src/pages/<page>.astro       route — composition only, no copy, no logic
 src/lib/content/<page>.ts    all copy for that page, one object, `as const`
 src/components/sections/     reusable blocks, props in, static HTML out
-src/components/ui/           primitives (button, input, Icon)
-src/layouts/Layout.astro     head, SEO, JSON-LD, Header, Footer
-src/lib/config/site.ts       brand, URL, nav, social, footer — single source
+src/components/ui/           primitives (button cva classes, Icon)
+src/layouts/Layout.astro     head, SEO, fonts, JSON-LD slot, skip link, Header, Footer
+src/lib/config/site.ts       brand, URL, nav, contact, footer — single source
+src/lib/seo/schema.ts        typed JSON-LD builders (Organization, WebSite)
 src/styles/global.css        Tailwind v4 @theme tokens
 </shape>
 
 <aliases>
-@lib        → src/lib/index.ts
 @lib/*      → src/lib/*
 @components/* → src/components/*
 @layouts/*  → src/layouts/*
-@assets/*   → src/assets/*
-@content/*  → src/content/*
 
 Defined in tsconfig.json. Use them instead of ../../ across folders; relative
 imports stay inside one folder.
@@ -30,6 +28,11 @@ A page file contains: imports, a Layout, and sections. No copy, no data shaping,
 no business logic. If a page grows past that, the extra belongs in a section or
 in the content file.
 
+src/pages/404.astro is the one page with its own markup (a large numeral,
+heading and links inside a Section), because no section fits it; its copy still
+comes from src/lib/content/not-found.ts. It renders the header and footer like
+every other page, so a lost visitor keeps the navigation.
+
 src/pages/robots.txt.ts is an endpoint, generated at build time from siteConfig.
 </pages>
 
@@ -38,7 +41,8 @@ src/components/sections/
 
 Section.astro is the layout primitive — container width, vertical rhythm, and the
 optional eyebrow/title/subtitle header. Every block builds on it unless it needs a
-full-bleed layout of its own (Hero, CTA, Header, Footer do).
+full-bleed layout of its own (Hero, Header and Footer do; CTA, Features and FAQ
+are built on it).
 
 Contract for every section:
 - typed `interface Props` in the frontmatter, `readonly` arrays for lists
@@ -47,35 +51,58 @@ Contract for every section:
 - static markup, no `client:` directive
 - colour from tokens only
 
-Existing: Header, Hero, Logos, Features, Testimonials, FAQ, CTA, Footer, Section.
+Existing: Header, Hero, Features, FAQ, CTA, Footer, Section.
 Check them before writing a new one.
 </sections>
 
 <layout>
-Layout.astro owns everything above the page content:
+Layout.astro owns everything above and around the page content:
 
-- <head>: title, description, keywords, canonical, OG, Twitter, Organization JSON-LD
-- Header and Footer, on by default
-- optional ClientRouter (view transitions)
+- <head>: the exact <title>, description, robots, canonical, the two <Font>
+  tags, favicon, theme-color, Open Graph (locale, site name, type, title,
+  description, url, image 1200×630 + alt, article times), twitter:card, and one
+  <script type="application/ld+json"> per jsonLd object
+- the skip link, Header, <main id="main" tabindex="-1">, Footer on every page
+- no client script of any kind (no ClientRouter, no prefetch)
 
-Props: title, description, ogImage, noIndex, showHeader, showFooter, headerCta,
-viewTransitions.
+Props (all optional):
+  title          the exact <title> and og:title; nothing is appended.
+                 Default siteConfig.title ('Larchwick Coffee Roasters')
+  description    default siteConfig.description
+  canonical      a path or absolute URL; default the current path. Always
+                 rendered absolute, with a trailing slash
+  ogImage        a 1200×630 image; default siteConfig.ogImage ('/og.jpg')
+  ogImageAlt     default siteConfig.ogImageAlt
+  ogType         'website' (default) | 'article'
+  publishedTime  ISO 8601 → article:published_time (only when ogType is article)
+  modifiedTime   ISO 8601 → article:modified_time (only when ogType is article)
+  noindex        robots "noindex, follow", and no canonical or og:url
+  jsonLd         one object or an array (builders in src/lib/seo/schema.ts)
 
-A page passes title + description and usually nothing else.
+Indexable pages get robots "index, follow, max-image-preview:large,
+max-snippet:-1, max-video-preview:-1", the old site's Yoast value.
+
+A page passes its SEO object from its content file (`<Layout {...home.seo}>`).
+There is no site-wide JSON-LD: the home page passes organizationSchema() and
+websiteSchema().
 </layout>
 
 <content>
 src/lib/content/<page>.ts
 
 One exported object per page, `as const` so the literal types flow into section
-props. Group by section key, mirroring the order on the page.
+props. A `seo` key ({ title, description }) is spread into Layout; the other keys
+are grouped by section, mirroring the order on the page. home.ts and
+not-found.ts exist so far.
 
 Never inline copy into a component. Never put a brand name, URL, nav item, or
-social link here — those live in src/lib/config/site.ts and are shared.
+contact detail here — those live in src/lib/config/site.ts and are shared.
 </content>
 
 <config>
-src/lib/config/site.ts is the single source of truth for the brand.
+src/lib/config/site.ts is the single source of truth for the brand: name, title,
+description, URL, language and locale, OG image + alt, theme colour, nav, contact
+details, and the footer's headings, labels, demo label and copyright.
 
 astro.config.ts imports it for `site`, which is what makes the sitemap and every
 absolute canonical/OG URL correct. Change the URL in ONE place.
@@ -83,23 +110,19 @@ absolute canonical/OG URL correct. Change the URL in ONE place.
 
 <rendering>
 output: 'static' — every page is prerendered to HTML at build time.
+trailingSlash: 'always' + build.format: 'directory' — /about/ builds to
+dist/about/index.html, and every internal href ends in '/', as on WordPress.
 
-Opt one page into on-demand rendering with `export const prerender = false`.
-Never flip the global mode to 'server' for a landing site.
-
-astro.config.ts (Vercel adapter) is the default; astro.config.docker.ts (Node
-standalone) is used by the Docker build. Keep both in sync when changing
-integrations.
+astro.config.ts is the only config, and there is no adapter: dist/ is served as
+static assets (Cloudflare Workers Static Assets from Phase 2c). Without an
+adapter, `export const prerender = false` is not available. Never flip the
+global mode to 'server'.
 </rendering>
 
-<islands>
-React is available but is the exception, not the default. A section becomes an
-island only when it genuinely needs state or event handling, and then:
+<javascript>
+The site ships zero client JavaScript. There is no React and no client:
+directive anywhere. Icon.astro renders inline SVG with no runtime.
 
-client:visible  below the fold
-client:idle     needed soon after load
-client:load     must be interactive at first paint — justify it
-
-lucide-react rendered in .astro with NO client: directive emits inline SVG and
-ships zero JavaScript. That is the intended usage.
-</islands>
+If something seems to need interactivity, ask first: a small Astro <script> or
+a UI framework is an architecture decision, not a default.
+</javascript>

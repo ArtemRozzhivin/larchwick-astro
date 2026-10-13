@@ -1,41 +1,43 @@
 # Project
 
-> This file is a template. Replace every section below when you start a real
-> landing from this repository, and keep it current from then on.
-
 ## What is this
 
-An Astro landing-page template — a starter for marketing sites and landings. It ships finished page blocks, SEO wiring, and quality gates so a new
-site starts with the structure already in place.
+Larchwick Coffee Roasters is a fictional coffee roaster (demo project — fictional business). This
+repo rebuilds its WordPress site as a static Astro site with content in Sanity, as a public
+portfolio case study. The plan and the progress tracker are in [PLAN.md](../../PLAN.md).
 
 ## Pages
 
-| Route  | Page doc                 | Status      | Notes                                      |
-| ------ | ------------------------ | ----------- | ------------------------------------------ |
-| `/`    | [home](../pages/home.md) | placeholder | Demo landing composed from every block     |
-| `/404` | [404](../pages/404.md)   | real        | Full-screen, no header or footer by design |
+| Route  | Page doc                 | Status  | Notes                                                                                                                                   |
+| ------ | ------------------------ | ------- | --------------------------------------------------------------------------------------------------------------------------------------- |
+| `/`    | [home](../pages/home.md) | partial | Larchwick brand: hero with its three promises, three features and the subscription call to action; the rest of the old home comes later |
+| `/404` | [404](../pages/404.md)   | real    | Header and footer, a large "404", links to Home, Blog and Contact; noindex                                                              |
 
 `/robots.txt` and `/sitemap-index.xml` are generated at build time from the site
 config; they have no page doc.
 
+The navigation already links to `/about/`, `/services/`, `/products/`, `/blog/`, `/faq/` and
+`/contact/`, the old site's menu. Those pages are not built yet (Phases 5a–5c), so they show the
+404 page until then.
+
 ## Still placeholder
 
-Everything below has to be replaced before a real site launches:
-
-- Site name, URL, description, and OG image — `src/lib/config/site.ts`
-- Author name, email, and social links — same file
-- Navigation items and footer links, including the legal pages they point at
-  (`/privacy`, `/terms` do not exist yet)
-- All home page copy — `src/lib/content/home.ts`
-- The `og.png` social preview image referenced by the config but not in `public/`
-- The favicon (`public/favicon.svg` is the Astro default)
-- Colour tokens — `src/styles/global.css`
+- Site URL: `https://larchwick.example` until Phase 2c sets the `workers.dev` address
+- Contact details use the reserved `.example` domain and a placeholder phone number, by design
+- The hero has no photo yet (the old one had coffee beans behind it); images arrive with Sanity
+  in Phases 3–5
+- The pages listed above that the navigation links to
 - Analytics: none is installed
 
 ## Notes
 
-Static output: every page is prerendered at build time. A page opts into
-on-demand rendering individually; the site mode is never flipped to server.
+Static output with no Astro adapter: every page is prerendered at build time, with
+`trailingSlash: 'always'` and `build.format: 'directory'`, so every URL keeps WordPress's
+trailing slash. There is no Vercel and no Docker setup any more; the static build is headed for
+Cloudflare Workers Static Assets in Phase 2c.
 
-Two build configs, kept in sync: the default targets Vercel, `astro.config.docker.ts`
-targets a standalone Node server for the Docker image.
+The site ships zero client JavaScript: no React, no view transitions, no prefetch script.
+
+The brand foundation (Phase 2b) is in: the 9 colour tokens from the old site, DM Serif Display
+and Inter self-hosted through the Astro Fonts API, the Larchwick favicon and the `og.jpg` social
+preview image.

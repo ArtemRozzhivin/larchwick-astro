@@ -4,8 +4,6 @@ dist/
 # generated types
 .astro/
 
-.vercel/
-
 # Claude Code (per-developer local settings; shared config stays tracked)
 .claude/settings.local.json
 
@@ -25,6 +23,16 @@ pnpm-debug.log*
 # environment variables
 .env
 .env.production
+.env.local
+.env.*.local
+
+# Sanity and Cloudflare (wrangler) local state
+.sanity/
+.wrangler/
+
+# Measurement raw data: crawl responses and unscrubbed Lighthouse exports (may hold the WP login)
+.cache/
+docs/*/lighthouse/inbox/
 
 # macOS-specific files
 .DS_Store

@@ -1,23 +1,19 @@
 ---
-/**
- * Renders a lucide icon by name.
- *
- * lucide-react components are rendered on the server here — no `client:` directive
- * means Astro emits plain inline SVG and ships zero JavaScript for them.
- */
-import {
-  Check,
-  LayoutGrid,
-  Palette,
-  Rocket,
-  Search,
-  ShieldCheck,
-  Sparkles,
-  Star,
-  Zap,
-} from 'lucide-react'
-
 import type { IconName } from '@lib/types'
+
+type IconNode =
+  | readonly ['path', { readonly d: string }]
+  | readonly ['circle', { readonly cx: string; readonly cy: string; readonly r: string }]
+  | readonly [
+      'rect',
+      {
+        readonly x: string
+        readonly y: string
+        readonly width: string
+        readonly height: string
+        readonly rx: string
+      },
+    ]
 
 interface Props {
   name: IconName
@@ -26,19 +22,61 @@ interface Props {
 
 const { name, class: className = 'size-6' } = Astro.props
 
-const ICONS = {
-  zap: Zap,
-  search: Search,
-  layout: LayoutGrid,
-  palette: Palette,
-  shield: ShieldCheck,
-  rocket: Rocket,
-  check: Check,
-  star: Star,
-  sparkles: Sparkles,
-} as const
+// Icon nodes copied from Lucide 0.563.0 (https://lucide.dev, ISC); the licence notice is in CREDITS.md.
+const ICONS: Record<IconName, readonly IconNode[]> = {
+  coffee: [
+    ['path', { d: 'M10 2v2' }],
+    ['path', { d: 'M14 2v2' }],
+    [
+      'path',
+      {
+        d: 'M16 8a1 1 0 0 1 1 1v8a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V9a1 1 0 0 1 1-1h14a4 4 0 1 1 0 8h-1',
+      },
+    ],
+    ['path', { d: 'M6 2v2' }],
+  ],
+  'chevron-down': [['path', { d: 'm6 9 6 6 6-6' }]],
+  check: [['path', { d: 'M20 6 9 17l-5-5' }]],
+  mail: [
+    ['path', { d: 'm22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7' }],
+    ['rect', { x: '2', y: '4', width: '20', height: '16', rx: '2' }],
+  ],
+  phone: [
+    [
+      'path',
+      {
+        d: 'M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384',
+      },
+    ],
+  ],
+  clock: [
+    ['path', { d: 'M12 6v6l4 2' }],
+    ['circle', { cx: '12', cy: '12', r: '10' }],
+  ],
+  menu: [
+    ['path', { d: 'M4 5h16' }],
+    ['path', { d: 'M4 12h16' }],
+    ['path', { d: 'M4 19h16' }],
+  ],
+  x: [
+    ['path', { d: 'M18 6 6 18' }],
+    ['path', { d: 'm6 6 12 12' }],
+  ],
+}
 
-const Component = ICONS[name]
+const nodes = ICONS[name]
 ---
 
-<Component className={className} aria-hidden="true" />
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  aria-hidden="true"
+  class={className}
+>
+  {nodes.map(([Tag, attrs]) => <Tag {...attrs} />)}
+</svg>
