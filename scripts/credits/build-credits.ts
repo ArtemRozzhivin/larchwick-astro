@@ -15,6 +15,7 @@ const REQUEST_TIMEOUT_MS = 20_000
 const REDIRECT_STATUSES = new Set([301, 302, 307, 308])
 const NOT_FOUND_STATUSES = new Set([404, 410])
 const CONTENT_TYPES = new Set(['page', 'post'])
+const OG_IMAGE_PHOTO_ID = 'hFpqG9KU5Gc'
 const LUCIDE_NOTICE = [
   'ISC License',
   '',
@@ -378,6 +379,22 @@ function usedOnCell(row: Row, titles: ReadonlyMap<number, string>): string {
     : 'not used on the site'
 }
 
+function renderSocialPreview(rows: readonly Row[]): string[] {
+  const source = rows.find((row) => row.attachment.unsplashId === OG_IMAGE_PHOTO_ID)
+  if (!source) throw new Error(`No attachment for Unsplash photo ${OG_IMAGE_PHOTO_ID} (og.jpg)`)
+  const { attachment, photo } = source
+  return [
+    '## Social preview image',
+    '',
+    '`public/og.jpg`, the image shown when a page is shared, is a cropped and darkened copy of',
+    `[${attachment.unsplashId}](${photo.check.url})`,
+    `by ${photo.photographer} (media ${attachment.id} above), used under the`,
+    `[Unsplash License](${UNSPLASH_LICENSE}). The Larchwick name on it is set in`,
+    'DM Serif Display and the tagline in Inter, both under the SIL Open Font License 1.1.',
+    '',
+  ]
+}
+
 function renderCredits(
   rows: readonly Row[],
   titles: ReadonlyMap<number, string>,
@@ -433,10 +450,11 @@ function renderCredits(
     table,
     '',
     ...(notes.length > 0 ? ['Notes from the last run:', '', ...notes, ''] : []),
+    ...renderSocialPreview(rows),
     '## Fonts',
     '',
     '- **DM Serif Display** and **Inter**: [SIL Open Font License 1.1](https://openfontlicense.org).',
-    '  The brand fonts, self-hosted from Phase 2b.',
+    '  Self-hosted from our own origin through the Astro Fonts API (Fontsource), latin subset.',
     '',
     '## Icons',
     '',
