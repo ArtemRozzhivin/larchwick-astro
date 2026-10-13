@@ -6,19 +6,13 @@
  */
 import { home } from '@lib/content/home'
 import CTA from '@components/sections/CTA.astro'
-import FAQ from '@components/sections/FAQ.astro'
 import Features from '@components/sections/Features.astro'
 import Hero from '@components/sections/Hero.astro'
-import Logos from '@components/sections/Logos.astro'
-import Testimonials from '@components/sections/Testimonials.astro'
 import Layout from '@layouts/Layout.astro'
 ---
 
-<Layout headerCta={home.hero.primaryCta}>
+<Layout>
   <Hero {...home.hero} />
-  <Logos {...home.logos} />
   <Features {...home.features} />
-  <Testimonials {...home.testimonials} />
-  <FAQ {...home.faq} />
   <CTA {...home.cta} />
 </Layout>

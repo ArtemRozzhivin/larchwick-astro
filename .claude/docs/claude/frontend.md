@@ -1,8 +1,9 @@
 <file_types>
-.astro   default for anything rendered. Static, ships no JS.
-.tsx     only for a React island that genuinely needs state or events, and for
-         primitives whose variants are shared (button.tsx exposes buttonVariants,
-         which .astro files use as a class string).
+.astro   anything rendered. Static, ships no JS.
+.ts      config, content, types, and shared class strings (button.ts exposes
+         buttonVariants, which .astro files use as a class string).
+
+There are no .tsx files: the site has no React (PLAN.md D-7).
 </file_types>
 
 <astro_components>
@@ -38,20 +39,18 @@ An `id` prop with a sensible default belongs on every section, so pages can link
 to `#features` without editing the component.
 </props>
 
-<react_islands>
-A .tsx component only becomes an island when a page adds a client: directive.
-Without one, Astro renders it to static HTML — which is exactly how Icon.astro
-uses lucide-react.
+<client_js>
+Zero client JavaScript. No React, no client: directive, no <script> in a
+component or page (the JSON-LD <script type="application/ld+json"> is data, not
+code).
 
-When an island is genuinely needed:
-- keep it as small as possible; wrap the interactive part, not the whole section
-- pass data down as props from the .astro parent, serialisable values only
-- client:visible or client:idle before client:load
-</react_islands>
+If a component seems to need interactivity, ask before writing any: a small
+Astro <script> or a UI framework is an architecture decision.
+</client_js>
 
 <imports>
 Aliases from tsconfig.json:
-  @lib, @lib/*, @components/*, @layouts/*, @assets/*, @content/*
+  @lib/*, @components/*, @layouts/*
 
 Use an alias whenever an import crosses a folder. Relative imports stay inside one
 folder (./Section.astro, ../types).
@@ -67,25 +66,30 @@ Icon-only controls need an aria-label or sr-only text.
 Decorative SVG gets aria-hidden="true"; meaningful images get real alt text.
 Never remove a focus ring without replacing it — every focusable element in this
 repo uses focus-visible:ring-2.
-Exactly one <h1> per page (the Hero title); section headings are <h2>.
+Exactly one <h1> per page (the Hero title); section headings are <h2>. Card
+titles inside a section are <h3> under a section title, and <h2> when the
+section has none (Features picks the level from its title), so no level is
+skipped.
 </accessibility>
 
 <forms>
-react-hook-form + @hookform/resolvers + zod are installed.
+A form is a plain HTML <form method="post">, with zero client JS. Validation is
+native HTML (required, type="email", maxlength); the server re-checks it.
 
-zod here is v3 — z.string().url(), z.string().email(). NOT the v4 top-level
-z.url().
+The contact form (Phase 5c, PLAN.md D-4) posts to /api/contact, a small
+Cloudflare Worker script beside the static assets. It sends the message through
+Resend, then 303-redirects to a static thank-you page.
 
-A form is one of the few legitimate islands. Keep the form itself in a .tsx
-component with client:visible, and leave the surrounding section static.
+No form or validation library is installed. Astro's own zod is v4 (astro/zod),
+and none of our code imports it.
 </forms>
 
 <ui_primitives>
 src/components/ui/
-  button.tsx   cva variants; .astro files import buttonVariants() for a class string
-  input.tsx    label + error handling built in
-  Icon.astro   lucide icon by name, server-rendered
+  button.ts    cva variants; .astro files call buttonVariants() for a class string
+  Icon.astro   inline SVG by name (Lucide paths, ISC), no runtime
 
-Extend a primitive with a new cva variant rather than forking it. New icons are
-added to ICON_NAMES in src/lib/types/icon.ts and to the map in Icon.astro.
+Extend a primitive with a new cva variant rather than forking it. A new icon is
+a name in ICON_NAMES (src/lib/types/icon.ts) plus its nodes in Icon.astro,
+copied from Lucide; the Record type fails the check if the two drift apart.
 </ui_primitives>

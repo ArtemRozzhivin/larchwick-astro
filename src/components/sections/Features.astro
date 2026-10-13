@@ -25,6 +25,8 @@ const GRID_CLASSES = {
   2: 'sm:grid-cols-2',
   3: 'sm:grid-cols-2 lg:grid-cols-3',
 } as const
+
+const ItemHeading = title ? 'h3' : 'h2'
 ---
 
 <Section id={id} eyebrow={eyebrow} title={title} subtitle={subtitle} tone="muted">
@@ -37,7 +39,7 @@ const GRID_CLASSES = {
               <Icon name={item.icon} />
             </span>
           )}
-          <h3 class="text-lg font-semibold text-gray-900">{item.title}</h3>
+          <ItemHeading class="text-lg font-semibold text-gray-900">{item.title}</ItemHeading>
           <p class="mt-2 text-gray-600">{item.description}</p>
         </li>
       ))

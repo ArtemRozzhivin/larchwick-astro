@@ -1,7 +1,6 @@
 # Build output
 dist/
 .astro/
-.vercel/
 
 # Dependencies
 node_modules/
@@ -14,3 +13,4 @@ docs/after/
 # Agent instruction files — XML-tagged prose with intentional column alignment
 # that Prettier's markdown printer flattens.
 .claude/
+CLAUDE.md

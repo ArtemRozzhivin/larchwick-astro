@@ -1,36 +1,31 @@
 export const siteConfig = {
-  name: 'My App',
-  description: 'A modern web application built with Astro.',
-  url: 'https://your-site.com',
+  name: 'Larchwick',
+  description:
+    'Specialty coffee, roasted in small batches every Monday and Thursday and shipped across Europe within 48 hours, with the roast date on every bag.',
+  // Placeholder on the reserved .example domain; Phase 2c sets the workers.dev address.
+  url: 'https://larchwick.example',
   ogImage: '/og.png',
-
-  author: {
-    name: 'Your Name',
-    email: 'hello@your-site.com',
-    twitter: '@yourhandle',
-  },
-
-  keywords: ['astro', 'landing page', 'marketing'],
 
   nav: [
     { label: 'Home', href: '/' },
-    { label: 'About', href: '/about' },
-    { label: 'Pricing', href: '/pricing' },
-    { label: 'Contact', href: '/contact' },
+    { label: 'About', href: '/about/' },
+    { label: 'Services', href: '/services/' },
+    { label: 'Products', href: '/products/' },
+    { label: 'Blog', href: '/blog/' },
+    { label: 'FAQ', href: '/faq/' },
+    { label: 'Contact', href: '/contact/' },
   ],
 
-  social: {
-    twitter: 'https://twitter.com/yourhandle',
-    github: 'https://github.com/yourusername',
-    linkedin: 'https://linkedin.com/in/yourprofile',
+  contact: {
+    email: 'hello@larchwick.example',
+    wholesaleEmail: 'wholesale@larchwick.example',
+    phone: '+40 700 000 000',
+    hours: ['Monday–Friday: 9:00–17:00', 'Saturday: 10:00–14:00 (pick-up only)', 'Sunday: closed'],
   },
 
   footer: {
-    links: [
-      { label: 'Privacy Policy', href: '/privacy' },
-      { label: 'Terms of Service', href: '/terms' },
-    ],
-    copyright: `© ${new Date().getFullYear()} My App. All rights reserved.`,
+    demoLabel: 'Demo project — fictional business',
+    copyright: `© ${new Date().getFullYear()} Larchwick`,
   },
 } as const
 

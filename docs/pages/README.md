@@ -9,10 +9,10 @@ placeholder content · `placeholder` — template content only.
 
 ## Pages
 
-| Page            | Route  | What it's for                                     | Status      |
-| --------------- | ------ | ------------------------------------------------- | ----------- |
-| [Home](home.md) | `/`    | Demo landing showing every available block        | placeholder |
-| [404](404.md)   | `/404` | Shown when a visitor hits an address that is gone | real        |
+| Page            | Route  | What it's for                                        | Status  |
+| --------------- | ------ | ---------------------------------------------------- | ------- |
+| [Home](home.md) | `/`    | Larchwick's front door: coffees, story, subscription | partial |
+| [404](404.md)   | `/404` | Shown when a visitor hits an address that is gone    | real    |
 
 ## Adding a page
 

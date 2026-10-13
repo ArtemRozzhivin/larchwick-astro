@@ -29,17 +29,16 @@ content file** — which is why the next landing takes an hour, not a day.
 - [Git Flow](#git-flow)
 - [Scripts](#scripts)
 - [Deployment](#deployment)
-- [Docker](#docker)
 
 ---
 
 ## Getting Started
 
-**Prerequisites:** Node.js 20+, npm, Git.
+**Prerequisites:** Node.js 22.18+ (`.node-version` pins 24), npm, Git.
 
 ```bash
 git clone <repo-url>
-cd your-project
+cd larchwick-astro
 npm install          # also installs the git hooks (husky)
 cp .env.example .env
 npm run dev          # → http://localhost:4321
@@ -47,13 +46,13 @@ npm run dev          # → http://localhost:4321
 
 ### First five minutes on a new project
 
-1. `src/lib/config/site.ts` — name, URL, description, OG image, nav, social,
-   footer links. Everything else derives from this, including the sitemap and every
-   canonical/OG URL.
+1. `src/lib/config/site.ts` — name, URL, description, OG image, nav, contact
+   details, footer. Everything else derives from this, including the sitemap and
+   every canonical/OG URL.
 2. `src/styles/global.css` — the `primary-*` / `secondary-*` / `accent-*` colour
    scales.
 3. `src/lib/content/home.ts` — the home page copy.
-4. `public/favicon.svg` and `public/og.png`.
+4. `public/favicon.svg`, and `public/og.png` once it is added (Phase 2b).
 
 ---
 
@@ -72,9 +71,9 @@ export const pricing = {
 
 ```astro
 ---
+import { pricing } from '@lib/content/pricing'
 import FAQ from '@components/sections/FAQ.astro'
 import Hero from '@components/sections/Hero.astro'
-import { pricing } from '@lib/content/pricing'
 import Layout from '@layouts/Layout.astro'
 ---
 
@@ -95,22 +94,20 @@ closest existing block; keep the [section contract](./docs/STRUCTURE.md#section-
 
 `src/components/sections/`
 
-| Component      | For                                    | Key props                                                            |
-| -------------- | -------------------------------------- | -------------------------------------------------------------------- |
-| `Section`      | layout primitive every block sits on   | `id`, `eyebrow`, `title`, `subtitle`, `align`, `tone`                |
-| `Header`       | sticky nav + mobile menu, zero JS      | `cta`                                                                |
-| `Hero`         | above the fold                         | `eyebrow`, `title`, `subtitle`, `primaryCta`, `secondaryCta`, `note` |
-| `Logos`        | social-proof strip                     | `title`, `items`                                                     |
-| `Features`     | value props in a grid                  | `eyebrow`, `title`, `subtitle`, `items`, `columns`                   |
-| `Testimonials` | quotes                                 | `eyebrow`, `title`, `items`                                          |
-| `FAQ`          | accordion, native `<details>`, zero JS | `eyebrow`, `title`, `items`                                          |
-| `CTA`          | closing conversion block               | `title`, `subtitle`, `primaryCta`, `secondaryCta`                    |
-| `Footer`       | links + social, from `siteConfig`      | none                                                                 |
+| Component  | For                                    | Key props                                                            |
+| ---------- | -------------------------------------- | -------------------------------------------------------------------- |
+| `Section`  | layout primitive every block sits on   | `id`, `eyebrow`, `title`, `subtitle`, `align`, `tone`                |
+| `Header`   | sticky nav + mobile menu, zero JS      | `cta`                                                                |
+| `Hero`     | above the fold                         | `eyebrow`, `title`, `subtitle`, `primaryCta`, `secondaryCta`, `note` |
+| `Features` | value props in a grid                  | `eyebrow`, `title`, `subtitle`, `items`, `columns`                   |
+| `FAQ`      | accordion, native `<details>`, zero JS | `eyebrow`, `title`, `items`                                          |
+| `CTA`      | closing conversion block               | `title`, `subtitle`, `primaryCta`, `secondaryCta`                    |
+| `Footer`   | nav, email, demo label, `siteConfig`   | none                                                                 |
 
 `Header` and `Footer` are rendered by `Layout`. Turn them off per page with
 `showHeader={false}` / `showFooter={false}`.
 
-See [`/`](./src/pages/index.astro) for a page using all of them.
+See [`/`](./src/pages/index.astro) for a page built from `Hero`, `Features` and `CTA`.
 
 ---
 
@@ -125,12 +122,11 @@ src/
 ├── layouts/Layout.astro   <head>, SEO, JSON-LD, Header, Footer
 ├── components/
 │   ├── sections/          The page blocks
-│   └── ui/                Primitives — button, input, Icon
+│   └── ui/                Primitives — button classes (cva), Icon
 ├── lib/
-│   ├── config/site.ts     Brand, URL, nav, social — single source of truth
+│   ├── config/site.ts     Brand, URL, nav, contact — single source of truth
 │   ├── content/           Copy, one file per page
-│   ├── types/             Shared types
-│   └── utils/             cn() and friends
+│   └── types/             Shared types
 └── styles/global.css      Tailwind v4 @theme tokens
 ```
 
@@ -139,7 +135,7 @@ Full detail, including where new code goes: [docs/STRUCTURE.md](./docs/STRUCTURE
 ### Aliases
 
 ```
-@lib  @lib/*  @components/*  @layouts/*  @assets/*  @content/*
+@lib/*  @components/*  @layouts/*
 ```
 
 Use an alias whenever an import crosses a folder; keep relative imports inside one
@@ -149,17 +145,14 @@ folder.
 
 ## Performance
 
-A page ships **~4.5 kB gzip** — the view-transition script, and nothing else. Pass
-`viewTransitions={false}` on a single-page landing and it ships zero JavaScript.
+A page ships **zero JavaScript**: no view transitions, no prefetch script, no
+islands, and no React. The only `<script>` in the HTML is the JSON-LD data block.
 
-That is protected by one rule: **HTML → CSS → a React island, in that order.**
+That is protected by one rule: **HTML → CSS → ask first.**
 
 - FAQ accordion and mobile menu — `<details>` / `<summary>`, no JS
-- Icons — `lucide-react` rendered on the server as inline SVG, no JS
+- Icons — inline SVG from `Icon.astro` (Lucide paths, ISC), no JS
 - Motion — CSS transitions and the keyframes in `global.css`
-
-React is available. A component only hydrates when a page adds an explicit
-`client:` directive — prefer `client:visible` or `client:idle` over `client:load`.
 
 Images in `src/assets/` go through `astro:assets` `<Image>`, which emits
 width/height, modern formats, and a srcset:
@@ -202,8 +195,6 @@ Colour comes from tokens in `src/styles/global.css` — `primary-*`, `secondary-
 `accent-*`, `shadow-soft`, `shadow-card`. Never a hex or arbitrary value in a
 component, so a rebrand stays a one-file change. There is no `tailwind.config.js`
 (Tailwind v4 is CSS-first) and adding one does nothing.
-
-`cn()` from `@lib/utils` for conditional classes in `.tsx`.
 
 ### Accessibility
 
@@ -257,52 +248,32 @@ npm run lint:fix         # Auto-fix
 npm run format           # Prettier
 npm run format:check     # Prettier, check only
 npm run verify           # check + lint + format:check
+
+npm run credits            # Rebuild CREDITS.md
+npm run seo:crawl          # Crawl the WordPress "before" site (SEO snapshot)
+npm run lighthouse:import  # File saved Lighthouse JSON reports into docs/
 ```
 
 ---
 
 ## Deployment
 
-Output is **static** — every page is prerendered at build time, which is what makes
-a landing fast. A single page can opt into on-demand rendering with
-`export const prerender = false`; the site mode stays static.
+Output is **static** — every page is prerendered at build time, with
+`trailingSlash: 'always'` and `build.format: 'directory'`, so every URL keeps
+WordPress's trailing slash. There is no Astro adapter: `dist/` is plain static
+files.
 
-**Vercel** — `astro.config.ts` uses `@astrojs/vercel`. Push to the connected
-project; no extra config.
-
-**Anywhere else** — swap the adapter in `astro.config.ts`, or drop it entirely and
-serve `dist/` from any static host. See the
-[Astro deployment guides](https://docs.astro.build/en/guides/deploy/).
+**Cloudflare** — the site is headed for Cloudflare Workers Static Assets, built by
+Workers Builds from GitHub (Phase 2c in [PLAN.md](./PLAN.md)).
 
 Set the real URL in `src/lib/config/site.ts` before deploying — the sitemap and
 every canonical/OG URL come from it.
 
----
-
-## Docker
-
-Run the project without a local Node install.
-
-```bash
-cp .env.example .env
-docker compose up dev     # dev server with hot reload → http://localhost:4321
-docker compose up app     # production server
-```
-
-The production image uses `@astrojs/node` in standalone mode via
-`astro.config.docker.ts` (multi-stage build). Keep that config in sync with
-`astro.config.ts` when changing integrations.
-
-```bash
-npm run docker:dev    # dev container
-npm run docker:build  # build the production image
-npm run docker:start  # run the production container
-```
-
 ### Environment variables
 
 Add them to `.env` (copied from `.env.example`). Variables prefixed with `PUBLIC_`
-are exposed to the client; everything else stays server-side.
+can reach client code; the others are read at build time only. There is no
+server, so anything a page renders is baked into the static HTML.
 
 ---
 

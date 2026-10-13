@@ -4,6 +4,7 @@
  * and no hydration, so it costs nothing on load.
  */
 import { siteConfig } from '@lib/config/site'
+import Icon from '@components/ui/Icon.astro'
 
 interface Cta {
   label: string
@@ -46,29 +47,26 @@ const isActive = (href: string) => currentPath === href || currentPath === `${hr
       }
     </nav>
 
-    <div class="hidden md:block">
-      {
-        cta && (
+    {
+      cta && (
+        <div class="hidden md:block">
           <a
             href={cta.href}
             class="bg-primary-600 hover:bg-primary-700 focus-visible:ring-primary-600 inline-flex items-center justify-center rounded-xl px-5 py-2.5 text-sm font-medium text-white transition-colors focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none"
           >
             {cta.label}
           </a>
-        )
-      }
-    </div>
+        </div>
+      )
+    }
 
     <details class="group relative md:hidden">
       <summary
         class="focus-visible:ring-primary-600 flex size-10 cursor-pointer items-center justify-center rounded-lg text-gray-900 focus-visible:ring-2 focus-visible:outline-none [&::-webkit-details-marker]:hidden"
       >
         <span class="sr-only">Toggle menu</span>
-        <svg class="size-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path class="group-open:hidden" stroke-linecap="round" d="M4 7h16M4 12h16M4 17h16"></path>
-          <path class="hidden group-open:block" stroke-linecap="round" d="M6 6l12 12M6 18L18 6"
-          ></path>
-        </svg>
+        <Icon name="menu" class="size-6 group-open:hidden" />
+        <Icon name="x" class="hidden size-6 group-open:block" />
       </summary>
 
       <nav
@@ -81,7 +79,7 @@ const isActive = (href: string) => currentPath === href || currentPath === `${hr
               href={item.href}
               aria-current={isActive(item.href) ? 'page' : undefined}
               class:list={[
-                'block rounded-xl px-4 py-2.5 text-sm font-medium transition-colors hover:bg-gray-50',
+                'focus-visible:ring-primary-600 block rounded-xl px-4 py-2.5 text-sm font-medium transition-colors hover:bg-gray-50 focus-visible:ring-2 focus-visible:outline-none',
                 isActive(item.href) ? 'text-primary-600' : 'text-gray-700',
               ]}
             >
@@ -93,7 +91,7 @@ const isActive = (href: string) => currentPath === href || currentPath === `${hr
           cta && (
             <a
               href={cta.href}
-              class="bg-primary-600 hover:bg-primary-700 mt-2 block rounded-xl px-4 py-2.5 text-center text-sm font-medium text-white"
+              class="bg-primary-600 hover:bg-primary-700 focus-visible:ring-primary-600 mt-2 block rounded-xl px-4 py-2.5 text-center text-sm font-medium text-white focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none"
             >
               {cta.label}
             </a>

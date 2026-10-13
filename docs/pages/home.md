@@ -1,45 +1,51 @@
 ---
 route: /
-status: placeholder
+status: partial
 ---
 
 # Home
 
 ## Purpose
 
-The demo landing page. It exists to show every block the template provides, and to
-be the starting point a real landing is built from — the fastest route to a new
-site is to rewrite this page's copy rather than start from an empty file.
+The front door of Larchwick Coffee Roasters, a fictional specialty coffee roaster. It tells a
+visitor what Larchwick sells and sends them on to the coffees, the story behind the roastery, or
+a subscription enquiry.
 
 ## Sections, in order
 
-1. **Header** — site name, navigation, and a call-to-action button. Sticks to the
-   top while scrolling. On phones the navigation collapses into a menu button.
-2. **Hero** — the headline, a supporting sentence, two buttons, and a small note
-   under them. This is the only place on the page with a top-level heading.
-3. **Logo strip** — "Trusted by" row of company names. Accepts real logo images
-   instead of names.
-4. **Features** — six cards, each with an icon, a title, and a short description.
-5. **Testimonials** — three quotes with an author and a role, optionally a photo.
-6. **FAQ** — four expandable questions. Only the clicked one opens.
-7. **Closing call to action** — a coloured panel with a headline and a button.
-8. **Footer** — site name, legal links, social links, and a copyright line.
+1. **Header** — the Larchwick name and the menu: Home, About, Services, Products, Blog, FAQ and
+   Contact. It sticks to the top while scrolling. On phones the menu collapses into a menu
+   button.
+2. **Hero** — "Specialty coffee roastery · Est. 2019", the headline "Fresh coffee, roasted in
+   small batches", a short paragraph about roasting days and shipping, and two buttons: "Shop our
+   coffees" and "Our story". This is the only top-level heading on the page.
+3. **Features** — three cards, each with a coffee-cup icon: "Roasted to order", "Fully
+   traceable" and "Brewing help", each with one sentence.
+4. **Subscription call to action** — "Try a subscription", "Fresh coffee every 2 or 4 weeks.
+   Save 10%, pause any time." and an "Ask about subscriptions" button.
+5. **Footer** — the Larchwick name, the menu links, the contact email, the label "Demo project —
+   fictional business" and a copyright line.
 
 ## Key interactions
 
-- Clicking a header navigation item jumps to that part of the page or opens that
-  page
-- On a phone, the menu button opens and closes the navigation
-- Clicking an FAQ question expands its answer; clicking again collapses it
-- The hero and closing buttons scroll to the matching part of the page
+- The menu links open the matching page
+- On a phone, the menu button opens and closes the menu
+- "Shop our coffees" opens the Products page; "Our story" opens the About page
+- "Ask about subscriptions" opens the Contact page
+- The email address in the footer opens the visitor's mail app
 
 ## Content owner
 
-— (template placeholder; a real project's client or PM supplies the copy)
+— (the copy is taken word for word from the old Larchwick home page)
 
 ## Known limitations
 
-- Every word on this page is placeholder text and must be replaced.
-- The logo strip shows invented company names, not images.
-- The footer links to a privacy policy and terms page that do not exist yet.
-- The social preview image the page references has not been added.
+- The page still uses the starter template's colours, fonts and spacing. The Larchwick look
+  arrives in the next phase.
+- Only part of the old home page is here so far. Still to come: the three short promises under
+  the hero buttons, "Our coffees", "From farm to your cup", "For cafés and offices" and "From the
+  blog".
+- The pages the menu and buttons link to are not built yet, so they show the "page not found"
+  page for now.
+- The features have no heading of their own, as on the old page.
+- The social preview image has not been added.

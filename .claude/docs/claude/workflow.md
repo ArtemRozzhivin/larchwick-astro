@@ -8,9 +8,13 @@ lint_fix=npm run lint:fix
 format=npm run format
 format_check=npm run format:check
 verify=npm run verify        check + lint + format:check
+credits=npm run credits      rebuild CREDITS.md
+seo_crawl=npm run seo:crawl  crawl the WordPress "before" site
+lighthouse_import=npm run lighthouse:import
+                             file saved Lighthouse JSON reports into docs/
 
-docker_dev=npm run docker:dev
-docker_build=npm run docker:build
+Node >= 22.18 (package.json engines); .node-version pins 24 for CI and the
+Cloudflare build.
 
 There is no test runner in this template. Verification is astro check + lint +
 format + a successful build.
@@ -31,7 +35,7 @@ Conventional Commits, enforced by commitlint:
 
 feat: add pricing page
 fix: give the mobile menu an accessible name
-chore: bump astro to 5.3
+chore: update dependencies
 refactor: build Features on the Section primitive
 
 Subject line only. No body unless the user asks.

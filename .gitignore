@@ -4,8 +4,6 @@ dist/
 # generated types
 .astro/
 
-.vercel/
-
 # Claude Code (per-developer local settings; shared config stays tracked)
 .claude/settings.local.json
 
