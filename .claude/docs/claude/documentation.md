@@ -31,6 +31,7 @@ Newest date section on top, one per day.
 - [Fix]: description
 - [Refactor]: description
 - [Chore]: description
+- [Docs]: description
 
 1-3 sentences per bullet. Technical detail belongs here: file paths, what was
 rejected and why, what was NOT verified, and — for this template especially —
@@ -58,8 +59,8 @@ Sections:
 Status: real (final copy and assets) | partial | placeholder (template content).
 
 ## Still placeholder
-- what a real project must replace before launch: site name, URL, OG image,
-  social links, legal pages, analytics.
+- what still has to be replaced before launch: site URL, OG image, favicon,
+  pages not built yet, analytics.
 
 Update when a route is added or removed, or when a page moves off placeholder
 content.

@@ -5,19 +5,16 @@ Nothing else. That split is what makes the next landing page take an hour.
 src/pages/<page>.astro       route — composition only, no copy, no logic
 src/lib/content/<page>.ts    all copy for that page, one object, `as const`
 src/components/sections/     reusable blocks, props in, static HTML out
-src/components/ui/           primitives (button, input, Icon)
+src/components/ui/           primitives (button cva classes, Icon)
 src/layouts/Layout.astro     head, SEO, JSON-LD, Header, Footer
-src/lib/config/site.ts       brand, URL, nav, social, footer — single source
+src/lib/config/site.ts       brand, URL, nav, contact, footer — single source
 src/styles/global.css        Tailwind v4 @theme tokens
 </shape>
 
 <aliases>
-@lib        → src/lib/index.ts
 @lib/*      → src/lib/*
 @components/* → src/components/*
 @layouts/*  → src/layouts/*
-@assets/*   → src/assets/*
-@content/*  → src/content/*
 
 Defined in tsconfig.json. Use them instead of ../../ across folders; relative
 imports stay inside one folder.
@@ -29,6 +26,9 @@ src/pages/**/*.astro maps 1:1 to routes.
 A page file contains: imports, a Layout, and sections. No copy, no data shaping,
 no business logic. If a page grows past that, the extra belongs in a section or
 in the content file.
+
+The one deliberate exception is src/pages/404.astro: it is self-contained, with
+its full-screen markup and copy inline, and no content file or sections.
 
 src/pages/robots.txt.ts is an endpoint, generated at build time from siteConfig.
 </pages>
@@ -47,21 +47,21 @@ Contract for every section:
 - static markup, no `client:` directive
 - colour from tokens only
 
-Existing: Header, Hero, Logos, Features, Testimonials, FAQ, CTA, Footer, Section.
+Existing: Header, Hero, Features, FAQ, CTA, Footer, Section.
 Check them before writing a new one.
 </sections>
 
 <layout>
 Layout.astro owns everything above the page content:
 
-- <head>: title, description, keywords, canonical, OG, Twitter, Organization JSON-LD
+- <head>: title, description, canonical, OG, Twitter, Organization JSON-LD
 - Header and Footer, on by default
-- optional ClientRouter (view transitions)
+- no client script of any kind (no ClientRouter, no prefetch)
 
-Props: title, description, ogImage, noIndex, showHeader, showFooter, headerCta,
-viewTransitions.
+Props: title, description, ogImage, noIndex, showHeader, showFooter, headerCta.
 
-A page passes title + description and usually nothing else.
+A page passes title + description and usually nothing else. The home page may
+rely on the siteConfig name/description defaults instead.
 </layout>
 
 <content>
@@ -71,7 +71,7 @@ One exported object per page, `as const` so the literal types flow into section
 props. Group by section key, mirroring the order on the page.
 
 Never inline copy into a component. Never put a brand name, URL, nav item, or
-social link here — those live in src/lib/config/site.ts and are shared.
+contact detail here — those live in src/lib/config/site.ts and are shared.
 </content>
 
 <config>
@@ -83,23 +83,19 @@ absolute canonical/OG URL correct. Change the URL in ONE place.
 
 <rendering>
 output: 'static' — every page is prerendered to HTML at build time.
+trailingSlash: 'always' + build.format: 'directory' — /about/ builds to
+dist/about/index.html, and every internal href ends in '/', as on WordPress.
 
-Opt one page into on-demand rendering with `export const prerender = false`.
-Never flip the global mode to 'server' for a landing site.
-
-astro.config.ts (Vercel adapter) is the default; astro.config.docker.ts (Node
-standalone) is used by the Docker build. Keep both in sync when changing
-integrations.
+astro.config.ts is the only config, and there is no adapter: dist/ is served as
+static assets (Cloudflare Workers Static Assets from Phase 2c). Without an
+adapter, `export const prerender = false` is not available. Never flip the
+global mode to 'server'.
 </rendering>
 
-<islands>
-React is available but is the exception, not the default. A section becomes an
-island only when it genuinely needs state or event handling, and then:
+<javascript>
+The site ships zero client JavaScript. There is no React and no client:
+directive anywhere. Icon.astro renders inline SVG with no runtime.
 
-client:visible  below the fold
-client:idle     needed soon after load
-client:load     must be interactive at first paint — justify it
-
-lucide-react rendered in .astro with NO client: directive emits inline SVG and
-ships zero JavaScript. That is the intended usage.
-</islands>
+If something seems to need interactivity, ask first: a small Astro <script> or
+a UI framework is an architecture decision, not a default.
+</javascript>

@@ -1,49 +1,43 @@
 <baseline>
-A page in this template ships:
-  ClientRouter (view transitions)   ~4.5 kB gzip — the only script, and optional
-  everything else                   0 kB
+A page on this site ships 0 kB of JavaScript: no ClientRouter, no prefetch
+script, no islands. The only <script> in the HTML is the JSON-LD data block.
 
 That is the number to protect. Every review asks what a change adds to it.
 
 Measure, do not guess:
-  npm run build      then read the emitted chunk sizes
-  grep -c astro-island dist/<page>.html    0 means nothing hydrated
+  npm run build
+  find dist -name '*.js'                      nothing means no JS shipped
+  grep -o '<script[^>]*>' dist/index.html     only type="application/ld+json"
 </baseline>
 
 <javascript_budget>
-Order of preference, always:
+The budget is zero. Order of preference, always:
 
 1. HTML does it       <details>/<summary>, <dialog>, anchors, forms
 2. CSS does it        transitions, animations, :hover, :focus-within, group-open:
-3. A React island     only when state or event handling is unavoidable
+3. Ask first          anything else. A small Astro <script> or a UI framework is
+                      an architecture decision, never a default.
 
 Already solved without JS in this repo — reuse rather than re-solve:
   accordion / FAQ     <details> + group-open: (FAQ.astro)
   mobile menu         <details> + group-open: (Header.astro)
-  icons               lucide-react in .astro, no client: directive
+  icons               inline SVG from Icon.astro, no runtime
   smooth scroll       scroll-smooth on <html> + #anchor links
-  entrance motion     animate-fade-in / animate-slide-up in global.css
-
-Hydration directives, cheapest first:
-  client:visible      below the fold — carousels, maps, heavy widgets
-  client:idle         needed soon, not for first paint
-  client:load         must be interactive immediately — justify it in the PR
-
-client:load above the fold is the single easiest way to wreck this template.
+  entrance motion     animate-slide-up in global.css
+  contact form        plain HTML POST to /api/contact (Phase 5c)
 </javascript_budget>
 
-<view_transitions>
-Layout renders ClientRouter by default, which costs ~4.5 kB gzip.
-
-Worth it for a multi-page site. For a one-page landing it buys nothing — pass
-viewTransitions={false} and the page ships literally zero JavaScript.
-</view_transitions>
+<navigation>
+No ClientRouter (view transitions) and no Astro prefetch: both inject a client
+script. No prefetch of any kind; adding one is an architecture decision (ask
+first).
+</navigation>
 
 <images>
 Anything in src/assets/ goes through astro:assets:
 
   import { Image } from 'astro:assets'
-  import hero from '@assets/hero.png'
+  import hero from '../assets/hero.png'
   <Image src={hero} alt="…" widths={[480, 960, 1440]} loading="eager" />
 
 It emits width/height (no layout shift), modern formats, and a srcset.
@@ -57,16 +51,19 @@ Rules:
 </images>
 
 <fonts>
-@fontsource-variable/nunito-sans is imported once in Layout.astro. One variable
-font file covers every weight.
+No web font is loaded yet; text uses the system stack. Phase 2b self-hosts the
+two brand fonts through the Astro Fonts API with the Fontsource provider:
+DM Serif Display 400 (latin, preloaded) and Inter variable (latin). No Google
+Fonts request.
 
-Adding a second family doubles the font payload — ask before doing it, and prefer
-another weight of the existing one.
+Every extra family or weight adds payload — ask before adding one.
 </fonts>
 
 <css>
-Tailwind v4 generates only the classes actually used, so the stylesheet stays
-small on its own. Two things spoil that:
+Tailwind v4 generates only the classes it finds in its sources, so the
+stylesheet stays small on its own. global.css limits those sources to src/
+(`@import 'tailwindcss' source('..')`), so class names quoted in PLAN.md or the
+docs never ship. Two things spoil that:
 - long arbitrary values repeated across files (extract a token instead)
 - hand-written CSS in global.css that duplicates a utility
 
@@ -85,8 +82,8 @@ A marketing tag added "temporarily" is the most common permanent regression.
 
 <checklist>
 Before calling a page done:
-- [ ] npm run build passes, and no new chunk appeared without a reason
-- [ ] no client: directive that HTML or CSS could have replaced
+- [ ] npm run build passes, and dist/ contains no .js file
+- [ ] no client: directive and no <script> other than JSON-LD
 - [ ] every image has width/height and the right loading value
 - [ ] exactly one <h1>
 - [ ] no render-blocking third-party script

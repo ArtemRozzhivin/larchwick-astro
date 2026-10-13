@@ -10,7 +10,7 @@ Two goals, in this order: the page loads fast, and the next page takes an hour.
 
 Both come from the same rule — **a page is a Layout plus an ordered list of section components, and all copy lives in a content file.** Nothing in a section component is page-specific.
 
-JavaScript is the exception. Every section here is static `.astro` that ships zero JS. Before reaching for React, check whether HTML already does it.
+The site ships zero client JavaScript. Every section here is static `.astro`, and there is no React. If something seems to need interactivity, check whether HTML or CSS already does it, and ask before writing any script.
 </prime_directive>
 
 <fast_path>
@@ -36,9 +36,9 @@ export const pricing = {
 
 ```astro
 ---
+import { pricing } from '@lib/content/pricing'
 import FAQ from '@components/sections/FAQ.astro'
 import Hero from '@components/sections/Hero.astro'
-import { pricing } from '@lib/content/pricing'
 import Layout from '@layouts/Layout.astro'
 ---
 
@@ -63,12 +63,10 @@ Reference: `src/pages/index.astro` + `src/lib/content/home.ts`.
 | `Section.astro`      | layout primitive every block sits on  | `id`, `eyebrow`, `title`, `subtitle`, `align`, `tone` |
 | `Header.astro`       | sticky nav, mobile menu, zero JS      | `cta`                                             |
 | `Hero.astro`         | above-the-fold                        | `eyebrow`, `title`, `subtitle`, `primaryCta`, `secondaryCta`, `note` |
-| `Logos.astro`        | social proof strip                    | `title`, `items` (strings or `{name, src}`)       |
 | `Features.astro`     | value props in a grid                 | `eyebrow`, `title`, `subtitle`, `items`, `columns` |
-| `Testimonials.astro` | quotes                                | `eyebrow`, `title`, `items`                       |
 | `FAQ.astro`          | accordion, native `<details>`, zero JS | `eyebrow`, `title`, `items`                       |
 | `CTA.astro`          | closing conversion block              | `title`, `subtitle`, `primaryCta`, `secondaryCta` |
-| `Footer.astro`       | links + social, driven by siteConfig  | none                                              |
+| `Footer.astro`       | nav, email, demo label, from siteConfig | none                                            |
 
 `Header` and `Footer` are rendered by `Layout` automatically. Turn them off per page with `showHeader={false}` / `showFooter={false}`.
 
@@ -89,32 +87,28 @@ Copy the closest existing section as the starting point rather than writing one 
 </section_contract>
 
 <zero_js>
-The default page ships no JavaScript beyond optional view transitions. Keep it that way.
+Every page ships zero JavaScript: no view transitions, no prefetch script, no islands. Keep it that way.
 
 Already solved without JS in this repo — reuse these patterns:
 
 - **Accordion / FAQ** → `<details>` + `<summary>`, styled with `group-open:`
 - **Mobile menu** → same `<details>` pattern (see `Header.astro`)
-- **Icons** → `lucide-react` rendered in `.astro` with no `client:` directive; Astro emits inline SVG
-- **Motion** → CSS transitions and the `animate-*` keyframes in `global.css`
+- **Icons** → `Icon.astro`, inline SVG by name (Lucide paths, ISC), no runtime
+- **Motion** → CSS transitions and the `animate-slide-up` keyframes in `global.css`
 - **Smooth scroll** → `scroll-smooth` on `<html>`, plain `#anchor` links
+- **Forms** → a plain HTML `<form method="post">` with native validation
 
-When a component genuinely needs state, make it a React island:
-
-- `client:visible` — below the fold (carousels, maps, heavy widgets)
-- `client:idle` — needed soon after load, but not for first paint
-- `client:load` — only when it must be interactive immediately
-
-Adding `client:load` to something above the fold is the single easiest way to wreck this template's performance. Justify it in the PR if you do.
+There is no React and no `client:` directive. If a component seems to need state or event handling, stop and ask: a small Astro `<script>` or a UI framework is an architecture decision.
 </zero_js>
 
 <seo>
-`Layout.astro` already emits title, description, keywords, canonical, OpenGraph, Twitter cards, and Organization JSON-LD. Per page, pass `title` and `description` — that is usually all that is needed.
+`Layout.astro` already emits title, description, canonical, OpenGraph, Twitter cards, and Organization JSON-LD. Per page, pass `title` and `description` — that is usually all that is needed.
 
-- `siteConfig` (`src/lib/config/site.ts`) is the single source for name, URL, OG image, author, nav, social, and footer links. `astro.config.ts` reads `site` from it, so the sitemap and every absolute URL follow automatically.
+- `siteConfig` (`src/lib/config/site.ts`) is the single source for name, URL, OG image, nav, contact details, and the footer's demo label and copyright. `astro.config.ts` reads `site` from it, so the sitemap and every absolute URL follow automatically.
 - `src/pages/robots.txt.ts` generates robots.txt with the right sitemap URL at build time.
 - Set `noIndex` on pages that should stay out of search (thank-you pages, the 404).
-- Every page needs exactly one `<h1>` — that is the `Hero` title. Section headings are `<h2>`.
+- Every page needs exactly one `<h1>` — that is the `Hero` title. Section headings are `<h2>`. Card titles are `<h3>` under a section title and `<h2>` when the section has none, so no level is skipped.
+- `trailingSlash: 'always'`: every internal link ends in `/` (`/about/`, never `/about`).
   </seo>
 
 <images>
@@ -123,7 +117,7 @@ Use `astro:assets` for anything in `src/assets/`:
 ```astro
 ---
 import { Image } from 'astro:assets'
-import hero from '@assets/hero.png'
+import hero from '../assets/hero.png'
 ---
 
 <Image src={hero} alt="…" widths={[480, 960, 1440]} loading="eager" />
@@ -140,10 +134,10 @@ It emits width/height (no layout shift), modern formats, and a srcset.
 Before calling a page done:
 
 - [ ] copy lives in `src/lib/content/`, not in components
-- [ ] no brand name, URL, or social link hardcoded — those come from `siteConfig`
+- [ ] no brand name, URL, or contact detail hardcoded — those come from `siteConfig`
 - [ ] exactly one `<h1>`
-- [ ] `title` and `description` passed to `Layout`
+- [ ] `title` and `description` passed to `Layout` (the home page may rely on the `siteConfig` name/description defaults)
 - [ ] every image has dimensions and an `alt`
-- [ ] no `client:` directive that a CSS/HTML pattern could have replaced
+- [ ] no `client:` directive and no `<script>` other than JSON-LD
 - [ ] `npm run verify` and `npm run build` pass
       </checklist>

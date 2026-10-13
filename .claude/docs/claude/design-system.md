@@ -6,8 +6,10 @@ nothing — a JS config is ignored unless referenced with @config.
 
 Structure:
   @import 'tailwindcss'
-  @theme { --color-*, --shadow-* }   design tokens
-  keyframes + .container-wide        the little that has to be hand-written
+  @theme { --color-*, --shadow-* }   design tokens, incl. --color-border
+  @theme inline { --radius-* }       radius scale derived from :root --radius
+  @layer base                        * { border-border }: the default border colour
+  slideUp keyframes + .container-wide  the little that has to be hand-written
 </source_of_truth>
 
 <tokens>
@@ -19,6 +21,10 @@ colour scales, 50–950:
 shadows:
   shadow-soft   resting cards
   shadow-card   hover / raised
+
+border:
+  border-border the default border colour, applied to every element by the
+                base rule, so a bare `border` class needs no colour
 
 Tailwind's own gray scale, white, and black are fine for text, borders, and
 surfaces — they are part of the framework, not ad-hoc values.
@@ -56,22 +62,21 @@ Headings: font-semibold tracking-tight, with text-balance so they wrap evenly.
 Body copy: text-pretty for paragraphs longer than a line.
 Scale: h1 text-4xl md:text-6xl, h2 text-3xl md:text-4xl, h3 text-lg.
 
-The font is Nunito Sans Variable, imported once in Layout.astro. One variable
-file covers every weight — do not add a second family without asking.
+No web font is loaded yet: text uses Tailwind's default system stack
+(--font-sans). Phase 2b adds DM Serif Display and Inter through the Astro Fonts
+API (PLAN.md §7). Do not add a font package.
 </typography>
 
 <components>
-Variant-driven components use cva (button.tsx is the reference): variants for
-look, size, and rounded, with defaultVariants set.
+Variant-driven components use cva (src/components/ui/button.ts is the
+reference): variants for look, size, and rounded, with defaultVariants set.
 
 .astro files reuse those styles by calling buttonVariants({ variant, size }) and
-passing the result as a class — no need to hydrate React for a link that looks
-like a button.
+passing the result as a class on an <a> or <button>. Phase 2b restyles the
+variants with the brand tokens.
 </components>
 
 <dark_mode>
-@custom-variant dark (&:is(.dark *)) is declared, so dark: utilities work as soon
-as a .dark class lands on a root element. No toggle ships today; the sections are
-written light-first. Adding dark mode means adding dark: variants, not a second
-set of tokens.
+There is no dark mode. The site is light only, and no dark variant or dark
+token set is defined. Adding one is a design decision; ask first.
 </dark_mode>
