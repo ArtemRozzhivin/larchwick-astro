@@ -49,10 +49,18 @@ the same export: featured images, images in the content, and the Home page's Ele
 | 180      | Caio Arbulu                 | [9V5vXxnksf4](https://unsplash.com/photos/rolling-hills-and-mountains-under-a-hazy-sky-9V5vXxnksf4)                          | not used on the site                                                          |
 | 181      | Benjaminrobyn Jespersen     | [gGsarGszQHo](https://unsplash.com/photos/man-making-cafe-latte-gGsarGszQHo)                                                 | Home (Elementor)                                                              |
 
+## Social preview image
+
+`public/og.jpg`, the image shown when a page is shared, is a cropped and darkened copy of
+[hFpqG9KU5Gc](https://unsplash.com/photos/coffee-beans-in-close-up-photography-hFpqG9KU5Gc)
+by Lazarescu Alexandra (media 148 above), used under the
+[Unsplash License](https://unsplash.com/license). The Larchwick name on it is set in
+DM Serif Display and the tagline in Inter, both under the SIL Open Font License 1.1.
+
 ## Fonts
 
 - **DM Serif Display** and **Inter**: [SIL Open Font License 1.1](https://openfontlicense.org).
-  The brand fonts, self-hosted from Phase 2b.
+  Self-hosted from our own origin through the Astro Fonts API (Fontsource), latin subset.
 
 ## Icons
 

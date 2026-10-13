@@ -1,4 +1,8 @@
 ---
+import { buttonVariants } from '@components/ui/button'
+
+import Section from './Section.astro'
+
 interface Cta {
   label: string
   href: string
@@ -13,42 +17,25 @@ interface Props {
 }
 
 const { id = 'cta', title, subtitle, primaryCta, secondaryCta } = Astro.props
+
+const hasCtas = Boolean(primaryCta || secondaryCta)
 ---
 
-<section id={id} class="bg-white py-20 md:py-28">
-  <div class="container-wide">
-    <div class="bg-primary-600 rounded-3xl px-6 py-16 text-center md:px-16">
-      <h2 class="text-3xl font-semibold tracking-tight text-balance text-white md:text-4xl">
-        {title}
-      </h2>
-      {
-        subtitle && (
-          <p class="text-primary-100 mx-auto mt-4 max-w-2xl text-lg text-pretty">{subtitle}</p>
-        )
-      }
-
-      {
-        (primaryCta || secondaryCta) && (
-          <div class="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
-            {primaryCta && (
-              <a
-                href={primaryCta.href}
-                class="text-primary-700 inline-flex w-full items-center justify-center rounded-2xl bg-white px-8 py-4 text-lg font-medium transition-colors hover:bg-gray-100 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-transparent focus-visible:outline-none sm:w-auto"
-              >
-                {primaryCta.label}
-              </a>
-            )}
-            {secondaryCta && (
-              <a
-                href={secondaryCta.href}
-                class="inline-flex w-full items-center justify-center rounded-2xl border border-white/40 px-8 py-4 text-lg font-medium text-white transition-colors hover:bg-white/10 focus-visible:ring-2 focus-visible:ring-white focus-visible:outline-none sm:w-auto"
-              >
-                {secondaryCta.label}
-              </a>
-            )}
-          </div>
-        )
-      }
-    </div>
-  </div>
-</section>
+<Section id={id} title={title} subtitle={subtitle} tone="muted">
+  {
+    hasCtas && (
+      <div class="flex flex-col items-center justify-center gap-3 sm:flex-row">
+        {primaryCta && (
+          <a href={primaryCta.href} class={buttonVariants({ variant: 'primary', size: 'lg' })}>
+            {primaryCta.label}
+          </a>
+        )}
+        {secondaryCta && (
+          <a href={secondaryCta.href} class={buttonVariants({ variant: 'secondary', size: 'lg' })}>
+            {secondaryCta.label}
+          </a>
+        )}
+      </div>
+    )
+  }
+</Section>

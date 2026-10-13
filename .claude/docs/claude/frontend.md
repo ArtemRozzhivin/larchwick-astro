@@ -22,7 +22,7 @@ then any derived constants. Template after the fence.
 
 Conditional classes use class:list, not string concatenation:
 
-  <div class:list={['rounded-2xl p-6', isActive && 'ring-2', className]}>
+  <div class:list={['rounded-sm p-6', isActive && 'bg-subtle', className]}>
 
 Pull anything longer than one short expression out of the template into a named
 const above the fence.
@@ -64,9 +64,16 @@ than sorting by hand.
 Interactive things are <button> or <a>, never a <div> with a handler.
 Icon-only controls need an aria-label or sr-only text.
 Decorative SVG gets aria-hidden="true"; meaningful images get real alt text.
-Never remove a focus ring without replacing it — every focusable element in this
-repo uses focus-visible:ring-2.
-Exactly one <h1> per page (the Hero title); section headings are <h2>. Card
+Focus: a base rule in global.css gives every :focus-visible element a 2px
+currentColor outline (3px offset); buttons set their own outline colour in the
+cva variant. Never remove an outline without replacing it.
+Layout.astro renders a "Skip to content" link as the first focusable element
+(visible on focus) that targets <main id="main" tabindex="-1">.
+State is never colour alone: the active nav link gets an underline and
+aria-current ("page" on an exact match, "true" on an ancestor such as /blog/
+for /blog/<slug>/).
+Exactly one <h1> per page (the Hero title, or the 404's heading); section
+headings are <h2>. Card
 titles inside a section are <h3> under a section title, and <h2> when the
 section has none (Features picks the level from its title), so no level is
 skipped.
@@ -86,8 +93,9 @@ and none of our code imports it.
 
 <ui_primitives>
 src/components/ui/
-  button.ts    cva variants; .astro files call buttonVariants() for a class string
-  Icon.astro   inline SVG by name (Lucide paths, ISC), no runtime
+  button.ts    cva variants (primary, secondary, inverse, inverse-outline;
+               sm/md/lg); .astro files call buttonVariants() for a class string
+  Icon.astro   inline SVG by name (Lucide 0.563.0 paths, ISC), no runtime
 
 Extend a primitive with a new cva variant rather than forking it. A new icon is
 a name in ICON_NAMES (src/lib/types/icon.ts) plus its nodes in Icon.astro,

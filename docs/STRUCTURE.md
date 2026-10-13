@@ -15,7 +15,7 @@ larchwick-astro/
 │   ├── internal/    Pages, status, what is still placeholder
 │   ├── pages/       One doc per page, for PM/QA/clients + index
 │   └── STRUCTURE.md this file
-├── public/          Served as-is (favicon.svg; og.png arrives in Phase 2b)
+├── public/          Served as-is: favicon.svg (the Larchwick bean) and og.jpg (1200×630)
 ├── scripts/         Node tools outside the site: credits/, seo-check/, lighthouse-import/; import-wp/ later
 ├── src/             Source
 ├── astro.config.ts  The only build config: static output, no adapter, trailing slashes
@@ -33,16 +33,16 @@ larchwick-astro/
 src/
 ├── pages/                      Routes. One file = one URL.
 │   ├── index.astro             Home — Layout + sections, no copy
-│   ├── 404.astro               Full-screen, header/footer hidden; self-contained, copy inline
+│   ├── 404.astro               Header, footer, and its own markup in a Section; copy from content/not-found.ts
 │   └── robots.txt.ts           Generated from siteConfig at build time
 │
 ├── layouts/
-│   └── Layout.astro            <head>, SEO, JSON-LD, Header, Footer
+│   └── Layout.astro            <head>, SEO props, fonts, JSON-LD, skip link, Header, Footer
 │
 ├── components/
 │   ├── sections/               The page blocks
 │   │   ├── Section.astro       Layout primitive: container, rhythm, header
-│   │   ├── Header.astro        Sticky nav + mobile menu (zero JS)
+│   │   ├── Header.astro        Wordmark, nav with active state, mobile menu (zero JS)
 │   │   ├── Hero.astro
 │   │   ├── Features.astro
 │   │   ├── FAQ.astro           <details> accordion (zero JS)
@@ -54,10 +54,13 @@ src/
 │
 ├── lib/
 │   ├── config/site.ts          Brand, URL, nav, contact, footer — single source
-│   ├── content/home.ts         All copy for the home page
+│   ├── content/                Copy, one file per page
+│   │   ├── home.ts             Home: SEO, hero, features, CTA
+│   │   └── not-found.ts        The 404 page
+│   ├── seo/schema.ts           Typed JSON-LD builders (Organization, WebSite)
 │   └── types/icon.ts           Allowed icon names
 │
-└── styles/global.css           Tailwind v4 @theme tokens, keyframes, container
+└── styles/global.css           Tailwind v4 @theme tokens, base rules, container
 ```
 
 ---
@@ -76,14 +79,15 @@ import Hero from '@components/sections/Hero.astro'
 import Layout from '@layouts/Layout.astro'
 ---
 
-<Layout title="Pricing" description="Simple plans for every team.">
+<Layout {...pricing.seo}>
   <Hero {...pricing.hero} />
   <FAQ {...pricing.faq} />
 </Layout>
 ```
 
-`Layout` already renders the header and footer. Turn them off per page with
-`showHeader={false}` / `showFooter={false}`.
+`Layout` renders the skip link, header and footer on every page. A content
+file's `seo` object (`title`, `description`) is spread into it; `title` is the
+exact `<title>`.
 
 ---
 
@@ -104,14 +108,16 @@ Copy the closest existing section rather than starting from scratch.
 
 ## Where does this go?
 
-| What                                    | Where                       |
-| --------------------------------------- | --------------------------- |
-| Words a visitor reads on one page       | `src/lib/content/<page>.ts` |
-| Brand name, URL, nav, contact, footer   | `src/lib/config/site.ts`    |
-| A reusable page block                   | `src/components/sections/`  |
-| A small reusable element (button, icon) | `src/components/ui/`        |
-| A colour, shadow, or font token         | `src/styles/global.css`     |
-| A route                                 | `src/pages/`                |
+| What                                    | Where                        |
+| --------------------------------------- | ---------------------------- |
+| Words a visitor reads on one page       | `src/lib/content/<page>.ts`  |
+| Brand name, URL, nav, contact, footer   | `src/lib/config/site.ts`     |
+| A reusable page block                   | `src/components/sections/`   |
+| A small reusable element (button, icon) | `src/components/ui/`         |
+| A colour, shadow, or font token         | `src/styles/global.css`      |
+| A font family or weight                 | `fonts` in `astro.config.ts` |
+| JSON-LD structured data                 | `src/lib/seo/schema.ts`      |
+| A route                                 | `src/pages/`                 |
 
 ---
 
@@ -139,12 +145,13 @@ relative imports inside one folder.
 
 ## Conventions
 
-1. **One `<h1>` per page** — the Hero title. Section headings are `<h2>`. Card
+1. **One `<h1>` per page** — the Hero title (the 404 has its own). Section headings are `<h2>`. Card
    titles are `<h3>` under a section title and `<h2>` when the section has none,
    so no level is skipped.
-2. **Tokens only for colour** — `primary-*`, `secondary-*`, `accent-*`,
-   `shadow-soft`, `shadow-card`. No hex or arbitrary values in components, so a
-   rebrand stays a one-file change.
+2. **Tokens only for colour** — `brand`, `brand-dark`, `heading`, `body`,
+   `surface`, `canvas`, `dark`, `subtle`, `border`, `shadow-soft`, `shadow-card`.
+   No hex or arbitrary values in components, so a rebrand stays a one-file
+   change. Text on a coloured fill is white on `brand-dark`, never on `brand`.
 3. **`Section.astro` owns spacing** — do not re-do padding inside a block that
    already sits in it.
 4. **`siteConfig` owns the brand** — never hardcode a name, URL, or contact detail.

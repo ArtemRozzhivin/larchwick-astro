@@ -5,14 +5,14 @@ time**. Each phase ends with a short "what we did / what's next" and Artem's go-
 next one starts. Tick the boxes as work lands, and log every decision in
 [Decisions](#3-decisions).
 
-Last updated: 2026-10-13 · Current phase: **Phase 2b — in progress**
+Last updated: 2026-10-13 · Current phase: **Phase 2c — not started**
 
 | #   | Phase                                    | Status      |
 | --- | ---------------------------------------- | ----------- |
 | 0   | Repo hygiene and open decisions          | done        |
 | 1   | Measure the "before" site properly       | in progress |
 | 2a  | Astro 7 upgrade and template cleanup     | done        |
-| 2b  | Brand foundation (tokens, fonts, layout) | in progress |
+| 2b  | Brand foundation (tokens, fonts, layout) | done        |
 | 2c  | First Cloudflare deploy                  | not started |
 | 3   | Sanity setup and content model           | not started |
 | 4   | Import script                            | not started |
@@ -98,6 +98,7 @@ means rewriting history. Phase 0 makes it compliant before anything else is push
 | 2026-10-13 | **D-16** Icons are inline SVG in `Icon.astro`, with path data copied from Lucide 0.563.0; the ISC and Feather MIT notices are in `CREDITS.md`                                                    | No icon package needed; only the icons in use are kept.                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
 | 2026-10-13 | **D-17** `compressHTML: true` (Astro's pre-7 HTML whitespace rules) instead of Astro 7's `'jsx'` default                                                                                         | `prettier-plugin-astro` 0.14 formats with HTML whitespace semantics. Its 1.x (Rust compiler) crashes with `prettier-plugin-tailwindcss` 0.8.1, so the formatter stays on 0.14 and the build follows it.                                                                                                                                                                                                                                                                                                      |
 | 2026-10-13 | `.node-version` = 24 (Active LTS) for Workers Builds and CI; `engines.node >= 22.18`. Site URL is `https://larchwick.example` until Phase 2c                                                     | The reserved `.example` domain can't point anywhere real; 2c sets the `workers.dev` address.                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| 2026-10-13 | Social image is `public/og.jpg` (not `og.png`), 1200×630, 57 KB: the old Home hero photo with the Larchwick name. The 404 page now shows the header and footer                                   | A photo compresses far better as JPEG. Visitors on a dead link need the navigation. Artem reviewed the 2b shell visually and approved it.                                                                                                                                                                                                                                                                                                                                                                    |
 
 ### Open
 
@@ -421,22 +422,22 @@ maintenance even when they ship no bytes.
 
 ### Phase 2b — Brand foundation
 
-- [ ] Design tokens in `global.css` `@theme`:
+- [x] Design tokens in `global.css` `@theme`:
   - The 9 colours (appendix A).
   - `--font-serif` and `--font-sans`, loaded through the Fonts API.
   - Section padding of 40px vertical (`py-10`) and a button radius of 4px. These are the brief's
     values; refine them visually.
   - Rule: text on a coloured fill uses `brand-dark`.
-- [ ] Layout:
+- [x] Layout:
   - SEO props: exact title, description, canonical, `og:type`, article times, noindex.
   - A JSON-LD slot.
   - A skip link and `<main id="main">`.
-- [ ] Header: active state by URL prefix, so Blog stays active on posts; `aria-hidden` on the
+- [x] Header: active state by URL prefix, so Blog stays active on posts; `aria-hidden` on the
       menu SVG.
-- [ ] Footer: navigation, contact details and the demo label.
-- [ ] `Section.astro`: tones mapped to brand tokens; headings in the serif font.
-- [ ] Add `og.png`, made by Artem or from a credited Unsplash photo, and add it to `CREDITS.md`.
-- [ ] Update `.claude/docs/claude/design-system.md` and `performance.md` (tokens, fonts).
+- [x] Footer: navigation, contact details and the demo label.
+- [x] `Section.astro`: tones mapped to brand tokens; headings in the serif font.
+- [x] Add `og.png`, made by Artem or from a credited Unsplash photo, and add it to `CREDITS.md`.
+- [x] Update `.claude/docs/claude/design-system.md` and `performance.md` (tokens, fonts).
 
 **Exit:** a branded shell (header, footer, 404 and one sample page) works locally, and verify and
 build pass.

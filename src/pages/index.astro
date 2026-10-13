@@ -5,13 +5,16 @@
  * blocks below to reshape the page without touching a component.
  */
 import { home } from '@lib/content/home'
+import { organizationSchema, websiteSchema } from '@lib/seo/schema'
 import CTA from '@components/sections/CTA.astro'
 import Features from '@components/sections/Features.astro'
 import Hero from '@components/sections/Hero.astro'
 import Layout from '@layouts/Layout.astro'
+
+const jsonLd = [organizationSchema(), websiteSchema()]
 ---
 
-<Layout>
+<Layout {...home.seo} jsonLd={jsonLd}>
   <Hero {...home.hero} />
   <Features {...home.features} />
   <CTA {...home.cta} />

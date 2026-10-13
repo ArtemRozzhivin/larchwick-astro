@@ -8,10 +8,10 @@ portfolio case study. The plan and the progress tracker are in [PLAN.md](../../P
 
 ## Pages
 
-| Route  | Page doc                 | Status  | Notes                                                                                                      |
-| ------ | ------------------------ | ------- | ---------------------------------------------------------------------------------------------------------- |
-| `/`    | [home](../pages/home.md) | partial | Larchwick's hero, three features and the subscription call to action; the rest of the old home comes later |
-| `/404` | [404](../pages/404.md)   | real    | Full-screen, no header or footer by design; links to Home and Contact                                      |
+| Route  | Page doc                 | Status  | Notes                                                                                                                                   |
+| ------ | ------------------------ | ------- | --------------------------------------------------------------------------------------------------------------------------------------- |
+| `/`    | [home](../pages/home.md) | partial | Larchwick brand: hero with its three promises, three features and the subscription call to action; the rest of the old home comes later |
+| `/404` | [404](../pages/404.md)   | real    | Header and footer, a large "404", links to Home, Blog and Contact; noindex                                                              |
 
 `/robots.txt` and `/sitemap-index.xml` are generated at build time from the site
 config; they have no page doc.
@@ -23,11 +23,9 @@ The navigation already links to `/about/`, `/services/`, `/products/`, `/blog/`,
 ## Still placeholder
 
 - Site URL: `https://larchwick.example` until Phase 2c sets the `workers.dev` address
-- The `og.png` social preview image referenced by the config but not in `public/` (Phase 2b)
-- The favicon (`public/favicon.svg` is the Astro default)
-- Colour tokens, fonts and section styling are still the template's; text uses the system font
-  stack until Phase 2b adds the brand foundation
 - Contact details use the reserved `.example` domain and a placeholder phone number, by design
+- The hero has no photo yet (the old one had coffee beans behind it); images arrive with Sanity
+  in Phases 3–5
 - The pages listed above that the navigation links to
 - Analytics: none is installed
 
@@ -39,3 +37,7 @@ trailing slash. There is no Vercel and no Docker setup any more; the static buil
 Cloudflare Workers Static Assets in Phase 2c.
 
 The site ships zero client JavaScript: no React, no view transitions, no prefetch script.
+
+The brand foundation (Phase 2b) is in: the 9 colour tokens from the old site, DM Serif Display
+and Inter self-hosted through the Astro Fonts API, the Larchwick favicon and the `og.jpg` social
+preview image.

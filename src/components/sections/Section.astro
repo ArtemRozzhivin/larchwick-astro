@@ -26,9 +26,9 @@ const {
 } = Astro.props
 
 const TONE_CLASSES: Record<NonNullable<Props['tone']>, string> = {
-  default: 'bg-white text-gray-900',
-  muted: 'bg-gray-50 text-gray-900',
-  inverted: 'bg-gray-900 text-white',
+  default: 'bg-surface text-body',
+  muted: 'bg-canvas text-body',
+  inverted: 'bg-dark text-subtle',
 }
 
 const hasHeader = Boolean(eyebrow || title || subtitle)
@@ -36,34 +36,32 @@ const isCentered = align === 'center'
 const isInverted = tone === 'inverted'
 ---
 
-<section id={id} class:list={['py-20 md:py-28', TONE_CLASSES[tone], className]}>
+<section id={id} class:list={['py-12 md:py-20', TONE_CLASSES[tone], className]}>
   <div class="container-wide">
     {
       hasHeader && (
-        <header class:list={['mb-12 md:mb-16', isCentered && 'mx-auto max-w-2xl text-center']}>
+        <header class:list={['mb-10 md:mb-12', isCentered && 'mx-auto max-w-2xl text-center']}>
           {eyebrow && (
             <p
               class:list={[
-                'mb-3 text-sm font-semibold tracking-wide uppercase',
-                isInverted ? 'text-primary-300' : 'text-primary-600',
+                'mb-3 text-sm font-semibold tracking-widest text-balance uppercase',
+                isInverted ? 'text-brand' : 'text-brand-dark',
               ]}
             >
               {eyebrow}
             </p>
           )}
           {title && (
-            <h2 class="text-3xl font-semibold tracking-tight text-balance md:text-4xl">{title}</h2>
-          )}
-          {subtitle && (
-            <p
+            <h2
               class:list={[
-                'mt-4 text-lg text-pretty',
-                isInverted ? 'text-gray-300' : 'text-gray-600',
+                'font-serif text-3xl leading-tight text-balance md:text-4xl',
+                isInverted ? 'text-surface' : 'text-heading',
               ]}
             >
-              {subtitle}
-            </p>
+              {title}
+            </h2>
           )}
+          {subtitle && <p class="mt-4 text-lg leading-relaxed text-pretty">{subtitle}</p>}
         </header>
       )
     }
