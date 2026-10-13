@@ -1,41 +1,108 @@
 ---
 import { siteConfig } from '@lib/config/site'
+import type { IconName } from '@lib/types'
+import Icon from '@components/ui/Icon.astro'
 
-const emailHref = `mailto:${siteConfig.contact.email}`
+interface ContactItem {
+  icon: IconName
+  label: string
+  value: string
+  href: string
+}
+
+const { contact, footer, nav } = siteConfig
+
+const contactItems: readonly ContactItem[] = [
+  {
+    icon: 'mail',
+    label: footer.labels.email,
+    value: contact.email,
+    href: `mailto:${contact.email}`,
+  },
+  {
+    icon: 'mail',
+    label: footer.labels.wholesaleEmail,
+    value: contact.wholesaleEmail,
+    href: `mailto:${contact.wholesaleEmail}`,
+  },
+  {
+    icon: 'phone',
+    label: footer.labels.phone,
+    value: contact.phone,
+    href: `tel:${contact.phone.replace(/\s+/g, '')}`,
+  },
+]
+
+const HEADING = 'font-serif text-surface mb-4 text-xl'
+const LINK = 'hover:text-surface rounded-sm underline-offset-4 transition-colors hover:underline'
 ---
 
-<footer class="border-t border-gray-100 bg-white py-12">
-  <div class="container-wide">
-    <div class="flex flex-col items-center justify-between gap-6 md:flex-row">
-      <a
-        href="/"
-        class="focus-visible:ring-primary-600 rounded font-semibold tracking-tight text-gray-900 focus-visible:ring-2 focus-visible:ring-offset-4 focus-visible:outline-none"
-      >
+<footer class="bg-dark text-subtle text-sm leading-relaxed">
+  <div class="container-wide grid gap-10 py-12 sm:grid-cols-2 md:py-16 lg:grid-cols-12 lg:gap-8">
+    <div class="lg:col-span-4">
+      <a href="/" class="text-surface rounded-sm font-serif text-2xl leading-none">
         {siteConfig.name}
       </a>
-
-      <nav aria-label="Footer" class="flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
-        {
-          siteConfig.nav.map((link) => (
-            <a
-              href={link.href}
-              class="hover:text-primary-600 focus-visible:ring-primary-600 rounded text-sm text-gray-600 transition-colors focus-visible:ring-2 focus-visible:ring-offset-4 focus-visible:outline-none"
-            >
-              {link.label}
-            </a>
-          ))
-        }
-      </nav>
-
-      <a
-        href={emailHref}
-        class="hover:text-primary-600 focus-visible:ring-primary-600 rounded text-sm text-gray-500 transition-colors focus-visible:ring-2 focus-visible:ring-offset-4 focus-visible:outline-none"
+      <p class="mt-4 max-w-xs">{siteConfig.description}</p>
+      <p
+        class="border-brand text-surface mt-6 inline-flex rounded-sm border px-3 py-1.5 font-medium"
       >
-        {siteConfig.contact.email}
-      </a>
+        {footer.demoLabel}
+      </p>
     </div>
 
-    <p class="mt-8 text-center text-sm text-gray-500">{siteConfig.footer.demoLabel}</p>
-    <p class="mt-2 text-center text-sm text-gray-500">{siteConfig.footer.copyright}</p>
+    <nav aria-label="Footer" class="lg:col-span-2">
+      <h2 class={HEADING}>{footer.headings.nav}</h2>
+      <ul class="grid grid-cols-2 gap-x-6 gap-y-2 lg:grid-cols-1">
+        {
+          nav.map((item) => (
+            <li>
+              <a href={item.href} class={LINK}>
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <div class="lg:col-span-3">
+      <h2 class={HEADING}>{footer.headings.contact}</h2>
+      <dl class="space-y-3">
+        {
+          contactItems.map((item) => (
+            <div>
+              <dt class="flex items-center gap-2 text-xs font-semibold tracking-widest uppercase">
+                <Icon name={item.icon} class="text-brand size-4 shrink-0" />
+                {item.label}
+              </dt>
+              <dd class="mt-0.5 pl-6">
+                <a href={item.href} class:list={[LINK, 'text-surface break-words']}>
+                  {item.value}
+                </a>
+              </dd>
+            </div>
+          ))
+        }
+      </dl>
+    </div>
+
+    <div class="lg:col-span-3">
+      <h2 class={HEADING}>{footer.headings.hours}</h2>
+      <ul class="space-y-1.5">
+        {
+          contact.hours.map((line) => (
+            <li class="flex gap-2">
+              <Icon name="clock" class="text-brand mt-1 size-4 shrink-0" />
+              {line}
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+
+  <div class="border-surface/15 border-t">
+    <p class="container-wide py-6">{footer.copyright}</p>
   </div>
 </footer>

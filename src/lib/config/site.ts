@@ -1,10 +1,17 @@
 export const siteConfig = {
   name: 'Larchwick',
+  title: 'Larchwick Coffee Roasters',
   description:
     'Specialty coffee, roasted in small batches every Monday and Thursday and shipped across Europe within 48 hours, with the roast date on every bag.',
   // Placeholder on the reserved .example domain; Phase 2c sets the workers.dev address.
   url: 'https://larchwick.example',
-  ogImage: '/og.png',
+  lang: 'en-US',
+  locale: 'en_US',
+  // 1200×630 JPEG; every og:image on the site uses that size.
+  ogImage: '/og.jpg',
+  ogImageAlt: 'Close-up of dark roasted coffee beans with the Larchwick name',
+  // Same value as --color-surface in global.css, so the browser bar matches the header.
+  themeColor: '#fffcf7',
 
   nav: [
     { label: 'Home', href: '/' },
@@ -24,6 +31,8 @@ export const siteConfig = {
   },
 
   footer: {
+    headings: { nav: 'Explore', contact: 'Contact', hours: 'Opening hours' },
+    labels: { email: 'Email', wholesaleEmail: 'Wholesale enquiries', phone: 'Phone' },
     demoLabel: 'Demo project — fictional business',
     copyright: `© ${new Date().getFullYear()} Larchwick`,
   },

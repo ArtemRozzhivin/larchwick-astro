@@ -1,6 +1,6 @@
 import sitemap from '@astrojs/sitemap'
 import tailwindcss from '@tailwindcss/vite'
-import { defineConfig } from 'astro/config'
+import { defineConfig, fontProviders } from 'astro/config'
 
 import { siteConfig } from './src/lib/config/site'
 
@@ -21,6 +21,31 @@ export default defineConfig({
   // HTML whitespace rules (Astro 7 defaults to 'jsx'): prettier-plugin-astro 0.14 formats with
   // HTML whitespace semantics, so wrapped inline elements keep their spaces.
   compressHTML: true,
+
+  // Downloaded from Fontsource at build time and served from our own origin as woff2, latin only.
+  // Layout.astro renders them with <Font>; the generated metric-matched fallbacks limit layout shift.
+  fonts: [
+    {
+      provider: fontProviders.fontsource(),
+      name: 'DM Serif Display',
+      cssVariable: '--font-dm-serif-display',
+      weights: [400],
+      styles: ['normal'],
+      subsets: ['latin'],
+      formats: ['woff2'],
+      fallbacks: ['Georgia', 'serif'],
+    },
+    {
+      provider: fontProviders.fontsource(),
+      name: 'Inter',
+      cssVariable: '--font-inter',
+      weights: ['100 900'],
+      styles: ['normal', 'italic'],
+      subsets: ['latin'],
+      formats: ['woff2'],
+      fallbacks: ['sans-serif'],
+    },
+  ],
 
   integrations: [sitemap()],
 
