@@ -32,6 +32,10 @@ pnpm-debug.log*
 .sanity/
 .wrangler/
 
+# Measurement raw data: crawl responses and unscrubbed Lighthouse exports (may hold the WP login)
+.cache/
+docs/*/lighthouse/inbox/
+
 # macOS-specific files
 .DS_Store
 
