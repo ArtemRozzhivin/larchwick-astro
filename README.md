@@ -49,10 +49,11 @@ npm run dev          # → http://localhost:4321
 1. `src/lib/config/site.ts` — name, URL, description, OG image, nav, contact
    details, footer. Everything else derives from this, including the sitemap and
    every canonical/OG URL.
-2. `src/styles/global.css` — the `primary-*` / `secondary-*` / `accent-*` colour
-   scales.
+2. `src/styles/global.css` — the 9 brand colour tokens (`brand`, `brand-dark`,
+   `heading`, `body`, `surface`, `canvas`, `dark`, `subtle`, `border`).
+   `astro.config.ts` — the two self-hosted fonts (Astro Fonts API).
 3. `src/lib/content/home.ts` — the home page copy.
-4. `public/favicon.svg`, and `public/og.png` once it is added (Phase 2b).
+4. `public/favicon.svg` and `public/og.jpg` (1200×630).
 
 ---
 
@@ -62,6 +63,7 @@ npm run dev          # → http://localhost:4321
 
 ```ts
 export const pricing = {
+  seo: { title: 'Pricing | Larchwick', description: 'Plans and prices.' },
   hero: { title: 'Simple pricing', primaryCta: { label: 'Start free', href: '#plans' } },
   faq: { title: 'Questions', items: [{ question: '…', answer: '…' }] },
 } as const
@@ -77,13 +79,13 @@ import Hero from '@components/sections/Hero.astro'
 import Layout from '@layouts/Layout.astro'
 ---
 
-<Layout title="Pricing" description="Simple plans for every team.">
+<Layout {...pricing.seo}>
   <Hero {...pricing.hero} />
   <FAQ {...pricing.faq} />
 </Layout>
 ```
 
-That is the whole page — `Layout` already handles the head, SEO, header, and footer.
+That is the whole page — `Layout` already handles the head, SEO, fonts, header, and footer.
 
 **3. Only if no section fits**, add one to `src/components/sections/`. Copy the
 closest existing block; keep the [section contract](./docs/STRUCTURE.md#section-contract).
@@ -94,18 +96,17 @@ closest existing block; keep the [section contract](./docs/STRUCTURE.md#section-
 
 `src/components/sections/`
 
-| Component  | For                                    | Key props                                                            |
-| ---------- | -------------------------------------- | -------------------------------------------------------------------- |
-| `Section`  | layout primitive every block sits on   | `id`, `eyebrow`, `title`, `subtitle`, `align`, `tone`                |
-| `Header`   | sticky nav + mobile menu, zero JS      | `cta`                                                                |
-| `Hero`     | above the fold                         | `eyebrow`, `title`, `subtitle`, `primaryCta`, `secondaryCta`, `note` |
-| `Features` | value props in a grid                  | `eyebrow`, `title`, `subtitle`, `items`, `columns`                   |
-| `FAQ`      | accordion, native `<details>`, zero JS | `eyebrow`, `title`, `items`                                          |
-| `CTA`      | closing conversion block               | `title`, `subtitle`, `primaryCta`, `secondaryCta`                    |
-| `Footer`   | nav, email, demo label, `siteConfig`   | none                                                                 |
+| Component  | For                                    | Key props                                                              |
+| ---------- | -------------------------------------- | ---------------------------------------------------------------------- |
+| `Section`  | layout primitive every block sits on   | `id`, `eyebrow`, `title`, `subtitle`, `align`, `tone`                  |
+| `Header`   | nav with active state + mobile menu    | none (reads `siteConfig`)                                              |
+| `Hero`     | above the fold, dark band              | `eyebrow`, `title`, `subtitle`, `primaryCta`, `secondaryCta`, `points` |
+| `Features` | value props in a grid                  | `eyebrow`, `title`, `subtitle`, `items`, `columns`                     |
+| `FAQ`      | accordion, native `<details>`, zero JS | `eyebrow`, `title`, `items`                                            |
+| `CTA`      | closing conversion block               | `title`, `subtitle`, `primaryCta`, `secondaryCta`                      |
+| `Footer`   | nav, contact, hours, demo label        | none (reads `siteConfig`)                                              |
 
-`Header` and `Footer` are rendered by `Layout`. Turn them off per page with
-`showHeader={false}` / `showFooter={false}`.
+`Header` and `Footer` are rendered by `Layout` on every page, the 404 included.
 
 See [`/`](./src/pages/index.astro) for a page built from `Hero`, `Features` and `CTA`.
 
@@ -119,13 +120,14 @@ src/
 │   ├── index.astro        Home: Layout + sections
 │   ├── 404.astro
 │   └── robots.txt.ts      Generated from siteConfig at build time
-├── layouts/Layout.astro   <head>, SEO, JSON-LD, Header, Footer
+├── layouts/Layout.astro   <head>, SEO, fonts, JSON-LD, Header, Footer
 ├── components/
 │   ├── sections/          The page blocks
 │   └── ui/                Primitives — button classes (cva), Icon
 ├── lib/
 │   ├── config/site.ts     Brand, URL, nav, contact — single source of truth
 │   ├── content/           Copy, one file per page
+│   ├── seo/               JSON-LD builders
 │   └── types/             Shared types
 └── styles/global.css      Tailwind v4 @theme tokens
 ```
@@ -152,7 +154,7 @@ That is protected by one rule: **HTML → CSS → ask first.**
 
 - FAQ accordion and mobile menu — `<details>` / `<summary>`, no JS
 - Icons — inline SVG from `Icon.astro` (Lucide paths, ISC), no JS
-- Motion — CSS transitions and the keyframes in `global.css`
+- Fonts — self-hosted woff2 through the Astro Fonts API, no Google Fonts request
 
 Images in `src/assets/` go through `astro:assets` `<Image>`, which emits
 width/height, modern formats, and a srcset:
@@ -191,16 +193,18 @@ Type parameters and return values, avoid `any`, use `interface` for object shape
 
 ### Styling
 
-Colour comes from tokens in `src/styles/global.css` — `primary-*`, `secondary-*`,
-`accent-*`, `shadow-soft`, `shadow-card`. Never a hex or arbitrary value in a
-component, so a rebrand stays a one-file change. There is no `tailwind.config.js`
+Colour comes from the brand tokens in `src/styles/global.css` — `brand`,
+`brand-dark`, `heading`, `body`, `surface`, `canvas`, `dark`, `subtle`, `border`,
+`shadow-soft`, `shadow-card`. Never a hex or arbitrary value in a component, so a
+rebrand stays a one-file change. Text on a coloured fill is white on `brand-dark`
+(5.73:1), never on `brand`. There is no `tailwind.config.js`
 (Tailwind v4 is CSS-first) and adding one does nothing.
 
 ### Accessibility
 
 One `<h1>` per page (the Hero title). Interactive things are `<button>` or `<a>`.
-Icon-only controls need an accessible name. Never remove a focus ring without
-replacing it.
+Icon-only controls need an accessible name. Every page starts with a "Skip to
+content" link. Never remove a focus outline without replacing it.
 
 ---
 

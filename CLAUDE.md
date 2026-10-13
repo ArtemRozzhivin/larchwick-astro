@@ -27,6 +27,7 @@ If a component genuinely seems to need interactivity, stop and ask first. Even a
 - **Astro 7** — `output: 'static'` stays, with no adapter: `dist/` is served as static assets. `trailingSlash: 'always'` and `build.format: 'directory'` keep WordPress's URLs, so every internal href ends in `/` (`/about/`, never `/about`); files such as `/robots.txt` and `/sitemap-index.xml` do not. Node ≥ 22.18 (`.node-version` pins 24).
 - **Astro 7 compiler** — the Rust compiler errors on unclosed non-void tags and no longer fixes invalid nesting (no `<div>` inside `<p>`). Astro 7 defaults `compressHTML` to `'jsx'` (whitespace containing a line break between elements is removed). We set `compressHTML: true`, the pre-7 HTML whitespace rules, because `prettier-plugin-astro` 0.14 wraps inline elements assuming HTML whitespace. Don't switch to `'jsx'` until the formatter is upgraded; `prettier-plugin-astro` 1.x currently breaks `prettier-plugin-tailwindcss`.
 - **Tailwind v4** — CSS-first. There is no `tailwind.config.js` and adding one does nothing. Tokens live in `src/styles/global.css` under `@theme`.
+- **Fonts** — the Astro Fonts API (`fonts` in `astro.config.ts`, Fontsource provider) downloads DM Serif Display and Inter at build time and serves them from our own origin; `<Font>` in `Layout.astro` emits the `@font-face` rules and preloads. No font package and no Google Fonts link. DM Serif Display has only weight 400, so never put `font-medium`/`font-semibold`/`font-bold` on a `font-serif` heading (the browser fakes a bold).
 - **No zod in our code.** Astro's own zod is v4 (import it from `astro/zod` if ever needed), so the v4 API applies: `z.email()`, `z.url()`.
 - **Icons** — inline SVG in `src/components/ui/Icon.astro` (Lucide paths, ISC). A new icon is a name in `ICON_NAMES` plus its nodes; no icon package.
 - **ESLint 10** flat config. `astro.config.ts` is TypeScript, so it can import `siteConfig`.
@@ -114,9 +115,11 @@ Do not write code comments unless the user explicitly asks. Config files and non
 </comment_style>
 
 <colors>
-Tokens only, from `src/styles/global.css` (`@theme`): `primary-*`, `secondary-*`, `accent-*`, `shadow-soft`, `shadow-card`. Gray scale and white/black are Tailwind defaults and are fine.
+Tokens only, from `src/styles/global.css` (`@theme`), the old site's 9 brand colours: `brand`, `brand-dark`, `heading`, `body`, `surface`, `canvas`, `dark`, `subtle`, `border`, plus `shadow-soft` and `shadow-card`. `white` is fine for text on a `brand-dark` fill; avoid Tailwind's gray scale (cool greys clash with the warm palette).
 
-Never a hex or arbitrary colour value in a component. If a new colour is needed, add it to `@theme` in `global.css` first. Full rules in `.claude/docs/claude/design-system.md`.
+Contrast rule: text on a coloured fill uses `brand-dark` as the fill with white text (5.73:1). Never white on `brand` (3.49:1), and never `brand` as text on a light background; `brand` is a decorative accent (icons, underlines, borders, eyebrows on `dark`).
+
+Never a hex or arbitrary colour value in a component. If a new colour is needed, add it to `@theme` in `global.css` first. Full rules and the contrast table in `.claude/docs/claude/design-system.md`.
 </colors>
 
 <task_completion>

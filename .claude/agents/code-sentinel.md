@@ -80,8 +80,8 @@ A marketing page is judged on this, and it is cheap to get right.
   </step_5_accessibility>
 
 <step_6_seo_and_images>
-- A page not passing `title` and `description` to `Layout` → Warning. The home page may rely on the `siteConfig` name/description defaults.
-- A page that should be excluded from search (thank-you, confirmation, 404) without `noIndex` → Warning.
+- A page not passing `title` and `description` to `Layout` (normally by spreading its content file's `seo`) → Warning. `title` is the exact `<title>`; nothing is appended.
+- A page that should be excluded from search (thank-you, confirmation, 404) without `noindex` → Warning.
 - A new route that changes the site map without `docs/pages/` being updated → Warning.
 - An internal `href` without a trailing slash (`/about` instead of `/about/`) → Warning: `trailingSlash: 'always'` makes it a redirect.
 - `<img>` without `width`/`height` → Warning (cumulative layout shift).
@@ -92,7 +92,7 @@ A marketing page is judged on this, and it is cheap to get right.
 <step_7_correctness_and_types>
 Logic errors and inverted conditions; missing null guards on optional props; `any`; unsafe `as`; non-null assertions on plausibly-nullable values; a `Props` interface that lies about what is optional.
 
-Also: a hardcoded hex or arbitrary colour value instead of a token from `global.css` → Warning.
+Also: a hardcoded hex or arbitrary colour value instead of a token from `global.css` → Warning. White text on `brand`, or `brand` as text on a light background, → Warning (fails AA; use `brand-dark`). A weight class on a `font-serif` heading → Suggestion (DM Serif Display has one weight, so the browser fakes the bold).
 </step_7_correctness_and_types>
 
 <output_format>

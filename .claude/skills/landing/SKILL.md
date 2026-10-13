@@ -27,6 +27,7 @@ ls src/lib/content
 
 ```ts
 export const pricing = {
+  seo: { title: 'Pricing | Larchwick', description: '…' },
   hero: { title: '…', subtitle: '…', primaryCta: { label: '…', href: '#plans' } },
   faq: { title: 'Questions', items: [{ question: '…', answer: '…' }] },
 } as const
@@ -42,13 +43,13 @@ import Hero from '@components/sections/Hero.astro'
 import Layout from '@layouts/Layout.astro'
 ---
 
-<Layout title="Pricing" description="Simple plans for every team.">
+<Layout {...pricing.seo}>
   <Hero {...pricing.hero} />
   <FAQ {...pricing.faq} />
 </Layout>
 ```
 
-That is the whole page. `Layout` already handles the head, SEO, header, and footer.
+That is the whole page. `Layout` already handles the head, SEO, fonts, skip link, header, and footer.
 
 **3. Only if no section fits**, add one — see `<section_contract>`.
 
@@ -61,14 +62,16 @@ Reference: `src/pages/index.astro` + `src/lib/content/home.ts`.
 | Component            | For                                   | Key props                                         |
 | -------------------- | ------------------------------------- | ------------------------------------------------- |
 | `Section.astro`      | layout primitive every block sits on  | `id`, `eyebrow`, `title`, `subtitle`, `align`, `tone` |
-| `Header.astro`       | sticky nav, mobile menu, zero JS      | `cta`                                             |
-| `Hero.astro`         | above-the-fold                        | `eyebrow`, `title`, `subtitle`, `primaryCta`, `secondaryCta`, `note` |
+| `Header.astro`       | wordmark, nav with active state, `<details>` mobile menu, zero JS | none (reads `siteConfig`) |
+| `Hero.astro`         | above-the-fold dark band              | `eyebrow`, `title`, `subtitle`, `primaryCta`, `secondaryCta`, `points` |
 | `Features.astro`     | value props in a grid                 | `eyebrow`, `title`, `subtitle`, `items`, `columns` |
 | `FAQ.astro`          | accordion, native `<details>`, zero JS | `eyebrow`, `title`, `items`                       |
-| `CTA.astro`          | closing conversion block              | `title`, `subtitle`, `primaryCta`, `secondaryCta` |
-| `Footer.astro`       | nav, email, demo label, from siteConfig | none                                            |
+| `CTA.astro`          | closing conversion block (canvas band) | `title`, `subtitle`, `primaryCta`, `secondaryCta` |
+| `Footer.astro`       | nav, contact details, hours, demo label, © — from siteConfig | none                     |
 
-`Header` and `Footer` are rendered by `Layout` automatically. Turn them off per page with `showHeader={false}` / `showFooter={false}`.
+`Header` and `Footer` are rendered by `Layout` on every page, the 404 included.
+
+Buttons: `buttonVariants({ variant, size })` from `src/components/ui/button.ts` — `primary` / `secondary` on light bands, `inverse` / `inverse-outline` on dark ones.
 
 `Section.astro` owns the container width, vertical rhythm, and the eyebrow/title/subtitle header. Build a new block on it instead of re-doing padding.
 </available_sections>
@@ -81,7 +84,8 @@ A new section must follow the same shape, or blocks stop being interchangeable:
 - optional `id` with a sensible default, so in-page anchors work
 - built on `Section.astro` unless it needs a full-bleed layout
 - static markup, no `client:` directive
-- tokens only for colour (`primary-*`, `secondary-*`, `accent-*`, `shadow-soft`, `shadow-card`)
+- tokens only for colour (`brand`, `brand-dark`, `heading`, `body`, `surface`, `canvas`, `dark`, `subtle`, `border`, `shadow-soft`, `shadow-card`)
+- headings in `font-serif` with no weight class (DM Serif Display has one weight)
 
 Copy the closest existing section as the starting point rather than writing one from scratch.
 </section_contract>
@@ -94,20 +98,21 @@ Already solved without JS in this repo — reuse these patterns:
 - **Accordion / FAQ** → `<details>` + `<summary>`, styled with `group-open:`
 - **Mobile menu** → same `<details>` pattern (see `Header.astro`)
 - **Icons** → `Icon.astro`, inline SVG by name (Lucide paths, ISC), no runtime
-- **Motion** → CSS transitions and the `animate-slide-up` keyframes in `global.css`
-- **Smooth scroll** → `scroll-smooth` on `<html>`, plain `#anchor` links
+- **Motion** → CSS transitions; respect `motion-safe:` / `motion-reduce:`
+- **Smooth scroll** → `motion-safe:scroll-smooth` on `<html>`, plain `#anchor` links
+- **Active nav link** → `aria-current` computed at build time in `Header.astro`
 - **Forms** → a plain HTML `<form method="post">` with native validation
 
 There is no React and no `client:` directive. If a component seems to need state or event handling, stop and ask: a small Astro `<script>` or a UI framework is an architecture decision.
 </zero_js>
 
 <seo>
-`Layout.astro` already emits title, description, canonical, OpenGraph, Twitter cards, and Organization JSON-LD. Per page, pass `title` and `description` — that is usually all that is needed.
+`Layout.astro` emits the exact `title` (nothing is appended), description, robots, canonical, Open Graph (with a 1200×630 image and its alt) and `twitter:card`. Per page, spread the content file's `seo` object (`title`, `description`) into it. Other props: `canonical`, `ogImage`, `ogImageAlt`, `ogType` (`'article'` adds `publishedTime` / `modifiedTime`), `noindex` and `jsonLd` (one object or an array, built with `src/lib/seo/schema.ts`). There is no site-wide JSON-LD; the home page passes the Organization and WebSite builders.
 
-- `siteConfig` (`src/lib/config/site.ts`) is the single source for name, URL, OG image, nav, contact details, and the footer's demo label and copyright. `astro.config.ts` reads `site` from it, so the sitemap and every absolute URL follow automatically.
+- `siteConfig` (`src/lib/config/site.ts`) is the single source for name, title, URL, OG image and alt, theme colour, nav, contact details, and the footer's headings, demo label and copyright. `astro.config.ts` reads `site` from it, so the sitemap and every absolute URL follow automatically.
 - `src/pages/robots.txt.ts` generates robots.txt with the right sitemap URL at build time.
-- Set `noIndex` on pages that should stay out of search (thank-you pages, the 404).
-- Every page needs exactly one `<h1>` — that is the `Hero` title. Section headings are `<h2>`. Card titles are `<h3>` under a section title and `<h2>` when the section has none, so no level is skipped.
+- Set `noindex` on pages that should stay out of search (thank-you pages, the 404): robots becomes `noindex, follow` and the canonical is dropped.
+- Every page needs exactly one `<h1>` — usually the `Hero` title. Section headings are `<h2>`. Card titles are `<h3>` under a section title and `<h2>` when the section has none, so no level is skipped.
 - `trailingSlash: 'always'`: every internal link ends in `/` (`/about/`, never `/about`).
   </seo>
 
@@ -136,7 +141,7 @@ Before calling a page done:
 - [ ] copy lives in `src/lib/content/`, not in components
 - [ ] no brand name, URL, or contact detail hardcoded — those come from `siteConfig`
 - [ ] exactly one `<h1>`
-- [ ] `title` and `description` passed to `Layout` (the home page may rely on the `siteConfig` name/description defaults)
+- [ ] the content file's `seo` (`title`, `description`) spread into `Layout`
 - [ ] every image has dimensions and an `alt`
 - [ ] no `client:` directive and no `<script>` other than JSON-LD
 - [ ] `npm run verify` and `npm run build` pass
