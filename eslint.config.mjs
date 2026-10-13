@@ -7,21 +7,13 @@ import prettierConfig from './prettier.config.mjs'
 
 export default [
   {
-    ignores: [
-      'dist/**',
-      'node_modules/**',
-      '.astro/**',
-      '.vercel/**',
-      'build/**',
-      'public/**',
-      '.cache/**',
-    ],
+    ignores: ['dist/**', 'node_modules/**', '.astro/**', 'build/**', 'public/**', '.cache/**'],
   },
 
   ...eslintPluginAstro.configs['flat/recommended'],
 
   {
-    files: ['**/*.{ts,tsx}'],
+    files: ['**/*.ts'],
     languageOptions: {
       parser: tsParser,
       parserOptions: {
@@ -32,7 +24,7 @@ export default [
   },
 
   {
-    files: ['**/*.{js,jsx,ts,tsx,astro}'],
+    files: ['**/*.{js,ts,astro}'],
     plugins: {
       'unused-imports': unusedImports,
       'simple-import-sort': simpleImportSort,
@@ -46,8 +38,8 @@ export default [
         {
           groups: [
             ['^\\u0000'],
-            ['^react$', '^@?\\w'],
-            ['^@services', '^@lib', '^@components', '^@content', '^@layouts', '^@assets', '^@'],
+            ['^@?\\w'],
+            ['^@lib', '^@components', '^@layouts', '^@'],
             ['^\\.'],
             ['^.+\\.(module.css|module.scss)$'],
             ['^.+\\.(gif|png|svg|jpg|jpeg)$'],
@@ -72,7 +64,7 @@ export default [
 
   {
     ...eslintPluginPrettier,
-    files: ['**/*.{js,jsx,ts,tsx}'],
+    files: ['**/*.{js,ts}'],
     rules: {
       ...eslintPluginPrettier.rules,
       'prettier/prettier': ['error', prettierConfig],

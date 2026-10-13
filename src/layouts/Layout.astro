@@ -1,8 +1,5 @@
 ---
 import '../styles/global.css'
-import '@fontsource-variable/nunito-sans'
-
-import { ClientRouter } from 'astro:transitions'
 
 import { siteConfig } from '@lib/config/site'
 import Footer from '@components/sections/Footer.astro'
@@ -17,11 +14,6 @@ interface Props {
   showHeader?: boolean
   showFooter?: boolean
   headerCta?: { label: string; href: string }
-  /**
-   * Cross-page view transitions. Worth ~4.5 kB gzip of JavaScript, which is the
-   * only script a page ships by default. Set false on a single-page landing.
-   */
-  viewTransitions?: boolean
 }
 
 const {
@@ -32,7 +24,6 @@ const {
   showHeader = true,
   showFooter = true,
   headerCta,
-  viewTransitions = true,
 } = Astro.props
 
 const pageTitle = title ? `${title} | ${siteConfig.name}` : siteConfig.name
@@ -46,7 +37,6 @@ const jsonLd = {
   url: siteConfig.url,
   description: siteConfig.description,
   logo: ogImageURL.href,
-  sameAs: Object.values(siteConfig.social),
 }
 ---
 
@@ -61,7 +51,6 @@ const jsonLd = {
     <!-- SEO -->
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
-    <meta name="keywords" content={siteConfig.keywords.join(', ')} />
     <link rel="canonical" href={canonicalURL} />
     {noIndex && <meta name="robots" content="noindex, nofollow" />}
 
@@ -75,7 +64,6 @@ const jsonLd = {
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:creator" content={siteConfig.author.twitter} />
     <meta name="twitter:title" content={pageTitle} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImageURL} />
@@ -83,7 +71,6 @@ const jsonLd = {
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} is:inline />
 
     <slot name="head" />
-    {viewTransitions && <ClientRouter />}
   </head>
 
   <body class="mx-auto min-h-screen max-w-screen-2xl bg-white text-black">

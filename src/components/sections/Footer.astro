@@ -1,7 +1,7 @@
 ---
 import { siteConfig } from '@lib/config/site'
 
-const socialEntries = Object.entries(siteConfig.social) as [string, string][]
+const emailHref = `mailto:${siteConfig.contact.email}`
 ---
 
 <footer class="border-t border-gray-100 bg-white py-12">
@@ -16,7 +16,7 @@ const socialEntries = Object.entries(siteConfig.social) as [string, string][]
 
       <nav aria-label="Footer" class="flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
         {
-          siteConfig.footer.links.map((link) => (
+          siteConfig.nav.map((link) => (
             <a
               href={link.href}
               class="hover:text-primary-600 focus-visible:ring-primary-600 rounded text-sm text-gray-600 transition-colors focus-visible:ring-2 focus-visible:ring-offset-4 focus-visible:outline-none"
@@ -27,24 +27,15 @@ const socialEntries = Object.entries(siteConfig.social) as [string, string][]
         }
       </nav>
 
-      <ul class="flex items-center gap-4">
-        {
-          socialEntries.map(([name, href]) => (
-            <li>
-              <a
-                href={href}
-                rel="noopener noreferrer"
-                target="_blank"
-                class="hover:text-primary-600 focus-visible:ring-primary-600 rounded text-sm text-gray-500 capitalize transition-colors focus-visible:ring-2 focus-visible:ring-offset-4 focus-visible:outline-none"
-              >
-                {name}
-              </a>
-            </li>
-          ))
-        }
-      </ul>
+      <a
+        href={emailHref}
+        class="hover:text-primary-600 focus-visible:ring-primary-600 rounded text-sm text-gray-500 transition-colors focus-visible:ring-2 focus-visible:ring-offset-4 focus-visible:outline-none"
+      >
+        {siteConfig.contact.email}
+      </a>
     </div>
 
-    <p class="mt-8 text-center text-sm text-gray-500">{siteConfig.footer.copyright}</p>
+    <p class="mt-8 text-center text-sm text-gray-500">{siteConfig.footer.demoLabel}</p>
+    <p class="mt-2 text-center text-sm text-gray-500">{siteConfig.footer.copyright}</p>
   </div>
 </footer>

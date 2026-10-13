@@ -7,7 +7,7 @@ import Layout from '@layouts/Layout.astro'
   <div class="relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-6">
     <!-- Dot grid background -->
     <div
-      class="pointer-events-none absolute inset-0 [background-image:radial-gradient(circle,#d1d5db_1.5px,transparent_1.5px)] [background-size:28px_28px] opacity-60"
+      class="pointer-events-none absolute inset-0 [background-image:radial-gradient(circle,var(--color-gray-300)_1.5px,transparent_1.5px)] [background-size:28px_28px] opacity-60"
     >
     </div>
 
@@ -52,17 +52,13 @@ import Layout from '@layouts/Layout.astro'
         <a href="/" class={buttonVariants({ variant: 'primary', size: 'default', rounded: 'lg' })}>
           Go home
         </a>
-        <button
-          id="go-back"
+        <a
+          href="/contact/"
           class={buttonVariants({ variant: 'outline', size: 'default', rounded: 'lg' })}
         >
-          Go back
-        </button>
+          Contact us
+        </a>
       </div>
     </div>
   </div>
 </Layout>
-
-<script>
-  document.getElementById('go-back')?.addEventListener('click', () => history.back())
-</script>

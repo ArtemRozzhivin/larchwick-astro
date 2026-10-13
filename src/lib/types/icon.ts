@@ -1,13 +1,3 @@
-export const ICON_NAMES = [
-  'zap',
-  'search',
-  'layout',
-  'palette',
-  'shield',
-  'rocket',
-  'check',
-  'star',
-  'sparkles',
-] as const
+export const ICON_NAMES = ['coffee', 'chevron-down', 'menu', 'x'] as const
 
 export type IconName = (typeof ICON_NAMES)[number]
