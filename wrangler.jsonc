@@ -3,6 +3,8 @@
   // Must match the Worker name in the Cloudflare dashboard, or Workers Builds refuses to deploy.
   "name": "larchwick-astro",
   "compatibility_date": "2026-10-06",
+  // Branch builds run `npx wrangler preview`, which requires this block (empty = defaults).
+  "previews": {},
   // Static assets only for now; the /api/contact script arrives in Phase 5c (PLAN.md D-0, D-4).
   "assets": {
     "directory": "./dist",
