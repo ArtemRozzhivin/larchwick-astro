@@ -3,8 +3,8 @@ export const siteConfig = {
   title: 'Larchwick Coffee Roasters',
   description:
     'Specialty coffee, roasted in small batches every Monday and Thursday and shipped across Europe within 48 hours, with the roast date on every bag.',
-  // Placeholder on the reserved .example domain; Phase 2c sets the workers.dev address.
-  url: 'https://larchwick.example',
+  // The free workers.dev address (PLAN.md D-3, D-18); a custom domain can replace it later.
+  url: 'https://larchwick-astro.larchwick.workers.dev',
   lang: 'en-US',
   locale: 'en_US',
   // 1200×630 JPEG; every og:image on the site uses that size.
