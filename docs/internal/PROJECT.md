@@ -22,7 +22,6 @@ The navigation already links to `/about/`, `/services/`, `/products/`, `/blog/`,
 
 ## Still placeholder
 
-- Site URL: `https://larchwick.example` until Phase 2c sets the `workers.dev` address
 - Contact details use the reserved `.example` domain and a placeholder phone number, by design
 - The hero has no photo yet (the old one had coffee beans behind it); images arrive with Sanity
   in Phases 3–5
