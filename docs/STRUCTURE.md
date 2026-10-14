@@ -13,10 +13,11 @@ larchwick-astro/
 ├── docs/            Documentation
 │   ├── before/      Evidence from the WordPress site (export, SEO crawl, Lighthouse, screenshots); not Prettier-formatted
 │   ├── internal/    Pages, status, what is still placeholder
+│   ├── import-report.md, import-report.json, redirect-map.csv   Written by npm run import:wp; not Prettier-formatted
 │   ├── pages/       One doc per page, for PM/QA/clients + index
 │   └── STRUCTURE.md this file
 ├── public/          Served as-is: favicon.svg (the Larchwick bean), og.jpg (1200×630), _headers (Cloudflare response headers)
-├── scripts/         Node tools outside the site: credits/, seo-check/, lighthouse-import/; import-wp/ later
+├── scripts/         Node tools outside the site: credits/, seo-check/, lighthouse-import/ (Node built-ins only) and import-wp/ (WordPress → Sanity; scripts/package.json, Vitest tests)
 ├── src/             Source
 ├── studio/          Sanity Studio (own package.json): schemaTypes/{documents,objects,sections}, desk structure, env.ts (project ID)
 ├── astro.config.ts  The only build config: static output, no adapter, trailing slashes

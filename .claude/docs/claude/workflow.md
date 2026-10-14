@@ -14,6 +14,9 @@ studio=npm run studio        Sanity Studio on http://localhost:3333 (studio/ has
                              package.json: npm install --prefix studio once)
 studio_typegen=npm run studio:typegen
                              schema extract + typegen → src/lib/sanity/sanity.types.ts
+import_wp=npm run import:wp     WordPress → Sanity, dry run by default; -- --write to apply
+                             (scripts/ has its own package.json: npm install --prefix scripts once;
+                             tests: npm --prefix scripts test)
 lighthouse_import=npm run lighthouse:import
                              file saved Lighthouse JSON reports into docs/
 
