@@ -64,6 +64,13 @@ export const cardGrid = defineType({
               ],
             }),
             defineField({
+              name: 'points',
+              title: 'Bullet points',
+              type: 'array',
+              description: 'Short plain points, e.g. "Weekly or twice-weekly delivery".',
+              of: [defineArrayMember({ type: 'string' })],
+            }),
+            defineField({
               name: 'price',
               title: 'Price',
               type: 'string',

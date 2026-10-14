@@ -1,13 +1,13 @@
 import { defineField, defineType } from 'sanity'
 
-import { headingField, sectionPreview, toneField } from '../fields'
+import { optionalHeadingField, sectionPreview, toneField } from '../fields'
 
 export const cta = defineType({
   name: 'cta',
   title: 'Call to action',
   type: 'object',
   fields: [
-    headingField,
+    optionalHeadingField,
     defineField({ name: 'text', title: 'Text', type: 'text', rows: 2 }),
     defineField({
       name: 'primaryCta',
