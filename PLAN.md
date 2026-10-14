@@ -5,7 +5,7 @@ time**. Each phase ends with a short "what we did / what's next" and Artem's go-
 next one starts. Tick the boxes as work lands, and log every decision in
 [Decisions](#3-decisions).
 
-Last updated: 2026-10-13 · Current phase: **Phase 2c — not started**
+Last updated: 2026-10-13 · Current phase: **Phase 2c — in progress**
 
 | #   | Phase                                    | Status      |
 | --- | ---------------------------------------- | ----------- |
@@ -13,7 +13,7 @@ Last updated: 2026-10-13 · Current phase: **Phase 2c — not started**
 | 1   | Measure the "before" site properly       | in progress |
 | 2a  | Astro 7 upgrade and template cleanup     | done        |
 | 2b  | Brand foundation (tokens, fonts, layout) | done        |
-| 2c  | First Cloudflare deploy                  | not started |
+| 2c  | First Cloudflare deploy                  | in progress |
 | 3   | Sanity setup and content model           | not started |
 | 4   | Import script                            | not started |
 | 5a  | Data layer and page rendering            | not started |
@@ -102,7 +102,9 @@ means rewriting history. Phase 0 makes it compliant before anything else is push
 
 ### Open
 
-None right now. New questions get logged here with a recommendation first.
+| Date       | Question                                                                                             | Recommendation                                                                                                                                           |
+| ---------- | ---------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 2026-10-14 | **D-18** Public address. The account's `workers.dev` subdomain is the same as Artem's email username | Rename the account subdomain to a neutral name before the URL is written into `site.ts`, the canonicals and the sitemap. Until then: `larchwick.example` |
 
 ---
 
@@ -446,15 +448,15 @@ changed (contrast numbers).
 
 ### Phase 2c — First Cloudflare deploy
 
-- [ ] Add `wrangler.jsonc` (D-0): assets only for now, `html_handling: "force-trailing-slash"`,
+- [x] Add `wrangler.jsonc` (D-0): assets only for now, `html_handling: "force-trailing-slash"`,
       `not_found_handling: "404-page"`. The `/api/contact` script arrives in 5c.
-- [ ] Add a pinned `wrangler` devDependency (ask first) for local `wrangler dev`.
-- [ ] `public/_headers`:
+- [x] Add a pinned `wrangler` devDependency (4.149.0, approved 2026-10-13) for local `wrangler dev`.
+- [x] `public/_headers`:
   - Immutable cache for `/_astro/*`.
   - Security headers.
   - `/*  X-Robots-Tag: noindex` until production, so the half-built site is never indexed.
     Removed in Phase 7.
-- [ ] With Artem's explicit OK to push:
+- [x] With Artem's explicit OK to push (Artem connected the repo, 2026-10-13):
   1. Connect Workers Builds to the repo.
   2. Branch pushes create preview versions.
   3. **Production builds when a PR is merged into `main`.** The pre-push hook blocks direct

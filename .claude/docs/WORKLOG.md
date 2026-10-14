@@ -3,6 +3,12 @@
 Claude's private engineering log. Technical detail belongs here — file paths, what
 was rejected and why, what a change cost in shipped kB. Newest date on top.
 
+## 2026-10-14
+
+- [Feat]: Phase 2c Cloudflare config. `wrangler.jsonc` makes the Worker `larchwick-astro` (the dashboard name; Workers Builds refuses a mismatch) serve `./dist` as static assets with `html_handling: "force-trailing-slash"` and `not_found_handling: "404-page"`, compatibility date 2026-10-06 (the bundled workerd's). No `main` script yet; `/api/contact` arrives in 5c. `public/_headers`: `/_astro/*` immutable for a year; every path gets `X-Robots-Tag: noindex` (until Phase 7), `nosniff`, `strict-origin-when-cross-origin`, a Permissions-Policy, HSTS and a CSP with `script-src 'none'` (zero JS) and `style-src 'unsafe-inline'` (the Fonts API inlines `@font-face`). `interest-cohort` left out on purpose: Chrome logs it as an unknown feature, which Lighthouse counts as a console error. `wrangler` 4.149.0 pinned as a devDependency (4.150.0 was hours old), so Workers Builds deploys with the same version.
+
+- [Chore]: checked locally with `npx wrangler dev`: `/` 200 with all headers; a `/_astro/*.css` file `immutable`; `/nope/` 404 status with `dist/404.html`; `/_headers` itself 404; a temporary `dist/redirect-test/` page gave `/redirect-test` → 307 → `/redirect-test/` and `/index.html` → 307 → `/`. `/about` is a 404 today because the page does not exist yet; the redirect only fires for existing pages. Install note: npm 11.17 blocks `workerd`'s postinstall (`allow-scripts`) and, on a slow link, silently skipped the 36 MB `@cloudflare/workerd-darwin-arm64` optional binary (wrangler then crashes on start); a plain `npm install` on a normal connection fixed it. Site URL stays `https://larchwick.example`: the account's `workers.dev` subdomain is open (PLAN §3).
+
 ## 2026-10-13
 
 - [Chore]: Phase 2a upgrade. `astro` 5.18.1 → 7.3.8, `@astrojs/sitemap` 3.7.2 → 3.7.4, `tailwindcss` and `@tailwindcss/vite` 4.2.2 → 4.3.3 (Vite 8). `@astrojs/check` 0.9.10 and TypeScript 5.9.3 stay, because check peers `^5 || ^6`, not TypeScript 7. After the install npm left Vite 6.4.1 hoisted as `@tailwindcss/vite`'s peer while Astro nested its own Vite 8, so `npm ls` failed on esbuild; `npm dedupe` put both on Vite 8.3.4 and `npm ls --all` is clean. `engines.node` is `>=22.18`, `.node-version` pins 24, and CI reads it through `node-version-file`.

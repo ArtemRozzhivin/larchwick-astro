@@ -30,6 +30,7 @@ If a component genuinely seems to need interactivity, stop and ask first. Even a
 - **Fonts** — the Astro Fonts API (`fonts` in `astro.config.ts`, Fontsource provider) downloads DM Serif Display and Inter at build time and serves them from our own origin; `<Font>` in `Layout.astro` emits the `@font-face` rules and preloads. No font package and no Google Fonts link. DM Serif Display has only weight 400, so never put `font-medium`/`font-semibold`/`font-bold` on a `font-serif` heading (the browser fakes a bold).
 - **No zod in our code.** Astro's own zod is v4 (import it from `astro/zod` if ever needed), so the v4 API applies: `z.email()`, `z.url()`.
 - **Icons** — inline SVG in `src/components/ui/Icon.astro` (Lucide paths, ISC). A new icon is a name in `ICON_NAMES` plus its nodes; no icon package.
+- **Cloudflare Workers Static Assets** — `wrangler.jsonc` serves `dist/` with `html_handling: "force-trailing-slash"` (slashless URLs get a **307**, so the old WordPress URLs need explicit 301 rules in `_redirects`, Phase 6) and `not_found_handling: "404-page"`. Headers live in `public/_headers`; it sends `script-src 'none'`, so any script added later breaks until the CSP is updated. `X-Robots-Tag: noindex` stays until Phase 7. The Worker `name` must match the dashboard's.
 - **ESLint 10** flat config. `astro.config.ts` is TypeScript, so it can import `siteConfig`.
 </version_traps>
 

@@ -267,8 +267,18 @@ Output is **static** — every page is prerendered at build time, with
 WordPress's trailing slash. There is no Astro adapter: `dist/` is plain static
 files.
 
-**Cloudflare** — the site is headed for Cloudflare Workers Static Assets, built by
-Workers Builds from GitHub (Phase 2c in [PLAN.md](./PLAN.md)).
+**Cloudflare Workers Static Assets**, configured in `wrangler.jsonc` and built by
+Workers Builds from GitHub. Every push to `main` builds (`npm run build`) and deploys
+(`npx wrangler deploy`); pushes to other branches upload a preview version. Response
+headers (asset caching, security headers, and `X-Robots-Tag: noindex` until launch) live
+in `public/_headers`.
+
+To serve the build locally the way Cloudflare does (trailing-slash redirects, the 404
+page, `_headers`):
+
+```bash
+npm run build && npx wrangler dev
+```
 
 Set the real URL in `src/lib/config/site.ts` before deploying — the sitemap and
 every canonical/OG URL come from it.
