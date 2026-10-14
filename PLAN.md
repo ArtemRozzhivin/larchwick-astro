@@ -449,7 +449,7 @@ changed (contrast numbers).
 
 - [x] Add `wrangler.jsonc` (D-0): assets only for now, `html_handling: "force-trailing-slash"`,
       `not_found_handling: "404-page"`. The `/api/contact` script arrives in 5c.
-- [x] Add a pinned `wrangler` devDependency (4.149.0, approved 2026-10-13) for local `wrangler dev`.
+- [x] ~~Add a pinned `wrangler` devDependency for local `wrangler dev`.~~ Added, then removed on 2026-10-14: nothing in the repo uses it, and Cloudflare's build fetches its own `wrangler`. `npx wrangler dev` still works ad hoc.
 - [x] `public/_headers`:
   - Immutable cache for `/_astro/*`.
   - Security headers.
