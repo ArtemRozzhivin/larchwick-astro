@@ -29,6 +29,7 @@ content file** — which is why the next landing takes an hour, not a day.
 - [Git Flow](#git-flow)
 - [Scripts](#scripts)
 - [Deployment](#deployment)
+- [Importing from WordPress](#importing-from-wordpress)
 
 ---
 
@@ -288,6 +289,47 @@ every canonical/OG URL come from it.
 Add them to `.env` (copied from `.env.example`). Variables prefixed with `PUBLIC_`
 can reach client code; the others are read at build time only. There is no
 server, so anything a page renders is baked into the static HTML.
+
+---
+
+## Importing from WordPress
+
+`scripts/import-wp/` moves a WordPress site into Sanity. It reads a standard WordPress export
+(**Tools → Export → All content**), so it needs no plugin, no Application Password and no change
+to WordPress. Images are downloaded from the old site with plain GET requests.
+
+```bash
+npm install --prefix scripts          # once: the importer's own packages
+npm run import:wp                     # dry run: writes the report, changes nothing in Sanity
+npm run import:wp -- --write          # uploads missing images, then creates/patches documents
+npm run import:wp -- --write          # again: reports 0 mutations
+npm --prefix scripts test             # Vitest: one test per WordPress edge case
+```
+
+`--write` needs `SANITY_WRITE_TOKEN` (an Editor token) in `.env`. Other flags:
+`--only=media,taxonomy,posts,pages,settings,redirects`, `--limit=N` (first N posts and pages),
+`--wxr=<path>` and `--origin=<old site URL>`. Every run writes `docs/import-report.md`,
+`docs/import-report.json` and `docs/redirect-map.csv`.
+
+What it does:
+
+- **Posts** become Portable Text: headings, nested lists, links, images with alt text and
+  captions, galleries, tables and quotes (a trailing "— Name" becomes the citation). Shortcodes
+  can't live in rich text, so they are dropped and reported.
+- **Pages** become sections: a cover → hero, media-text → image and text, titled columns →
+  features or cards, bold one-line lists → numbers, `details` under H2s → one FAQ, an ordered
+  "Title: text" list → steps, a coloured box with buttons → call to action, the Contact Form 7
+  shortcode → the contact form (its details go to Site settings), italic "fictional" notes →
+  disclaimers. Anything else stays a text section with a warning.
+- **Links** lose the old origin, get a trailing slash, and old post URLs move under `/blog/`.
+- **Redirects** (301, one hop): old post URLs, old slugs, `/home/` and every attachment page.
+- **Idempotent**: documents get stable ids (`wp-post-<id>`, `wp-page-<id>`, …) and stable keys,
+  and only changed fields the importer owns are written. Pages built with Elementor keep their
+  title, slug and SEO from WordPress; their sections are built by hand and never overwritten.
+
+To point it at another WordPress site, export its WXR, set `--origin`, write
+`scripts/import-wp/alt-text.json` (keyed by media ID), and adjust the Astra colour → background
+map in `sections.ts` if the theme differs.
 
 ---
 

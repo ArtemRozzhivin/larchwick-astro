@@ -11,7 +11,7 @@
     "dev": "sanity dev",
     "build": "sanity build",
     "deploy": "sanity deploy",
-    "typegen": "sanity schema extract --path schema.json && sanity typegen generate",
+    "typegen": "sanity schema extract --path schema.json --force && sanity typegen generate",
     "check": "tsc --noEmit"
   },
   "dependencies": {

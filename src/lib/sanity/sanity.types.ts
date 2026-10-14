@@ -111,6 +111,7 @@ export type CardGrid = {
       _type: 'spec'
       _key: string
     }>
+    points?: Array<string>
     price?: string
     cta?: LinkItem
     _type: 'card'

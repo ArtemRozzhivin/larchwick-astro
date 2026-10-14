@@ -32,7 +32,8 @@ If a component genuinely seems to need interactivity, stop and ask first. Even a
 - **Icons** — inline SVG in `src/components/ui/Icon.astro` (Lucide paths, ISC). A new icon is a name in `ICON_NAMES` plus its nodes; no icon package.
 - **Cloudflare Workers Static Assets** — `wrangler.jsonc` serves `dist/` with `html_handling: "force-trailing-slash"` (slashless URLs get a **307**, so the old WordPress URLs need explicit 301 rules in `_redirects`, Phase 6) and `not_found_handling: "404-page"`. Headers live in `public/_headers`; it sends `script-src 'none'`, so any script added later breaks until the CSP is updated. `X-Robots-Tag: noindex` stays until Phase 7. The Worker `name` must match the dashboard's.
 - **Sanity Studio lives in `studio/`** with its own `package.json` (Sanity 6, React 19 for the Studio app only; the site ships no React). Root `tsconfig.json` excludes it; type-check it with `npm --prefix studio run check`. After any schema change run `npm run studio:typegen`, which rewrites `src/lib/sanity/sanity.types.ts` (generated, never edit by hand). Alt text lives on each image field (`accessibleImage`, `figure`), not on the asset.
-- **ESLint 10** flat config. `astro.config.ts` is TypeScript, so it can import `siteConfig`.
+- **The WordPress importer lives in `scripts/import-wp/`** with its own `scripts/package.json` (`@sanity/client`, the WordPress block parser, `htmlparser2`, Vitest). Root `tsconfig.json` excludes it; check it with `npm --prefix scripts run check` and `npm --prefix scripts test` (both run in CI). `npm run import:wp` is a dry run; only `--write` changes Sanity. It owns only fields WordPress supplies and never unsets, so Studio-only values survive a re-run (PLAN D-21).
+- **ESLint 10** flat config. The core unused-vars rule flags parameter names inside TypeScript function *types*; prefix those with `_`. `astro.config.ts` is TypeScript, so it can import `siteConfig`.
 </version_traps>
 
 <source_of_truth>
