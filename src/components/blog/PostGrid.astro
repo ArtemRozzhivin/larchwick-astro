@@ -1,0 +1,22 @@
+---
+import type { Post } from '@lib/sanity/posts'
+
+import PostCard from './PostCard.astro'
+
+interface Props {
+  posts: readonly Post[]
+  headingLevel?: 'h2' | 'h3'
+}
+
+const { posts, headingLevel } = Astro.props
+---
+
+<ul class="grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
+  {
+    posts.map((post) => (
+      <li>
+        <PostCard post={post} headingLevel={headingLevel} />
+      </li>
+    ))
+  }
+</ul>

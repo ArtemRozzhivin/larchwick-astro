@@ -1,0 +1,20 @@
+---
+import { blog } from '@lib/content/blog'
+import { sanityFetch } from '@lib/sanity/client'
+import { getPosts } from '@lib/sanity/posts'
+import { BLOG_PAGE_QUERY } from '@lib/sanity/queries'
+import type { BLOG_PAGE_QUERY_RESULT } from '@lib/sanity/sanity.types'
+import BlogArchive from '@components/blog/BlogArchive.astro'
+import Layout from '@layouts/Layout.astro'
+
+const [posts, page] = await Promise.all([
+  getPosts(),
+  sanityFetch<BLOG_PAGE_QUERY_RESULT>(BLOG_PAGE_QUERY),
+])
+const title = page?.seo?.metaTitle ?? blog.seo.title
+const description = page?.seo?.metaDescription ?? blog.seo.description
+---
+
+<Layout title={title} description={description}>
+  <BlogArchive heading={blog.heading} intro={blog.intro} posts={posts} />
+</Layout>

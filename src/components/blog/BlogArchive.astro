@@ -1,0 +1,37 @@
+---
+import type { Post } from '@lib/sanity/posts'
+
+import PostGrid from './PostGrid.astro'
+
+interface Props {
+  eyebrow?: string
+  heading: string
+  intro?: string
+  posts: readonly Post[]
+}
+
+const { eyebrow, heading, intro, posts } = Astro.props
+---
+
+<section class="bg-canvas py-14 md:py-20">
+  <div class="container-wide">
+    <header class="max-w-2xl">
+      {
+        eyebrow && (
+          <p class="text-brand-dark mb-3 text-sm font-semibold tracking-widest uppercase">
+            {eyebrow}
+          </p>
+        )
+      }
+      <h1 class="text-heading font-serif text-4xl leading-tight text-balance sm:text-5xl">
+        {heading}
+      </h1>
+      {intro && <p class="mt-4 text-lg leading-relaxed text-pretty">{intro}</p>}
+    </header>
+  </div>
+</section>
+<section class="bg-surface py-12 md:py-16">
+  <div class="container-wide">
+    <PostGrid posts={posts} />
+  </div>
+</section>

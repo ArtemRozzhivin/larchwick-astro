@@ -1,0 +1,36 @@
+---
+import { blog } from '@lib/content/blog'
+import { type Post, termPath } from '@lib/sanity/posts'
+
+interface Props {
+  post: Pick<Post, 'publishedAt' | 'categories'>
+  byline?: boolean
+  class?: string
+}
+
+const { post, byline = false, class: className } = Astro.props
+
+const dateFormat = new Intl.DateTimeFormat('en-GB', { dateStyle: 'long' })
+const category = post.categories?.[0]
+---
+
+<p class:list={['flex flex-wrap items-center gap-x-2 gap-y-1 text-sm', className]}>
+  {
+    category && (
+      <a
+        href={termPath({ _type: 'category', slug: category.slug })}
+        class="text-brand-dark font-semibold tracking-wide uppercase hover:underline"
+      >
+        {category.title}
+      </a>
+    )
+  }
+  {category && post.publishedAt && <span aria-hidden="true">·</span>}
+  {
+    post.publishedAt && (
+      <time datetime={post.publishedAt}>{dateFormat.format(new Date(post.publishedAt))}</time>
+    )
+  }
+  {byline && <span aria-hidden="true">·</span>}
+  {byline && <span>By {blog.byline}</span>}
+</p>
