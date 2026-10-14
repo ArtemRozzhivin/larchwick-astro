@@ -16,6 +16,10 @@ lighthouse_import=npm run lighthouse:import
 Node >= 22.18 (package.json engines); .node-version pins 24 for CI and the
 Cloudflare build.
 
+Serve the built site the way Cloudflare does: npm run build && npx wrangler dev
+(npx downloads wrangler; it is not a dependency). Deploys are not run by hand: Workers Builds
+deploys main on every push and uploads a preview version for other branches.
+
 There is no test runner in this template. Verification is astro check + lint +
 format + a successful build.
 </commands>

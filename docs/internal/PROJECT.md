@@ -22,7 +22,6 @@ The navigation already links to `/about/`, `/services/`, `/products/`, `/blog/`,
 
 ## Still placeholder
 
-- Site URL: `https://larchwick.example` until Phase 2c sets the `workers.dev` address
 - Contact details use the reserved `.example` domain and a placeholder phone number, by design
 - The hero has no photo yet (the old one had coffee beans behind it); images arrive with Sanity
   in Phases 3–5
@@ -33,8 +32,9 @@ The navigation already links to `/about/`, `/services/`, `/products/`, `/blog/`,
 
 Static output with no Astro adapter: every page is prerendered at build time, with
 `trailingSlash: 'always'` and `build.format: 'directory'`, so every URL keeps WordPress's
-trailing slash. There is no Vercel and no Docker setup any more; the static build is headed for
-Cloudflare Workers Static Assets in Phase 2c.
+trailing slash. It is served by Cloudflare Workers Static Assets
+(`wrangler.jsonc`), built and deployed by Workers Builds on every push to `main`. Until launch
+(Phase 7) every response carries `X-Robots-Tag: noindex` from `public/_headers`.
 
 The site ships zero client JavaScript: no React, no view transitions, no prefetch script.
 

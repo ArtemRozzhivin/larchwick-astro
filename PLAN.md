@@ -5,7 +5,7 @@ time**. Each phase ends with a short "what we did / what's next" and Artem's go-
 next one starts. Tick the boxes as work lands, and log every decision in
 [Decisions](#3-decisions).
 
-Last updated: 2026-10-13 · Current phase: **Phase 2c — not started**
+Last updated: 2026-10-13 · Current phase: **Phase 2c — in progress**
 
 | #   | Phase                                    | Status      |
 | --- | ---------------------------------------- | ----------- |
@@ -13,7 +13,7 @@ Last updated: 2026-10-13 · Current phase: **Phase 2c — not started**
 | 1   | Measure the "before" site properly       | in progress |
 | 2a  | Astro 7 upgrade and template cleanup     | done        |
 | 2b  | Brand foundation (tokens, fonts, layout) | done        |
-| 2c  | First Cloudflare deploy                  | not started |
+| 2c  | First Cloudflare deploy                  | in progress |
 | 3   | Sanity setup and content model           | not started |
 | 4   | Import script                            | not started |
 | 5a  | Data layer and page rendering            | not started |
@@ -99,6 +99,7 @@ means rewriting history. Phase 0 makes it compliant before anything else is push
 | 2026-10-13 | **D-17** `compressHTML: true` (Astro's pre-7 HTML whitespace rules) instead of Astro 7's `'jsx'` default                                                                                         | `prettier-plugin-astro` 0.14 formats with HTML whitespace semantics. Its 1.x (Rust compiler) crashes with `prettier-plugin-tailwindcss` 0.8.1, so the formatter stays on 0.14 and the build follows it.                                                                                                                                                                                                                                                                                                      |
 | 2026-10-13 | `.node-version` = 24 (Active LTS) for Workers Builds and CI; `engines.node >= 22.18`. Site URL is `https://larchwick.example` until Phase 2c                                                     | The reserved `.example` domain can't point anywhere real; 2c sets the `workers.dev` address.                                                                                                                                                                                                                                                                                                                                                                                                                 |
 | 2026-10-13 | Social image is `public/og.jpg` (not `og.png`), 1200×630, 57 KB: the old Home hero photo with the Larchwick name. The 404 page now shows the header and footer                                   | A photo compresses far better as JPEG. Visitors on a dead link need the navigation. Artem reviewed the 2b shell visually and approved it.                                                                                                                                                                                                                                                                                                                                                                    |
+| 2026-10-14 | **D-18** Public address: `https://larchwick-astro.larchwick.workers.dev`                                                                                                                         | The account's first `workers.dev` subdomain was Artem's email username; he renamed it to `larchwick` before the URL went into `site.ts`, the canonicals and the sitemap.                                                                                                                                                                                                                                                                                                                                     |
 
 ### Open
 
@@ -446,15 +447,15 @@ changed (contrast numbers).
 
 ### Phase 2c — First Cloudflare deploy
 
-- [ ] Add `wrangler.jsonc` (D-0): assets only for now, `html_handling: "force-trailing-slash"`,
+- [x] Add `wrangler.jsonc` (D-0): assets only for now, `html_handling: "force-trailing-slash"`,
       `not_found_handling: "404-page"`. The `/api/contact` script arrives in 5c.
-- [ ] Add a pinned `wrangler` devDependency (ask first) for local `wrangler dev`.
-- [ ] `public/_headers`:
+- [x] ~~Add a pinned `wrangler` devDependency for local `wrangler dev`.~~ Added, then removed on 2026-10-14: nothing in the repo uses it, and Cloudflare's build fetches its own `wrangler`. `npx wrangler dev` still works ad hoc.
+- [x] `public/_headers`:
   - Immutable cache for `/_astro/*`.
   - Security headers.
   - `/*  X-Robots-Tag: noindex` until production, so the half-built site is never indexed.
     Removed in Phase 7.
-- [ ] With Artem's explicit OK to push:
+- [x] With Artem's explicit OK to push (Artem connected the repo, 2026-10-13):
   1. Connect Workers Builds to the repo.
   2. Branch pushes create preview versions.
   3. **Production builds when a PR is merged into `main`.** The pre-push hook blocks direct
