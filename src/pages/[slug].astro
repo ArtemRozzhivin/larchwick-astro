@@ -1,0 +1,32 @@
+---
+import { siteConfig } from '@lib/config/site'
+import { sanityFetch } from '@lib/sanity/client'
+import { imageSource } from '@lib/sanity/image'
+import { PAGE_QUERY, PAGE_SLUGS_QUERY } from '@lib/sanity/queries'
+import type { PAGE_QUERY_RESULT, PAGE_SLUGS_QUERY_RESULT } from '@lib/sanity/sanity.types'
+import SectionRenderer from '@components/sections/SectionRenderer.astro'
+import Layout from '@layouts/Layout.astro'
+
+export async function getStaticPaths() {
+  const slugs = await sanityFetch<PAGE_SLUGS_QUERY_RESULT>(PAGE_SLUGS_QUERY)
+  return slugs.filter((slug) => slug !== null).map((slug) => ({ params: { slug } }))
+}
+
+const { slug } = Astro.params
+const page = await sanityFetch<PAGE_QUERY_RESULT>(PAGE_QUERY, { slug })
+if (!page) throw new Error(`Sanity has no page with slug "${slug}"`)
+
+const seo = page.seo
+const title = seo?.metaTitle ?? `${page.title} | ${siteConfig.name}`
+const ogImage = seo?.ogImage?.asset ? imageSource(seo.ogImage, 1200, 1200 / 630).src : undefined
+---
+
+<Layout
+  title={title}
+  description={seo?.metaDescription ?? siteConfig.description}
+  ogImage={ogImage}
+  noindex={seo?.noindex ?? false}
+  canonical={seo?.canonical}
+>
+  <SectionRenderer sections={page.sections ?? []} />
+</Layout>

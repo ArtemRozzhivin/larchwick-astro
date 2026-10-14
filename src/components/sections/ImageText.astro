@@ -1,0 +1,62 @@
+---
+import type { SanityImageValue } from '@lib/sanity/image'
+import type { BlockContent } from '@lib/sanity/sanity.types'
+import RichText from '@components/rich-text/RichText.astro'
+import { buttonVariants } from '@components/ui/button'
+import SanityImage from '@components/ui/SanityImage.astro'
+
+import Section, { type Tone } from './Section.astro'
+
+interface Props {
+  id?: string
+  eyebrow?: string
+  heading?: string
+  body?: BlockContent
+  image?: SanityImageValue
+  imagePosition?: 'left' | 'right'
+  cta?: { label?: string; href?: string }
+  tone?: Tone
+}
+
+const { id, eyebrow, heading, body = [], image, imagePosition = 'left', cta, tone } = Astro.props
+---
+
+<Section id={id} tone={tone}>
+  <div class="grid items-center gap-10 md:grid-cols-2 md:gap-14">
+    {
+      image && (
+        <SanityImage
+          image={image}
+          widths={[480, 720, 960, 1280]}
+          sizes="(min-width: 48rem) 36rem, 100vw"
+          aspectRatio={4 / 3}
+          class:list={['w-full rounded-sm', imagePosition === 'right' && 'md:order-last']}
+        />
+      )
+    }
+    <div>
+      {
+        eyebrow && (
+          <p class="text-brand-dark mb-3 text-sm font-semibold tracking-widest uppercase">
+            {eyebrow}
+          </p>
+        )
+      }
+      {
+        heading && (
+          <h2 class="text-heading font-serif text-3xl leading-tight text-balance md:text-4xl">
+            {heading}
+          </h2>
+        )
+      }
+      <RichText value={body} class="mt-5 text-lg" />
+      {
+        cta?.href && cta.label && (
+          <a href={cta.href} class:list={['mt-8', buttonVariants({ variant: 'secondary' })]}>
+            {cta.label}
+          </a>
+        )
+      }
+    </div>
+  </div>
+</Section>
