@@ -10,6 +10,10 @@ format_check=npm run format:check
 verify=npm run verify        check + lint + format:check
 credits=npm run credits      rebuild CREDITS.md
 seo_crawl=npm run seo:crawl  crawl the WordPress "before" site
+studio=npm run studio        Sanity Studio on http://localhost:3333 (studio/ has its own
+                             package.json: npm install --prefix studio once)
+studio_typegen=npm run studio:typegen
+                             schema extract + typegen → src/lib/sanity/sanity.types.ts
 lighthouse_import=npm run lighthouse:import
                              file saved Lighthouse JSON reports into docs/
 

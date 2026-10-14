@@ -7,7 +7,17 @@ import prettierConfig from './prettier.config.mjs'
 
 export default [
   {
-    ignores: ['dist/**', 'node_modules/**', '.astro/**', 'build/**', 'public/**', '.cache/**'],
+    ignores: [
+      'dist/**',
+      'node_modules/**',
+      '.astro/**',
+      'build/**',
+      'public/**',
+      '.cache/**',
+      'studio/dist/**',
+      'studio/.sanity/**',
+      'src/lib/sanity/sanity.types.ts',
+    ],
   },
 
   ...eslintPluginAstro.configs['flat/recommended'],

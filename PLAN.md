@@ -5,7 +5,7 @@ time**. Each phase ends with a short "what we did / what's next" and Artem's go-
 next one starts. Tick the boxes as work lands, and log every decision in
 [Decisions](#3-decisions).
 
-Last updated: 2026-10-13 · Current phase: **Phase 2c — in progress**
+Last updated: 2026-10-13 · Current phase: **Phase 3 — in progress**
 
 | #   | Phase                                    | Status      |
 | --- | ---------------------------------------- | ----------- |
@@ -14,7 +14,7 @@ Last updated: 2026-10-13 · Current phase: **Phase 2c — in progress**
 | 2a  | Astro 7 upgrade and template cleanup     | done        |
 | 2b  | Brand foundation (tokens, fonts, layout) | done        |
 | 2c  | First Cloudflare deploy                  | in progress |
-| 3   | Sanity setup and content model           | not started |
+| 3   | Sanity setup and content model           | in progress |
 | 4   | Import script                            | not started |
 | 5a  | Data layer and page rendering            | not started |
 | 5b  | Blog templates                           | not started |
@@ -100,6 +100,8 @@ means rewriting history. Phase 0 makes it compliant before anything else is push
 | 2026-10-13 | `.node-version` = 24 (Active LTS) for Workers Builds and CI; `engines.node >= 22.18`. Site URL is `https://larchwick.example` until Phase 2c                                                     | The reserved `.example` domain can't point anywhere real; 2c sets the `workers.dev` address.                                                                                                                                                                                                                                                                                                                                                                                                                 |
 | 2026-10-13 | Social image is `public/og.jpg` (not `og.png`), 1200×630, 57 KB: the old Home hero photo with the Larchwick name. The 404 page now shows the header and footer                                   | A photo compresses far better as JPEG. Visitors on a dead link need the navigation. Artem reviewed the 2b shell visually and approved it.                                                                                                                                                                                                                                                                                                                                                                    |
 | 2026-10-14 | **D-18** Public address: `https://larchwick-astro.larchwick.workers.dev`                                                                                                                         | The account's first `workers.dev` subdomain was Artem's email username; he renamed it to `larchwick` before the URL went into `site.ts`, the canonicals and the sitemap.                                                                                                                                                                                                                                                                                                                                     |
+| 2026-10-14 | **D-14 amended:** alt text lives on each image field (`accessibleImage`, `figure`), not on the Sanity asset; `alt-text.json` stays the importer's source                                         | The default Studio can't edit asset-level alt text without the Media plugin (a new dependency). Artem approved.                                                                                                                                                                                                                                                                                                                                                                                              |
+| 2026-10-14 | Home is the `page` with slug `home`, served at `/`. Tables are a built-in rows × cells object, not `@sanity/table`. `@sanity/vision` (GROQ playground) stays in the Studio                       | No extra dependencies; Vision is used to test the importer's output and the site's queries. Artem approved.                                                                                                                                                                                                                                                                                                                                                                                                  |
 
 ### Open
 
@@ -469,16 +471,16 @@ surface platform behaviour (307 vs 301).
 
 ### Phase 3 — Sanity setup and content model
 
-- [ ] Create the Sanity project (free plan) with a public `production` dataset. Drafts stay
+- [x] Create the Sanity project (free plan) with a public `production` dataset (`zboja23d`, 2026-10-14). Drafts stay
       private.
-- [ ] Create `studio/` with `npx sanity@latest init --output-path studio` (Sanity 6).
-- [ ] Schemas (appendix A lists the brief's fields):
+- [x] Create `studio/` (Sanity 6; scaffolded by hand rather than `sanity init`, so there was no template code to delete).
+- [x] Schemas (appendix A lists the brief's fields):
   - Documents: `post`, `page` (with `sections[]`), `category`, `tag`, `siteSettings` (singleton),
     `redirect`.
   - A shared `seo` object.
   - Portable Text: image (alt per D-14, caption), table, gallery, callout and quote with
     citation.
-- [ ] Page sections:
+- [x] Page sections:
   - hero (cover and banner variants, eyebrow, trust list, tone)
   - textBlock
   - imageText (eyebrow)
@@ -491,24 +493,24 @@ surface platform behaviour (307 vs 301).
   - cta
   - contactForm
   - **quote, steps and disclaimer** (recon finding 12)
-- [ ] Validation:
+- [x] Validation:
   - alt text (D-14)
   - meta title and description length warnings
   - unique slugs
   - a redirect `from` must start and end with `/` and must not equal a live route (pattern and
     sitemap rules live in code, not here)
-- [ ] Studio UX:
+- [x] Studio UX:
   - a clear title and description on every field
   - a singleton desk structure for settings
   - list previews and ordering
-- [ ] TypeGen: `sanity schema extract` + `sanity typegen generate`, with the types consumed by
+- [x] TypeGen: `sanity schema extract` + `sanity typegen generate`, with the types consumed by
       Astro.
 - [ ] Deploy the Studio to `*.sanity.studio` (free).
   - The free plan has only Administrator and Viewer roles. **Administrator invites go only to
     accounts Artem controls**, because an Administrator can see the webhook (and the deploy-hook
     URL inside it).
   - The editor demo is shown as a recording.
-- [ ] Commit the project ID and dataset as non-secret config defaults. The importer's write token
+- [x] Commit the project ID and dataset as non-secret config defaults. The importer's write token
       lives only in `.env`.
 
 **Exit:** we have reviewed the schemas together, the Studio is deployed and the types are
