@@ -5,7 +5,7 @@ time**. Each phase ends with a short "what we did / what's next" and Artem's go-
 next one starts. Tick the boxes as work lands, and log every decision in
 [Decisions](#3-decisions).
 
-Last updated: 2026-10-14 · Current phase: **Phase 4 — in progress**
+Last updated: 2026-10-14 · Current phase: **Phase 5a — not started**
 
 | #   | Phase                                    | Status      |
 | --- | ---------------------------------------- | ----------- |
@@ -14,8 +14,8 @@ Last updated: 2026-10-14 · Current phase: **Phase 4 — in progress**
 | 2a  | Astro 7 upgrade and template cleanup     | done        |
 | 2b  | Brand foundation (tokens, fonts, layout) | done        |
 | 2c  | First Cloudflare deploy                  | in progress |
-| 3   | Sanity setup and content model           | in progress |
-| 4   | Import script                            | in progress |
+| 3   | Sanity setup and content model           | done        |
+| 4   | Import script                            | done        |
 | 5a  | Data layer and page rendering            | not started |
 | 5b  | Blog templates                           | not started |
 | 5c  | Home, contact form and design polish     | not started |
@@ -105,6 +105,7 @@ means rewriting history. Phase 0 makes it compliant before anything else is push
 | 2026-10-14 | **D-19** The importer reads the committed WXR export, not the REST API with `context=edit`                                                                                                                      | The WXR already holds the raw blocks and the literal Yoast values, so no Application Password and no WordPress change are needed. Any WordPress site can produce one (Tools → Export).                                                                                                                                                                                                                                                                                                                       |
 | 2026-10-14 | **D-20** Our own HTML → Portable Text converter on `htmlparser2`, not `@portabletext/block-tools` + jsdom. Packages: `@sanity/client`, `@wordpress/block-serialization-default-parser`, `htmlparser2`, `vitest` | Only 13 block types occur; a small converter is easier to read and test than a generic one plus a large DOM. Artem approved the four packages.                                                                                                                                                                                                                                                                                                                                                               |
 | 2026-10-14 | **D-21** The importer owns only fields WordPress supplies (per subfield for `seo` and `mainImage`), never unsets, and skips drafts                                                                              | The pre-write review showed whole-field ownership would wipe Studio-only values (noindex, canonical, crops, descriptions) on a re-run.                                                                                                                                                                                                                                                                                                                                                                       |
+| 2026-10-14 | Photos 120 and 133 show real brands; import them as on WordPress and replace both in Phase 5c                                                                                                                   | Ground rule: no real company's logo. They were already on the old site, so the import stays faithful; the swap is a tracked 5c task. Artem agreed.                                                                                                                                                                                                                                                                                                                                                           |
 
 ### Open
 
@@ -508,7 +509,7 @@ surface platform behaviour (307 vs 301).
   - list previews and ordering
 - [x] TypeGen: `sanity schema extract` + `sanity typegen generate`, with the types consumed by
       Astro.
-- [ ] Deploy the Studio to `*.sanity.studio` (free).
+- [x] Deploy the Studio to `*.sanity.studio` (free): https://larchwick.sanity.studio, deployed by Artem 2026-10-14.
   - The free plan has only Administrator and Viewer roles. **Administrator invites go only to
     accounts Artem controls**, because an Administrator can see the webhook (and the deploy-hook
     URL inside it).
@@ -569,11 +570,13 @@ the decisions are logged in §3 (D-19 to D-21).
 - [x] Vitest (D-9): 39 tests on real WXR snippets and the full export, run in CI.
 - [x] README section: "Importing from WordPress".
 - [x] One reviewer agent before the first write (2026-10-14): 6 findings, all fixed.
-- [ ] Run order:
-  1. Dry run, then review the report together.
-  2. Real run.
-  3. Re-run → 0 mutations.
-  4. `sanity documents validate` → 0 errors.
+- [x] Run order (2026-10-14):
+  1. Dry run, reviewed together with Artem (alt texts approved).
+  2. Real run: 30 images uploaded, 72 documents created in one transaction
+     (`docs/import-report.md` is this run).
+  3. Re-run: **0 mutations**, all 72 unchanged, 0 uploads.
+  4. `sanity documents validate`: 72 documents, **0 errors**, 1 warning (Services meta title is
+     63 characters, from WordPress; left for Phase 6).
 
 **Exit:** the import is complete and idempotent, and the report is committed.
 **Talking points:**
@@ -586,7 +589,7 @@ the decisions are logged in §3 (D-19 to D-21).
 
 ### Phase 5a — Data layer and page rendering
 
-- [ ] Fill in all 30 alt texts (in `alt-text.json` and re-imported, per D-14).
+- [x] Fill in all 30 alt texts (in `alt-text.json`, imported 2026-10-14, per D-14).
 - [ ] `src/lib/sanity/`: the client, typed GROQ queries and `siteSettings` helpers. Set the Sanity
       env in `ci.yml` and in Workers Builds in the same PR as the first query.
 - [ ] Image component: Sanity image → Astro `<Picture>`, honouring crop and hotspot
@@ -614,6 +617,8 @@ the decisions are logged in §3 (D-19 to D-21).
 
 - [ ] Rebuild Home by hand in Studio as `sections[]`, with a live `latestPosts` replacing the
       widget.
+- [ ] Replace the two photos that show real brands (media 120 "Di Bella Coffee" cups, the Services
+      hero; media 133 "O566" bags, the Products social image) with other credited Unsplash photos.
 - [ ] Contact form (D-4), zero client JS:
   - `<form method="post" action="/api/contact">` with a honeypot field and a timestamp check.
   - A small Worker script validates the fields and sends through Resend's HTTP API with plain
