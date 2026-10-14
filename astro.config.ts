@@ -47,6 +47,12 @@ export default defineConfig({
     },
   ],
 
+  // Sanity images are downloaded at build time and re-encoded to AVIF/WebP under /_astro/,
+  // so pages load images from our own origin (the CSP allows img-src 'self' only).
+  image: {
+    remotePatterns: [{ protocol: 'https', hostname: 'cdn.sanity.io' }],
+  },
+
   integrations: [sitemap()],
 
   vite: {
