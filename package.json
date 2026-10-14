@@ -21,6 +21,8 @@
     "credits": "node scripts/credits/build-credits.ts",
     "seo:crawl": "node scripts/seo-check/crawl.ts",
     "lighthouse:import": "node scripts/lighthouse-import/import.ts",
+    "studio": "npm --prefix studio run dev",
+    "studio:typegen": "npm --prefix studio run typegen",
     "prepare": "husky",
     "lint-staged": "lint-staged"
   },

@@ -10,11 +10,19 @@ format_check=npm run format:check
 verify=npm run verify        check + lint + format:check
 credits=npm run credits      rebuild CREDITS.md
 seo_crawl=npm run seo:crawl  crawl the WordPress "before" site
+studio=npm run studio        Sanity Studio on http://localhost:3333 (studio/ has its own
+                             package.json: npm install --prefix studio once)
+studio_typegen=npm run studio:typegen
+                             schema extract + typegen → src/lib/sanity/sanity.types.ts
 lighthouse_import=npm run lighthouse:import
                              file saved Lighthouse JSON reports into docs/
 
 Node >= 22.18 (package.json engines); .node-version pins 24 for CI and the
 Cloudflare build.
+
+Serve the built site the way Cloudflare does: npm run build && npx wrangler dev
+(npx downloads wrangler; it is not a dependency). Deploys are not run by hand: Workers Builds
+deploys main on every push and uploads a preview version for other branches.
 
 There is no test runner in this template. Verification is astro check + lint +
 format + a successful build.
