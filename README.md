@@ -256,6 +256,8 @@ npm run verify           # check + lint + format:check
 npm run credits            # Rebuild CREDITS.md
 npm run seo:crawl          # Crawl the WordPress "before" site (SEO snapshot)
 npm run lighthouse:import  # File saved Lighthouse JSON reports into docs/
+npm run studio             # Sanity Studio at http://localhost:3333 (first time: npm install --prefix studio)
+npm run studio:typegen     # Regenerate src/lib/sanity/sanity.types.ts after a schema change
 ```
 
 ---

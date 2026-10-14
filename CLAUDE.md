@@ -31,6 +31,7 @@ If a component genuinely seems to need interactivity, stop and ask first. Even a
 - **No zod in our code.** Astro's own zod is v4 (import it from `astro/zod` if ever needed), so the v4 API applies: `z.email()`, `z.url()`.
 - **Icons** — inline SVG in `src/components/ui/Icon.astro` (Lucide paths, ISC). A new icon is a name in `ICON_NAMES` plus its nodes; no icon package.
 - **Cloudflare Workers Static Assets** — `wrangler.jsonc` serves `dist/` with `html_handling: "force-trailing-slash"` (slashless URLs get a **307**, so the old WordPress URLs need explicit 301 rules in `_redirects`, Phase 6) and `not_found_handling: "404-page"`. Headers live in `public/_headers`; it sends `script-src 'none'`, so any script added later breaks until the CSP is updated. `X-Robots-Tag: noindex` stays until Phase 7. The Worker `name` must match the dashboard's.
+- **Sanity Studio lives in `studio/`** with its own `package.json` (Sanity 6, React 19 for the Studio app only; the site ships no React). Root `tsconfig.json` excludes it; type-check it with `npm --prefix studio run check`. After any schema change run `npm run studio:typegen`, which rewrites `src/lib/sanity/sanity.types.ts` (generated, never edit by hand). Alt text lives on each image field (`accessibleImage`, `figure`), not on the asset.
 - **ESLint 10** flat config. `astro.config.ts` is TypeScript, so it can import `siteConfig`.
 </version_traps>
 
