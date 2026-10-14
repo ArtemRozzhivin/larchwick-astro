@@ -1,0 +1,16 @@
+---
+import type { Props as NodeProps } from 'astro-portabletext/types'
+
+import type { Quote as QuoteValue } from '@lib/sanity/sanity.types'
+
+type Props = NodeProps<QuoteValue & { _key: string }>
+
+const { node } = Astro.props
+---
+
+<figure class="border-brand my-8 border-l-4 pl-5">
+  <blockquote class="text-heading font-serif text-xl leading-snug md:text-2xl">
+    <p>{node.text}</p>
+  </blockquote>
+  {node.citation && <figcaption class="mt-3 text-sm">— {node.citation}</figcaption>}
+</figure>

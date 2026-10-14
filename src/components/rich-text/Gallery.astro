@@ -1,0 +1,32 @@
+---
+import type { Props as NodeProps } from 'astro-portabletext/types'
+
+import type { Gallery as GalleryValue } from '@lib/sanity/sanity.types'
+import SanityImage from '@components/ui/SanityImage.astro'
+
+type Props = NodeProps<GalleryValue & { _key: string }>
+
+const { node } = Astro.props
+
+const images = node.images ?? []
+const GRID_CLASSES = images.length === 2 ? 'sm:grid-cols-2' : 'sm:grid-cols-3'
+---
+
+<figure class="my-8">
+  <ul class:list={['grid gap-3', GRID_CLASSES]}>
+    {
+      images.map((image) => (
+        <li>
+          <SanityImage
+            image={image}
+            widths={[320, 480, 720]}
+            sizes="(min-width: 40rem) 15rem, 100vw"
+            aspectRatio={3 / 2}
+            class="w-full rounded-sm"
+          />
+        </li>
+      ))
+    }
+  </ul>
+  {node.caption && <figcaption class="mt-2 text-sm">{node.caption}</figcaption>}
+</figure>

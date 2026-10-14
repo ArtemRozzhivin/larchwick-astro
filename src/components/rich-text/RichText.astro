@@ -1,0 +1,28 @@
+---
+import { PortableText } from 'astro-portabletext'
+
+import type { BlockContent } from '@lib/sanity/sanity.types'
+
+import Callout from './Callout.astro'
+import Figure from './Figure.astro'
+import Gallery from './Gallery.astro'
+import Link from './Link.astro'
+import Quote from './Quote.astro'
+import Table from './Table.astro'
+
+interface Props {
+  value: BlockContent
+  class?: string
+}
+
+const { value, class: className } = Astro.props
+
+const components = {
+  type: { figure: Figure, gallery: Gallery, table: Table, callout: Callout, quote: Quote },
+  mark: { link: Link },
+}
+---
+
+<div class:list={['rich-text', className]}>
+  <PortableText value={value} components={components} />
+</div>

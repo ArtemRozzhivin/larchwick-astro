@@ -1,5 +1,8 @@
 export const ICON_NAMES = [
   'coffee',
+  'sprout',
+  'flame',
+  'truck',
   'chevron-down',
   'check',
   'mail',
@@ -10,3 +13,7 @@ export const ICON_NAMES = [
 ] as const
 
 export type IconName = (typeof ICON_NAMES)[number]
+
+export function isIconName(name: string | undefined): name is IconName {
+  return (ICON_NAMES as readonly string[]).includes(name ?? '')
+}
