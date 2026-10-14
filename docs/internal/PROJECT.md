@@ -17,8 +17,7 @@ portfolio case study. The plan and the progress tracker are in [PLAN.md](../../P
 `/robots.txt` and `/sitemap-index.xml` are generated at build time from the site
 config; they have no page doc.
 
-The navigation links to the old site's menu. `/blog/` and the posts are not built yet (Phase 5b),
-so they show the 404 page until then.
+The blog (Phase 5b) builds `/blog/`, the 10 posts and the category and tag archives from Sanity.
 
 ## Still placeholder
 

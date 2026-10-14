@@ -5,7 +5,7 @@ time**. Each phase ends with a short "what we did / what's next" and Artem's go-
 next one starts. Tick the boxes as work lands, and log every decision in
 [Decisions](#3-decisions).
 
-Last updated: 2026-10-14 · Current phase: **Phase 5a — in progress**
+Last updated: 2026-10-14 · Current phase: **Phase 5b — in progress**
 
 | #   | Phase                                    | Status      |
 | --- | ---------------------------------------- | ----------- |
@@ -17,7 +17,7 @@ Last updated: 2026-10-14 · Current phase: **Phase 5a — in progress**
 | 3   | Sanity setup and content model           | done        |
 | 4   | Import script                            | done        |
 | 5a  | Data layer and page rendering            | in progress |
-| 5b  | Blog templates                           | not started |
+| 5b  | Blog templates                           | in progress |
 | 5c  | Home, contact form and design polish     | not started |
 | 6   | Redirects and SEO parity                 | not started |
 | 7   | Production and editor workflow           | not started |
@@ -605,14 +605,17 @@ the decisions are logged in §3 (D-19 to D-21).
 
 ### Phase 5b — Blog templates
 
-- [ ] `/blog/` with an H1, `/blog/[slug]/`, `/blog/category/[slug]/` and `/blog/tag/[slug]/`.
+- [x] `/blog/` with an H1, `/blog/[slug]/`, `/blog/category/[slug]/` and `/blog/tag/[slug]/`.
       Pagination is optional, only if posts exceed one page.
-- [ ] Post template:
+- [x] Post template:
   - the featured image as the hero
   - category and date
   - the byline "Larchwick team"
   - related posts from the same category
   - previous/next links
+
+Built 2026-10-14: 22 blog pages (index, 10 posts, 3 categories, 8 tags) from one cached posts
+query and one terms query; posts carry `og:type` article, article times and BlogPosting JSON-LD.
 
 **Exit:** all 10 posts and every archive render.
 

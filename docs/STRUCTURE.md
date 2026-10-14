@@ -61,6 +61,7 @@ src/
 │   │   ├── home.ts             Home: SEO, hero, features, CTA
 │   │   └── not-found.ts        The 404 page
 │   ├── sanity/                 client.ts (fetch to the Sanity query API), queries.ts (defineQuery),
+│   │                           posts.ts (cached posts/terms, paths, related, archives),
 │   │                           image.ts (crop/hotspot URLs), sanity.types.ts (TypeGen; never edit)
 │   ├── seo/schema.ts           Typed JSON-LD builders (Organization, WebSite)
 │   └── types/icon.ts           Allowed icon names
