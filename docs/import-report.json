@@ -1,0 +1,113 @@
+{
+  "mode": "write",
+  "date": "2026-10-14",
+  "source": "docs/before/larchwick.WordPress.2026-10-07.xml",
+  "target": "zboja23d/production",
+  "media": {
+    "total": 30,
+    "existing": 0,
+    "uploaded": 30,
+    "pending": 0,
+    "missingAlt": []
+  },
+  "documents": {
+    "taxonomy": {
+      "total": 11,
+      "create": 11,
+      "patch": 0,
+      "unchanged": 0
+    },
+    "posts": {
+      "total": 10,
+      "create": 10,
+      "patch": 0,
+      "unchanged": 0
+    },
+    "pages": {
+      "total": 7,
+      "create": 7,
+      "patch": 0,
+      "unchanged": 0
+    },
+    "settings": {
+      "total": 1,
+      "create": 1,
+      "patch": 0,
+      "unchanged": 0
+    },
+    "redirects": {
+      "total": 43,
+      "create": 43,
+      "patch": 0,
+      "unchanged": 0
+    }
+  },
+  "mutations": 72,
+  "warnings": [
+    {
+      "where": "page \"About\"",
+      "message": "the cover heading was not an H1; the hero makes it the page H1"
+    }
+  ],
+  "links": [
+    {
+      "from": "/choosing-the-right-grind-size/",
+      "to": "/blog/choosing-the-right-grind-size/",
+      "reason": "post moved under /blog/",
+      "where": "post \"How to Brew Pour-Over at Home\""
+    },
+    {
+      "from": "/choosing-the-right-grind-size/",
+      "to": "/blog/choosing-the-right-grind-size/",
+      "reason": "post moved under /blog/",
+      "where": "post \"French Press: 5 Common Mistakes\""
+    },
+    {
+      "from": "/washed-vs-natural-process/",
+      "to": "/blog/washed-vs-natural-process/",
+      "reason": "post moved under /blog/",
+      "where": "post \"Colombia Huila: Our House Espresso Bean\""
+    },
+    {
+      "from": "/meet-our-new-roaster/",
+      "to": "/blog/meet-our-new-roaster/",
+      "reason": "post moved under /blog/",
+      "where": "page \"About\""
+    },
+    {
+      "from": "/contact",
+      "to": "/contact/",
+      "reason": "trailing slash added",
+      "where": "page \"Services\""
+    },
+    {
+      "from": "/choosing-the-right-grind-size/",
+      "to": "/blog/choosing-the-right-grind-size/",
+      "reason": "post moved under /blog/",
+      "where": "page \"Products\""
+    }
+  ],
+  "redirects": 43,
+  "skipped": [
+    {
+      "where": "page \"Home\"",
+      "reason": "built with Elementor (JSON widgets, not blocks); its sections are rebuilt by hand in Phase 5c. Title, slug and SEO are still imported."
+    },
+    {
+      "where": "post \"Hello world!\"",
+      "reason": "status \"trash\""
+    },
+    {
+      "where": "page \"Sample Page\"",
+      "reason": "status \"trash\""
+    },
+    {
+      "where": "page \"Privacy Policy\"",
+      "reason": "status \"trash\""
+    },
+    {
+      "where": "page \"Elementor #145\"",
+      "reason": "status \"trash\""
+    }
+  ]
+}
