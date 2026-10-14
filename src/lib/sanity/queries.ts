@@ -14,13 +14,32 @@ export const PAGE_QUERY = defineQuery(
   }`,
 )
 
-export const LATEST_POSTS_QUERY = defineQuery(
-  `*[_type == "post" && defined(slug.current)] | order(publishedAt desc)[0...$count]{
+export const POSTS_QUERY = defineQuery(
+  `*[_type == "post" && defined(slug.current)] | order(publishedAt desc){
     _id,
+    _updatedAt,
     title,
     "slug": slug.current,
     excerpt,
     publishedAt,
-    mainImage
+    mainImage,
+    body,
+    seo,
+    "categories": categories[]->{ _id, title, "slug": slug.current },
+    "tags": tags[]->{ _id, title, "slug": slug.current }
   }`,
+)
+
+export const TERMS_QUERY = defineQuery(
+  `*[_type in ["category", "tag"] && defined(slug.current)] | order(title asc){
+    _id,
+    _type,
+    title,
+    "slug": slug.current,
+    description
+  }`,
+)
+
+export const BLOG_PAGE_QUERY = defineQuery(
+  `*[_type == "page" && slug.current == "blog"][0]{ title, seo }`,
 )
