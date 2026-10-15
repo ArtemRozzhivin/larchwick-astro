@@ -21,6 +21,7 @@
     "credits": "node scripts/credits/build-credits.ts",
     "seo:crawl": "node scripts/seo-check/crawl.ts",
     "lighthouse:import": "node scripts/lighthouse-import/import.ts",
+    "test:worker": "node --test 'worker/**/*.test.ts'",
     "import:wp": "node --env-file-if-exists=.env scripts/import-wp/import.ts",
     "studio": "npm --prefix studio run dev",
     "studio:typegen": "npm --prefix studio run typegen",
