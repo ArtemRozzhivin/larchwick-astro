@@ -1,0 +1,39 @@
+---
+import Section, { type Tone } from './Section.astro'
+
+interface Row {
+  _key?: string
+  name?: string
+  description?: string
+  price?: string
+}
+
+interface Props {
+  id?: string
+  eyebrow?: string
+  heading?: string
+  intro?: string
+  rows: readonly Row[]
+  note?: string
+  tone?: Tone
+}
+
+const { id, eyebrow, heading, intro, rows, note, tone } = Astro.props
+---
+
+<Section id={id} eyebrow={eyebrow} heading={heading} intro={intro} tone={tone} width="narrow">
+  <dl class="divide-border border-y">
+    {
+      rows.map((row) => (
+        <div class="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 py-4">
+          <dt>
+            <span class="text-heading font-semibold">{row.name}</span>
+            {row.description && <span class="block text-sm">{row.description}</span>}
+          </dt>
+          <dd class="text-heading font-serif text-xl">{row.price}</dd>
+        </div>
+      ))
+    }
+  </dl>
+  {note && <p class="mt-4 text-sm">{note}</p>}
+</Section>

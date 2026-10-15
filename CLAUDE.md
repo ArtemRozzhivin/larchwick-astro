@@ -30,9 +30,10 @@ If a component genuinely seems to need interactivity, stop and ask first. Even a
 - **Fonts** — the Astro Fonts API (`fonts` in `astro.config.ts`, Fontsource provider) downloads DM Serif Display and Inter at build time and serves them from our own origin; `<Font>` in `Layout.astro` emits the `@font-face` rules and preloads. No font package and no Google Fonts link. DM Serif Display has only weight 400, so never put `font-medium`/`font-semibold`/`font-bold` on a `font-serif` heading (the browser fakes a bold).
 - **No zod in our code.** Astro's own zod is v4 (import it from `astro/zod` if ever needed), so the v4 API applies: `z.email()`, `z.url()`.
 - **Icons** — inline SVG in `src/components/ui/Icon.astro` (Lucide paths, ISC). A new icon is a name in `ICON_NAMES` plus its nodes; no icon package.
-- **Cloudflare Workers Static Assets** — `wrangler.jsonc` serves `dist/` with `html_handling: "force-trailing-slash"` (slashless URLs get a **307**, so the old WordPress URLs need explicit 301 rules in `_redirects`, Phase 6) and `not_found_handling: "404-page"`. Headers live in `public/_headers`; it sends `script-src 'none'`, so any script added later breaks until the CSP is updated. `X-Robots-Tag: noindex` stays until Phase 7. The Worker `name` must match the dashboard's.
+- **Cloudflare Workers Static Assets** — `wrangler.jsonc` serves `dist/` with `html_handling: "force-trailing-slash"` (slashless URLs get a **307**, so the old WordPress URLs need explicit 301 rules in `_redirects`, Phase 6) and `not_found_handling: "404-page"`. Headers live in `public/_headers`; it sends `script-src 'none'`, so any script added later breaks until the CSP is updated. `X-Robots-Tag: noindex` stays until Phase 7. The Worker `name` must match the dashboard's. `main: worker/index.ts` handles only `/api/*` (`run_worker_first`); the contact handler is tested with `npm run test:worker` (Node's built-in `node --test`, no Vitest at the root). Its secrets `RESEND_API_KEY` and `CONTACT_TO` live only in Cloudflare.
 - **Sanity Studio lives in `studio/`** with its own `package.json` (Sanity 6, React 19 for the Studio app only; the site ships no React). Root `tsconfig.json` excludes it; type-check it with `npm --prefix studio run check`. After any schema change run `npm run studio:typegen`, which rewrites `src/lib/sanity/sanity.types.ts` (generated, never edit by hand). Alt text lives on each image field (`accessibleImage`, `figure`), not on the asset.
-- **ESLint 10** flat config. `astro.config.ts` is TypeScript, so it can import `siteConfig`.
+- **The WordPress importer lives in `scripts/import-wp/`** with its own `scripts/package.json` (`@sanity/client`, the WordPress block parser, `htmlparser2`, Vitest). Root `tsconfig.json` excludes it; check it with `npm --prefix scripts run check` and `npm --prefix scripts test` (both run in CI). `npm run import:wp` is a dry run; only `--write` changes Sanity. It owns only fields WordPress supplies and never unsets, so Studio-only values survive a re-run (PLAN D-21).
+- **ESLint 10** flat config. The core unused-vars rule flags parameter names inside TypeScript function *types*; prefix those with `_`. `astro.config.ts` is TypeScript, so it can import `siteConfig`.
 </version_traps>
 
 <source_of_truth>
@@ -66,13 +67,17 @@ Trust implementation over documentation.
 </global_rules>
 
 <building_a_page>
-The fast path, in order. A new landing page should take one file plus one content object.
+Content pages live in Sanity, not in code. A `page` document with slug `<slug>` is built at `/<slug>/` by `src/pages/[slug].astro`, which renders its `sections[]` through `SectionRenderer.astro` (one `case` per section `_type`). A new page is made in the Studio; no code changes.
 
-1. Add the copy to `src/lib/content/<page>.ts` — one exported object, `as const`.
-2. Create `src/pages/<page>.astro`: import `Layout`, import the sections you need, spread the content into them.
-3. Only if no existing section fits, create a new one in `src/components/sections/`.
+A new section type, in order:
 
-Never inline copy into a section component, and never hardcode a brand name, URL, nav item, or contact detail — those come from `src/lib/config/site.ts`.
+1. Schema in `studio/schemaTypes/sections/`, added to `sectionTypes` and to `SECTION_TYPES`.
+2. A component in `src/components/sections/` whose props use the schema's field names (`heading`, `intro`, `text`, `items`, `tone`…), so the Sanity object spreads straight in.
+3. A `case` in `SectionRenderer.astro`, then `npm run studio:typegen`.
+
+Rich text goes through `src/components/rich-text/RichText.astro`; Sanity images through `src/components/ui/SanityImage.astro` (never a raw `cdn.sanity.io` URL in markup: the CSP only allows our own origin). Home is the `home` page document (rendered by `src/pages/index.astro`); the 404 and the contact result pages keep their copy in `src/lib/content/`. The menu, contact details, demo label and default description come from the **Site settings** document (`getSiteSettings()`); `src/lib/config/site.ts` keeps only the URL, language, titles, OG defaults and footer UI labels.
+
+Never inline copy into a section component, and never hardcode a brand name, URL, nav item, or contact detail — those come from Site settings or `src/lib/config/site.ts`.
 </building_a_page>
 
 <reuse_before_building>

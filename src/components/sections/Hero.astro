@@ -1,30 +1,69 @@
 ---
+import type { SanityImageValue } from '@lib/sanity/image'
 import { buttonVariants } from '@components/ui/button'
 import Icon from '@components/ui/Icon.astro'
+import SanityImage from '@components/ui/SanityImage.astro'
 
 interface Cta {
-  label: string
-  href: string
+  label?: string
+  href?: string
 }
 
 interface Props {
   id?: string
+  variant?: 'cover' | 'banner'
   eyebrow?: string
-  title: string
-  subtitle?: string
+  heading?: string
+  text?: string
+  image?: SanityImageValue
   primaryCta?: Cta
   secondaryCta?: Cta
-  points?: readonly string[]
+  trustList?: readonly string[]
+  priority?: boolean
 }
 
-const { id = 'hero', eyebrow, title, subtitle, primaryCta, secondaryCta, points = [] } = Astro.props
+const {
+  id = 'hero',
+  variant = 'cover',
+  eyebrow,
+  heading,
+  text,
+  image,
+  primaryCta,
+  secondaryCta,
+  trustList = [],
+  priority = false,
+} = Astro.props
 
-const hasCtas = Boolean(primaryCta || secondaryCta)
+const isBanner = variant === 'banner'
+const ctas = [primaryCta, secondaryCta].filter((cta) => cta?.href && cta.label)
+const backdrop = image ? { ...image, decorative: true } : undefined
 ---
 
-<section id={id} class="bg-dark text-subtle py-16 md:py-24">
+<section
+  id={id}
+  class:list={[
+    'bg-dark text-subtle relative isolate overflow-hidden',
+    isBanner ? 'py-20 md:py-28' : 'py-20 md:py-32',
+  ]}
+>
+  {
+    backdrop && (
+      <>
+        <SanityImage
+          image={backdrop}
+          widths={[640, 960, 1280, 1920, 2400]}
+          sizes="100vw"
+          aspectRatio={isBanner ? 3 : 2}
+          priority={priority}
+          class="absolute inset-0 -z-20 size-full object-cover"
+        />
+        <div class="bg-dark/70 absolute inset-0 -z-10" aria-hidden="true" />
+      </>
+    )
+  }
   <div class="container-wide">
-    <div class="max-w-2xl">
+    <div class:list={['max-w-2xl', isBanner && 'mx-auto text-center']}>
       {
         eyebrow && (
           <p class="text-brand mb-5 text-sm font-semibold tracking-widest text-balance uppercase">
@@ -34,37 +73,43 @@ const hasCtas = Boolean(primaryCta || secondaryCta)
       }
 
       <h1
-        class="text-surface font-serif text-4xl leading-tight text-balance sm:text-5xl lg:text-[3.5rem]"
+        class:list={[
+          'text-surface font-serif leading-tight text-balance',
+          isBanner ? 'text-4xl sm:text-5xl' : 'text-4xl sm:text-5xl lg:text-[3.5rem]',
+        ]}
       >
-        {title}
+        {heading}
       </h1>
 
-      {subtitle && <p class="mt-6 text-lg leading-relaxed text-pretty">{subtitle}</p>}
+      {text && <p class="mt-6 text-lg leading-relaxed text-pretty">{text}</p>}
 
       {
-        hasCtas && (
-          <div class="mt-9 flex flex-col gap-3 sm:flex-row">
-            {primaryCta && (
-              <a href={primaryCta.href} class={buttonVariants({ variant: 'inverse', size: 'lg' })}>
-                {primaryCta.label}
-              </a>
-            )}
-            {secondaryCta && (
+        ctas.length > 0 && (
+          <div class:list={['mt-9 flex flex-col gap-3 sm:flex-row', isBanner && 'justify-center']}>
+            {ctas.map((cta, index) => (
               <a
-                href={secondaryCta.href}
-                class={buttonVariants({ variant: 'inverse-outline', size: 'lg' })}
+                href={cta?.href}
+                class={buttonVariants({
+                  variant: index === 0 ? 'inverse' : 'inverse-outline',
+                  size: 'lg',
+                })}
               >
-                {secondaryCta.label}
+                {cta?.label}
               </a>
-            )}
+            ))}
           </div>
         )
       }
 
       {
-        points.length > 0 && (
-          <ul class="mt-8 flex flex-col gap-x-6 gap-y-2 text-sm sm:flex-row sm:flex-wrap">
-            {points.map((point) => (
+        trustList.length > 0 && (
+          <ul
+            class:list={[
+              'mt-8 flex flex-col gap-x-6 gap-y-2 text-sm sm:flex-row sm:flex-wrap',
+              isBanner && 'justify-center',
+            ]}
+          >
+            {trustList.map((point) => (
               <li class="flex items-center gap-2">
                 <Icon name="check" class="text-brand size-4 shrink-0" />
                 {point}

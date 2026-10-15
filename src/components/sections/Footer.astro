@@ -1,37 +1,12 @@
 ---
 import { siteConfig } from '@lib/config/site'
-import type { IconName } from '@lib/types'
+import { contactDetails, getSiteSettings } from '@lib/sanity/settings'
 import Icon from '@components/ui/Icon.astro'
 
-interface ContactItem {
-  icon: IconName
-  label: string
-  value: string
-  href: string
-}
-
-const { contact, footer, nav } = siteConfig
-
-const contactItems: readonly ContactItem[] = [
-  {
-    icon: 'mail',
-    label: footer.labels.email,
-    value: contact.email,
-    href: `mailto:${contact.email}`,
-  },
-  {
-    icon: 'mail',
-    label: footer.labels.wholesaleEmail,
-    value: contact.wholesaleEmail,
-    href: `mailto:${contact.wholesaleEmail}`,
-  },
-  {
-    icon: 'phone',
-    label: footer.labels.phone,
-    value: contact.phone,
-    href: `tel:${contact.phone.replace(/\s+/g, '')}`,
-  },
-]
+const { footer } = siteConfig
+const settings = await getSiteSettings()
+const { contact, navigation: nav } = settings
+const contactItems = contactDetails(contact, footer.labels)
 
 const HEADING = 'font-serif text-surface mb-4 text-xl'
 const LINK = 'hover:text-surface rounded-sm underline-offset-4 transition-colors hover:underline'
@@ -41,13 +16,13 @@ const LINK = 'hover:text-surface rounded-sm underline-offset-4 transition-colors
   <div class="container-wide grid gap-10 py-12 sm:grid-cols-2 md:py-16 lg:grid-cols-12 lg:gap-8">
     <div class="lg:col-span-4">
       <a href="/" class="text-surface rounded-sm font-serif text-2xl leading-none">
-        {siteConfig.name}
+        {settings.siteName}
       </a>
-      <p class="mt-4 max-w-xs">{siteConfig.description}</p>
+      <p class="mt-4 max-w-xs">{settings.description}</p>
       <p
         class="border-brand text-surface mt-6 inline-flex rounded-sm border px-3 py-1.5 font-medium"
       >
-        {footer.demoLabel}
+        {settings.demoLabel}
       </p>
     </div>
 

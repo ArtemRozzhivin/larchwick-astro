@@ -1,0 +1,30 @@
+---
+import { siteConfig } from '@lib/config/site'
+import { blog } from '@lib/content/blog'
+import { archivePaths, type Post, type Term, termLabel } from '@lib/sanity/posts'
+import BlogArchive from '@components/blog/BlogArchive.astro'
+import Layout from '@layouts/Layout.astro'
+
+interface Props {
+  term: Term
+  posts: Post[]
+}
+
+export const getStaticPaths = () => archivePaths('tag')
+
+const { term, posts } = Astro.props
+
+const label = termLabel(term.title)
+const title = `${label} | ${siteConfig.name} Blog`
+const description =
+  term.description ?? `Posts tagged "${label}" on the Larchwick Coffee Roasters blog.`
+---
+
+<Layout title={title} description={description}>
+  <BlogArchive
+    eyebrow={blog.tagLabel}
+    heading={label}
+    intro={term.description ?? undefined}
+    posts={posts}
+  />
+</Layout>

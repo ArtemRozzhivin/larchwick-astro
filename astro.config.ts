@@ -47,7 +47,18 @@ export default defineConfig({
     },
   ],
 
-  integrations: [sitemap()],
+  // Sanity images are downloaded at build time and re-encoded to AVIF/WebP under /_astro/,
+  // so pages load images from our own origin (the CSP allows img-src 'self' only).
+  image: {
+    remotePatterns: [{ protocol: 'https', hostname: 'cdn.sanity.io' }],
+  },
+
+  // The contact form's thank-you and error pages are noindex, so they stay out of the sitemap.
+  integrations: [
+    sitemap({
+      filter: (page) => !page.includes('/contact/thanks/') && !page.includes('/contact/error/'),
+    }),
+  ],
 
   vite: {
     plugins: [tailwindcss()],

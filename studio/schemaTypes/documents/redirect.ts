@@ -17,7 +17,7 @@ async function fromError(from: string | undefined, context: ValidationContext) {
     `{
       "duplicates": count(*[_type == "redirect" && from == $from && !(_id in [$id, $draftId])]),
       "routes": count(*[
-        (_type == "page" && "/" + slug.current + "/" == $from) ||
+        (_type == "page" && slug.current != "home" && "/" + slug.current + "/" == $from) ||
         (_type == "post" && "/blog/" + slug.current + "/" == $from)
       ])
     }`,

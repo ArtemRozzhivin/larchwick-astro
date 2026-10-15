@@ -15,11 +15,6 @@
 export declare const internalGroqTypeReferenceTo: unique symbol
 
 // Source: schema.json
-export type Disclaimer = {
-  _type: 'disclaimer'
-  text?: string
-}
-
 export type ContactForm = {
   _type: 'contactForm'
   heading?: string
@@ -111,6 +106,7 @@ export type CardGrid = {
       _type: 'spec'
       _key: string
     }>
+    points?: Array<string>
     price?: string
     cta?: LinkItem
     _type: 'card'
@@ -422,9 +418,6 @@ export type Page = {
       } & ContactForm)
     | ({
         _key: string
-      } & Disclaimer)
-    | ({
-        _key: string
       } & Quote)
   >
   seo?: Seo
@@ -573,7 +566,6 @@ export type Geopoint = {
 }
 
 export type AllSanitySchemaTypes =
-  | Disclaimer
   | ContactForm
   | Cta
   | LatestPosts
@@ -615,3 +607,131 @@ export type AllSanitySchemaTypes =
   | SanityAssetSourceData
   | SanityImageAsset
   | Geopoint
+
+// Source: ../src/lib/sanity/queries.ts
+// Variable: PAGE_SLUGS_QUERY
+// Query: *[_type == "page" && defined(slug.current) && !(slug.current in ["home", "blog"])].slug.current
+export type PAGE_SLUGS_QUERY_RESULT = Array<string | null>
+
+// Source: ../src/lib/sanity/queries.ts
+// Variable: PAGE_QUERY
+// Query: *[_type == "page" && slug.current == $slug][0]{    _id,    title,    "slug": slug.current,    seo,    sections  }
+export type PAGE_QUERY_RESULT = {
+  _id: string
+  title: string | null
+  slug: string | null
+  seo: Seo | null
+  sections: Array<
+    | ({
+        _key: string
+      } & CardGrid)
+    | ({
+        _key: string
+      } & ContactForm)
+    | ({
+        _key: string
+      } & Cta)
+    | ({
+        _key: string
+      } & Faq)
+    | ({
+        _key: string
+      } & FeatureGrid)
+    | ({
+        _key: string
+      } & Hero)
+    | ({
+        _key: string
+      } & ImageText)
+    | ({
+        _key: string
+      } & LatestPosts)
+    | ({
+        _key: string
+      } & PriceTable)
+    | ({
+        _key: string
+      } & Quote)
+    | ({
+        _key: string
+      } & Stats)
+    | ({
+        _key: string
+      } & Steps)
+    | ({
+        _key: string
+      } & TextBlock)
+  > | null
+} | null
+
+// Source: ../src/lib/sanity/queries.ts
+// Variable: POSTS_QUERY
+// Query: *[_type == "post" && defined(slug.current)] | order(publishedAt desc){    _id,    _updatedAt,    title,    "slug": slug.current,    excerpt,    publishedAt,    mainImage,    body,    seo,    "categories": categories[]->{ _id, title, "slug": slug.current },    "tags": tags[]->{ _id, title, "slug": slug.current }  }
+export type POSTS_QUERY_RESULT = Array<{
+  _id: string
+  _updatedAt: string
+  title: string | null
+  slug: string | null
+  excerpt: string | null
+  publishedAt: string | null
+  mainImage: AccessibleImage | null
+  body: BlockContent | null
+  seo: Seo | null
+  categories: Array<{
+    _id: string
+    title: string | null
+    slug: string | null
+  }> | null
+  tags: Array<{
+    _id: string
+    title: string | null
+    slug: string | null
+  }> | null
+}>
+
+// Source: ../src/lib/sanity/queries.ts
+// Variable: TERMS_QUERY
+// Query: *[_type in ["category", "tag"] && defined(slug.current)] | order(title asc){    _id,    _type,    title,    "slug": slug.current,    description  }
+export type TERMS_QUERY_RESULT = Array<
+  | {
+      _id: string
+      _type: 'category'
+      title: string | null
+      slug: string | null
+      description: string | null
+    }
+  | {
+      _id: string
+      _type: 'tag'
+      title: string | null
+      slug: string | null
+      description: string | null
+    }
+>
+
+// Source: ../src/lib/sanity/queries.ts
+// Variable: BLOG_PAGE_QUERY
+// Query: *[_type == "page" && slug.current == "blog"][0]{ title, seo }
+export type BLOG_PAGE_QUERY_RESULT = {
+  title: string | null
+  seo: Seo | null
+} | null
+
+// Source: ../src/lib/sanity/queries.ts
+// Variable: SETTINGS_QUERY
+// Query: *[_type == "siteSettings"][0]{    siteName,    description,    "navigation": navigation[]{ label, href },    contact,    demoLabel  }
+export type SETTINGS_QUERY_RESULT = {
+  siteName: string | null
+  description: string | null
+  navigation: Array<{
+    label: string | null
+    href: string | null
+  }> | null
+  contact: {
+    email?: string
+    wholesaleEmail?: string
+    phone?: string
+    hours?: Array<string>
+  } | null
+  demoLabel: string | null
+} | null

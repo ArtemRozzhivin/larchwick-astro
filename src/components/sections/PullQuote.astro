@@ -1,0 +1,21 @@
+---
+import Section, { type Tone } from './Section.astro'
+
+interface Props {
+  id?: string
+  text?: string
+  citation?: string
+  tone?: Tone
+}
+
+const { id, text, citation, tone } = Astro.props
+---
+
+<Section id={id} tone={tone} width="narrow">
+  <figure class="text-center">
+    <blockquote class="text-heading font-serif text-2xl leading-snug text-balance md:text-3xl">
+      <p>“{text}”</p>
+    </blockquote>
+    {citation && <figcaption class="mt-5">— {citation}</figcaption>}
+  </figure>
+</Section>

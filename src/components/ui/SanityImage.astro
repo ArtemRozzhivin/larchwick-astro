@@ -1,0 +1,34 @@
+---
+import { Picture } from 'astro:assets'
+
+import { imageSource, type SanityImageValue } from '@lib/sanity/image'
+
+interface Props {
+  image: SanityImageValue
+  widths: readonly number[]
+  sizes: string
+  aspectRatio?: number
+  priority?: boolean
+  class?: string
+}
+
+const { image, widths, sizes, aspectRatio, priority = false, class: className } = Astro.props
+
+const { src, width, height } = imageSource(image, Math.max(...widths), aspectRatio)
+const usableWidths = widths.filter((candidate) => candidate <= width)
+const alt = image.decorative ? '' : (image.alt ?? '')
+---
+
+<Picture
+  src={src}
+  width={width}
+  height={height}
+  widths={usableWidths.length > 0 ? usableWidths : [width]}
+  sizes={sizes}
+  formats={['avif', 'webp']}
+  fallbackFormat="jpg"
+  quality={75}
+  alt={alt}
+  priority={priority}
+  class={className}
+/>

@@ -1,0 +1,33 @@
+---
+import { getPosts } from '@lib/sanity/posts'
+import PostGrid from '@components/blog/PostGrid.astro'
+import { buttonVariants } from '@components/ui/button'
+
+import Section, { type Tone } from './Section.astro'
+
+interface Props {
+  id?: string
+  eyebrow?: string
+  heading?: string
+  count?: number
+  cta?: { label?: string; href?: string }
+  tone?: Tone
+}
+
+const { id, eyebrow, heading, count = 3, cta, tone } = Astro.props
+
+const posts = (await getPosts()).slice(0, count)
+---
+
+<Section id={id} eyebrow={eyebrow} heading={heading} tone={tone}>
+  <PostGrid posts={posts} headingLevel={heading ? 'h3' : 'h2'} />
+  {
+    cta?.href && cta.label && (
+      <div class="mt-10 text-center">
+        <a href={cta.href} class={buttonVariants({ variant: 'secondary' })}>
+          {cta.label}
+        </a>
+      </div>
+    )
+  }
+</Section>

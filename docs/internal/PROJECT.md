@@ -8,17 +8,16 @@ portfolio case study. The plan and the progress tracker are in [PLAN.md](../../P
 
 ## Pages
 
-| Route  | Page doc                 | Status  | Notes                                                                                                                                   |
-| ------ | ------------------------ | ------- | --------------------------------------------------------------------------------------------------------------------------------------- |
-| `/`    | [home](../pages/home.md) | partial | Larchwick brand: hero with its three promises, three features and the subscription call to action; the rest of the old home comes later |
-| `/404` | [404](../pages/404.md)   | real    | Header and footer, a large "404", links to Home, Blog and Contact; noindex                                                              |
+| Route                                                       | Page doc                                   | Status  | Notes                                                                                                                                   |
+| ----------------------------------------------------------- | ------------------------------------------ | ------- | --------------------------------------------------------------------------------------------------------------------------------------- |
+| `/`                                                         | [home](../pages/home.md)                   | partial | Larchwick brand: hero with its three promises, three features and the subscription call to action; the rest of the old home comes later |
+| `/404`                                                      | [404](../pages/404.md)                     | real    | Header and footer, a large "404", links to Home, Blog and Contact; noindex                                                              |
+| `/about/`, `/services/`, `/products/`, `/faq/`, `/contact/` | [content pages](../pages/content-pages.md) | real    | Sanity `page` documents rendered by `[slug].astro` + `SectionRenderer`                                                                  |
 
 `/robots.txt` and `/sitemap-index.xml` are generated at build time from the site
 config; they have no page doc.
 
-The navigation already links to `/about/`, `/services/`, `/products/`, `/blog/`, `/faq/` and
-`/contact/`, the old site's menu. Those pages are not built yet (Phases 5a–5c), so they show the
-404 page until then.
+The blog (Phase 5b) builds `/blog/`, the 10 posts and the category and tag archives from Sanity.
 
 ## Still placeholder
 
@@ -40,9 +39,10 @@ The site ships zero client JavaScript: no React, no view transitions, no prefetc
 
 Content model (Phase 3): Sanity project `zboja23d`, public `production` dataset, edited in the
 Studio in `studio/` (`npm run studio`, http://localhost:3333). Documents: page (built from 14
-section types), post, category, tag, site settings (singleton) and redirect. The pages do not
-read from Sanity yet: the import script (Phase 4) fills the dataset and the data layer (Phase 5a)
-renders it.
+section types), post, category, tag, site settings (singleton) and redirect. The import script
+(Phase 4) has filled the dataset: 10 posts, 7 pages, 3 categories, 8 tags, site settings, 43
+redirects and 30 images with alt text. Every page now comes from Sanity at build time (plain `fetch`, public dataset, no token): Home,
+the content pages and the blog. The menu, footer and contact details come from Site settings. The Studio is deployed at https://larchwick.sanity.studio (login required).
 
 The brand foundation (Phase 2b) is in: the 9 colour tokens from the old site, DM Serif Display
 and Inter self-hosted through the Astro Fonts API, the Larchwick favicon and the `og.jpg` social

@@ -3,7 +3,7 @@
  * The mobile menu is built on <details>/<summary>: no JavaScript and no
  * hydration, so it costs nothing on load.
  */
-import { siteConfig } from '@lib/config/site'
+import { getSiteSettings } from '@lib/sanity/settings'
 import Icon from '@components/ui/Icon.astro'
 
 type AriaCurrent = 'page' | 'true' | undefined
@@ -16,7 +16,11 @@ function getAriaCurrent(href: string): AriaCurrent {
   return undefined
 }
 
-const navItems = siteConfig.nav.map((item) => ({ ...item, current: getAriaCurrent(item.href) }))
+const settings = await getSiteSettings()
+const navItems = settings.navigation.map((item) => ({
+  ...item,
+  current: getAriaCurrent(item.href),
+}))
 
 const LINK_BASE =
   'rounded-sm decoration-2 underline-offset-8 transition-colors hover:text-brand-dark aria-[current]:text-brand-dark aria-[current]:underline aria-[current]:decoration-brand'
@@ -25,7 +29,7 @@ const LINK_BASE =
 <header class="border-border bg-surface relative border-b">
   <div class="container-wide flex h-16 items-center justify-between gap-6 md:h-20">
     <a href="/" class="text-heading rounded-sm font-serif text-2xl leading-none md:text-[1.75rem]">
-      {siteConfig.name}
+      {settings.siteName}
     </a>
 
     <nav aria-label="Main" class="hidden md:block">

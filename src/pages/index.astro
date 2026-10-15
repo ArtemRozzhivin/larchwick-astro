@@ -1,21 +1,30 @@
 ---
-/**
- * A landing page is just a Layout plus an ordered list of sections.
- * All copy comes from src/lib/content/home.ts — reorder, drop, or duplicate the
- * blocks below to reshape the page without touching a component.
- */
-import { home } from '@lib/content/home'
+import { siteConfig } from '@lib/config/site'
+import { sanityFetch } from '@lib/sanity/client'
+import { imageSource } from '@lib/sanity/image'
+import { PAGE_QUERY } from '@lib/sanity/queries'
+import type { PAGE_QUERY_RESULT } from '@lib/sanity/sanity.types'
+import { getSiteSettings } from '@lib/sanity/settings'
 import { organizationSchema, websiteSchema } from '@lib/seo/schema'
-import CTA from '@components/sections/CTA.astro'
-import Features from '@components/sections/Features.astro'
-import Hero from '@components/sections/Hero.astro'
+import SectionRenderer from '@components/sections/SectionRenderer.astro'
 import Layout from '@layouts/Layout.astro'
 
-const jsonLd = [organizationSchema(), websiteSchema()]
+const [page, settings] = await Promise.all([
+  sanityFetch<PAGE_QUERY_RESULT>(PAGE_QUERY, { slug: 'home' }),
+  getSiteSettings(),
+])
+if (!page) throw new Error('Sanity has no page with slug "home"')
+
+const seo = page.seo
+const ogImage = seo?.ogImage?.asset ? imageSource(seo.ogImage, 1200, 1200 / 630).src : undefined
+const jsonLd = [organizationSchema(settings), websiteSchema(settings)]
 ---
 
-<Layout {...home.seo} jsonLd={jsonLd}>
-  <Hero {...home.hero} />
-  <Features {...home.features} />
-  <CTA {...home.cta} />
+<Layout
+  title={seo?.metaTitle ?? siteConfig.title}
+  description={seo?.metaDescription ?? undefined}
+  ogImage={ogImage}
+  jsonLd={jsonLd}
+>
+  <SectionRenderer sections={page.sections ?? []} />
 </Layout>
