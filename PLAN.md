@@ -5,7 +5,7 @@ time**. Each phase ends with a short "what we did / what's next" and Artem's go-
 next one starts. Tick the boxes as work lands, and log every decision in
 [Decisions](#3-decisions).
 
-Last updated: 2026-10-14 · Current phase: **Phase 5a — not started**
+Last updated: 2026-10-14 · Current phase: **Phase 5a — in progress**
 
 | #   | Phase                                    | Status      |
 | --- | ---------------------------------------- | ----------- |
@@ -13,10 +13,10 @@ Last updated: 2026-10-14 · Current phase: **Phase 5a — not started**
 | 1   | Measure the "before" site properly       | in progress |
 | 2a  | Astro 7 upgrade and template cleanup     | done        |
 | 2b  | Brand foundation (tokens, fonts, layout) | done        |
-| 2c  | First Cloudflare deploy                  | in progress |
+| 2c  | First Cloudflare deploy                  | done        |
 | 3   | Sanity setup and content model           | done        |
 | 4   | Import script                            | done        |
-| 5a  | Data layer and page rendering            | not started |
+| 5a  | Data layer and page rendering            | in progress |
 | 5b  | Blog templates                           | not started |
 | 5c  | Home, contact form and design polish     | not started |
 | 6   | Redirects and SEO parity                 | not started |
@@ -106,6 +106,7 @@ means rewriting history. Phase 0 makes it compliant before anything else is push
 | 2026-10-14 | **D-20** Our own HTML → Portable Text converter on `htmlparser2`, not `@portabletext/block-tools` + jsdom. Packages: `@sanity/client`, `@wordpress/block-serialization-default-parser`, `htmlparser2`, `vitest` | Only 13 block types occur; a small converter is easier to read and test than a generic one plus a large DOM. Artem approved the four packages.                                                                                                                                                                                                                                                                                                                                                               |
 | 2026-10-14 | **D-21** The importer owns only fields WordPress supplies (per subfield for `seo` and `mainImage`), never unsets, and skips drafts                                                                              | The pre-write review showed whole-field ownership would wipe Studio-only values (noindex, canonical, crops, descriptions) on a re-run.                                                                                                                                                                                                                                                                                                                                                                       |
 | 2026-10-14 | Photos 120 and 133 show real brands; import them as on WordPress and replace both in Phase 5c                                                                                                                   | Ground rule: no real company's logo. They were already on the old site, so the import stays faithful; the swap is a tracked 5c task. Artem agreed.                                                                                                                                                                                                                                                                                                                                                           |
+| 2026-10-14 | Site data layer: plain `fetch` to Sanity's query API, plus `groq`, `@sanity/image-url` and `astro-portabletext` (no `@sanity/client` in the site)                                                               | Build-time, read-only queries on a public dataset need no client library; the three packages give typed queries, crop/hotspot-aware image URLs and zero-JS rich text. Artem approved.                                                                                                                                                                                                                                                                                                                        |
 
 ### Open
 
@@ -466,7 +467,7 @@ changed (contrast numbers).
   2. Branch pushes create preview versions.
   3. **Production builds when a PR is merged into `main`.** The pre-push hook blocks direct
      pushes to `main`.
-- [ ] Check with `curl -I` on `*.workers.dev`: `/about` → 307 → `/about/`, a real 404 status, the
+- [x] Check with `curl -I` on `*.workers.dev` (2026-10-14, after the dev → main merge): `/about` → 307 → `/about/`, a real 404 status, the
       headers, and that noindex is present.
 
 **Exit:** the shell is live on `workers.dev`, noindexed, and the docs match the code.
@@ -590,13 +591,15 @@ the decisions are logged in §3 (D-19 to D-21).
 ### Phase 5a — Data layer and page rendering
 
 - [x] Fill in all 30 alt texts (in `alt-text.json`, imported 2026-10-14, per D-14).
-- [ ] `src/lib/sanity/`: the client, typed GROQ queries and `siteSettings` helpers. Set the Sanity
-      env in `ci.yml` and in Workers Builds in the same PR as the first query.
-- [ ] Image component: Sanity image → Astro `<Picture>`, honouring crop and hotspot
-      (`@sanity/image-url` v2). AVIF/WebP, sensible widths, `priority` only on the LCP hero.
-- [ ] Portable Text renderer: table, gallery, callout and quote.
-- [ ] `SectionRenderer`: each `_type` → its section, following the section contract.
-- [ ] Routes: `/` and `[slug]` pages, plus 404.
+- [x] `src/lib/sanity/`: `client.ts` (plain `fetch` to the query API; the public dataset needs no
+      token, so no env in CI or Workers Builds), typed GROQ queries (`defineQuery` + TypeGen
+      result types). `siteSettings` helpers move to 5c, with the header and footer.
+- [x] Image component: Sanity image → Astro `<Picture>`, honouring crop and hotspot
+      (`@sanity/image-url` v2). AVIF/WebP with a JPEG fallback, sensible widths, `priority` only on
+      the LCP hero.
+- [x] Portable Text renderer (`astro-portabletext`): figure, table, gallery, callout, quote, links.
+- [x] `SectionRenderer`: each `_type` → its section, following the section contract.
+- [x] Routes: `[slug]` for every page except `home` and `blog`, plus 404. `/` stays code until 5c.
 
 **Exit:** every imported page renders, and verify and build pass.
 

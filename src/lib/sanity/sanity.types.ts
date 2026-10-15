@@ -616,3 +616,74 @@ export type AllSanitySchemaTypes =
   | SanityAssetSourceData
   | SanityImageAsset
   | Geopoint
+
+// Source: ../src/lib/sanity/queries.ts
+// Variable: PAGE_SLUGS_QUERY
+// Query: *[_type == "page" && defined(slug.current) && !(slug.current in ["home", "blog"])].slug.current
+export type PAGE_SLUGS_QUERY_RESULT = Array<string | null>
+
+// Source: ../src/lib/sanity/queries.ts
+// Variable: PAGE_QUERY
+// Query: *[_type == "page" && slug.current == $slug][0]{    _id,    title,    "slug": slug.current,    seo,    sections  }
+export type PAGE_QUERY_RESULT = {
+  _id: string
+  title: string | null
+  slug: string | null
+  seo: Seo | null
+  sections: Array<
+    | ({
+        _key: string
+      } & CardGrid)
+    | ({
+        _key: string
+      } & ContactForm)
+    | ({
+        _key: string
+      } & Cta)
+    | ({
+        _key: string
+      } & Disclaimer)
+    | ({
+        _key: string
+      } & Faq)
+    | ({
+        _key: string
+      } & FeatureGrid)
+    | ({
+        _key: string
+      } & Hero)
+    | ({
+        _key: string
+      } & ImageText)
+    | ({
+        _key: string
+      } & LatestPosts)
+    | ({
+        _key: string
+      } & PriceTable)
+    | ({
+        _key: string
+      } & Quote)
+    | ({
+        _key: string
+      } & Stats)
+    | ({
+        _key: string
+      } & Steps)
+    | ({
+        _key: string
+      } & TextBlock)
+  > | null
+} | null
+
+// Source: ../src/lib/sanity/queries.ts
+// Variable: LATEST_POSTS_QUERY
+// Query: *[_type == "post" && defined(slug.current)] | order(publishedAt desc)[0...$count]{    _id,    title,    "slug": slug.current,    excerpt,    publishedAt,    mainImage  }
+export type LATEST_POSTS_QUERY_RESULT = Array<{
+  _id: string
+  title: string | null
+  slug: string | null
+  excerpt: string | null
+  publishedAt: string | null
+  mainImage: AccessibleImage | null
+}>

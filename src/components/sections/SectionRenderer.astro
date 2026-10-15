@@ -1,0 +1,63 @@
+---
+import type { PAGE_QUERY_RESULT } from '@lib/sanity/sanity.types'
+
+import CardGrid from './CardGrid.astro'
+import ContactForm from './ContactForm.astro'
+import CTA from './CTA.astro'
+import Disclaimer from './Disclaimer.astro'
+import FAQ from './FAQ.astro'
+import Features from './Features.astro'
+import Hero from './Hero.astro'
+import ImageText from './ImageText.astro'
+import LatestPosts from './LatestPosts.astro'
+import PriceTable from './PriceTable.astro'
+import PullQuote from './PullQuote.astro'
+import Stats from './Stats.astro'
+import Steps from './Steps.astro'
+import TextBlock from './TextBlock.astro'
+
+type Sections = NonNullable<NonNullable<PAGE_QUERY_RESULT>['sections']>
+
+interface Props {
+  sections: Sections
+}
+
+const { sections } = Astro.props
+---
+
+{
+  sections.map((section, index) => {
+    switch (section._type) {
+      case 'hero':
+        return <Hero {...section} priority={index === 0} />
+      case 'textBlock':
+        return <TextBlock {...section} />
+      case 'imageText':
+        return <ImageText {...section} />
+      case 'featureGrid':
+        return <Features {...section} items={section.items ?? []} />
+      case 'stats':
+        return <Stats {...section} items={section.items ?? []} />
+      case 'cardGrid':
+        return <CardGrid {...section} cards={section.cards ?? []} />
+      case 'priceTable':
+        return <PriceTable {...section} rows={section.rows ?? []} />
+      case 'faq':
+        return <FAQ {...section} groups={section.groups ?? []} />
+      case 'steps':
+        return <Steps {...section} items={section.items ?? []} />
+      case 'latestPosts':
+        return <LatestPosts {...section} />
+      case 'cta':
+        return <CTA {...section} />
+      case 'contactForm':
+        return <ContactForm {...section} />
+      case 'quote':
+        return <PullQuote {...section} />
+      case 'disclaimer':
+        return <Disclaimer {...section} />
+      default:
+        return null
+    }
+  })
+}

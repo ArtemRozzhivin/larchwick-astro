@@ -1,0 +1,48 @@
+---
+import type { Props as NodeProps } from 'astro-portabletext/types'
+
+import type { Table as TableValue } from '@lib/sanity/sanity.types'
+
+type Props = NodeProps<TableValue & { _key: string }>
+
+const { node } = Astro.props
+
+const rows = node.rows ?? []
+const [head, ...body] = node.headerRow ? rows : [undefined, ...rows]
+---
+
+<div class="my-8 overflow-x-auto">
+  <table class="w-full border-collapse text-left text-sm md:text-base">
+    {node.caption && <caption class="mb-2 text-left text-sm">{node.caption}</caption>}
+    {
+      head && (
+        <thead>
+          <tr class="border-heading border-b-2">
+            {(head.cells ?? []).map((cell) => (
+              <th scope="col" class="text-heading py-2 pr-4 font-semibold">
+                {cell}
+              </th>
+            ))}
+          </tr>
+        </thead>
+      )
+    }
+    <tbody>
+      {
+        body.map((row) => (
+          <tr class="border-b">
+            {(row?.cells ?? []).map((cell, index) =>
+              index === 0 ? (
+                <th scope="row" class="text-heading py-2 pr-4 font-medium">
+                  {cell}
+                </th>
+              ) : (
+                <td class="py-2 pr-4">{cell}</td>
+              ),
+            )}
+          </tr>
+        ))
+      }
+    </tbody>
+  </table>
+</div>

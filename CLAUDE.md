@@ -67,11 +67,15 @@ Trust implementation over documentation.
 </global_rules>
 
 <building_a_page>
-The fast path, in order. A new landing page should take one file plus one content object.
+Content pages live in Sanity, not in code. A `page` document with slug `<slug>` is built at `/<slug>/` by `src/pages/[slug].astro`, which renders its `sections[]` through `SectionRenderer.astro` (one `case` per section `_type`). A new page is made in the Studio; no code changes.
 
-1. Add the copy to `src/lib/content/<page>.ts` — one exported object, `as const`.
-2. Create `src/pages/<page>.astro`: import `Layout`, import the sections you need, spread the content into them.
-3. Only if no existing section fits, create a new one in `src/components/sections/`.
+A new section type, in order:
+
+1. Schema in `studio/schemaTypes/sections/`, added to `sectionTypes` and to `SECTION_TYPES`.
+2. A component in `src/components/sections/` whose props use the schema's field names (`heading`, `intro`, `text`, `items`, `tone`…), so the Sanity object spreads straight in.
+3. A `case` in `SectionRenderer.astro`, then `npm run studio:typegen`.
+
+Rich text goes through `src/components/rich-text/RichText.astro`; Sanity images through `src/components/ui/SanityImage.astro` (never a raw `cdn.sanity.io` URL in markup: the CSP only allows our own origin). Home (`src/lib/content/home.ts`) and the 404 (`not-found.ts`) are still code until Phase 5c.
 
 Never inline copy into a section component, and never hardcode a brand name, URL, nav item, or contact detail — those come from `src/lib/config/site.ts`.
 </building_a_page>

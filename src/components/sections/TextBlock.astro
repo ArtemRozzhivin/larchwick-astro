@@ -1,0 +1,20 @@
+---
+import type { BlockContent } from '@lib/sanity/sanity.types'
+import RichText from '@components/rich-text/RichText.astro'
+
+import Section, { type Tone } from './Section.astro'
+
+interface Props {
+  id?: string
+  eyebrow?: string
+  heading?: string
+  body?: BlockContent
+  tone?: Tone
+}
+
+const { id, eyebrow, heading, body = [], tone } = Astro.props
+---
+
+<Section id={id} eyebrow={eyebrow} heading={heading} tone={tone} align="left" width="narrow">
+  <RichText value={body} class="text-lg" />
+</Section>

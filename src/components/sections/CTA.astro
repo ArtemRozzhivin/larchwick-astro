@@ -1,40 +1,39 @@
 ---
 import { buttonVariants } from '@components/ui/button'
 
-import Section from './Section.astro'
+import Section, { type Tone } from './Section.astro'
 
 interface Cta {
-  label: string
-  href: string
+  label?: string
+  href?: string
 }
 
 interface Props {
   id?: string
-  title: string
-  subtitle?: string
+  heading?: string
+  text?: string
   primaryCta?: Cta
   secondaryCta?: Cta
+  tone?: Tone
 }
 
-const { id = 'cta', title, subtitle, primaryCta, secondaryCta } = Astro.props
+const { id = 'cta', heading, text, primaryCta, secondaryCta, tone = 'muted' } = Astro.props
 
-const hasCtas = Boolean(primaryCta || secondaryCta)
+const ctas = [primaryCta, secondaryCta].filter((cta) => cta?.href && cta.label)
 ---
 
-<Section id={id} title={title} subtitle={subtitle} tone="muted">
+<Section id={id} heading={heading} intro={text} tone={tone}>
   {
-    hasCtas && (
+    ctas.length > 0 && (
       <div class="flex flex-col items-center justify-center gap-3 sm:flex-row">
-        {primaryCta && (
-          <a href={primaryCta.href} class={buttonVariants({ variant: 'primary', size: 'lg' })}>
-            {primaryCta.label}
+        {ctas.map((cta, index) => (
+          <a
+            href={cta?.href}
+            class={buttonVariants({ variant: index === 0 ? 'primary' : 'secondary', size: 'lg' })}
+          >
+            {cta?.label}
           </a>
-        )}
-        {secondaryCta && (
-          <a href={secondaryCta.href} class={buttonVariants({ variant: 'secondary', size: 'lg' })}>
-            {secondaryCta.label}
-          </a>
-        )}
+        ))}
       </div>
     )
   }
