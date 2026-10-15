@@ -27,7 +27,7 @@ const MUTED_BACKGROUNDS = new Set([
   'ast-global-color-7',
 ])
 const DARK_BACKGROUNDS = new Set(['ast-global-color-2', 'ast-global-color-6'])
-const DISCLAIMER = /fictional|placeholder/i
+const FICTIONAL_NOTE = /fictional|placeholder/i
 const SPEC = /^([^:]{1,40}):\s*(.+)$/
 const CONTACT_FIELDS: readonly [RegExp, keyof ContactDetails][] = [
   [/wholesale/i, 'wholesaleEmail'],
@@ -73,10 +73,16 @@ function toneOf(color: string | undefined): 'muted' | 'inverted' | undefined {
   return undefined
 }
 
-function isDisclaimer(block: Block): boolean {
+function isFictionalNote(block: Block): boolean {
   if (block.name !== 'paragraph') return false
   const nodes = innerOf(block.html, 'p')
-  return isItalicOnly(nodes) && DISCLAIMER.test(textOf(nodes))
+  return isItalicOnly(nodes) && FICTIONAL_NOTE.test(textOf(nodes))
+}
+
+function dropNote(block: Block, context: ConvertContext): void {
+  context.skip(
+    `fictional-business note dropped: "${paragraphText(block, context)}" (the footer's demo label covers it)`,
+  )
 }
 
 function image(wpId: number | undefined, context: ConvertContext, decorative = false) {
@@ -327,9 +333,9 @@ function trailing(blocks: readonly Block[], context: ConvertContext): Section[] 
     loose = []
   }
   for (const block of blocks) {
-    if (isDisclaimer(block)) {
+    if (isFictionalNote(block)) {
       flush()
-      sections.push(section('disclaimer', context, { text: paragraphText(block, context) }))
+      dropNote(block, context)
     } else if (block.name === 'quote') {
       flush()
       const value = quote(block, context)
@@ -374,14 +380,13 @@ function groupSections(group: Block, context: ConvertContext): Section[] {
   if (rest.length === 1 && first?.name === 'list' && first.attrs.ordered === true) {
     return stepsSection(first, context, heading)
   }
-  const disclaimers = rest.filter(isDisclaimer)
-  const content = rest.filter((block) => !isDisclaimer(block))
-  return [
-    ...textSection(heading, content, context, tone),
-    ...disclaimers.map((block) =>
-      section('disclaimer', context, { text: paragraphText(block, context) }),
-    ),
-  ]
+  for (const block of rest.filter(isFictionalNote)) dropNote(block, context)
+  return textSection(
+    heading,
+    rest.filter((block) => !isFictionalNote(block)),
+    context,
+    tone,
+  )
 }
 
 function hero(cover: Block, context: ConvertContext): Section {

@@ -1,3 +1,4 @@
+import type { MediaAsset } from './types.ts'
 import type { WxrItem } from './wxr.ts'
 
 export interface AltEntry {
@@ -50,4 +51,16 @@ export function mediaItems(
 
 export function creditLine(credit: Credit | undefined): string | undefined {
   return credit ? `${credit.photographer} / Unsplash` : undefined
+}
+
+export interface MediaSwap {
+  use: number
+  reason: string
+}
+
+export function withSwaps(
+  lookup: (_wpId: number) => MediaAsset | undefined,
+  swaps: Readonly<Record<string, MediaSwap>>,
+): (_wpId: number) => MediaAsset | undefined {
+  return (wpId) => lookup(swaps[String(wpId)]?.use ?? wpId)
 }

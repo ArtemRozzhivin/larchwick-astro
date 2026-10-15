@@ -3,7 +3,7 @@ import { resolve } from 'node:path'
 import { describe, expect, it } from 'vitest'
 
 import { buildDocuments, type DesiredDoc } from './documents.ts'
-import { type AltEntry, mediaItems, parseCredits } from './media.ts'
+import { type AltEntry, mediaItems, type MediaSwap, parseCredits, withSwaps } from './media.ts'
 import { planMutations, stable } from './sync.ts'
 import { ORIGIN } from './testing.ts'
 import { parseWxr } from './wxr.ts'
@@ -20,13 +20,16 @@ const media = mediaItems(
   altText,
   parseCredits(readFileSync(resolve(ROOT, 'CREDITS.md'), 'utf8')),
 )
+const swaps = JSON.parse(
+  readFileSync(resolve(import.meta.dirname, 'media-swaps.json'), 'utf8'),
+) as Record<string, MediaSwap>
 const build = () =>
   buildDocuments(wxr, {
     origin: ORIGIN,
-    media: (wpId) => {
+    media: withSwaps((wpId) => {
       const item = media.find((candidate) => candidate.wpId === wpId)
       return item && { assetId: `image-${wpId}`, alt: item.alt }
-    },
+    }, swaps),
   })
 
 describe('the real WordPress export', () => {
@@ -158,5 +161,22 @@ describe('the real WordPress export', () => {
   it('keeps single link fields free of array keys', () => {
     const text = JSON.stringify(build().docs.map((item) => item.doc))
     expect(text).not.toMatch(/"(cta|primaryCta|secondaryCta)":\{"_type":"linkItem","_key"/)
+  })
+  it('replaces the two real-brand photos everywhere they are used', () => {
+    const text = JSON.stringify(build().docs.map((item) => item.doc))
+    expect(text).not.toMatch(/"image-(120|133)"/)
+    const services = build().docs.find((item) => item.doc._id === 'wp-page-67')!
+    const hero = (
+      services.doc.sections as { _type: string; image?: { asset: { _ref: string } } }[]
+    )[0]
+    expect(hero.image?.asset._ref).toBe('image-118')
+  })
+
+  it('imports no fictional-business notes as sections', () => {
+    const text = JSON.stringify(build().docs.map((item) => item.doc))
+    expect(text).not.toMatch(/"_type":"disclaimer"/)
+    expect(
+      build().skipped.filter((item) => item.reason.startsWith('fictional-business note')),
+    ).toHaveLength(2)
   })
 })

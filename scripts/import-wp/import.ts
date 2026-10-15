@@ -4,7 +4,7 @@ import { parseArgs } from 'node:util'
 
 import { apiVersion, dataset, projectId } from '../../studio/env.ts'
 import { buildDocuments, type DesiredDoc, type Group, GROUPS } from './documents.ts'
-import { type AltEntry, mediaItems, parseCredits } from './media.ts'
+import { type AltEntry, mediaItems, type MediaSwap, parseCredits, withSwaps } from './media.ts'
 import { type Report, summarise, toCsv, toMarkdown } from './report.ts'
 import { commit, existingAssets, existingDocuments, sanityClient, uploadAsset } from './sanity.ts'
 import { planMutations } from './sync.ts'
@@ -74,13 +74,22 @@ async function main(): Promise<void> {
       console.log(`  uploaded media ${item.wpId} (${item.filename})`)
     }
   }
-  const lookup = (wpId: number): MediaAsset | undefined => {
+  const swaps = JSON.parse(
+    readFileSync(resolve(import.meta.dirname, 'media-swaps.json'), 'utf8'),
+  ) as Record<string, MediaSwap>
+  const lookup = withSwaps((wpId: number): MediaAsset | undefined => {
     const item = media.find((candidate) => candidate.wpId === wpId)
     if (!item) return undefined
     return { assetId: assets.get(wpId) ?? `image-pending-wp-${wpId}`, alt: item.alt }
-  }
+  }, swaps)
 
   const built = buildDocuments(wxr, { origin: options.origin, media: lookup, limit: options.limit })
+  for (const [from, swap] of Object.entries(swaps)) {
+    built.skipped.push({
+      where: `media ${from}`,
+      reason: `replaced by media ${swap.use}: ${swap.reason}`,
+    })
+  }
   const selected: DesiredDoc[] = built.docs.filter((item) => options.only.has(item.group as Group))
   const existing = await existingDocuments(
     client,

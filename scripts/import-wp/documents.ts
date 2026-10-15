@@ -134,6 +134,7 @@ export function buildDocuments(wxr: Wxr, options: BuildOptions): Built {
     media: options.media,
     href: (href) => rewriteHref(href, rules, (change) => links.push({ ...change, where })),
     warn: (message) => warnings.push({ where, message }),
+    skip: (reason) => skipped.push({ where, reason }),
     contact,
   })
 

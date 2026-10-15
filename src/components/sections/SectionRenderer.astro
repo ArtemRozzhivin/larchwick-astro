@@ -4,7 +4,6 @@ import type { PAGE_QUERY_RESULT } from '@lib/sanity/sanity.types'
 import CardGrid from './CardGrid.astro'
 import ContactForm from './ContactForm.astro'
 import CTA from './CTA.astro'
-import Disclaimer from './Disclaimer.astro'
 import FAQ from './FAQ.astro'
 import Features from './Features.astro'
 import Hero from './Hero.astro'
@@ -54,8 +53,6 @@ const { sections } = Astro.props
         return <ContactForm {...section} />
       case 'quote':
         return <PullQuote {...section} />
-      case 'disclaimer':
-        return <Disclaimer {...section} />
       default:
         return null
     }
