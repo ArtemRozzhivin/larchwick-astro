@@ -41,8 +41,8 @@ Content model (Phase 3): Sanity project `zboja23d`, public `production` dataset,
 Studio in `studio/` (`npm run studio`, http://localhost:3333). Documents: page (built from 14
 section types), post, category, tag, site settings (singleton) and redirect. The import script
 (Phase 4) has filled the dataset: 10 posts, 7 pages, 3 categories, 8 tags, site settings, 43
-redirects and 30 images with alt text. Since Phase 5a the site builds its content pages from Sanity at build time (plain `fetch`, public
-dataset, no token); Home and the blog follow in 5b and 5c. The Studio is deployed at https://larchwick.sanity.studio (login required).
+redirects and 30 images with alt text. Every page now comes from Sanity at build time (plain `fetch`, public dataset, no token): Home,
+the content pages and the blog. The menu, footer and contact details come from Site settings. The Studio is deployed at https://larchwick.sanity.studio (login required).
 
 The brand foundation (Phase 2b) is in: the 9 colour tokens from the old site, DM Serif Display
 and Inter self-hosted through the Astro Fonts API, the Larchwick favicon and the `og.jpg` social

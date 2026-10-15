@@ -20,8 +20,10 @@ disclaimer. The first section is the hero, which holds the page's only H1.
 ## Key interactions
 
 - FAQ questions open and close without JavaScript (`<details>`).
-- The contact form posts to `/api/contact`. The endpoint that sends the email arrives in Phase 5c;
-  until then the form has nowhere to send to.
+- The contact form posts to `/api/contact`, a small Cloudflare Worker that checks the fields and
+  the hidden honeypot, sends the message through Resend, and redirects to `/contact/thanks/` or
+  `/contact/error/` (both noindex, not in the sitemap). Copy for those two pages is in
+  `src/lib/content/contact.ts`.
 
 ## Content owner
 
@@ -30,6 +32,6 @@ next build; publishing will trigger that build automatically from Phase 7.
 
 ## Known limitations
 
-- The contact details next to the form still come from `src/lib/config/site.ts`, not Site settings
-  (Phase 5c).
-- Photo 120 on Services shows a real brand and is replaced in Phase 5c.
+- Messages only reach the inbox once Artem has set the Worker secrets `RESEND_API_KEY` and
+  `CONTACT_TO`. Resend's test sender delivers only to the Resend account owner.
+- There is no rate limit beyond Resend's 100 emails a day.
