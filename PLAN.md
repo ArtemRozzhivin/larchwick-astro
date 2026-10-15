@@ -5,7 +5,7 @@ time**. Each phase ends with a short "what we did / what's next" and Artem's go-
 next one starts. Tick the boxes as work lands, and log every decision in
 [Decisions](#3-decisions).
 
-Last updated: 2026-10-14 · Current phase: **Phase 5b — in progress**
+Last updated: 2026-10-14 · Current phase: **Phase 5c — in progress**
 
 | #   | Phase                                    | Status      |
 | --- | ---------------------------------------- | ----------- |
@@ -16,13 +16,14 @@ Last updated: 2026-10-14 · Current phase: **Phase 5b — in progress**
 | 2c  | First Cloudflare deploy                  | done        |
 | 3   | Sanity setup and content model           | done        |
 | 4   | Import script                            | done        |
-| 5a  | Data layer and page rendering            | in progress |
-| 5b  | Blog templates                           | in progress |
-| 5c  | Home, contact form and design polish     | not started |
+| 5a  | Data layer and page rendering            | done        |
+| 5b  | Blog templates                           | done        |
+| 5c  | Home, contact form and design polish     | in progress |
 | 6   | Redirects and SEO parity                 | not started |
 | 7   | Production and editor workflow           | not started |
 | 8   | Performance and accessibility pass       | not started |
 | 9   | Case study and Upwork portfolio entry    | not started |
+| 10  | Redesign (later, not scheduled)          | not started |
 
 ---
 
@@ -107,6 +108,9 @@ means rewriting history. Phase 0 makes it compliant before anything else is push
 | 2026-10-14 | **D-21** The importer owns only fields WordPress supplies (per subfield for `seo` and `mainImage`), never unsets, and skips drafts                                                                              | The pre-write review showed whole-field ownership would wipe Studio-only values (noindex, canonical, crops, descriptions) on a re-run.                                                                                                                                                                                                                                                                                                                                                                       |
 | 2026-10-14 | Photos 120 and 133 show real brands; import them as on WordPress and replace both in Phase 5c                                                                                                                   | Ground rule: no real company's logo. They were already on the old site, so the import stays faithful; the swap is a tracked 5c task. Artem agreed.                                                                                                                                                                                                                                                                                                                                                           |
 | 2026-10-14 | Site data layer: plain `fetch` to Sanity's query API, plus `groq`, `@sanity/image-url` and `astro-portabletext` (no `@sanity/client` in the site)                                                               | Build-time, read-only queries on a public dataset need no client library; the three packages give typed queries, crop/hotspot-aware image URLs and zero-JS rich text. Artem approved.                                                                                                                                                                                                                                                                                                                        |
+| 2026-10-15 | Inline "fictional business" notes removed from About and Contact; the `disclaimer` section type is deleted. The footer label stays                                                                              | Artem asked for it; §2 still requires the demo label, which the footer carries on every page.                                                                                                                                                                                                                                                                                                                                                                                                                |
+| 2026-10-15 | Photos 120 and 133 are swapped in the importer (`media-swaps.json`) for 118 and 135, already credited                                                                                                           | Real brands out, no new photos or credits needed, and a re-import keeps the swap.                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| 2026-10-15 | Contact Worker tests run on Node's built-in test runner; the timestamp check is dropped for an Origin check                                                                                                     | No new dependency at the root. A static page can't record when it was opened without JS.                                                                                                                                                                                                                                                                                                                                                                                                                     |
 
 ### Open
 
@@ -621,12 +625,14 @@ query and one terms query; posts carry `og:type` article, article times and Blog
 
 ### Phase 5c — Home, contact form and design polish
 
-- [ ] Rebuild Home by hand in Studio as `sections[]`, with a live `latestPosts` replacing the
-      widget.
-- [ ] Replace the two photos that show real brands (media 120 "Di Bella Coffee" cups, the Services
+- [x] Rebuild Home as `sections[]`, with a live `latestPosts` replacing the widget. Written into
+      the `home` page with a one-off script (same result as by hand, exact copy of the old layout);
+      the importer never owns Home's sections.
+- [x] Replace the two photos that show real brands (media 120 "Di Bella Coffee" cups, the Services
       hero; media 133 "O566" bags, the Products social image) with other credited Unsplash photos.
-- [ ] Contact form (D-4), zero client JS:
-  - `<form method="post" action="/api/contact">` with a honeypot field and a timestamp check.
+- [x] Contact form (D-4), zero client JS (code done; Artem sets the Resend secrets):
+  - `<form method="post" action="/api/contact">` with a honeypot field and an Origin check. The
+    timestamp check is dropped: a static page can't stamp the time it was opened without JS.
   - A small Worker script validates the fields and sends through Resend's HTTP API with plain
     `fetch`: no SDK, and a `User-Agent` header is required.
   - It answers with a 303 to `/contact/thanks/` or `/contact/error/` (both static, noindex).
@@ -635,11 +641,14 @@ query and one terms query; posts carry `og:type` article, article times and Blog
     never in the repo.
   - Sender: Resend's test sender, which delivers only to the Resend account owner (Artem). With a
     domain (D-3), it would be `hello@<domain>`.
-  - Tests for the handler (validation, honeypot, redirect). Ask before adding Vitest at the root.
+  - Tests for the handler (validation, honeypot, origin, redirect): 7 tests on Node's built-in
+    `node --test`, so no Vitest at the root (`npm run test:worker`, also in CI).
   - Free limits: Resend allows 100 emails/day; Workers allow 100k script requests/day (only
     `/api/*` counts).
-- [ ] `siteSettings` drives the navigation, footer, contact details and default SEO.
-- [ ] Design refinements from recon:
+- [x] `siteSettings` drives the navigation, footer, contact details and default SEO.
+- [x] Design refinements from recon (kept small, since a redesign follows in Phase 10): reading
+      width ~75 characters, styled FAQ, hairline tables, quotes in tokens, equal-height cards. Product
+      cards have no price data (prices live in the table), so that item is dropped:
   - a real type scale
   - prose at 65–75 characters per line
   - spacing below heroes
@@ -652,6 +661,9 @@ query and one terms query; posts carry `og:type` article, article times and Blog
 - [ ] Run `sanity dataset export` once Home and the alt text exist. Keep the export outside the
       repo: that content lives nowhere else.
 - [ ] Write `docs/pages/`, one doc per template: page, blog index, post, archive, contact and 404.
+
+- [x] Remove the inline "fictional business" notes on About and Contact (Artem, 2026-10-15); the
+      importer drops them, and the footer's demo label stays as §2 requires.
 
 **Exit:** the site is feature-complete, and we have reviewed it together at all three widths.
 **Talking points:** why a contact form needs a tiny server (the Resend key is a secret); how a page builder in Sanity becomes typed Astro components; why the site
@@ -788,6 +800,12 @@ URL is treated as a secret.
   - no fake testimonials
 
 **Exit:** the definition of done in §1 holds.
+
+### Phase 10 — Redesign (later)
+
+Not scheduled. Artem, 2026-10-15: the rebuilt site still looks like an exact copy of the
+WordPress theme. A real redesign (layout, type scale, imagery) comes after launch, on the same
+content model; the Sanity sections and tokens keep it a front-end-only change.
 
 ## 10. Measurement protocol
 

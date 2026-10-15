@@ -4,8 +4,10 @@
   "compatibility_date": "2026-10-06",
   // Branch builds run `npx wrangler preview`, which requires this block (empty = defaults).
   "previews": {},
-  // Static assets only for now; the /api/contact script arrives in Phase 5c (PLAN.md D-0, D-4).
+  // Only /api/* reaches the script (the contact form, PLAN.md D-4); every page is a static asset.
+  "main": "worker/index.ts",
   "assets": {
+    "run_worker_first": ["/api/*"],
     "directory": "./dist",
     // /about → 307 → /about/, matching Astro's trailingSlash: 'always'.
     "html_handling": "force-trailing-slash",

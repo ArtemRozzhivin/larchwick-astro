@@ -121,16 +121,12 @@ describe('page sections from page blocks', () => {
     })
   })
 
-  it('turns an italic "fictional business" note into a disclaimer', () => {
-    const { result } = sections(
+  it('drops an italic "fictional business" note and reports it, since the footer label covers it', () => {
+    const { result, context } = sections(
       '<!-- wp:paragraph --><p><em>Contact details are placeholders. Larchwick is a fictional business.</em></p><!-- /wp:paragraph -->',
     )
-    expect(result).toEqual([
-      expect.objectContaining({
-        _type: 'disclaimer',
-        text: 'Contact details are placeholders. Larchwick is a fictional business.',
-      }),
-    ])
+    expect(result).toEqual([])
+    expect(context.skipped[0]).toMatch(/fictional-business note dropped/)
   })
 
   it('turns an ordered "Title: text" list under a heading into steps', () => {

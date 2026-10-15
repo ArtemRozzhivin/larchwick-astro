@@ -105,5 +105,6 @@ export interface ConvertContext {
   media: (_wpId: number) => MediaAsset | undefined
   href: (_href: string) => string
   warn: (_message: string) => void
+  skip: (_reason: string) => void
   contact: ContactDetails
 }

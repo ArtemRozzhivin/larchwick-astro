@@ -1,7 +1,6 @@
 import { cardGrid } from './cardGrid'
 import { contactForm } from './contactForm'
 import { cta } from './cta'
-import { disclaimer } from './disclaimer'
 import { faq } from './faq'
 import { featureGrid } from './featureGrid'
 import { hero } from './hero'
@@ -25,7 +24,6 @@ export const sectionTypes = [
   latestPosts,
   cta,
   contactForm,
-  disclaimer,
 ]
 
 export const SECTION_TYPES = [...sectionTypes.map(({ name }) => name), 'quote']

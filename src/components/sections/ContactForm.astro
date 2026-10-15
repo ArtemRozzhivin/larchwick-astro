@@ -1,5 +1,6 @@
 ---
 import { siteConfig } from '@lib/config/site'
+import { contactDetails, getSiteSettings } from '@lib/sanity/settings'
 import { buttonVariants } from '@components/ui/button'
 import Icon from '@components/ui/Icon.astro'
 
@@ -15,7 +16,9 @@ interface Props {
 
 const { id = 'contact', heading, intro, showContactDetails = true, tone } = Astro.props
 
-const { contact } = siteConfig
+const { contact } = await getSiteSettings()
+const labels = { ...siteConfig.footer.labels, hours: siteConfig.footer.headings.hours }
+const details = contactDetails(contact, siteConfig.footer.labels)
 const fieldClass =
   'border-border bg-surface text-heading focus-visible:outline-brand-dark mt-1.5 block w-full rounded-sm border px-3.5 py-2.5'
 const labelClass = 'text-heading text-sm font-medium'
@@ -56,47 +59,30 @@ const labelClass = 'text-heading text-sm font-medium'
     {
       showContactDetails && (
         <address class="space-y-6 not-italic">
-          <div>
-            <h2 class="text-heading font-serif text-xl">Email</h2>
-            <p class="mt-1 flex items-center gap-2">
-              <Icon name="mail" class="text-brand-dark size-4 shrink-0" />
-              <a href={`mailto:${contact.email}`} class="underline underline-offset-4">
-                {contact.email}
-              </a>
-            </p>
-          </div>
-          <div>
-            <h2 class="text-heading font-serif text-xl">Phone</h2>
-            <p class="mt-1 flex items-center gap-2">
-              <Icon name="phone" class="text-brand-dark size-4 shrink-0" />
-              <a
-                href={`tel:${contact.phone.replace(/\s/g, '')}`}
-                class="underline underline-offset-4"
-              >
-                {contact.phone}
-              </a>
-            </p>
-          </div>
-          <div>
-            <h2 class="text-heading font-serif text-xl">Opening hours</h2>
-            <ul class="mt-1 space-y-1">
-              {contact.hours.map((line) => (
-                <li class="flex items-center gap-2">
-                  <Icon name="clock" class="text-brand-dark size-4 shrink-0" />
-                  {line}
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div>
-            <h2 class="text-heading font-serif text-xl">Wholesale enquiries</h2>
-            <p class="mt-1 flex items-center gap-2">
-              <Icon name="mail" class="text-brand-dark size-4 shrink-0" />
-              <a href={`mailto:${contact.wholesaleEmail}`} class="underline underline-offset-4">
-                {contact.wholesaleEmail}
-              </a>
-            </p>
-          </div>
+          {details.map((detail) => (
+            <div>
+              <h2 class="text-heading font-serif text-xl">{detail.label}</h2>
+              <p class="mt-1 flex items-center gap-2">
+                <Icon name={detail.icon} class="text-brand-dark size-4 shrink-0" />
+                <a href={detail.href} class="underline underline-offset-4">
+                  {detail.value}
+                </a>
+              </p>
+            </div>
+          ))}
+          {contact.hours.length > 0 && (
+            <div>
+              <h2 class="text-heading font-serif text-xl">{labels.hours}</h2>
+              <ul class="mt-1 space-y-1">
+                {contact.hours.map((line) => (
+                  <li class="flex items-center gap-2">
+                    <Icon name="clock" class="text-brand-dark size-4 shrink-0" />
+                    {line}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
         </address>
       )
     }

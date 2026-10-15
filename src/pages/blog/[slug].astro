@@ -11,6 +11,7 @@ import {
   termLabel,
   termPath,
 } from '@lib/sanity/posts'
+import { getSiteSettings } from '@lib/sanity/settings'
 import { blogPostingSchema } from '@lib/seo/schema'
 import PostGrid from '@components/blog/PostGrid.astro'
 import PostMeta from '@components/blog/PostMeta.astro'
@@ -37,7 +38,8 @@ export async function getStaticPaths() {
 const { post, related, newer, older } = Astro.props
 
 const title = post.seo?.metaTitle ?? `${post.title} | ${siteConfig.name}`
-const description = post.seo?.metaDescription ?? post.excerpt ?? siteConfig.description
+const settings = await getSiteSettings()
+const description = post.seo?.metaDescription ?? post.excerpt ?? settings.description
 const socialImage = post.seo?.ogImage ?? post.mainImage
 const ogImage = socialImage?.asset ? imageSource(socialImage, 1200, 1200 / 630).src : undefined
 const url = new URL(postPath(post), siteConfig.url).href
@@ -68,7 +70,7 @@ const neighbours = [
 >
   <article>
     <header class="bg-canvas pt-14 pb-10 md:pt-20">
-      <div class="container-wide max-w-4xl">
+      <div class="container-wide max-w-3xl">
         <PostMeta post={post} byline />
         <h1 class="text-heading mt-4 font-serif text-4xl leading-tight text-balance sm:text-5xl">
           {post.title}
@@ -94,7 +96,7 @@ const neighbours = [
       )
     }
 
-    <div class="container-wide max-w-4xl pt-16 pb-12">
+    <div class="container-wide max-w-3xl pt-16 pb-12">
       <RichText value={post.body ?? []} class="text-lg" />
 
       {
@@ -123,7 +125,7 @@ const neighbours = [
 
   {
     neighbours.length > 0 && (
-      <nav aria-label="Previous and next posts" class="container-wide max-w-4xl pb-12">
+      <nav aria-label="Previous and next posts" class="container-wide max-w-3xl pb-12">
         <ul class="grid gap-4 sm:grid-cols-2">
           {neighbours.map(({ label, post: neighbour }) => (
             <li class:list={[label === blog.olderLabel && 'sm:text-right']}>

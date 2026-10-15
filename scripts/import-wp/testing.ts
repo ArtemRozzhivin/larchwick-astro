@@ -13,10 +13,12 @@ export const ALT: Readonly<Record<number, string>> = {
 
 export function testContext(postSlugs: readonly string[] = []): ConvertContext & {
   warnings: string[]
+  skipped: string[]
   links: Omit<LinkChange, 'where'>[]
   contact: ContactDetails
 } {
   const warnings: string[] = []
+  const skipped: string[] = []
   const links: Omit<LinkChange, 'where'>[] = []
   const rules: LinkRules = { origin: ORIGIN, postSlugs: new Set(postSlugs) }
   return {
@@ -26,8 +28,10 @@ export function testContext(postSlugs: readonly string[] = []): ConvertContext &
       wpId in ALT || wpId === 999 ? { assetId: `image-${wpId}`, alt: ALT[wpId] } : undefined,
     href: (href) => rewriteHref(href, rules, (change) => links.push(change)),
     warn: (message) => warnings.push(message),
+    skip: (reason) => skipped.push(reason),
     contact: {},
     warnings,
+    skipped,
     links,
   }
 }

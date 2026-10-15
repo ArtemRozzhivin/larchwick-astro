@@ -53,7 +53,12 @@ export default defineConfig({
     remotePatterns: [{ protocol: 'https', hostname: 'cdn.sanity.io' }],
   },
 
-  integrations: [sitemap()],
+  // The contact form's thank-you and error pages are noindex, so they stay out of the sitemap.
+  integrations: [
+    sitemap({
+      filter: (page) => !page.includes('/contact/thanks/') && !page.includes('/contact/error/'),
+    }),
+  ],
 
   vite: {
     plugins: [tailwindcss()],

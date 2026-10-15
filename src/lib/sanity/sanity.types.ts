@@ -15,11 +15,6 @@
 export declare const internalGroqTypeReferenceTo: unique symbol
 
 // Source: schema.json
-export type Disclaimer = {
-  _type: 'disclaimer'
-  text?: string
-}
-
 export type ContactForm = {
   _type: 'contactForm'
   heading?: string
@@ -423,9 +418,6 @@ export type Page = {
       } & ContactForm)
     | ({
         _key: string
-      } & Disclaimer)
-    | ({
-        _key: string
       } & Quote)
   >
   seo?: Seo
@@ -574,7 +566,6 @@ export type Geopoint = {
 }
 
 export type AllSanitySchemaTypes =
-  | Disclaimer
   | ContactForm
   | Cta
   | LatestPosts
@@ -640,9 +631,6 @@ export type PAGE_QUERY_RESULT = {
     | ({
         _key: string
       } & Cta)
-    | ({
-        _key: string
-      } & Disclaimer)
     | ({
         _key: string
       } & Faq)
@@ -727,4 +715,23 @@ export type TERMS_QUERY_RESULT = Array<
 export type BLOG_PAGE_QUERY_RESULT = {
   title: string | null
   seo: Seo | null
+} | null
+
+// Source: ../src/lib/sanity/queries.ts
+// Variable: SETTINGS_QUERY
+// Query: *[_type == "siteSettings"][0]{    siteName,    description,    "navigation": navigation[]{ label, href },    contact,    demoLabel  }
+export type SETTINGS_QUERY_RESULT = {
+  siteName: string | null
+  description: string | null
+  navigation: Array<{
+    label: string | null
+    href: string | null
+  }> | null
+  contact: {
+    email?: string
+    wholesaleEmail?: string
+    phone?: string
+    hours?: Array<string>
+  } | null
+  demoLabel: string | null
 } | null
