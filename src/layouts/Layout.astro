@@ -4,6 +4,7 @@ import '../styles/global.css'
 import { Font } from 'astro:assets'
 
 import { siteConfig } from '@lib/config/site'
+import { getSiteSettings } from '@lib/sanity/settings'
 import type { JsonLd } from '@lib/seo/schema'
 import Footer from '@components/sections/Footer.astro'
 import Header from '@components/sections/Header.astro'
@@ -27,7 +28,7 @@ interface Props {
 
 const {
   title = siteConfig.title,
-  description = siteConfig.description,
+  description,
   canonical = Astro.url.pathname,
   ogImage = siteConfig.ogImage,
   ogImageAlt = siteConfig.ogImageAlt,
@@ -37,6 +38,9 @@ const {
   noindex = false,
   jsonLd = [],
 } = Astro.props
+
+const settings = await getSiteSettings()
+const metaDescription = description ?? settings.description
 
 const ROBOTS_INDEX = 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1'
 const ROBOTS_NOINDEX = 'noindex, follow'
@@ -60,7 +64,7 @@ const jsonLdBlocks = (Array.isArray(jsonLd) ? jsonLd : [jsonLd]).map((node) =>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
-    <meta name="description" content={description} />
+    <meta name="description" content={metaDescription} />
     <meta name="robots" content={robots} />
     {canonicalHref && <link rel="canonical" href={canonicalHref} />}
 
@@ -75,7 +79,7 @@ const jsonLdBlocks = (Array.isArray(jsonLd) ? jsonLd : [jsonLd]).map((node) =>
     <meta property="og:site_name" content={siteConfig.name} />
     <meta property="og:type" content={ogType} />
     <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
+    <meta property="og:description" content={metaDescription} />
     {canonicalHref && <meta property="og:url" content={canonicalHref} />}
     <meta property="og:image" content={ogImageHref} />
     <meta property="og:image:width" content={String(OG_IMAGE_WIDTH)} />

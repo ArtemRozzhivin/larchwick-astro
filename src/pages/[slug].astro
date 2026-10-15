@@ -23,7 +23,7 @@ const ogImage = seo?.ogImage?.asset ? imageSource(seo.ogImage, 1200, 1200 / 630)
 
 <Layout
   title={title}
-  description={seo?.metaDescription ?? siteConfig.description}
+  description={seo?.metaDescription ?? undefined}
   ogImage={ogImage}
   noindex={seo?.noindex ?? false}
   canonical={seo?.canonical}

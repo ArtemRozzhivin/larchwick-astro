@@ -43,3 +43,13 @@ export const TERMS_QUERY = defineQuery(
 export const BLOG_PAGE_QUERY = defineQuery(
   `*[_type == "page" && slug.current == "blog"][0]{ title, seo }`,
 )
+
+export const SETTINGS_QUERY = defineQuery(
+  `*[_type == "siteSettings"][0]{
+    siteName,
+    description,
+    "navigation": navigation[]{ label, href },
+    contact,
+    demoLabel
+  }`,
+)
