@@ -57,3 +57,40 @@ export function websiteSchema(): WebSiteSchema {
     publisher: { '@id': organizationId },
   }
 }
+
+export interface BlogPostingSchema extends JsonLd {
+  '@type': 'BlogPosting'
+  headline: string
+  description: string
+  url: string
+  datePublished: string
+  dateModified: string
+  image?: string
+  author: { '@type': 'Organization'; name: string; url: string }
+  publisher: { '@id': string }
+  inLanguage: string
+}
+
+export function blogPostingSchema(post: {
+  title: string
+  description: string
+  url: string
+  publishedAt: string
+  modifiedAt: string
+  image?: string
+  byline: string
+}): BlogPostingSchema {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: post.title,
+    description: post.description,
+    url: post.url,
+    datePublished: post.publishedAt,
+    dateModified: post.modifiedAt,
+    ...(post.image && { image: post.image }),
+    author: { '@type': 'Organization', name: post.byline, url: homeUrl },
+    publisher: { '@id': organizationId },
+    inLanguage: siteConfig.lang,
+  }
+}

@@ -677,13 +677,54 @@ export type PAGE_QUERY_RESULT = {
 } | null
 
 // Source: ../src/lib/sanity/queries.ts
-// Variable: LATEST_POSTS_QUERY
-// Query: *[_type == "post" && defined(slug.current)] | order(publishedAt desc)[0...$count]{    _id,    title,    "slug": slug.current,    excerpt,    publishedAt,    mainImage  }
-export type LATEST_POSTS_QUERY_RESULT = Array<{
+// Variable: POSTS_QUERY
+// Query: *[_type == "post" && defined(slug.current)] | order(publishedAt desc){    _id,    _updatedAt,    title,    "slug": slug.current,    excerpt,    publishedAt,    mainImage,    body,    seo,    "categories": categories[]->{ _id, title, "slug": slug.current },    "tags": tags[]->{ _id, title, "slug": slug.current }  }
+export type POSTS_QUERY_RESULT = Array<{
   _id: string
+  _updatedAt: string
   title: string | null
   slug: string | null
   excerpt: string | null
   publishedAt: string | null
   mainImage: AccessibleImage | null
+  body: BlockContent | null
+  seo: Seo | null
+  categories: Array<{
+    _id: string
+    title: string | null
+    slug: string | null
+  }> | null
+  tags: Array<{
+    _id: string
+    title: string | null
+    slug: string | null
+  }> | null
 }>
+
+// Source: ../src/lib/sanity/queries.ts
+// Variable: TERMS_QUERY
+// Query: *[_type in ["category", "tag"] && defined(slug.current)] | order(title asc){    _id,    _type,    title,    "slug": slug.current,    description  }
+export type TERMS_QUERY_RESULT = Array<
+  | {
+      _id: string
+      _type: 'category'
+      title: string | null
+      slug: string | null
+      description: string | null
+    }
+  | {
+      _id: string
+      _type: 'tag'
+      title: string | null
+      slug: string | null
+      description: string | null
+    }
+>
+
+// Source: ../src/lib/sanity/queries.ts
+// Variable: BLOG_PAGE_QUERY
+// Query: *[_type == "page" && slug.current == "blog"][0]{ title, seo }
+export type BLOG_PAGE_QUERY_RESULT = {
+  title: string | null
+  seo: Seo | null
+} | null

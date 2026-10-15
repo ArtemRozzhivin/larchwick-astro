@@ -1,9 +1,7 @@
 ---
-import { sanityFetch } from '@lib/sanity/client'
-import { LATEST_POSTS_QUERY } from '@lib/sanity/queries'
-import type { LATEST_POSTS_QUERY_RESULT } from '@lib/sanity/sanity.types'
+import { getPosts } from '@lib/sanity/posts'
+import PostGrid from '@components/blog/PostGrid.astro'
 import { buttonVariants } from '@components/ui/button'
-import SanityImage from '@components/ui/SanityImage.astro'
 
 import Section, { type Tone } from './Section.astro'
 
@@ -18,40 +16,11 @@ interface Props {
 
 const { id, eyebrow, heading, count = 3, cta, tone } = Astro.props
 
-const posts = await sanityFetch<LATEST_POSTS_QUERY_RESULT>(LATEST_POSTS_QUERY, { count })
-const dateFormat = new Intl.DateTimeFormat('en-GB', { dateStyle: 'long' })
-const PostHeading = heading ? 'h3' : 'h2'
+const posts = (await getPosts()).slice(0, count)
 ---
 
 <Section id={id} eyebrow={eyebrow} heading={heading} tone={tone}>
-  <ul class="grid gap-8 md:grid-cols-3">
-    {
-      posts.map((post) => (
-        <li class="flex flex-col">
-          {post.mainImage && (
-            <SanityImage
-              image={post.mainImage}
-              widths={[400, 640, 800]}
-              sizes="(min-width: 48rem) 24rem, 100vw"
-              aspectRatio={3 / 2}
-              class="mb-4 w-full rounded-sm"
-            />
-          )}
-          {post.publishedAt && (
-            <time datetime={post.publishedAt} class="text-sm">
-              {dateFormat.format(new Date(post.publishedAt))}
-            </time>
-          )}
-          <PostHeading class="text-heading mt-1 font-serif text-xl leading-snug">
-            <a href={`/blog/${post.slug}/`} class="hover:text-brand-dark">
-              {post.title}
-            </a>
-          </PostHeading>
-          {post.excerpt && <p class="mt-2 leading-relaxed text-pretty">{post.excerpt}</p>}
-        </li>
-      ))
-    }
-  </ul>
+  <PostGrid posts={posts} headingLevel={heading ? 'h3' : 'h2'} />
   {
     cta?.href && cta.label && (
       <div class="mt-10 text-center">
