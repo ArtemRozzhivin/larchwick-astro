@@ -30,21 +30,27 @@ const { id, eyebrow, heading, body = [], image, imagePosition = 'left', cta, ton
           widths={[480, 720, 960, 1280]}
           sizes="(min-width: 48rem) 36rem, 100vw"
           aspectRatio={4 / 3}
-          class:list={['w-full rounded-sm', imagePosition === 'right' && 'md:order-last']}
+          class:list={[
+            'reveal border-espresso rounded-photo w-full border-2',
+            imagePosition === 'right' && 'md:order-last',
+          ]}
         />
       )
     }
     <div>
       {
         eyebrow && (
-          <p class="text-brand-dark mb-3 text-sm font-semibold tracking-widest uppercase">
+          <p class="text-larch reveal mb-3 font-bold" style="--reveal-delay: 1">
             {eyebrow}
           </p>
         )
       }
       {
         heading && (
-          <h2 class="text-heading font-serif text-3xl leading-tight text-balance md:text-4xl">
+          <h2
+            class="text-espresso font-display reveal text-[2.6rem] leading-[0.95] font-black text-balance md:text-6xl"
+            style="--reveal-delay: 2"
+          >
             {heading}
           </h2>
         )
@@ -52,7 +58,11 @@ const { id, eyebrow, heading, body = [], image, imagePosition = 'left', cta, ton
       <RichText value={body} class="mt-5 text-lg" />
       {
         cta?.href && cta.label && (
-          <a href={cta.href} class:list={['mt-8', buttonVariants({ variant: 'secondary' })]}>
+          <a
+            href={cta.href}
+            class:list={['reveal mt-8', buttonVariants({ variant: 'secondary' })]}
+            style="--reveal-delay: 3"
+          >
             {cta.label}
           </a>
         )

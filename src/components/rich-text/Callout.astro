@@ -11,7 +11,7 @@ const LABELS = { note: 'Note', tip: 'Tip', warning: 'Warning' } as const
 const label = LABELS[node.tone ?? 'tip']
 ---
 
-<aside class="border-brand bg-canvas my-8 rounded-sm border-l-4 px-5 py-4">
-  <p class="text-heading text-sm font-semibold tracking-widest uppercase">{label}</p>
+<aside class="bg-surface border-espresso shadow-label rounded-label my-8 border-2 px-5 py-4">
+  <p class="text-larch font-bold">{label}</p>
   <p class="mt-1">{node.text}</p>
 </aside>

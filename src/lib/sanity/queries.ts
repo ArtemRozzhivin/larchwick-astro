@@ -57,3 +57,7 @@ export const SETTINGS_QUERY = defineQuery(
 export const REDIRECTS_QUERY = defineQuery(
   `*[_type == "redirect" && defined(from) && defined(to)] | order(from asc){ from, to, permanent }`,
 )
+
+export const IMAGE_PLACEHOLDERS_QUERY = defineQuery(
+  `*[_type == "sanity.imageAsset" && defined(metadata.lqip)]{ _id, "lqip": metadata.lqip }`,
+)

@@ -31,16 +31,16 @@ const ItemHeading = heading ? 'h3' : 'h2'
 ---
 
 <Section id={id} eyebrow={eyebrow} heading={heading} intro={intro} tone={tone}>
-  <ul class:list={['grid gap-x-8 gap-y-10 text-center', gridClass]}>
+  <ul class:list={['grid gap-x-8 gap-y-10', gridClass]}>
     {
-      items.map((item) => (
-        <li class="mx-auto max-w-sm">
+      items.map((item, index) => (
+        <li class="reveal border-needle border-l-6 pl-5" style={`--reveal-delay: ${index}`}>
           {isIconName(item.icon) && (
-            <span class="text-brand-dark mb-4 inline-flex">
-              <Icon name={item.icon} class="size-9" />
+            <span class="text-larch mb-3 inline-flex">
+              <Icon name={item.icon} class="size-8" />
             </span>
           )}
-          <ItemHeading class="text-heading font-serif text-2xl leading-snug">
+          <ItemHeading class="font-display text-[1.9rem] leading-none font-extrabold">
             {item.title}
           </ItemHeading>
           {item.text && <p class="mt-2 leading-relaxed text-pretty">{item.text}</p>}

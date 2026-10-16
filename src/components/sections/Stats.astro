@@ -21,12 +21,14 @@ const gridClass = items.length === 4 ? 'grid-cols-2 lg:grid-cols-4' : 'grid-cols
 ---
 
 <Section id={id} eyebrow={eyebrow} heading={heading} tone={tone}>
-  <dl class:list={['grid gap-x-6 gap-y-10 text-center', gridClass]}>
+  <dl class:list={['grid gap-x-6 gap-y-10', gridClass]}>
     {
-      items.map((item) => (
-        <div class="flex flex-col-reverse gap-2">
+      items.map((item, index) => (
+        <div class="reveal flex flex-col-reverse gap-1" style={`--reveal-delay: ${index}`}>
           <dt class="text-pretty">{item.label}</dt>
-          <dd class="text-brand-dark font-serif text-4xl md:text-5xl">{item.value}</dd>
+          <dd class="text-larch font-display text-6xl leading-none font-black md:text-7xl">
+            {item.value}
+          </dd>
         </div>
       ))
     }

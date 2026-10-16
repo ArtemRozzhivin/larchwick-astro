@@ -10,10 +10,15 @@ const { seo, code, title, message, primaryCta, secondaryCtas } = notFound
 <Layout {...seo} noindex>
   <Section class="flex flex-1 flex-col justify-center">
     <div class="mx-auto max-w-xl py-4 text-center md:py-8">
-      <p aria-hidden="true" class="text-brand font-serif text-8xl leading-none md:text-9xl">
+      <p
+        aria-hidden="true"
+        class="border-stamp text-stamp font-display mx-auto grid size-40 rotate-[-12deg] place-items-center rounded-full border-4 text-7xl leading-none font-black motion-safe:animate-[press_0.55s_cubic-bezier(0.2,1.4,0.4,1)_0.3s_both]"
+      >
         {code}
       </p>
-      <h1 class="text-heading mt-6 font-serif text-4xl leading-tight md:text-5xl">{title}</h1>
+      <h1 class="text-espresso font-display mt-8 text-5xl leading-[0.95] font-black md:text-7xl">
+        {title}
+      </h1>
       <p class="mt-4 text-lg leading-relaxed text-pretty">{message}</p>
       <div class="mt-9 flex flex-col gap-3 sm:flex-row sm:justify-center">
         <a href={primaryCta.href} class={buttonVariants({ variant: 'primary' })}>

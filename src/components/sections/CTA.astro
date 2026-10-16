@@ -1,7 +1,7 @@
 ---
 import { buttonVariants } from '@components/ui/button'
 
-import Section, { type Tone } from './Section.astro'
+import type { Tone } from './Section.astro'
 
 interface Cta {
   label?: string
@@ -11,30 +11,95 @@ interface Cta {
 interface Props {
   id?: string
   heading?: string
+  quote?: string
+  citation?: string
   text?: string
   primaryCta?: Cta
   secondaryCta?: Cta
   tone?: Tone
 }
 
-const { id = 'cta', heading, text, primaryCta, secondaryCta, tone = 'muted' } = Astro.props
+const {
+  id = 'cta',
+  heading,
+  quote,
+  citation,
+  text,
+  primaryCta,
+  secondaryCta,
+  tone = 'muted',
+} = Astro.props
 
 const ctas = [primaryCta, secondaryCta].filter((cta) => cta?.href && cta.label)
+const BAND: Record<Tone, string> = {
+  muted: 'bg-needle text-espresso',
+  default: 'bg-surface text-espresso border-2 border-espresso',
+  inverted: 'bg-larch text-mist',
+}
+const isInverted = tone === 'inverted'
+const buttonOrder = isInverted
+  ? (['accent', 'inverse-outline'] as const)
+  : (['primary', 'secondary'] as const)
+const hasCopy = Boolean(heading || quote || text)
 ---
 
-<Section id={id} heading={heading} intro={text} tone={tone}>
-  {
-    ctas.length > 0 && (
-      <div class="flex flex-col items-center justify-center gap-3 sm:flex-row">
-        {ctas.map((cta, index) => (
-          <a
-            href={cta?.href}
-            class={buttonVariants({ variant: index === 0 ? 'primary' : 'secondary', size: 'lg' })}
+<section id={id} class="py-8 md:py-12">
+  <div class="container-wide">
+    <div
+      class:list={[
+        'reveal rounded-band px-6 text-center md:px-12',
+        hasCopy ? 'py-12 md:py-14' : 'py-8',
+        BAND[tone],
+      ]}
+    >
+      {
+        heading && (
+          <h2
+            style="--reveal-delay: 2"
+            class:list={[
+              'font-display reveal mx-auto max-w-3xl text-[2.6rem] leading-[0.95] font-black text-balance md:text-7xl',
+              isInverted && 'text-surface',
+            ]}
           >
-            {cta?.label}
-          </a>
-        ))}
-      </div>
-    )
-  }
-</Section>
+            {heading}
+          </h2>
+        )
+      }
+      {
+        quote && (
+          <figure class="reveal mx-auto max-w-4xl" style="--reveal-delay: 2">
+            <blockquote
+              class:list={[
+                'font-display text-[2.4rem] leading-[0.95] font-black text-balance md:text-6xl',
+                isInverted && 'text-surface',
+              ]}
+            >
+              <p>“{quote}”</p>
+            </blockquote>
+            {citation && <figcaption class="mt-5 text-lg font-bold">{citation}</figcaption>}
+          </figure>
+        )
+      }
+      {text && <p class="mx-auto mt-4 max-w-xl text-lg text-pretty">{text}</p>}
+      {
+        ctas.length > 0 && (
+          <div
+            class:list={[
+              'flex flex-col items-center justify-center gap-3 sm:flex-row',
+              hasCopy && 'mt-8',
+            ]}
+          >
+            {ctas.map((cta, index) => (
+              <a
+                href={cta?.href}
+                class={buttonVariants({ variant: buttonOrder[index], size: 'lg' })}
+              >
+                {cta?.label}
+              </a>
+            ))}
+          </div>
+        )
+      }
+    </div>
+  </div>
+</section>

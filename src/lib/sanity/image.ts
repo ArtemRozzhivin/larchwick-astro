@@ -1,6 +1,9 @@
 import { createImageUrlBuilder } from '@sanity/image-url'
 
 import { dataset, projectId } from '../../../studio/env'
+import { sanityFetch } from './client'
+import { IMAGE_PLACEHOLDERS_QUERY } from './queries'
+import type { IMAGE_PLACEHOLDERS_QUERY_RESULT } from './sanity.types'
 
 export interface SanityImageValue {
   asset?: { _ref: string }
@@ -35,4 +38,14 @@ export function imageSource(
     .quality(90)
     .url()
   return { src, width: targetWidth, height }
+}
+
+let placeholders: Promise<ReadonlyMap<string, string>> | undefined
+
+// Sanity keeps a tiny blurred preview (LQIP, about 1 KB) of every image; one query per build reads them all.
+export function getImagePlaceholders(): Promise<ReadonlyMap<string, string>> {
+  placeholders ??= sanityFetch<IMAGE_PLACEHOLDERS_QUERY_RESULT>(IMAGE_PLACEHOLDERS_QUERY).then(
+    (rows) => new Map(rows.flatMap((row) => (row.lqip ? [[row._id, row.lqip] as const] : []))),
+  )
+  return placeholders
 }

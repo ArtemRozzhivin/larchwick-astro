@@ -68,8 +68,8 @@ const jsonLdBlocks = (Array.isArray(jsonLd) ? jsonLd : [jsonLd]).map((node) =>
     <meta name="robots" content={robots} />
     {canonicalHref && <link rel="canonical" href={canonicalHref} />}
 
-    <Font cssVariable="--font-dm-serif-display" preload />
-    <Font cssVariable="--font-inter" preload={[{ style: 'normal' }]} />
+    <Font cssVariable="--font-big-shoulders" preload />
+    <Font cssVariable="--font-hanken" preload={[{ style: 'normal' }]} />
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="theme-color" content={siteConfig.themeColor} />
@@ -98,10 +98,10 @@ const jsonLdBlocks = (Array.isArray(jsonLd) ? jsonLd : [jsonLd]).map((node) =>
     <slot name="head" />
   </head>
 
-  <body class="bg-surface text-body flex min-h-dvh flex-col font-sans antialiased">
+  <body class="bg-paper text-ink flex min-h-dvh flex-col font-sans antialiased">
     <a
       href="#main"
-      class="bg-brand-dark outline-brand-dark sr-only z-50 rounded-sm font-medium text-white focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:px-4 focus:py-2"
+      class="bg-larch outline-larch sr-only z-50 rounded-sm font-medium text-white focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:px-4 focus:py-2"
     >
       Skip to content
     </a>

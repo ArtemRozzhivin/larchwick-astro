@@ -1,0 +1,61 @@
+---
+/**
+ * The coffee bag label: the brand's main graphic device. The stamp presses on once, on load.
+ */
+export interface CoffeeLabelValue {
+  name?: string
+  origin?: string
+  details?: readonly { _key?: string; label?: string; value?: string }[]
+  footnote?: string
+  stamp?: string
+}
+
+interface Props {
+  label: CoffeeLabelValue
+  brand: string
+  class?: string
+  style?: string
+}
+
+const { label, brand, class: className, style } = Astro.props
+
+const [stampSmall, ...stampRest] = (label.stamp ?? '').split('\n')
+const stampBig = stampRest.join(' ')
+---
+
+<div
+  class:list={[
+    'bg-surface text-espresso border-espresso shadow-label rounded-label relative w-full max-w-md justify-self-center border-2 p-7',
+    className,
+  ]}
+  style={style}
+>
+  {
+    label.stamp && (
+      <p class="border-stamp text-stamp bg-surface/90 font-display absolute -top-7 -right-5 grid size-32 rotate-[-12deg] place-items-center rounded-full border-3 text-center leading-none font-extrabold motion-safe:animate-[press_0.55s_cubic-bezier(0.2,1.4,0.4,1)_1s_both]">
+        <span>
+          {stampSmall}
+          {stampBig && <strong class="block text-2xl font-black">{stampBig}</strong>}
+        </span>
+      </p>
+    )
+  }
+  <p class="font-display pr-24 text-[2.6rem] leading-[0.9] font-black">{label.name}</p>
+  {label.origin && <p class="text-larch mt-2.5 font-bold">{label.origin}</p>}
+  {
+    label.details && label.details.length > 0 && (
+      <dl class="border-espresso mt-6 grid grid-cols-[auto_1fr] border-t-2">
+        {label.details.map((detail) => (
+          <>
+            <dt class="border-border border-b py-2 pr-5 font-bold">{detail.label}</dt>
+            <dd class="border-border border-b py-2">{detail.value}</dd>
+          </>
+        ))}
+      </dl>
+    )
+  }
+  <p class="mt-5 flex justify-between gap-4 font-bold">
+    <span>{label.footnote}</span>
+    <span>{brand}</span>
+  </p>
+</div>

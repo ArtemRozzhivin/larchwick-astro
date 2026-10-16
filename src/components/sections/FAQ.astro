@@ -41,18 +41,21 @@ const GroupHeading = heading ? 'h3' : 'h2'
       groups.map((group) => (
         <div>
           {group.heading && (
-            <GroupHeading class="text-heading mb-4 font-serif text-2xl md:text-3xl">
+            <GroupHeading class="text-espresso font-display reveal mb-4 text-[2.2rem] leading-none font-black md:text-5xl">
               {group.heading}
             </GroupHeading>
           )}
-          <div class="divide-border border-border bg-surface shadow-soft divide-y rounded-sm border">
+          <div
+            style="--reveal-delay: 1"
+            class="reveal divide-border bg-surface border-espresso rounded-label divide-y overflow-hidden border-2"
+          >
             {(group.items ?? []).map((item) => (
               <details class="group px-5 py-4 md:px-6 md:py-5">
-                <summary class="text-heading flex cursor-pointer list-none items-center justify-between gap-4 rounded-sm font-medium [&::-webkit-details-marker]:hidden">
+                <summary class="text-espresso flex cursor-pointer list-none items-center justify-between gap-4 rounded-sm text-lg font-bold [&::-webkit-details-marker]:hidden">
                   {item.question}
                   <Icon
                     name="chevron-down"
-                    class="text-brand-dark size-5 shrink-0 transition-transform group-open:rotate-180 motion-reduce:transition-none"
+                    class="text-larch size-6 shrink-0 transition-transform group-open:rotate-180 motion-reduce:transition-none"
                   />
                 </summary>
                 {item.answer && <RichText value={item.answer} class="mt-3" />}
