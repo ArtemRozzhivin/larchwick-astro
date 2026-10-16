@@ -30,20 +30,34 @@ const labelClass = 'text-heading text-sm font-medium'
       <div class="grid gap-5 sm:grid-cols-2">
         <label class={labelClass}>
           Your name
-          <input name="name" type="text" autocomplete="name" required class={fieldClass} />
+          <input
+            name="name"
+            type="text"
+            autocomplete="name"
+            required
+            maxlength="100"
+            class={fieldClass}
+          />
         </label>
         <label class={labelClass}>
           Your email
-          <input name="email" type="email" autocomplete="email" required class={fieldClass} />
+          <input
+            name="email"
+            type="email"
+            autocomplete="email"
+            required
+            maxlength="254"
+            class={fieldClass}
+          />
         </label>
       </div>
       <label class:list={[labelClass, 'block']}>
         Subject
-        <input name="subject" type="text" required class={fieldClass} />
+        <input name="subject" type="text" required maxlength="150" class={fieldClass} />
       </label>
       <label class:list={[labelClass, 'block']}>
-        Your message (optional)
-        <textarea name="message" rows="6" class={fieldClass}></textarea>
+        Your message (optional, up to 1,500 characters)
+        <textarea name="message" rows="6" maxlength="1500" class={fieldClass}></textarea>
       </label>
       <div class="hidden" aria-hidden="true">
         <label>
