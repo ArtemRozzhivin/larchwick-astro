@@ -13,13 +13,14 @@ larchwick-astro/
 ├── docs/            Documentation
 │   ├── before/      Evidence from the WordPress site (export, SEO crawl, Lighthouse, screenshots); not Prettier-formatted
 │   ├── internal/    Pages, status, what is still placeholder
-│   ├── after/       Evidence from the new site (SEO snapshot); not Prettier-formatted
+│   ├── after/       Evidence from the new site (SEO snapshot, rebuild-times.json from npm run rebuild:watch)
 │   ├── import-report.md, import-report.json, redirect-map.csv   Written by npm run import:wp; not Prettier-formatted
 │   ├── seo-parity-report.md   Written by npm run seo:compare
+│   ├── editor-guide.md  How to edit and publish in Sanity Studio, for non-developers
 │   ├── pages/       One doc per page, for PM/QA/clients + index
 │   └── STRUCTURE.md this file
 ├── public/          Served as-is: favicon.svg (the Larchwick bean), og.jpg (1200×630), _headers (Cloudflare response headers)
-├── scripts/         Node tools outside the site: credits/, seo-check/, lighthouse-import/ (Node built-ins only) and import-wp/ (WordPress → Sanity; scripts/package.json, Vitest tests)
+├── scripts/         Node tools outside the site: credits/, seo-check/, lighthouse-import/, rebuild-time/ (Node built-ins only) and import-wp/ (WordPress → Sanity; scripts/package.json, Vitest tests)
 ├── src/             Source
 ├── studio/          Sanity Studio (own package.json): schemaTypes/{documents,objects,sections}, desk structure, env.ts (project ID)
 ├── astro.config.ts  The only build config: static output, no adapter, trailing slashes
@@ -63,7 +64,8 @@ src/
 │   ├── content/                Copy, one file per page
 │   │   ├── home.ts             Home: SEO, hero, features, CTA
 │   │   └── not-found.ts        The 404 page
-│   ├── integrations/           redirects.ts (writes dist/_redirects, trims noindex from the sitemap) + redirect-rules.ts
+│   ├── integrations/           redirects.ts (writes dist/_redirects, trims noindex from the sitemap) + redirect-rules.ts,
+│   │                           preview-noindex.ts (noindex header on Workers Builds preview branches)
 │   ├── sanity/                 client.ts (fetch to the Sanity query API), queries.ts (defineQuery),
 │   │                           posts.ts (cached posts/terms, paths, related, archives),
 │   │                           settings.ts (cached Site settings: menu, contact, demo label),

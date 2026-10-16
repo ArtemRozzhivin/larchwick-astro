@@ -114,6 +114,7 @@ means rewriting history. Phase 0 makes it compliant before anything else is push
 | 2026-10-16 | No LocalBusiness JSON-LD                                                                                                                                                                                                                                                                                                 | It requires a street address; Larchwick has none, and an invented one could point at a real place. Organization already carries name, URL, email and phone.                                                                                                                                                                                                                                                                                                                                                  |
 | 2026-10-16 | Slashless URLs of live pages get explicit 301 rules (`/about` → `/about/`) instead of Cloudflare's 307                                                                                                                                                                                                                   | One permanent hop, as WordPress did; the rules are generated from the built routes.                                                                                                                                                                                                                                                                                                                                                                                                                          |
 | 2026-10-16 | Redesign moved before Phase 7, as "Larch and label": larch green, needle gold and espresso; Big Shoulders Display and Hanken Grotesk; the coffee bag label (bordered card, gold offset shadow, roast stamp) as the graphic device; a sticky header; scroll-driven fade-ups in CSS only. Supersedes "same brand, refined" | Artem wanted it before launch: the rebuild still looked like the WordPress theme. He picked this direction from three mockups (roast log, larch and label, origin) as the most unique and least templated. Same content model, same URLs and SEO, zero client JS kept; the case study becomes "rebuilt and redesigned", and the after-Lighthouse run in Phase 8 measures the new design.                                                                                                                     |
+| 2026-10-16 | Preview builds get `X-Robots-Tag: noindex` from the build (`previewNoindex()` appends it to `dist/_headers` when `WORKERS_CI_BRANCH` is not `main`), not from a host pattern in `public/_headers`                                                                                                                        | Cloudflare's example host pattern `https://:version.:subdomain.workers.dev/*` also matches production on `workers.dev`. The branch is known for certain at build time, and preview versions carry their own assets, so production can never inherit the header. Unit-tested; verified with `curl -I` on a preview and on production after the first deploy.                                                                                                                                                  |
 
 ### Open
 
@@ -719,15 +720,19 @@ why a parity check beats eyeballing.
 
 ### Phase 7 — Production and editor workflow
 
-- [ ] Remove the site-wide noindex header. Production runs on `workers.dev` or on a domain (D-3).
-      Confirm the build env vars and turn on the build cache.
+- [x] Remove the site-wide noindex header (code). Production runs on `workers.dev` (D-3). No build
+      env vars are needed (project id, dataset and API version are constants in `studio/env.ts`).
+- [ ] Artem: turn on the build cache; after the dev → main merge, `curl -I` production shows no
+      `X-Robots-Tag`, and the deployed SEO parity run (Phase 6) passes.
 - [ ] Create a Workers Builds deploy hook for `main`, and point a Sanity GROQ webhook at it (1 of
       the 2 free), filtered to our content types, on create, update and delete.
   - **The hook URL is a credential.** Keep it out of the repo and out of any screenshot or log we
     save, and recreate it if it is ever exposed.
-- [ ] **Measure publish → live:** several runs. Record only build IDs and timestamps (publish time,
+- [ ] **Measure publish → live:** several runs with `npm run rebuild:watch` (polls the page,
+      reads the publish time from Sanity, appends a run). Record only build IDs and timestamps (publish time,
       build start and end, first 200 with the new content) in `docs/after/rebuild-times.json`.
-- [ ] Optional: noindex on preview hosts. Cloudflare's example pattern
+- [x] Optional: noindex on preview hosts, done from the build (decision 2026-10-16); check a
+      preview with `curl -I`. Cloudflare's example pattern
       `https://:version.:subdomain.workers.dev/*` **also matches production on `workers.dev`**.
       Verify with `curl -I` that production has no `X-Robots-Tag`, or turn off Version URLs.
 - [ ] Editor walkthrough, done as a non-developer would, and checked live:
@@ -737,7 +742,8 @@ why a parity check beats eyeballing.
   - change SEO
   - add a redirect
 
-  Then write `docs/editor-guide.md` with screenshots, and no hook URLs in them.
+  Then write `docs/editor-guide.md` with screenshots, and no hook URLs in them. (Drafted from the
+  Studio's field names; screenshots and the measured publish time follow the walkthrough.)
 
 - [ ] Optional: Cloudflare Web Analytics (cookieless). Keep it only if its measured cost is
       acceptable.
