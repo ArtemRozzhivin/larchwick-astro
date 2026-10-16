@@ -28,7 +28,18 @@ interface Options {
   timeoutMs: number
 }
 
-function readOptions(): Options {
+const USAGE = `Usage: npm run rebuild:watch -- --path /blog/<slug>/ --text "new words" [--doc <id>]
+
+Run it, then publish in the Studio. It waits until the page shows the text and records
+the time from publish to live in ${OUTPUT}.
+
+  --path      page to watch, e.g. /blog/autumn-seasonal-blend/
+  --text      words that only the new version contains
+  --doc       Sanity document id, to read the publish time (optional)
+  --interval  seconds between checks (default 5)
+  --timeout   seconds before giving up (default 900)`
+
+function readOptions(): Options | null {
   const { values } = parseArgs({
     options: {
       path: { type: 'string' },
@@ -39,11 +50,7 @@ function readOptions(): Options {
       timeout: { type: 'string', default: '900' },
     },
   })
-  if (!values.path || !values.text) {
-    throw new Error(
-      'Usage: npm run rebuild:watch -- --path /blog/<slug>/ --text "new words" [--doc <id>]',
-    )
-  }
+  if (!values.path || !values.text) return null
   return {
     url: new URL(values.path, values.base).href,
     text: values.text,
@@ -77,9 +84,21 @@ function readRuns(): Run[] {
 
 async function main(): Promise<void> {
   const options = readOptions()
+  if (!options) {
+    console.log(USAGE)
+    process.exitCode = 1
+    return
+  }
+  if (await isLive(options.url, options.text, 0)) {
+    console.log(
+      `"${options.text}" is already on ${options.url}. Pick words only the new version has.`,
+    )
+    process.exitCode = 1
+    return
+  }
   const started = Date.now()
   console.log(`Watching ${options.url} for "${options.text}" every ${options.intervalMs / 1000}s`)
-  let attempt = 0
+  let attempt = 1
   while (!(await isLive(options.url, options.text, attempt))) {
     if (Date.now() - started > options.timeoutMs)
       throw new Error('Timed out before the change went live')
