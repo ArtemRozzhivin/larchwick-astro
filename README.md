@@ -277,8 +277,9 @@ files.
 Workers Builds from GitHub. Every push to `main` builds (`npm run build`) and deploys
 (`npx wrangler deploy`); pushes to other branches get a preview (`npx wrangler preview`).
 Cloudflare's build fetches `wrangler` itself, so the repo doesn't depend on it. Response
-headers (asset caching, security headers, and `X-Robots-Tag: noindex` until launch) live
-in `public/_headers`.
+headers (asset caching and security headers) live in `public/_headers`. Production is
+indexable; preview builds add `X-Robots-Tag: noindex` (the `previewNoindex()` integration
+appends it to `dist/_headers` when `WORKERS_CI_BRANCH` is not `main`).
 
 Optional: to serve the build locally the way Cloudflare does (trailing-slash redirects,
 the 404 page, `_headers`), run `npm run build && npx wrangler dev`. npx downloads wrangler on

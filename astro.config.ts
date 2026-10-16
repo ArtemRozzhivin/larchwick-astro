@@ -2,6 +2,7 @@ import sitemap from '@astrojs/sitemap'
 import tailwindcss from '@tailwindcss/vite'
 import { defineConfig, fontProviders } from 'astro/config'
 
+import { previewNoindex } from './src/integrations/preview-noindex'
 import { redirects } from './src/integrations/redirects'
 import { siteConfig } from './src/lib/config/site'
 
@@ -55,7 +56,8 @@ export default defineConfig({
   },
 
   // redirects() runs after sitemap(): it writes dist/_redirects and drops noindex pages from the sitemap.
-  integrations: [sitemap(), redirects()],
+  // previewNoindex() adds X-Robots-Tag: noindex to dist/_headers on Workers Builds preview branches.
+  integrations: [sitemap(), redirects(), previewNoindex()],
 
   vite: {
     plugins: [tailwindcss()],
