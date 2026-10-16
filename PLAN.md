@@ -5,7 +5,7 @@ time**. Each phase ends with a short "what we did / what's next" and Artem's go-
 next one starts. Tick the boxes as work lands, and log every decision in
 [Decisions](#3-decisions).
 
-Last updated: 2026-10-14 · Current phase: **Phase 5c — in progress**
+Last updated: 2026-10-14 · Current phase: **Phase 6 — in progress**
 
 | #   | Phase                                    | Status      |
 | --- | ---------------------------------------- | ----------- |
@@ -18,8 +18,8 @@ Last updated: 2026-10-14 · Current phase: **Phase 5c — in progress**
 | 4   | Import script                            | done        |
 | 5a  | Data layer and page rendering            | done        |
 | 5b  | Blog templates                           | done        |
-| 5c  | Home, contact form and design polish     | in progress |
-| 6   | Redirects and SEO parity                 | not started |
+| 5c  | Home, contact form and design polish     | done        |
+| 6   | Redirects and SEO parity                 | in progress |
 | 7   | Production and editor workflow           | not started |
 | 8   | Performance and accessibility pass       | not started |
 | 9   | Case study and Upwork portfolio entry    | not started |
@@ -111,6 +111,8 @@ means rewriting history. Phase 0 makes it compliant before anything else is push
 | 2026-10-15 | Inline "fictional business" notes removed from About and Contact; the `disclaimer` section type is deleted. The footer label stays                                                                              | Artem asked for it; §2 still requires the demo label, which the footer carries on every page.                                                                                                                                                                                                                                                                                                                                                                                                                |
 | 2026-10-15 | Photos 120 and 133 are swapped in the importer (`media-swaps.json`) for 118 and 135, already credited                                                                                                           | Real brands out, no new photos or credits needed, and a re-import keeps the swap.                                                                                                                                                                                                                                                                                                                                                                                                                            |
 | 2026-10-15 | Contact Worker tests run on Node's built-in test runner; the timestamp check is dropped for an Origin check                                                                                                     | No new dependency at the root. A static page can't record when it was opened without JS.                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| 2026-10-16 | No LocalBusiness JSON-LD                                                                                                                                                                                        | It requires a street address; Larchwick has none, and an invented one could point at a real place. Organization already carries name, URL, email and phone.                                                                                                                                                                                                                                                                                                                                                  |
+| 2026-10-16 | Slashless URLs of live pages get explicit 301 rules (`/about` → `/about/`) instead of Cloudflare's 307                                                                                                          | One permanent hop, as WordPress did; the rules are generated from the built routes.                                                                                                                                                                                                                                                                                                                                                                                                                          |
 
 ### Open
 
@@ -657,10 +659,11 @@ query and one terms query; posts carry `og:type` article, article times and Blog
   - styled FAQ `<details>`
   - hairline tables
   - blockquotes in tokens
-- [ ] Responsive review at 360, 768 and 1280 px, together.
+- [x] Responsive review at 360, 768 and 1280 px (Artem, 2026-10-16: every page fine).
 - [ ] Run `sanity dataset export` once Home and the alt text exist. Keep the export outside the
       repo: that content lives nowhere else.
-- [ ] Write `docs/pages/`, one doc per template: page, blog index, post, archive, contact and 404.
+- [x] Write `docs/pages/`: home, content pages (incl. contact and its result pages), blog (index,
+      post, archives) and 404.
 
 - [x] Remove the inline "fictional business" notes on About and Contact (Artem, 2026-10-15); the
       importer drops them, and the footer's demo label stays as §2 requires.
@@ -671,23 +674,27 @@ ships zero JS; why images are optimised at build time and not on request.
 
 ### Phase 6 — Redirects and SEO parity
 
-- [ ] The `_redirects` generator is an inline Astro integration on `astro:build:done`. It reads the
+- [x] The `_redirects` generator is an inline Astro integration on `astro:build:done`. It reads the
       redirect documents through GROQ, adds the §8 code rules, emits both slash forms, and writes
       `dist/_redirects`. It enforces the build-failure checks in §8.
-- [ ] `<head>`:
+- [x] `<head>`:
   - the exact title from `seo.metaTitle`
   - description
   - an absolute canonical with a trailing slash
   - Open Graph and Twitter tags
   - `og:type=article` with published and modified times
   - fallbacks from `siteSettings`
-- [ ] JSON-LD:
-  - Organization + LocalBusiness, with a fictional address
+- [x] JSON-LD:
+  - Organization (LocalBusiness dropped: it needs a street address, and an invented one could
+    name a real place)
   - BlogPosting
   - FAQPage, built from the FAQ sections
-- [ ] `@astrojs/sitemap`, excluding noindex pages, plus the sitemap rules.
-- [ ] `robots.txt`.
-- [ ] `scripts/seo-check/`, compare mode:
+- [x] `@astrojs/sitemap`, excluding noindex pages (read from each page's robots tag after the
+      build), plus the sitemap rules.
+- [x] `robots.txt`.
+- [x] `scripts/seo-check/`, compare mode (`npm run seo:compare`). Local run 2026-10-16 against
+      `wrangler dev`: **216/216 checks pass** (`docs/seo-parity-report.md`). Deployed run after the
+      next main merge:
   - It runs **locally against `npx wrangler dev`**, which applies `_redirects`, `_headers` and
     `html_handling` like production (`astro preview` ignores them), then against the deployed
     site.
