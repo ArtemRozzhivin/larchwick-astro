@@ -21,6 +21,7 @@
     "credits": "node scripts/credits/build-credits.ts",
     "seo:crawl": "node scripts/seo-check/crawl.ts",
     "seo:compare": "node scripts/seo-check/compare.ts",
+    "rebuild:watch": "node scripts/rebuild-time/watch.ts",
     "lighthouse:import": "node scripts/lighthouse-import/import.ts",
     "test": "node --test 'worker/**/*.test.ts' 'src/**/*.test.ts'",
     "import:wp": "node --env-file-if-exists=.env scripts/import-wp/import.ts",
