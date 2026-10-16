@@ -44,6 +44,9 @@ section types), post, category, tag, site settings (singleton) and redirect. The
 redirects and 30 images with alt text. Every page now comes from Sanity at build time (plain `fetch`, public dataset, no token): Home,
 the content pages and the blog. The menu, footer and contact details come from Site settings. The Studio is deployed at https://larchwick.sanity.studio (login required).
 
-The brand foundation (Phase 2b) is in: the 9 colour tokens from the old site, DM Serif Display
-and Inter self-hosted through the Astro Fonts API, the Larchwick favicon and the `og.jpg` social
-preview image.
+The design is "Larch and label" (Phase 10 redesign, replacing the Phase 2b copy of the old
+look): larch green, needle gold and espresso tokens, Big Shoulders Display and Hanken Grotesk
+self-hosted through the Astro Fonts API, a sticky header, coffee-label cards with a roast stamp,
+a "bags" card layout, a slide-in sidebar menu on phones (native popover), blurred previews while
+photos load, page headers that rise in on load, and blocks, titles and article text that fade up on
+scroll (CSS only, off for reduced motion). The favicon and the `og.jpg` social image are redrawn in the same look.

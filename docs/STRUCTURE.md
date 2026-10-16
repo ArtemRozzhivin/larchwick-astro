@@ -159,10 +159,11 @@ relative imports inside one folder.
 1. **One `<h1>` per page** — the Hero title (the 404 has its own). Section headings are `<h2>`. Card
    titles are `<h3>` under a section title and `<h2>` when the section has none,
    so no level is skipped.
-2. **Tokens only for colour** — `brand`, `brand-dark`, `heading`, `body`,
-   `surface`, `canvas`, `dark`, `subtle`, `border`, `shadow-soft`, `shadow-card`.
-   No hex or arbitrary values in components, so a rebrand stays a one-file
-   change. Text on a coloured fill is white on `brand-dark`, never on `brand`.
+2. **Tokens only for colour** — `larch`, `larch-deep`, `needle`, `espresso`, `ink`,
+   `mist`, `paper`, `surface`, `stamp`, `border`, `roast-*`, plus the `radius-*`
+   and `shadow-label` tokens. No hex or arbitrary colour values in components, so
+   a rebrand stays a one-file change. Gold (`needle`) is text only on `larch` or
+   `espresso`.
 3. **`Section.astro` owns spacing** — do not re-do padding inside a block that
    already sits in it.
 4. **`siteConfig` owns the brand** — never hardcode a name, URL, or contact detail.

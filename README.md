@@ -50,8 +50,8 @@ npm run dev          # → http://localhost:4321
 1. `src/lib/config/site.ts` — name, URL, description, OG image, nav, contact
    details, footer. Everything else derives from this, including the sitemap and
    every canonical/OG URL.
-2. `src/styles/global.css` — the 9 brand colour tokens (`brand`, `brand-dark`,
-   `heading`, `body`, `surface`, `canvas`, `dark`, `subtle`, `border`).
+2. `src/styles/global.css` — the "Larch and label" colour, radius and shadow
+   tokens (`larch`, `needle`, `espresso`, `paper`, `surface` and the rest).
    `astro.config.ts` — the two self-hosted fonts (Astro Fonts API).
 3. `src/lib/content/home.ts` — the home page copy.
 4. `public/favicon.svg` and `public/og.jpg` (1200×630).
@@ -194,11 +194,12 @@ Type parameters and return values, avoid `any`, use `interface` for object shape
 
 ### Styling
 
-Colour comes from the brand tokens in `src/styles/global.css` — `brand`,
-`brand-dark`, `heading`, `body`, `surface`, `canvas`, `dark`, `subtle`, `border`,
-`shadow-soft`, `shadow-card`. Never a hex or arbitrary value in a component, so a
-rebrand stays a one-file change. Text on a coloured fill is white on `brand-dark`
-(5.73:1), never on `brand`. There is no `tailwind.config.js`
+Colour comes from the tokens in `src/styles/global.css` — `larch`, `larch-deep`,
+`needle`, `espresso`, `ink`, `mist`, `paper`, `surface`, `stamp`, `border` and the
+`roast-*` bag colours. Never a hex or arbitrary colour value in a component, so a
+rebrand stays a one-file change. Gold (`needle`) is text only on `larch` or
+`espresso`. Blocks fade up as they scroll into view with the CSS-only `reveal`
+utility; it is off for reduced motion. There is no `tailwind.config.js`
 (Tailwind v4 is CSS-first) and adding one does nothing.
 
 ### Accessibility

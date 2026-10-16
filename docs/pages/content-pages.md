@@ -20,6 +20,8 @@ disclaimer. The first section is the hero, which holds the page's only H1.
 ## Key interactions
 
 - FAQ questions open and close without JavaScript (`<details>`).
+- On About, the founder's quote and the "See our coffees" and "Visit the blog" buttons share one
+  gold call-to-action band (the call to action's quote field).
 - The contact form posts to `/api/contact`, a small Cloudflare Worker that checks the fields and
   the hidden honeypot, sends the message through Resend, and redirects to `/contact/thanks/` or
   `/contact/error/` (both noindex, not in the sitemap). Copy for those two pages is in
