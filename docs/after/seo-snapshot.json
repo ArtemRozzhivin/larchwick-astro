@@ -1,6 +1,6 @@
 {
   "crawledAt": "2026-10-16",
-  "base": "http://localhost:8787",
+  "base": "https://larchwick-astro.larchwick.workers.dev",
   "records": [
     {
       "group": "pages",
@@ -8,12 +8,12 @@
       "hops": [],
       "finalUrl": "/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Larchwick Coffee Roasters | Fresh Small-Batch Coffee",
       "description": "Fresh, small-batch coffee roasted twice a week. Single origins, blends, brewing guides, classes and EU shipping from Larchwick Coffee Roasters.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/",
+      "canonical": "/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "Fresh coffee, roasted in small batches"
       ]
@@ -24,12 +24,12 @@
       "hops": [],
       "finalUrl": "/about/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "About Us: Small-Batch Coffee Roasters | Larchwick",
       "description": "Larchwick is a small-batch coffee roastery. Meet the team, learn how we source our beans, and why we roast in small batches.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/about/",
+      "canonical": "/about/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "About Larchwick"
       ]
@@ -45,12 +45,12 @@
       ],
       "finalUrl": "/about/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "About Us: Small-Batch Coffee Roasters | Larchwick",
       "description": "Larchwick is a small-batch coffee roastery. Meet the team, learn how we source our beans, and why we roast in small batches.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/about/",
+      "canonical": "/about/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "About Larchwick"
       ]
@@ -61,12 +61,12 @@
       "hops": [],
       "finalUrl": "/blog/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Coffee Brewing Guides and Roastery News | Larchwick Blog",
       "description": "Brewing guides, coffee origins and roastery news from Larchwick Coffee Roasters: pour-over, French press, cold brew and the coffees we roast.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/",
+      "canonical": "/blog/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "The Larchwick blog"
       ]
@@ -82,12 +82,12 @@
       ],
       "finalUrl": "/blog/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Coffee Brewing Guides and Roastery News | Larchwick Blog",
       "description": "Brewing guides, coffee origins and roastery news from Larchwick Coffee Roasters: pour-over, French press, cold brew and the coffees we roast.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/",
+      "canonical": "/blog/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "The Larchwick blog"
       ]
@@ -98,12 +98,12 @@
       "hops": [],
       "finalUrl": "/contact/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Contact Us | Larchwick Coffee Roasters",
       "description": "Contact Larchwick Coffee Roasters about orders, wholesale, brewing classes or office coffee. We reply within two working days.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/contact/",
+      "canonical": "/contact/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "Get in touch"
       ]
@@ -119,12 +119,12 @@
       ],
       "finalUrl": "/contact/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Contact Us | Larchwick Coffee Roasters",
       "description": "Contact Larchwick Coffee Roasters about orders, wholesale, brewing classes or office coffee. We reply within two working days.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/contact/",
+      "canonical": "/contact/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "Get in touch"
       ]
@@ -135,12 +135,12 @@
       "hops": [],
       "finalUrl": "/faq/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Frequently Asked Questions | Larchwick Coffee Roasters",
       "description": "Answers about Larchwick coffee: freshness, grind options, storage, EU shipping, subscriptions, wholesale and brewing classes.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/faq/",
+      "canonical": "/faq/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "Frequently asked questions"
       ]
@@ -156,12 +156,12 @@
       ],
       "finalUrl": "/faq/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Frequently Asked Questions | Larchwick Coffee Roasters",
       "description": "Answers about Larchwick coffee: freshness, grind options, storage, EU shipping, subscriptions, wholesale and brewing classes.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/faq/",
+      "canonical": "/faq/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "Frequently asked questions"
       ]
@@ -172,12 +172,12 @@
       "hops": [],
       "finalUrl": "/products/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Our Coffees: Single Origins and Blends | Larchwick",
       "description": "Explore Larchwick coffees: Ethiopia Yirgacheffe, Colombia Huila, House Espresso and the seasonal Autumn Blend. Origins, tasting notes and prices.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/products/",
+      "canonical": "/products/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "Our coffees"
       ]
@@ -193,12 +193,12 @@
       ],
       "finalUrl": "/products/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Our Coffees: Single Origins and Blends | Larchwick",
       "description": "Explore Larchwick coffees: Ethiopia Yirgacheffe, Colombia Huila, House Espresso and the seasonal Autumn Blend. Origins, tasting notes and prices.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/products/",
+      "canonical": "/products/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "Our coffees"
       ]
@@ -209,12 +209,12 @@
       "hops": [],
       "finalUrl": "/services/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Wholesale Coffee, Brewing Classes and Office Coffee | Larchwick",
       "description": "Wholesale coffee for cafés, small-group brewing classes and office coffee subscriptions from Larchwick Coffee Roasters.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/services/",
+      "canonical": "/services/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "Services"
       ]
@@ -230,12 +230,12 @@
       ],
       "finalUrl": "/services/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Wholesale Coffee, Brewing Classes and Office Coffee | Larchwick",
       "description": "Wholesale coffee for cafés, small-group brewing classes and office coffee subscriptions from Larchwick Coffee Roasters.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/services/",
+      "canonical": "/services/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "Services"
       ]
@@ -251,12 +251,12 @@
       ],
       "finalUrl": "/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Larchwick Coffee Roasters | Fresh Small-Batch Coffee",
       "description": "Fresh, small-batch coffee roasted twice a week. Single origins, blends, brewing guides, classes and EU shipping from Larchwick Coffee Roasters.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/",
+      "canonical": "/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "Fresh coffee, roasted in small batches"
       ]
@@ -272,12 +272,12 @@
       ],
       "finalUrl": "/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Larchwick Coffee Roasters | Fresh Small-Batch Coffee",
       "description": "Fresh, small-batch coffee roasted twice a week. Single origins, blends, brewing guides, classes and EU shipping from Larchwick Coffee Roasters.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/",
+      "canonical": "/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "Fresh coffee, roasted in small batches"
       ]
@@ -293,12 +293,12 @@
       ],
       "finalUrl": "/blog/autumn-seasonal-blend/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Autumn Seasonal Coffee Blend Is Back | Larchwick",
       "description": "Our limited autumn blend is back: cocoa, baked apple and a hint of spice. What's in it, how to brew it, and how long it's available.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/autumn-seasonal-blend/",
+      "canonical": "/blog/autumn-seasonal-blend/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "Our Autumn Seasonal Blend"
       ]
@@ -314,12 +314,12 @@
       ],
       "finalUrl": "/blog/autumn-seasonal-blend/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Autumn Seasonal Coffee Blend Is Back | Larchwick",
       "description": "Our limited autumn blend is back: cocoa, baked apple and a hint of spice. What's in it, how to brew it, and how long it's available.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/autumn-seasonal-blend/",
+      "canonical": "/blog/autumn-seasonal-blend/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "Our Autumn Seasonal Blend"
       ]
@@ -335,12 +335,12 @@
       ],
       "finalUrl": "/blog/choosing-the-right-grind-size/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Coffee Grind Size Chart for Every Brew Method | Larchwick",
       "description": "Which grind size for espresso, pour-over, French press or cold brew? A simple chart, plus how to tell if your grind is too fine or too coarse.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/choosing-the-right-grind-size/",
+      "canonical": "/blog/choosing-the-right-grind-size/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "Choosing the Right Grind Size"
       ]
@@ -356,12 +356,12 @@
       ],
       "finalUrl": "/blog/choosing-the-right-grind-size/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Coffee Grind Size Chart for Every Brew Method | Larchwick",
       "description": "Which grind size for espresso, pour-over, French press or cold brew? A simple chart, plus how to tell if your grind is too fine or too coarse.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/choosing-the-right-grind-size/",
+      "canonical": "/blog/choosing-the-right-grind-size/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "Choosing the Right Grind Size"
       ]
@@ -377,12 +377,12 @@
       ],
       "finalUrl": "/blog/cold-brew-four-simple-steps/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Easy Cold Brew Coffee Recipe in 4 Steps | Larchwick",
       "description": "Make smooth, low-acid cold brew at home with just coffee, water and a jar. Our simple 4-step recipe, ratio and steeping time.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/cold-brew-four-simple-steps/",
+      "canonical": "/blog/cold-brew-four-simple-steps/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "Cold Brew in 4 Simple Steps"
       ]
@@ -398,12 +398,12 @@
       ],
       "finalUrl": "/blog/cold-brew-four-simple-steps/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Easy Cold Brew Coffee Recipe in 4 Steps | Larchwick",
       "description": "Make smooth, low-acid cold brew at home with just coffee, water and a jar. Our simple 4-step recipe, ratio and steeping time.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/cold-brew-four-simple-steps/",
+      "canonical": "/blog/cold-brew-four-simple-steps/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "Cold Brew in 4 Simple Steps"
       ]
@@ -419,12 +419,12 @@
       ],
       "finalUrl": "/blog/colombia-huila-house-espresso/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Colombia Huila: Our House Espresso Coffee | Larchwick",
       "description": "Meet Colombia Huila, the coffee behind our house espresso: where it grows, how it tastes, and why it works so well with milk.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/colombia-huila-house-espresso/",
+      "canonical": "/blog/colombia-huila-house-espresso/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "Colombia Huila: Our House Espresso Bean"
       ]
@@ -440,12 +440,12 @@
       ],
       "finalUrl": "/blog/colombia-huila-house-espresso/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Colombia Huila: Our House Espresso Coffee | Larchwick",
       "description": "Meet Colombia Huila, the coffee behind our house espresso: where it grows, how it tastes, and why it works so well with milk.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/colombia-huila-house-espresso/",
+      "canonical": "/blog/colombia-huila-house-espresso/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "Colombia Huila: Our House Espresso Bean"
       ]
@@ -461,12 +461,12 @@
       ],
       "finalUrl": "/blog/ethiopia-yirgacheffe/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Ethiopia Yirgacheffe Coffee: Origin and Flavor | Larchwick",
       "description": "Why Ethiopia Yirgacheffe coffee tastes floral and bright: altitude, heirloom varieties and washed processing, plus how we brew it.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/ethiopia-yirgacheffe/",
+      "canonical": "/blog/ethiopia-yirgacheffe/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "Ethiopia Yirgacheffe: Bright and Floral"
       ]
@@ -482,12 +482,12 @@
       ],
       "finalUrl": "/blog/ethiopia-yirgacheffe/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Ethiopia Yirgacheffe Coffee: Origin and Flavor | Larchwick",
       "description": "Why Ethiopia Yirgacheffe coffee tastes floral and bright: altitude, heirloom varieties and washed processing, plus how we brew it.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/ethiopia-yirgacheffe/",
+      "canonical": "/blog/ethiopia-yirgacheffe/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "Ethiopia Yirgacheffe: Bright and Floral"
       ]
@@ -503,12 +503,12 @@
       ],
       "finalUrl": "/blog/french-press-5-common-mistakes/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "French Press Coffee: 5 Common Mistakes to Avoid | Larchwick",
       "description": "Bitter or muddy French press coffee? Learn the five most common mistakes, from grind size to timing, and how to fix each one.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/french-press-5-common-mistakes/",
+      "canonical": "/blog/french-press-5-common-mistakes/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "French Press: 5 Common Mistakes"
       ]
@@ -524,12 +524,12 @@
       ],
       "finalUrl": "/blog/french-press-5-common-mistakes/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "French Press Coffee: 5 Common Mistakes to Avoid | Larchwick",
       "description": "Bitter or muddy French press coffee? Learn the five most common mistakes, from grind size to timing, and how to fix each one.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/french-press-5-common-mistakes/",
+      "canonical": "/blog/french-press-5-common-mistakes/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "French Press: 5 Common Mistakes"
       ]
@@ -545,12 +545,12 @@
       ],
       "finalUrl": "/blog/how-to-brew-pour-over-at-home/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "How to Brew Pour-Over Coffee at Home | Larchwick",
       "description": "A simple step-by-step pour-over guide: ratio, water temperature, grind size and timing for a clean, sweet cup every morning.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/how-to-brew-pour-over-at-home/",
+      "canonical": "/blog/how-to-brew-pour-over-at-home/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "How to Brew Pour-Over at Home"
       ]
@@ -566,12 +566,12 @@
       ],
       "finalUrl": "/blog/how-to-brew-pour-over-at-home/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "How to Brew Pour-Over Coffee at Home | Larchwick",
       "description": "A simple step-by-step pour-over guide: ratio, water temperature, grind size and timing for a clean, sweet cup every morning.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/how-to-brew-pour-over-at-home/",
+      "canonical": "/blog/how-to-brew-pour-over-at-home/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "How to Brew Pour-Over at Home"
       ]
@@ -587,12 +587,12 @@
       ],
       "finalUrl": "/blog/meet-our-new-roaster/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Meet Mira, Our New Head Roaster | Larchwick",
       "description": "Meet Mira, the new head roaster at Larchwick Coffee Roasters: her background, her roasting style and the coffee she drinks every day.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/meet-our-new-roaster/",
+      "canonical": "/blog/meet-our-new-roaster/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "Meet Our New Roaster"
       ]
@@ -608,12 +608,12 @@
       ],
       "finalUrl": "/blog/meet-our-new-roaster/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Meet Mira, Our New Head Roaster | Larchwick",
       "description": "Meet Mira, the new head roaster at Larchwick Coffee Roasters: her background, her roasting style and the coffee she drinks every day.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/meet-our-new-roaster/",
+      "canonical": "/blog/meet-our-new-roaster/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "Meet Our New Roaster"
       ]
@@ -629,12 +629,12 @@
       ],
       "finalUrl": "/blog/now-shipping-across-europe/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Now Shipping Fresh Coffee Across Europe | Larchwick",
       "description": "Larchwick Coffee Roasters now ships fresh-roasted coffee across the EU. Delivery times, roast dates and wholesale enquiries.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/now-shipping-across-europe/",
+      "canonical": "/blog/now-shipping-across-europe/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "Larchwick Now Ships Across Europe"
       ]
@@ -650,12 +650,12 @@
       ],
       "finalUrl": "/blog/now-shipping-across-europe/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Now Shipping Fresh Coffee Across Europe | Larchwick",
       "description": "Larchwick Coffee Roasters now ships fresh-roasted coffee across the EU. Delivery times, roast dates and wholesale enquiries.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/now-shipping-across-europe/",
+      "canonical": "/blog/now-shipping-across-europe/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "Larchwick Now Ships Across Europe"
       ]
@@ -671,12 +671,12 @@
       ],
       "finalUrl": "/blog/washed-vs-natural-process/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Washed vs Natural Coffee Processing Explained | Larchwick",
       "description": "What do \"washed\" and \"natural\" mean on a coffee bag? A simple guide to coffee processing and how each method changes flavor.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/washed-vs-natural-process/",
+      "canonical": "/blog/washed-vs-natural-process/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "Washed vs Natural Process, Explained"
       ]
@@ -692,12 +692,12 @@
       ],
       "finalUrl": "/blog/washed-vs-natural-process/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Washed vs Natural Coffee Processing Explained | Larchwick",
       "description": "What do \"washed\" and \"natural\" mean on a coffee bag? A simple guide to coffee processing and how each method changes flavor.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/washed-vs-natural-process/",
+      "canonical": "/blog/washed-vs-natural-process/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "Washed vs Natural Process, Explained"
       ]
@@ -713,12 +713,12 @@
       ],
       "finalUrl": "/blog/ethiopia-yirgacheffe/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Ethiopia Yirgacheffe Coffee: Origin and Flavor | Larchwick",
       "description": "Why Ethiopia Yirgacheffe coffee tastes floral and bright: altitude, heirloom varieties and washed processing, plus how we brew it.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/ethiopia-yirgacheffe/",
+      "canonical": "/blog/ethiopia-yirgacheffe/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "Ethiopia Yirgacheffe: Bright and Floral"
       ]
@@ -734,12 +734,12 @@
       ],
       "finalUrl": "/blog/ethiopia-yirgacheffe/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Ethiopia Yirgacheffe Coffee: Origin and Flavor | Larchwick",
       "description": "Why Ethiopia Yirgacheffe coffee tastes floral and bright: altitude, heirloom varieties and washed processing, plus how we brew it.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/ethiopia-yirgacheffe/",
+      "canonical": "/blog/ethiopia-yirgacheffe/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "Ethiopia Yirgacheffe: Bright and Floral"
       ]
@@ -755,12 +755,12 @@
       ],
       "finalUrl": "/blog/choosing-the-right-grind-size/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Coffee Grind Size Chart for Every Brew Method | Larchwick",
       "description": "Which grind size for espresso, pour-over, French press or cold brew? A simple chart, plus how to tell if your grind is too fine or too coarse.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/choosing-the-right-grind-size/",
+      "canonical": "/blog/choosing-the-right-grind-size/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "Choosing the Right Grind Size"
       ]
@@ -776,12 +776,12 @@
       ],
       "finalUrl": "/blog/choosing-the-right-grind-size/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Coffee Grind Size Chart for Every Brew Method | Larchwick",
       "description": "Which grind size for espresso, pour-over, French press or cold brew? A simple chart, plus how to tell if your grind is too fine or too coarse.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/choosing-the-right-grind-size/",
+      "canonical": "/blog/choosing-the-right-grind-size/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "Choosing the Right Grind Size"
       ]
@@ -797,12 +797,12 @@
       ],
       "finalUrl": "/blog/category/brewing-guides/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Brewing Guides | Larchwick Blog",
       "description": "Brewing Guides: posts from the Larchwick Coffee Roasters blog.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/category/brewing-guides/",
+      "canonical": "/blog/category/brewing-guides/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "Brewing Guides"
       ]
@@ -818,12 +818,12 @@
       ],
       "finalUrl": "/blog/category/brewing-guides/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Brewing Guides | Larchwick Blog",
       "description": "Brewing Guides: posts from the Larchwick Coffee Roasters blog.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/category/brewing-guides/",
+      "canonical": "/blog/category/brewing-guides/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "Brewing Guides"
       ]
@@ -839,12 +839,12 @@
       ],
       "finalUrl": "/blog/category/coffee-origins/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Coffee Origins | Larchwick Blog",
       "description": "Coffee Origins: posts from the Larchwick Coffee Roasters blog.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/category/coffee-origins/",
+      "canonical": "/blog/category/coffee-origins/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "Coffee Origins"
       ]
@@ -860,12 +860,12 @@
       ],
       "finalUrl": "/blog/category/coffee-origins/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Coffee Origins | Larchwick Blog",
       "description": "Coffee Origins: posts from the Larchwick Coffee Roasters blog.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/category/coffee-origins/",
+      "canonical": "/blog/category/coffee-origins/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "Coffee Origins"
       ]
@@ -881,12 +881,12 @@
       ],
       "finalUrl": "/blog/category/roastery-news/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Roastery News | Larchwick Blog",
       "description": "Roastery News: posts from the Larchwick Coffee Roasters blog.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/category/roastery-news/",
+      "canonical": "/blog/category/roastery-news/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "Roastery News"
       ]
@@ -902,12 +902,12 @@
       ],
       "finalUrl": "/blog/category/roastery-news/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Roastery News | Larchwick Blog",
       "description": "Roastery News: posts from the Larchwick Coffee Roasters blog.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/category/roastery-news/",
+      "canonical": "/blog/category/roastery-news/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "Roastery News"
       ]
@@ -923,12 +923,12 @@
       ],
       "finalUrl": "/blog/tag/beginner/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Beginner | Larchwick Blog",
       "description": "Posts tagged \"Beginner\" on the Larchwick Coffee Roasters blog.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/tag/beginner/",
+      "canonical": "/blog/tag/beginner/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "Beginner"
       ]
@@ -944,12 +944,12 @@
       ],
       "finalUrl": "/blog/tag/beginner/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Beginner | Larchwick Blog",
       "description": "Posts tagged \"Beginner\" on the Larchwick Coffee Roasters blog.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/tag/beginner/",
+      "canonical": "/blog/tag/beginner/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "Beginner"
       ]
@@ -965,12 +965,12 @@
       ],
       "finalUrl": "/blog/tag/colombia/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Colombia | Larchwick Blog",
       "description": "Posts tagged \"Colombia\" on the Larchwick Coffee Roasters blog.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/tag/colombia/",
+      "canonical": "/blog/tag/colombia/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "Colombia"
       ]
@@ -986,12 +986,12 @@
       ],
       "finalUrl": "/blog/tag/colombia/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Colombia | Larchwick Blog",
       "description": "Posts tagged \"Colombia\" on the Larchwick Coffee Roasters blog.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/tag/colombia/",
+      "canonical": "/blog/tag/colombia/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "Colombia"
       ]
@@ -1007,12 +1007,12 @@
       ],
       "finalUrl": "/blog/tag/equipment/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Equipment | Larchwick Blog",
       "description": "Posts tagged \"Equipment\" on the Larchwick Coffee Roasters blog.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/tag/equipment/",
+      "canonical": "/blog/tag/equipment/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "Equipment"
       ]
@@ -1028,12 +1028,12 @@
       ],
       "finalUrl": "/blog/tag/equipment/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Equipment | Larchwick Blog",
       "description": "Posts tagged \"Equipment\" on the Larchwick Coffee Roasters blog.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/tag/equipment/",
+      "canonical": "/blog/tag/equipment/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "Equipment"
       ]
@@ -1049,12 +1049,12 @@
       ],
       "finalUrl": "/blog/tag/espresso/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Espresso | Larchwick Blog",
       "description": "Posts tagged \"Espresso\" on the Larchwick Coffee Roasters blog.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/tag/espresso/",
+      "canonical": "/blog/tag/espresso/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "Espresso"
       ]
@@ -1070,12 +1070,12 @@
       ],
       "finalUrl": "/blog/tag/espresso/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Espresso | Larchwick Blog",
       "description": "Posts tagged \"Espresso\" on the Larchwick Coffee Roasters blog.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/tag/espresso/",
+      "canonical": "/blog/tag/espresso/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "Espresso"
       ]
@@ -1091,12 +1091,12 @@
       ],
       "finalUrl": "/blog/tag/ethiopia/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Ethiopia | Larchwick Blog",
       "description": "Posts tagged \"Ethiopia\" on the Larchwick Coffee Roasters blog.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/tag/ethiopia/",
+      "canonical": "/blog/tag/ethiopia/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "Ethiopia"
       ]
@@ -1112,12 +1112,12 @@
       ],
       "finalUrl": "/blog/tag/ethiopia/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Ethiopia | Larchwick Blog",
       "description": "Posts tagged \"Ethiopia\" on the Larchwick Coffee Roasters blog.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/tag/ethiopia/",
+      "canonical": "/blog/tag/ethiopia/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "Ethiopia"
       ]
@@ -1133,12 +1133,12 @@
       ],
       "finalUrl": "/blog/tag/pour-over/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Pour-over | Larchwick Blog",
       "description": "Posts tagged \"Pour-over\" on the Larchwick Coffee Roasters blog.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/tag/pour-over/",
+      "canonical": "/blog/tag/pour-over/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "Pour-over"
       ]
@@ -1154,12 +1154,12 @@
       ],
       "finalUrl": "/blog/tag/pour-over/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Pour-over | Larchwick Blog",
       "description": "Posts tagged \"Pour-over\" on the Larchwick Coffee Roasters blog.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/tag/pour-over/",
+      "canonical": "/blog/tag/pour-over/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "Pour-over"
       ]
@@ -1175,12 +1175,12 @@
       ],
       "finalUrl": "/blog/tag/seasonal/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Seasonal | Larchwick Blog",
       "description": "Posts tagged \"Seasonal\" on the Larchwick Coffee Roasters blog.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/tag/seasonal/",
+      "canonical": "/blog/tag/seasonal/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "Seasonal"
       ]
@@ -1196,12 +1196,12 @@
       ],
       "finalUrl": "/blog/tag/seasonal/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Seasonal | Larchwick Blog",
       "description": "Posts tagged \"Seasonal\" on the Larchwick Coffee Roasters blog.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/tag/seasonal/",
+      "canonical": "/blog/tag/seasonal/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "Seasonal"
       ]
@@ -1217,12 +1217,12 @@
       ],
       "finalUrl": "/blog/tag/single-origin/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Single-origin | Larchwick Blog",
       "description": "Posts tagged \"Single-origin\" on the Larchwick Coffee Roasters blog.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/tag/single-origin/",
+      "canonical": "/blog/tag/single-origin/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "Single-origin"
       ]
@@ -1238,12 +1238,12 @@
       ],
       "finalUrl": "/blog/tag/single-origin/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Single-origin | Larchwick Blog",
       "description": "Posts tagged \"Single-origin\" on the Larchwick Coffee Roasters blog.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/tag/single-origin/",
+      "canonical": "/blog/tag/single-origin/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "Single-origin"
       ]
@@ -1259,12 +1259,12 @@
       ],
       "finalUrl": "/blog/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Coffee Brewing Guides and Roastery News | Larchwick Blog",
       "description": "Brewing guides, coffee origins and roastery news from Larchwick Coffee Roasters: pour-over, French press, cold brew and the coffees we roast.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/",
+      "canonical": "/blog/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "The Larchwick blog"
       ]
@@ -1280,12 +1280,12 @@
       ],
       "finalUrl": "/blog/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Coffee Brewing Guides and Roastery News | Larchwick Blog",
       "description": "Brewing guides, coffee origins and roastery news from Larchwick Coffee Roasters: pour-over, French press, cold brew and the coffees we roast.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/",
+      "canonical": "/blog/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "The Larchwick blog"
       ]
@@ -1301,12 +1301,12 @@
       ],
       "finalUrl": "/blog/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Coffee Brewing Guides and Roastery News | Larchwick Blog",
       "description": "Brewing guides, coffee origins and roastery news from Larchwick Coffee Roasters: pour-over, French press, cold brew and the coffees we roast.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/",
+      "canonical": "/blog/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "The Larchwick blog"
       ]
@@ -1322,12 +1322,12 @@
       ],
       "finalUrl": "/blog/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Coffee Brewing Guides and Roastery News | Larchwick Blog",
       "description": "Brewing guides, coffee origins and roastery news from Larchwick Coffee Roasters: pour-over, French press, cold brew and the coffees we roast.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/",
+      "canonical": "/blog/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "The Larchwick blog"
       ]
@@ -1343,12 +1343,12 @@
       ],
       "finalUrl": "/blog/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Coffee Brewing Guides and Roastery News | Larchwick Blog",
       "description": "Brewing guides, coffee origins and roastery news from Larchwick Coffee Roasters: pour-over, French press, cold brew and the coffees we roast.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/",
+      "canonical": "/blog/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "The Larchwick blog"
       ]
@@ -1364,12 +1364,12 @@
       ],
       "finalUrl": "/blog/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Coffee Brewing Guides and Roastery News | Larchwick Blog",
       "description": "Brewing guides, coffee origins and roastery news from Larchwick Coffee Roasters: pour-over, French press, cold brew and the coffees we roast.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/",
+      "canonical": "/blog/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "The Larchwick blog"
       ]
@@ -1385,12 +1385,12 @@
       ],
       "finalUrl": "/blog/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Coffee Brewing Guides and Roastery News | Larchwick Blog",
       "description": "Brewing guides, coffee origins and roastery news from Larchwick Coffee Roasters: pour-over, French press, cold brew and the coffees we roast.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/",
+      "canonical": "/blog/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "The Larchwick blog"
       ]
@@ -1406,12 +1406,12 @@
       ],
       "finalUrl": "/blog/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Coffee Brewing Guides and Roastery News | Larchwick Blog",
       "description": "Brewing guides, coffee origins and roastery news from Larchwick Coffee Roasters: pour-over, French press, cold brew and the coffees we roast.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/",
+      "canonical": "/blog/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "The Larchwick blog"
       ]
@@ -1427,12 +1427,12 @@
       ],
       "finalUrl": "/blog/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Coffee Brewing Guides and Roastery News | Larchwick Blog",
       "description": "Brewing guides, coffee origins and roastery news from Larchwick Coffee Roasters: pour-over, French press, cold brew and the coffees we roast.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/",
+      "canonical": "/blog/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "The Larchwick blog"
       ]
@@ -1448,12 +1448,12 @@
       ],
       "finalUrl": "/blog/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Coffee Brewing Guides and Roastery News | Larchwick Blog",
       "description": "Brewing guides, coffee origins and roastery news from Larchwick Coffee Roasters: pour-over, French press, cold brew and the coffees we roast.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/",
+      "canonical": "/blog/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "The Larchwick blog"
       ]
@@ -1469,12 +1469,12 @@
       ],
       "finalUrl": "/blog/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Coffee Brewing Guides and Roastery News | Larchwick Blog",
       "description": "Brewing guides, coffee origins and roastery news from Larchwick Coffee Roasters: pour-over, French press, cold brew and the coffees we roast.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/",
+      "canonical": "/blog/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "The Larchwick blog"
       ]
@@ -1490,12 +1490,12 @@
       ],
       "finalUrl": "/blog/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Coffee Brewing Guides and Roastery News | Larchwick Blog",
       "description": "Brewing guides, coffee origins and roastery news from Larchwick Coffee Roasters: pour-over, French press, cold brew and the coffees we roast.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/",
+      "canonical": "/blog/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "The Larchwick blog"
       ]
@@ -1511,12 +1511,12 @@
       ],
       "finalUrl": "/blog/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Coffee Brewing Guides and Roastery News | Larchwick Blog",
       "description": "Brewing guides, coffee origins and roastery news from Larchwick Coffee Roasters: pour-over, French press, cold brew and the coffees we roast.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/",
+      "canonical": "/blog/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "The Larchwick blog"
       ]
@@ -1532,12 +1532,12 @@
       ],
       "finalUrl": "/blog/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Coffee Brewing Guides and Roastery News | Larchwick Blog",
       "description": "Brewing guides, coffee origins and roastery news from Larchwick Coffee Roasters: pour-over, French press, cold brew and the coffees we roast.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/",
+      "canonical": "/blog/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "The Larchwick blog"
       ]
@@ -1553,12 +1553,12 @@
       ],
       "finalUrl": "/blog/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Coffee Brewing Guides and Roastery News | Larchwick Blog",
       "description": "Brewing guides, coffee origins and roastery news from Larchwick Coffee Roasters: pour-over, French press, cold brew and the coffees we roast.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/",
+      "canonical": "/blog/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "The Larchwick blog"
       ]
@@ -1574,12 +1574,12 @@
       ],
       "finalUrl": "/blog/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Coffee Brewing Guides and Roastery News | Larchwick Blog",
       "description": "Brewing guides, coffee origins and roastery news from Larchwick Coffee Roasters: pour-over, French press, cold brew and the coffees we roast.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/",
+      "canonical": "/blog/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "The Larchwick blog"
       ]
@@ -1595,12 +1595,12 @@
       ],
       "finalUrl": "/blog/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Coffee Brewing Guides and Roastery News | Larchwick Blog",
       "description": "Brewing guides, coffee origins and roastery news from Larchwick Coffee Roasters: pour-over, French press, cold brew and the coffees we roast.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/",
+      "canonical": "/blog/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "The Larchwick blog"
       ]
@@ -1616,12 +1616,12 @@
       ],
       "finalUrl": "/blog/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Coffee Brewing Guides and Roastery News | Larchwick Blog",
       "description": "Brewing guides, coffee origins and roastery news from Larchwick Coffee Roasters: pour-over, French press, cold brew and the coffees we roast.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/",
+      "canonical": "/blog/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "The Larchwick blog"
       ]
@@ -1637,12 +1637,12 @@
       ],
       "finalUrl": "/blog/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Coffee Brewing Guides and Roastery News | Larchwick Blog",
       "description": "Brewing guides, coffee origins and roastery news from Larchwick Coffee Roasters: pour-over, French press, cold brew and the coffees we roast.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/",
+      "canonical": "/blog/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "The Larchwick blog"
       ]
@@ -1658,12 +1658,12 @@
       ],
       "finalUrl": "/blog/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Coffee Brewing Guides and Roastery News | Larchwick Blog",
       "description": "Brewing guides, coffee origins and roastery news from Larchwick Coffee Roasters: pour-over, French press, cold brew and the coffees we roast.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/",
+      "canonical": "/blog/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "The Larchwick blog"
       ]
@@ -1679,12 +1679,12 @@
       ],
       "finalUrl": "/blog/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Coffee Brewing Guides and Roastery News | Larchwick Blog",
       "description": "Brewing guides, coffee origins and roastery news from Larchwick Coffee Roasters: pour-over, French press, cold brew and the coffees we roast.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/",
+      "canonical": "/blog/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "The Larchwick blog"
       ]
@@ -1700,12 +1700,12 @@
       ],
       "finalUrl": "/blog/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Coffee Brewing Guides and Roastery News | Larchwick Blog",
       "description": "Brewing guides, coffee origins and roastery news from Larchwick Coffee Roasters: pour-over, French press, cold brew and the coffees we roast.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/",
+      "canonical": "/blog/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "The Larchwick blog"
       ]
@@ -1721,12 +1721,12 @@
       ],
       "finalUrl": "/blog/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Coffee Brewing Guides and Roastery News | Larchwick Blog",
       "description": "Brewing guides, coffee origins and roastery news from Larchwick Coffee Roasters: pour-over, French press, cold brew and the coffees we roast.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/",
+      "canonical": "/blog/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "The Larchwick blog"
       ]
@@ -1742,12 +1742,12 @@
       ],
       "finalUrl": "/blog/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Coffee Brewing Guides and Roastery News | Larchwick Blog",
       "description": "Brewing guides, coffee origins and roastery news from Larchwick Coffee Roasters: pour-over, French press, cold brew and the coffees we roast.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/",
+      "canonical": "/blog/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "The Larchwick blog"
       ]
@@ -1763,12 +1763,12 @@
       ],
       "finalUrl": "/blog/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Coffee Brewing Guides and Roastery News | Larchwick Blog",
       "description": "Brewing guides, coffee origins and roastery news from Larchwick Coffee Roasters: pour-over, French press, cold brew and the coffees we roast.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/",
+      "canonical": "/blog/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "The Larchwick blog"
       ]
@@ -1784,12 +1784,12 @@
       ],
       "finalUrl": "/blog/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Coffee Brewing Guides and Roastery News | Larchwick Blog",
       "description": "Brewing guides, coffee origins and roastery news from Larchwick Coffee Roasters: pour-over, French press, cold brew and the coffees we roast.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/",
+      "canonical": "/blog/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "The Larchwick blog"
       ]
@@ -1805,12 +1805,12 @@
       ],
       "finalUrl": "/blog/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Coffee Brewing Guides and Roastery News | Larchwick Blog",
       "description": "Brewing guides, coffee origins and roastery news from Larchwick Coffee Roasters: pour-over, French press, cold brew and the coffees we roast.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/",
+      "canonical": "/blog/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "The Larchwick blog"
       ]
@@ -1826,12 +1826,12 @@
       ],
       "finalUrl": "/blog/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Coffee Brewing Guides and Roastery News | Larchwick Blog",
       "description": "Brewing guides, coffee origins and roastery news from Larchwick Coffee Roasters: pour-over, French press, cold brew and the coffees we roast.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/",
+      "canonical": "/blog/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "The Larchwick blog"
       ]
@@ -1847,12 +1847,12 @@
       ],
       "finalUrl": "/blog/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Coffee Brewing Guides and Roastery News | Larchwick Blog",
       "description": "Brewing guides, coffee origins and roastery news from Larchwick Coffee Roasters: pour-over, French press, cold brew and the coffees we roast.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/",
+      "canonical": "/blog/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "The Larchwick blog"
       ]
@@ -1868,12 +1868,12 @@
       ],
       "finalUrl": "/blog/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Coffee Brewing Guides and Roastery News | Larchwick Blog",
       "description": "Brewing guides, coffee origins and roastery news from Larchwick Coffee Roasters: pour-over, French press, cold brew and the coffees we roast.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/",
+      "canonical": "/blog/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "The Larchwick blog"
       ]
@@ -1889,12 +1889,12 @@
       ],
       "finalUrl": "/blog/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Coffee Brewing Guides and Roastery News | Larchwick Blog",
       "description": "Brewing guides, coffee origins and roastery news from Larchwick Coffee Roasters: pour-over, French press, cold brew and the coffees we roast.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/",
+      "canonical": "/blog/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "The Larchwick blog"
       ]
@@ -1910,12 +1910,12 @@
       ],
       "finalUrl": "/blog/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Coffee Brewing Guides and Roastery News | Larchwick Blog",
       "description": "Brewing guides, coffee origins and roastery news from Larchwick Coffee Roasters: pour-over, French press, cold brew and the coffees we roast.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/",
+      "canonical": "/blog/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "The Larchwick blog"
       ]
@@ -1931,12 +1931,12 @@
       ],
       "finalUrl": "/blog/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Coffee Brewing Guides and Roastery News | Larchwick Blog",
       "description": "Brewing guides, coffee origins and roastery news from Larchwick Coffee Roasters: pour-over, French press, cold brew and the coffees we roast.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/",
+      "canonical": "/blog/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "The Larchwick blog"
       ]
@@ -1952,12 +1952,12 @@
       ],
       "finalUrl": "/blog/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Coffee Brewing Guides and Roastery News | Larchwick Blog",
       "description": "Brewing guides, coffee origins and roastery news from Larchwick Coffee Roasters: pour-over, French press, cold brew and the coffees we roast.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/",
+      "canonical": "/blog/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "The Larchwick blog"
       ]
@@ -1973,12 +1973,12 @@
       ],
       "finalUrl": "/blog/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Coffee Brewing Guides and Roastery News | Larchwick Blog",
       "description": "Brewing guides, coffee origins and roastery news from Larchwick Coffee Roasters: pour-over, French press, cold brew and the coffees we roast.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/",
+      "canonical": "/blog/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "The Larchwick blog"
       ]
@@ -1994,12 +1994,12 @@
       ],
       "finalUrl": "/blog/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Coffee Brewing Guides and Roastery News | Larchwick Blog",
       "description": "Brewing guides, coffee origins and roastery news from Larchwick Coffee Roasters: pour-over, French press, cold brew and the coffees we roast.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/",
+      "canonical": "/blog/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "The Larchwick blog"
       ]
@@ -2015,12 +2015,12 @@
       ],
       "finalUrl": "/about/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "About Us: Small-Batch Coffee Roasters | Larchwick",
       "description": "Larchwick is a small-batch coffee roastery. Meet the team, learn how we source our beans, and why we roast in small batches.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/about/",
+      "canonical": "/about/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "About Larchwick"
       ]
@@ -2036,12 +2036,12 @@
       ],
       "finalUrl": "/about/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "About Us: Small-Batch Coffee Roasters | Larchwick",
       "description": "Larchwick is a small-batch coffee roastery. Meet the team, learn how we source our beans, and why we roast in small batches.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/about/",
+      "canonical": "/about/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "About Larchwick"
       ]
@@ -2057,12 +2057,12 @@
       ],
       "finalUrl": "/blog/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Coffee Brewing Guides and Roastery News | Larchwick Blog",
       "description": "Brewing guides, coffee origins and roastery news from Larchwick Coffee Roasters: pour-over, French press, cold brew and the coffees we roast.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/",
+      "canonical": "/blog/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "The Larchwick blog"
       ]
@@ -2078,12 +2078,12 @@
       ],
       "finalUrl": "/blog/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Coffee Brewing Guides and Roastery News | Larchwick Blog",
       "description": "Brewing guides, coffee origins and roastery news from Larchwick Coffee Roasters: pour-over, French press, cold brew and the coffees we roast.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/",
+      "canonical": "/blog/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "The Larchwick blog"
       ]
@@ -2099,12 +2099,12 @@
       ],
       "finalUrl": "/blog/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Coffee Brewing Guides and Roastery News | Larchwick Blog",
       "description": "Brewing guides, coffee origins and roastery news from Larchwick Coffee Roasters: pour-over, French press, cold brew and the coffees we roast.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/",
+      "canonical": "/blog/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "The Larchwick blog"
       ]
@@ -2120,12 +2120,12 @@
       ],
       "finalUrl": "/blog/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Coffee Brewing Guides and Roastery News | Larchwick Blog",
       "description": "Brewing guides, coffee origins and roastery news from Larchwick Coffee Roasters: pour-over, French press, cold brew and the coffees we roast.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/",
+      "canonical": "/blog/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "The Larchwick blog"
       ]
@@ -2141,12 +2141,12 @@
       ],
       "finalUrl": "/blog/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Coffee Brewing Guides and Roastery News | Larchwick Blog",
       "description": "Brewing guides, coffee origins and roastery news from Larchwick Coffee Roasters: pour-over, French press, cold brew and the coffees we roast.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/",
+      "canonical": "/blog/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "The Larchwick blog"
       ]
@@ -2162,12 +2162,12 @@
       ],
       "finalUrl": "/blog/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Coffee Brewing Guides and Roastery News | Larchwick Blog",
       "description": "Brewing guides, coffee origins and roastery news from Larchwick Coffee Roasters: pour-over, French press, cold brew and the coffees we roast.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/",
+      "canonical": "/blog/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "The Larchwick blog"
       ]
@@ -2183,12 +2183,12 @@
       ],
       "finalUrl": "/blog/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Coffee Brewing Guides and Roastery News | Larchwick Blog",
       "description": "Brewing guides, coffee origins and roastery news from Larchwick Coffee Roasters: pour-over, French press, cold brew and the coffees we roast.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/",
+      "canonical": "/blog/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "The Larchwick blog"
       ]
@@ -2204,12 +2204,12 @@
       ],
       "finalUrl": "/blog/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Coffee Brewing Guides and Roastery News | Larchwick Blog",
       "description": "Brewing guides, coffee origins and roastery news from Larchwick Coffee Roasters: pour-over, French press, cold brew and the coffees we roast.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/",
+      "canonical": "/blog/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "The Larchwick blog"
       ]
@@ -2225,12 +2225,12 @@
       ],
       "finalUrl": "/blog/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Coffee Brewing Guides and Roastery News | Larchwick Blog",
       "description": "Brewing guides, coffee origins and roastery news from Larchwick Coffee Roasters: pour-over, French press, cold brew and the coffees we roast.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/",
+      "canonical": "/blog/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "The Larchwick blog"
       ]
@@ -2246,12 +2246,12 @@
       ],
       "finalUrl": "/blog/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Coffee Brewing Guides and Roastery News | Larchwick Blog",
       "description": "Brewing guides, coffee origins and roastery news from Larchwick Coffee Roasters: pour-over, French press, cold brew and the coffees we roast.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/",
+      "canonical": "/blog/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "The Larchwick blog"
       ]
@@ -2267,12 +2267,12 @@
       ],
       "finalUrl": "/blog/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Coffee Brewing Guides and Roastery News | Larchwick Blog",
       "description": "Brewing guides, coffee origins and roastery news from Larchwick Coffee Roasters: pour-over, French press, cold brew and the coffees we roast.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/",
+      "canonical": "/blog/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "The Larchwick blog"
       ]
@@ -2288,12 +2288,12 @@
       ],
       "finalUrl": "/blog/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Coffee Brewing Guides and Roastery News | Larchwick Blog",
       "description": "Brewing guides, coffee origins and roastery news from Larchwick Coffee Roasters: pour-over, French press, cold brew and the coffees we roast.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/",
+      "canonical": "/blog/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "The Larchwick blog"
       ]
@@ -2309,12 +2309,12 @@
       ],
       "finalUrl": "/blog/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Coffee Brewing Guides and Roastery News | Larchwick Blog",
       "description": "Brewing guides, coffee origins and roastery news from Larchwick Coffee Roasters: pour-over, French press, cold brew and the coffees we roast.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/",
+      "canonical": "/blog/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "The Larchwick blog"
       ]
@@ -2330,12 +2330,12 @@
       ],
       "finalUrl": "/blog/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Coffee Brewing Guides and Roastery News | Larchwick Blog",
       "description": "Brewing guides, coffee origins and roastery news from Larchwick Coffee Roasters: pour-over, French press, cold brew and the coffees we roast.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/",
+      "canonical": "/blog/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "The Larchwick blog"
       ]
@@ -2351,12 +2351,12 @@
       ],
       "finalUrl": "/blog/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Coffee Brewing Guides and Roastery News | Larchwick Blog",
       "description": "Brewing guides, coffee origins and roastery news from Larchwick Coffee Roasters: pour-over, French press, cold brew and the coffees we roast.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/",
+      "canonical": "/blog/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "The Larchwick blog"
       ]
@@ -2372,12 +2372,12 @@
       ],
       "finalUrl": "/blog/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Coffee Brewing Guides and Roastery News | Larchwick Blog",
       "description": "Brewing guides, coffee origins and roastery news from Larchwick Coffee Roasters: pour-over, French press, cold brew and the coffees we roast.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/",
+      "canonical": "/blog/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "The Larchwick blog"
       ]
@@ -2393,12 +2393,12 @@
       ],
       "finalUrl": "/blog/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Coffee Brewing Guides and Roastery News | Larchwick Blog",
       "description": "Brewing guides, coffee origins and roastery news from Larchwick Coffee Roasters: pour-over, French press, cold brew and the coffees we roast.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/",
+      "canonical": "/blog/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "The Larchwick blog"
       ]
@@ -2414,12 +2414,12 @@
       ],
       "finalUrl": "/blog/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Coffee Brewing Guides and Roastery News | Larchwick Blog",
       "description": "Brewing guides, coffee origins and roastery news from Larchwick Coffee Roasters: pour-over, French press, cold brew and the coffees we roast.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/",
+      "canonical": "/blog/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "The Larchwick blog"
       ]
@@ -2435,12 +2435,12 @@
       ],
       "finalUrl": "/blog/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Coffee Brewing Guides and Roastery News | Larchwick Blog",
       "description": "Brewing guides, coffee origins and roastery news from Larchwick Coffee Roasters: pour-over, French press, cold brew and the coffees we roast.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/",
+      "canonical": "/blog/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "The Larchwick blog"
       ]
@@ -2456,12 +2456,12 @@
       ],
       "finalUrl": "/blog/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Coffee Brewing Guides and Roastery News | Larchwick Blog",
       "description": "Brewing guides, coffee origins and roastery news from Larchwick Coffee Roasters: pour-over, French press, cold brew and the coffees we roast.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/",
+      "canonical": "/blog/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "The Larchwick blog"
       ]
@@ -2477,12 +2477,12 @@
       ],
       "finalUrl": "/blog/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Coffee Brewing Guides and Roastery News | Larchwick Blog",
       "description": "Brewing guides, coffee origins and roastery news from Larchwick Coffee Roasters: pour-over, French press, cold brew and the coffees we roast.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/",
+      "canonical": "/blog/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "The Larchwick blog"
       ]
@@ -2498,12 +2498,12 @@
       ],
       "finalUrl": "/blog/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Coffee Brewing Guides and Roastery News | Larchwick Blog",
       "description": "Brewing guides, coffee origins and roastery news from Larchwick Coffee Roasters: pour-over, French press, cold brew and the coffees we roast.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/",
+      "canonical": "/blog/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "The Larchwick blog"
       ]
@@ -2519,12 +2519,12 @@
       ],
       "finalUrl": "/blog/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Coffee Brewing Guides and Roastery News | Larchwick Blog",
       "description": "Brewing guides, coffee origins and roastery news from Larchwick Coffee Roasters: pour-over, French press, cold brew and the coffees we roast.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/",
+      "canonical": "/blog/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "The Larchwick blog"
       ]
@@ -2540,12 +2540,12 @@
       ],
       "finalUrl": "/blog/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Coffee Brewing Guides and Roastery News | Larchwick Blog",
       "description": "Brewing guides, coffee origins and roastery news from Larchwick Coffee Roasters: pour-over, French press, cold brew and the coffees we roast.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/",
+      "canonical": "/blog/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "The Larchwick blog"
       ]
@@ -2561,12 +2561,12 @@
       ],
       "finalUrl": "/blog/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Coffee Brewing Guides and Roastery News | Larchwick Blog",
       "description": "Brewing guides, coffee origins and roastery news from Larchwick Coffee Roasters: pour-over, French press, cold brew and the coffees we roast.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/",
+      "canonical": "/blog/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "The Larchwick blog"
       ]
@@ -2582,12 +2582,12 @@
       ],
       "finalUrl": "/blog/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Coffee Brewing Guides and Roastery News | Larchwick Blog",
       "description": "Brewing guides, coffee origins and roastery news from Larchwick Coffee Roasters: pour-over, French press, cold brew and the coffees we roast.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/",
+      "canonical": "/blog/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "The Larchwick blog"
       ]
@@ -2603,12 +2603,12 @@
       ],
       "finalUrl": "/blog/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Coffee Brewing Guides and Roastery News | Larchwick Blog",
       "description": "Brewing guides, coffee origins and roastery news from Larchwick Coffee Roasters: pour-over, French press, cold brew and the coffees we roast.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/",
+      "canonical": "/blog/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "The Larchwick blog"
       ]
@@ -2624,12 +2624,12 @@
       ],
       "finalUrl": "/blog/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Coffee Brewing Guides and Roastery News | Larchwick Blog",
       "description": "Brewing guides, coffee origins and roastery news from Larchwick Coffee Roasters: pour-over, French press, cold brew and the coffees we roast.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/",
+      "canonical": "/blog/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "The Larchwick blog"
       ]
@@ -2645,12 +2645,12 @@
       ],
       "finalUrl": "/blog/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Coffee Brewing Guides and Roastery News | Larchwick Blog",
       "description": "Brewing guides, coffee origins and roastery news from Larchwick Coffee Roasters: pour-over, French press, cold brew and the coffees we roast.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/",
+      "canonical": "/blog/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "The Larchwick blog"
       ]
@@ -2666,12 +2666,12 @@
       ],
       "finalUrl": "/blog/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Coffee Brewing Guides and Roastery News | Larchwick Blog",
       "description": "Brewing guides, coffee origins and roastery news from Larchwick Coffee Roasters: pour-over, French press, cold brew and the coffees we roast.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/",
+      "canonical": "/blog/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "The Larchwick blog"
       ]
@@ -2687,12 +2687,12 @@
       ],
       "finalUrl": "/blog/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Coffee Brewing Guides and Roastery News | Larchwick Blog",
       "description": "Brewing guides, coffee origins and roastery news from Larchwick Coffee Roasters: pour-over, French press, cold brew and the coffees we roast.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/",
+      "canonical": "/blog/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "The Larchwick blog"
       ]
@@ -2708,12 +2708,12 @@
       ],
       "finalUrl": "/blog/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Coffee Brewing Guides and Roastery News | Larchwick Blog",
       "description": "Brewing guides, coffee origins and roastery news from Larchwick Coffee Roasters: pour-over, French press, cold brew and the coffees we roast.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/",
+      "canonical": "/blog/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "The Larchwick blog"
       ]
@@ -2729,12 +2729,12 @@
       ],
       "finalUrl": "/blog/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Coffee Brewing Guides and Roastery News | Larchwick Blog",
       "description": "Brewing guides, coffee origins and roastery news from Larchwick Coffee Roasters: pour-over, French press, cold brew and the coffees we roast.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/",
+      "canonical": "/blog/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "The Larchwick blog"
       ]
@@ -2750,12 +2750,12 @@
       ],
       "finalUrl": "/blog/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Coffee Brewing Guides and Roastery News | Larchwick Blog",
       "description": "Brewing guides, coffee origins and roastery news from Larchwick Coffee Roasters: pour-over, French press, cold brew and the coffees we roast.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/",
+      "canonical": "/blog/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "The Larchwick blog"
       ]
@@ -2771,12 +2771,12 @@
       ],
       "finalUrl": "/blog/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Coffee Brewing Guides and Roastery News | Larchwick Blog",
       "description": "Brewing guides, coffee origins and roastery news from Larchwick Coffee Roasters: pour-over, French press, cold brew and the coffees we roast.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/",
+      "canonical": "/blog/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "The Larchwick blog"
       ]
@@ -2792,12 +2792,12 @@
       ],
       "finalUrl": "/blog/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Coffee Brewing Guides and Roastery News | Larchwick Blog",
       "description": "Brewing guides, coffee origins and roastery news from Larchwick Coffee Roasters: pour-over, French press, cold brew and the coffees we roast.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/",
+      "canonical": "/blog/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "The Larchwick blog"
       ]
@@ -2813,12 +2813,12 @@
       ],
       "finalUrl": "/blog/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Coffee Brewing Guides and Roastery News | Larchwick Blog",
       "description": "Brewing guides, coffee origins and roastery news from Larchwick Coffee Roasters: pour-over, French press, cold brew and the coffees we roast.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/",
+      "canonical": "/blog/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "The Larchwick blog"
       ]
@@ -2834,12 +2834,12 @@
       ],
       "finalUrl": "/blog/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Coffee Brewing Guides and Roastery News | Larchwick Blog",
       "description": "Brewing guides, coffee origins and roastery news from Larchwick Coffee Roasters: pour-over, French press, cold brew and the coffees we roast.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/",
+      "canonical": "/blog/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "The Larchwick blog"
       ]
@@ -2855,12 +2855,12 @@
       ],
       "finalUrl": "/blog/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Coffee Brewing Guides and Roastery News | Larchwick Blog",
       "description": "Brewing guides, coffee origins and roastery news from Larchwick Coffee Roasters: pour-over, French press, cold brew and the coffees we roast.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/",
+      "canonical": "/blog/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "The Larchwick blog"
       ]
@@ -2876,12 +2876,12 @@
       ],
       "finalUrl": "/blog/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Coffee Brewing Guides and Roastery News | Larchwick Blog",
       "description": "Brewing guides, coffee origins and roastery news from Larchwick Coffee Roasters: pour-over, French press, cold brew and the coffees we roast.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/",
+      "canonical": "/blog/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "The Larchwick blog"
       ]
@@ -2897,12 +2897,12 @@
       ],
       "finalUrl": "/blog/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Coffee Brewing Guides and Roastery News | Larchwick Blog",
       "description": "Brewing guides, coffee origins and roastery news from Larchwick Coffee Roasters: pour-over, French press, cold brew and the coffees we roast.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/",
+      "canonical": "/blog/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "The Larchwick blog"
       ]
@@ -2918,12 +2918,12 @@
       ],
       "finalUrl": "/blog/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Coffee Brewing Guides and Roastery News | Larchwick Blog",
       "description": "Brewing guides, coffee origins and roastery news from Larchwick Coffee Roasters: pour-over, French press, cold brew and the coffees we roast.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/",
+      "canonical": "/blog/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "The Larchwick blog"
       ]
@@ -2939,12 +2939,12 @@
       ],
       "finalUrl": "/blog/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Coffee Brewing Guides and Roastery News | Larchwick Blog",
       "description": "Brewing guides, coffee origins and roastery news from Larchwick Coffee Roasters: pour-over, French press, cold brew and the coffees we roast.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/",
+      "canonical": "/blog/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "The Larchwick blog"
       ]
@@ -2960,12 +2960,12 @@
       ],
       "finalUrl": "/blog/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Coffee Brewing Guides and Roastery News | Larchwick Blog",
       "description": "Brewing guides, coffee origins and roastery news from Larchwick Coffee Roasters: pour-over, French press, cold brew and the coffees we roast.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/",
+      "canonical": "/blog/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "The Larchwick blog"
       ]
@@ -2981,12 +2981,12 @@
       ],
       "finalUrl": "/blog/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Coffee Brewing Guides and Roastery News | Larchwick Blog",
       "description": "Brewing guides, coffee origins and roastery news from Larchwick Coffee Roasters: pour-over, French press, cold brew and the coffees we roast.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/",
+      "canonical": "/blog/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "The Larchwick blog"
       ]
@@ -3002,12 +3002,12 @@
       ],
       "finalUrl": "/blog/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Coffee Brewing Guides and Roastery News | Larchwick Blog",
       "description": "Brewing guides, coffee origins and roastery news from Larchwick Coffee Roasters: pour-over, French press, cold brew and the coffees we roast.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/",
+      "canonical": "/blog/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "The Larchwick blog"
       ]
@@ -3023,12 +3023,12 @@
       ],
       "finalUrl": "/blog/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Coffee Brewing Guides and Roastery News | Larchwick Blog",
       "description": "Brewing guides, coffee origins and roastery news from Larchwick Coffee Roasters: pour-over, French press, cold brew and the coffees we roast.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/",
+      "canonical": "/blog/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "The Larchwick blog"
       ]
@@ -3044,12 +3044,12 @@
       ],
       "finalUrl": "/blog/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Coffee Brewing Guides and Roastery News | Larchwick Blog",
       "description": "Brewing guides, coffee origins and roastery news from Larchwick Coffee Roasters: pour-over, French press, cold brew and the coffees we roast.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/",
+      "canonical": "/blog/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "The Larchwick blog"
       ]
@@ -3065,12 +3065,12 @@
       ],
       "finalUrl": "/about/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "About Us: Small-Batch Coffee Roasters | Larchwick",
       "description": "Larchwick is a small-batch coffee roastery. Meet the team, learn how we source our beans, and why we roast in small batches.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/about/",
+      "canonical": "/about/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "About Larchwick"
       ]
@@ -3086,12 +3086,12 @@
       ],
       "finalUrl": "/about/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "About Us: Small-Batch Coffee Roasters | Larchwick",
       "description": "Larchwick is a small-batch coffee roastery. Meet the team, learn how we source our beans, and why we roast in small batches.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/about/",
+      "canonical": "/about/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "About Larchwick"
       ]
@@ -3107,12 +3107,12 @@
       ],
       "finalUrl": "/about/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "About Us: Small-Batch Coffee Roasters | Larchwick",
       "description": "Larchwick is a small-batch coffee roastery. Meet the team, learn how we source our beans, and why we roast in small batches.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/about/",
+      "canonical": "/about/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "About Larchwick"
       ]
@@ -3128,12 +3128,12 @@
       ],
       "finalUrl": "/about/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "About Us: Small-Batch Coffee Roasters | Larchwick",
       "description": "Larchwick is a small-batch coffee roastery. Meet the team, learn how we source our beans, and why we roast in small batches.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/about/",
+      "canonical": "/about/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "About Larchwick"
       ]
@@ -3149,12 +3149,12 @@
       ],
       "finalUrl": "/about/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "About Us: Small-Batch Coffee Roasters | Larchwick",
       "description": "Larchwick is a small-batch coffee roastery. Meet the team, learn how we source our beans, and why we roast in small batches.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/about/",
+      "canonical": "/about/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "About Larchwick"
       ]
@@ -3170,12 +3170,12 @@
       ],
       "finalUrl": "/about/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "About Us: Small-Batch Coffee Roasters | Larchwick",
       "description": "Larchwick is a small-batch coffee roastery. Meet the team, learn how we source our beans, and why we roast in small batches.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/about/",
+      "canonical": "/about/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "About Larchwick"
       ]
@@ -3191,12 +3191,12 @@
       ],
       "finalUrl": "/about/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "About Us: Small-Batch Coffee Roasters | Larchwick",
       "description": "Larchwick is a small-batch coffee roastery. Meet the team, learn how we source our beans, and why we roast in small batches.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/about/",
+      "canonical": "/about/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "About Larchwick"
       ]
@@ -3212,12 +3212,12 @@
       ],
       "finalUrl": "/about/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "About Us: Small-Batch Coffee Roasters | Larchwick",
       "description": "Larchwick is a small-batch coffee roastery. Meet the team, learn how we source our beans, and why we roast in small batches.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/about/",
+      "canonical": "/about/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "About Larchwick"
       ]
@@ -3233,12 +3233,12 @@
       ],
       "finalUrl": "/about/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "About Us: Small-Batch Coffee Roasters | Larchwick",
       "description": "Larchwick is a small-batch coffee roastery. Meet the team, learn how we source our beans, and why we roast in small batches.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/about/",
+      "canonical": "/about/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "About Larchwick"
       ]
@@ -3254,12 +3254,12 @@
       ],
       "finalUrl": "/about/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "About Us: Small-Batch Coffee Roasters | Larchwick",
       "description": "Larchwick is a small-batch coffee roastery. Meet the team, learn how we source our beans, and why we roast in small batches.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/about/",
+      "canonical": "/about/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "About Larchwick"
       ]
@@ -3275,12 +3275,12 @@
       ],
       "finalUrl": "/blog/autumn-seasonal-blend/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Autumn Seasonal Coffee Blend Is Back | Larchwick",
       "description": "Our limited autumn blend is back: cocoa, baked apple and a hint of spice. What's in it, how to brew it, and how long it's available.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/autumn-seasonal-blend/",
+      "canonical": "/blog/autumn-seasonal-blend/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "Our Autumn Seasonal Blend"
       ]
@@ -3296,12 +3296,12 @@
       ],
       "finalUrl": "/blog/autumn-seasonal-blend/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Autumn Seasonal Coffee Blend Is Back | Larchwick",
       "description": "Our limited autumn blend is back: cocoa, baked apple and a hint of spice. What's in it, how to brew it, and how long it's available.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/autumn-seasonal-blend/",
+      "canonical": "/blog/autumn-seasonal-blend/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "Our Autumn Seasonal Blend"
       ]
@@ -3317,12 +3317,12 @@
       ],
       "finalUrl": "/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Larchwick Coffee Roasters | Fresh Small-Batch Coffee",
       "description": "Fresh, small-batch coffee roasted twice a week. Single origins, blends, brewing guides, classes and EU shipping from Larchwick Coffee Roasters.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/",
+      "canonical": "/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "Fresh coffee, roasted in small batches"
       ]
@@ -3338,12 +3338,12 @@
       ],
       "finalUrl": "/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Larchwick Coffee Roasters | Fresh Small-Batch Coffee",
       "description": "Fresh, small-batch coffee roasted twice a week. Single origins, blends, brewing guides, classes and EU shipping from Larchwick Coffee Roasters.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/",
+      "canonical": "/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "Fresh coffee, roasted in small batches"
       ]
@@ -3359,12 +3359,12 @@
       ],
       "finalUrl": "/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Larchwick Coffee Roasters | Fresh Small-Batch Coffee",
       "description": "Fresh, small-batch coffee roasted twice a week. Single origins, blends, brewing guides, classes and EU shipping from Larchwick Coffee Roasters.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/",
+      "canonical": "/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "Fresh coffee, roasted in small batches"
       ]
@@ -3380,12 +3380,12 @@
       ],
       "finalUrl": "/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Larchwick Coffee Roasters | Fresh Small-Batch Coffee",
       "description": "Fresh, small-batch coffee roasted twice a week. Single origins, blends, brewing guides, classes and EU shipping from Larchwick Coffee Roasters.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/",
+      "canonical": "/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "Fresh coffee, roasted in small batches"
       ]
@@ -3401,12 +3401,12 @@
       ],
       "finalUrl": "/blog/choosing-the-right-grind-size/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Coffee Grind Size Chart for Every Brew Method | Larchwick",
       "description": "Which grind size for espresso, pour-over, French press or cold brew? A simple chart, plus how to tell if your grind is too fine or too coarse.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/choosing-the-right-grind-size/",
+      "canonical": "/blog/choosing-the-right-grind-size/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "Choosing the Right Grind Size"
       ]
@@ -3422,12 +3422,12 @@
       ],
       "finalUrl": "/blog/choosing-the-right-grind-size/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Coffee Grind Size Chart for Every Brew Method | Larchwick",
       "description": "Which grind size for espresso, pour-over, French press or cold brew? A simple chart, plus how to tell if your grind is too fine or too coarse.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/choosing-the-right-grind-size/",
+      "canonical": "/blog/choosing-the-right-grind-size/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "Choosing the Right Grind Size"
       ]
@@ -3443,12 +3443,12 @@
       ],
       "finalUrl": "/blog/cold-brew-four-simple-steps/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Easy Cold Brew Coffee Recipe in 4 Steps | Larchwick",
       "description": "Make smooth, low-acid cold brew at home with just coffee, water and a jar. Our simple 4-step recipe, ratio and steeping time.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/cold-brew-four-simple-steps/",
+      "canonical": "/blog/cold-brew-four-simple-steps/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "Cold Brew in 4 Simple Steps"
       ]
@@ -3464,12 +3464,12 @@
       ],
       "finalUrl": "/blog/cold-brew-four-simple-steps/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Easy Cold Brew Coffee Recipe in 4 Steps | Larchwick",
       "description": "Make smooth, low-acid cold brew at home with just coffee, water and a jar. Our simple 4-step recipe, ratio and steeping time.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/cold-brew-four-simple-steps/",
+      "canonical": "/blog/cold-brew-four-simple-steps/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "Cold Brew in 4 Simple Steps"
       ]
@@ -3485,12 +3485,12 @@
       ],
       "finalUrl": "/blog/cold-brew-four-simple-steps/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Easy Cold Brew Coffee Recipe in 4 Steps | Larchwick",
       "description": "Make smooth, low-acid cold brew at home with just coffee, water and a jar. Our simple 4-step recipe, ratio and steeping time.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/cold-brew-four-simple-steps/",
+      "canonical": "/blog/cold-brew-four-simple-steps/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "Cold Brew in 4 Simple Steps"
       ]
@@ -3506,12 +3506,12 @@
       ],
       "finalUrl": "/blog/cold-brew-four-simple-steps/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Easy Cold Brew Coffee Recipe in 4 Steps | Larchwick",
       "description": "Make smooth, low-acid cold brew at home with just coffee, water and a jar. Our simple 4-step recipe, ratio and steeping time.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/cold-brew-four-simple-steps/",
+      "canonical": "/blog/cold-brew-four-simple-steps/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "Cold Brew in 4 Simple Steps"
       ]
@@ -3527,12 +3527,12 @@
       ],
       "finalUrl": "/blog/colombia-huila-house-espresso/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Colombia Huila: Our House Espresso Coffee | Larchwick",
       "description": "Meet Colombia Huila, the coffee behind our house espresso: where it grows, how it tastes, and why it works so well with milk.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/colombia-huila-house-espresso/",
+      "canonical": "/blog/colombia-huila-house-espresso/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "Colombia Huila: Our House Espresso Bean"
       ]
@@ -3548,12 +3548,12 @@
       ],
       "finalUrl": "/blog/colombia-huila-house-espresso/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Colombia Huila: Our House Espresso Coffee | Larchwick",
       "description": "Meet Colombia Huila, the coffee behind our house espresso: where it grows, how it tastes, and why it works so well with milk.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/colombia-huila-house-espresso/",
+      "canonical": "/blog/colombia-huila-house-espresso/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "Colombia Huila: Our House Espresso Bean"
       ]
@@ -3569,12 +3569,12 @@
       ],
       "finalUrl": "/contact/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Contact Us | Larchwick Coffee Roasters",
       "description": "Contact Larchwick Coffee Roasters about orders, wholesale, brewing classes or office coffee. We reply within two working days.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/contact/",
+      "canonical": "/contact/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "Get in touch"
       ]
@@ -3590,12 +3590,12 @@
       ],
       "finalUrl": "/contact/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Contact Us | Larchwick Coffee Roasters",
       "description": "Contact Larchwick Coffee Roasters about orders, wholesale, brewing classes or office coffee. We reply within two working days.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/contact/",
+      "canonical": "/contact/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "Get in touch"
       ]
@@ -3611,12 +3611,12 @@
       ],
       "finalUrl": "/blog/ethiopia-yirgacheffe/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Ethiopia Yirgacheffe Coffee: Origin and Flavor | Larchwick",
       "description": "Why Ethiopia Yirgacheffe coffee tastes floral and bright: altitude, heirloom varieties and washed processing, plus how we brew it.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/ethiopia-yirgacheffe/",
+      "canonical": "/blog/ethiopia-yirgacheffe/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "Ethiopia Yirgacheffe: Bright and Floral"
       ]
@@ -3632,12 +3632,12 @@
       ],
       "finalUrl": "/blog/ethiopia-yirgacheffe/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Ethiopia Yirgacheffe Coffee: Origin and Flavor | Larchwick",
       "description": "Why Ethiopia Yirgacheffe coffee tastes floral and bright: altitude, heirloom varieties and washed processing, plus how we brew it.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/ethiopia-yirgacheffe/",
+      "canonical": "/blog/ethiopia-yirgacheffe/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "Ethiopia Yirgacheffe: Bright and Floral"
       ]
@@ -3653,12 +3653,12 @@
       ],
       "finalUrl": "/blog/ethiopia-yirgacheffe/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Ethiopia Yirgacheffe Coffee: Origin and Flavor | Larchwick",
       "description": "Why Ethiopia Yirgacheffe coffee tastes floral and bright: altitude, heirloom varieties and washed processing, plus how we brew it.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/ethiopia-yirgacheffe/",
+      "canonical": "/blog/ethiopia-yirgacheffe/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "Ethiopia Yirgacheffe: Bright and Floral"
       ]
@@ -3674,12 +3674,12 @@
       ],
       "finalUrl": "/blog/ethiopia-yirgacheffe/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Ethiopia Yirgacheffe Coffee: Origin and Flavor | Larchwick",
       "description": "Why Ethiopia Yirgacheffe coffee tastes floral and bright: altitude, heirloom varieties and washed processing, plus how we brew it.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/ethiopia-yirgacheffe/",
+      "canonical": "/blog/ethiopia-yirgacheffe/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "Ethiopia Yirgacheffe: Bright and Floral"
       ]
@@ -3695,12 +3695,12 @@
       ],
       "finalUrl": "/blog/ethiopia-yirgacheffe/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Ethiopia Yirgacheffe Coffee: Origin and Flavor | Larchwick",
       "description": "Why Ethiopia Yirgacheffe coffee tastes floral and bright: altitude, heirloom varieties and washed processing, plus how we brew it.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/ethiopia-yirgacheffe/",
+      "canonical": "/blog/ethiopia-yirgacheffe/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "Ethiopia Yirgacheffe: Bright and Floral"
       ]
@@ -3716,12 +3716,12 @@
       ],
       "finalUrl": "/blog/ethiopia-yirgacheffe/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Ethiopia Yirgacheffe Coffee: Origin and Flavor | Larchwick",
       "description": "Why Ethiopia Yirgacheffe coffee tastes floral and bright: altitude, heirloom varieties and washed processing, plus how we brew it.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/ethiopia-yirgacheffe/",
+      "canonical": "/blog/ethiopia-yirgacheffe/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "Ethiopia Yirgacheffe: Bright and Floral"
       ]
@@ -3737,12 +3737,12 @@
       ],
       "finalUrl": "/blog/ethiopia-yirgacheffe/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Ethiopia Yirgacheffe Coffee: Origin and Flavor | Larchwick",
       "description": "Why Ethiopia Yirgacheffe coffee tastes floral and bright: altitude, heirloom varieties and washed processing, plus how we brew it.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/ethiopia-yirgacheffe/",
+      "canonical": "/blog/ethiopia-yirgacheffe/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "Ethiopia Yirgacheffe: Bright and Floral"
       ]
@@ -3758,12 +3758,12 @@
       ],
       "finalUrl": "/blog/ethiopia-yirgacheffe/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Ethiopia Yirgacheffe Coffee: Origin and Flavor | Larchwick",
       "description": "Why Ethiopia Yirgacheffe coffee tastes floral and bright: altitude, heirloom varieties and washed processing, plus how we brew it.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/ethiopia-yirgacheffe/",
+      "canonical": "/blog/ethiopia-yirgacheffe/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "Ethiopia Yirgacheffe: Bright and Floral"
       ]
@@ -3779,12 +3779,12 @@
       ],
       "finalUrl": "/faq/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Frequently Asked Questions | Larchwick Coffee Roasters",
       "description": "Answers about Larchwick coffee: freshness, grind options, storage, EU shipping, subscriptions, wholesale and brewing classes.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/faq/",
+      "canonical": "/faq/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "Frequently asked questions"
       ]
@@ -3800,12 +3800,12 @@
       ],
       "finalUrl": "/faq/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Frequently Asked Questions | Larchwick Coffee Roasters",
       "description": "Answers about Larchwick coffee: freshness, grind options, storage, EU shipping, subscriptions, wholesale and brewing classes.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/faq/",
+      "canonical": "/faq/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "Frequently asked questions"
       ]
@@ -3821,12 +3821,12 @@
       ],
       "finalUrl": "/blog/french-press-5-common-mistakes/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "French Press Coffee: 5 Common Mistakes to Avoid | Larchwick",
       "description": "Bitter or muddy French press coffee? Learn the five most common mistakes, from grind size to timing, and how to fix each one.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/french-press-5-common-mistakes/",
+      "canonical": "/blog/french-press-5-common-mistakes/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "French Press: 5 Common Mistakes"
       ]
@@ -3842,12 +3842,12 @@
       ],
       "finalUrl": "/blog/french-press-5-common-mistakes/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "French Press Coffee: 5 Common Mistakes to Avoid | Larchwick",
       "description": "Bitter or muddy French press coffee? Learn the five most common mistakes, from grind size to timing, and how to fix each one.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/french-press-5-common-mistakes/",
+      "canonical": "/blog/french-press-5-common-mistakes/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "French Press: 5 Common Mistakes"
       ]
@@ -3863,12 +3863,12 @@
       ],
       "finalUrl": "/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Larchwick Coffee Roasters | Fresh Small-Batch Coffee",
       "description": "Fresh, small-batch coffee roasted twice a week. Single origins, blends, brewing guides, classes and EU shipping from Larchwick Coffee Roasters.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/",
+      "canonical": "/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "Fresh coffee, roasted in small batches"
       ]
@@ -3884,12 +3884,12 @@
       ],
       "finalUrl": "/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Larchwick Coffee Roasters | Fresh Small-Batch Coffee",
       "description": "Fresh, small-batch coffee roasted twice a week. Single origins, blends, brewing guides, classes and EU shipping from Larchwick Coffee Roasters.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/",
+      "canonical": "/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "Fresh coffee, roasted in small batches"
       ]
@@ -3905,12 +3905,12 @@
       ],
       "finalUrl": "/blog/how-to-brew-pour-over-at-home/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "How to Brew Pour-Over Coffee at Home | Larchwick",
       "description": "A simple step-by-step pour-over guide: ratio, water temperature, grind size and timing for a clean, sweet cup every morning.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/how-to-brew-pour-over-at-home/",
+      "canonical": "/blog/how-to-brew-pour-over-at-home/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "How to Brew Pour-Over at Home"
       ]
@@ -3926,12 +3926,12 @@
       ],
       "finalUrl": "/blog/how-to-brew-pour-over-at-home/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "How to Brew Pour-Over Coffee at Home | Larchwick",
       "description": "A simple step-by-step pour-over guide: ratio, water temperature, grind size and timing for a clean, sweet cup every morning.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/how-to-brew-pour-over-at-home/",
+      "canonical": "/blog/how-to-brew-pour-over-at-home/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "How to Brew Pour-Over at Home"
       ]
@@ -3947,12 +3947,12 @@
       ],
       "finalUrl": "/blog/how-to-brew-pour-over-at-home/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "How to Brew Pour-Over Coffee at Home | Larchwick",
       "description": "A simple step-by-step pour-over guide: ratio, water temperature, grind size and timing for a clean, sweet cup every morning.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/how-to-brew-pour-over-at-home/",
+      "canonical": "/blog/how-to-brew-pour-over-at-home/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "How to Brew Pour-Over at Home"
       ]
@@ -3968,12 +3968,12 @@
       ],
       "finalUrl": "/blog/how-to-brew-pour-over-at-home/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "How to Brew Pour-Over Coffee at Home | Larchwick",
       "description": "A simple step-by-step pour-over guide: ratio, water temperature, grind size and timing for a clean, sweet cup every morning.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/how-to-brew-pour-over-at-home/",
+      "canonical": "/blog/how-to-brew-pour-over-at-home/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "How to Brew Pour-Over at Home"
       ]
@@ -3989,12 +3989,12 @@
       ],
       "finalUrl": "/blog/meet-our-new-roaster/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Meet Mira, Our New Head Roaster | Larchwick",
       "description": "Meet Mira, the new head roaster at Larchwick Coffee Roasters: her background, her roasting style and the coffee she drinks every day.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/meet-our-new-roaster/",
+      "canonical": "/blog/meet-our-new-roaster/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "Meet Our New Roaster"
       ]
@@ -4010,12 +4010,12 @@
       ],
       "finalUrl": "/blog/meet-our-new-roaster/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Meet Mira, Our New Head Roaster | Larchwick",
       "description": "Meet Mira, the new head roaster at Larchwick Coffee Roasters: her background, her roasting style and the coffee she drinks every day.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/meet-our-new-roaster/",
+      "canonical": "/blog/meet-our-new-roaster/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "Meet Our New Roaster"
       ]
@@ -4031,12 +4031,12 @@
       ],
       "finalUrl": "/blog/meet-our-new-roaster/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Meet Mira, Our New Head Roaster | Larchwick",
       "description": "Meet Mira, the new head roaster at Larchwick Coffee Roasters: her background, her roasting style and the coffee she drinks every day.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/meet-our-new-roaster/",
+      "canonical": "/blog/meet-our-new-roaster/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "Meet Our New Roaster"
       ]
@@ -4052,12 +4052,12 @@
       ],
       "finalUrl": "/blog/meet-our-new-roaster/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Meet Mira, Our New Head Roaster | Larchwick",
       "description": "Meet Mira, the new head roaster at Larchwick Coffee Roasters: her background, her roasting style and the coffee she drinks every day.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/meet-our-new-roaster/",
+      "canonical": "/blog/meet-our-new-roaster/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "Meet Our New Roaster"
       ]
@@ -4073,12 +4073,12 @@
       ],
       "finalUrl": "/blog/now-shipping-across-europe/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Now Shipping Fresh Coffee Across Europe | Larchwick",
       "description": "Larchwick Coffee Roasters now ships fresh-roasted coffee across the EU. Delivery times, roast dates and wholesale enquiries.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/now-shipping-across-europe/",
+      "canonical": "/blog/now-shipping-across-europe/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "Larchwick Now Ships Across Europe"
       ]
@@ -4094,12 +4094,12 @@
       ],
       "finalUrl": "/blog/now-shipping-across-europe/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Now Shipping Fresh Coffee Across Europe | Larchwick",
       "description": "Larchwick Coffee Roasters now ships fresh-roasted coffee across the EU. Delivery times, roast dates and wholesale enquiries.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/now-shipping-across-europe/",
+      "canonical": "/blog/now-shipping-across-europe/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "Larchwick Now Ships Across Europe"
       ]
@@ -4115,12 +4115,12 @@
       ],
       "finalUrl": "/products/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Our Coffees: Single Origins and Blends | Larchwick",
       "description": "Explore Larchwick coffees: Ethiopia Yirgacheffe, Colombia Huila, House Espresso and the seasonal Autumn Blend. Origins, tasting notes and prices.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/products/",
+      "canonical": "/products/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "Our coffees"
       ]
@@ -4136,12 +4136,12 @@
       ],
       "finalUrl": "/products/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Our Coffees: Single Origins and Blends | Larchwick",
       "description": "Explore Larchwick coffees: Ethiopia Yirgacheffe, Colombia Huila, House Espresso and the seasonal Autumn Blend. Origins, tasting notes and prices.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/products/",
+      "canonical": "/products/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "Our coffees"
       ]
@@ -4157,12 +4157,12 @@
       ],
       "finalUrl": "/products/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Our Coffees: Single Origins and Blends | Larchwick",
       "description": "Explore Larchwick coffees: Ethiopia Yirgacheffe, Colombia Huila, House Espresso and the seasonal Autumn Blend. Origins, tasting notes and prices.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/products/",
+      "canonical": "/products/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "Our coffees"
       ]
@@ -4178,12 +4178,12 @@
       ],
       "finalUrl": "/products/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Our Coffees: Single Origins and Blends | Larchwick",
       "description": "Explore Larchwick coffees: Ethiopia Yirgacheffe, Colombia Huila, House Espresso and the seasonal Autumn Blend. Origins, tasting notes and prices.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/products/",
+      "canonical": "/products/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "Our coffees"
       ]
@@ -4199,12 +4199,12 @@
       ],
       "finalUrl": "/services/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Wholesale Coffee, Brewing Classes and Office Coffee | Larchwick",
       "description": "Wholesale coffee for cafés, small-group brewing classes and office coffee subscriptions from Larchwick Coffee Roasters.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/services/",
+      "canonical": "/services/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "Services"
       ]
@@ -4220,12 +4220,12 @@
       ],
       "finalUrl": "/services/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Wholesale Coffee, Brewing Classes and Office Coffee | Larchwick",
       "description": "Wholesale coffee for cafés, small-group brewing classes and office coffee subscriptions from Larchwick Coffee Roasters.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/services/",
+      "canonical": "/services/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "Services"
       ]
@@ -4241,12 +4241,12 @@
       ],
       "finalUrl": "/services/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Wholesale Coffee, Brewing Classes and Office Coffee | Larchwick",
       "description": "Wholesale coffee for cafés, small-group brewing classes and office coffee subscriptions from Larchwick Coffee Roasters.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/services/",
+      "canonical": "/services/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "Services"
       ]
@@ -4262,12 +4262,12 @@
       ],
       "finalUrl": "/services/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Wholesale Coffee, Brewing Classes and Office Coffee | Larchwick",
       "description": "Wholesale coffee for cafés, small-group brewing classes and office coffee subscriptions from Larchwick Coffee Roasters.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/services/",
+      "canonical": "/services/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "Services"
       ]
@@ -4283,12 +4283,12 @@
       ],
       "finalUrl": "/blog/washed-vs-natural-process/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Washed vs Natural Coffee Processing Explained | Larchwick",
       "description": "What do \"washed\" and \"natural\" mean on a coffee bag? A simple guide to coffee processing and how each method changes flavor.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/washed-vs-natural-process/",
+      "canonical": "/blog/washed-vs-natural-process/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "Washed vs Natural Process, Explained"
       ]
@@ -4304,12 +4304,12 @@
       ],
       "finalUrl": "/blog/washed-vs-natural-process/",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Washed vs Natural Coffee Processing Explained | Larchwick",
       "description": "What do \"washed\" and \"natural\" mean on a coffee bag? A simple guide to coffee processing and how each method changes flavor.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/blog/washed-vs-natural-process/",
+      "canonical": "/blog/washed-vs-natural-process/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "Washed vs Natural Process, Explained"
       ]
@@ -4330,7 +4330,7 @@
       "description": null,
       "canonical": null,
       "robots": null,
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": null,
       "locCount": 1
     },
@@ -4350,7 +4350,7 @@
       "description": null,
       "canonical": null,
       "robots": null,
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": null,
       "locCount": 1
     },
@@ -4370,7 +4370,7 @@
       "description": null,
       "canonical": null,
       "robots": null,
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": null,
       "locCount": 1
     },
@@ -4390,7 +4390,7 @@
       "description": null,
       "canonical": null,
       "robots": null,
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": null,
       "locCount": 1
     },
@@ -4410,7 +4410,7 @@
       "description": null,
       "canonical": null,
       "robots": null,
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": null,
       "locCount": 1
     },
@@ -4430,7 +4430,7 @@
       "description": null,
       "canonical": null,
       "robots": null,
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": null,
       "locCount": 1
     },
@@ -4450,7 +4450,7 @@
       "description": null,
       "canonical": null,
       "robots": null,
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": null,
       "locCount": 1
     },
@@ -4470,7 +4470,7 @@
       "description": null,
       "canonical": null,
       "robots": null,
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": null,
       "locCount": 1
     },
@@ -4480,12 +4480,12 @@
       "hops": [],
       "finalUrl": "/robots.txt",
       "finalStatus": 200,
-      "contentType": "text/plain; charset=utf-8",
+      "contentType": "text/plain",
       "title": null,
       "description": null,
       "canonical": null,
       "robots": null,
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": null
     },
     {
@@ -4494,12 +4494,12 @@
       "hops": [],
       "finalUrl": "/?p=11",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Larchwick Coffee Roasters | Fresh Small-Batch Coffee",
       "description": "Fresh, small-batch coffee roasted twice a week. Single origins, blends, brewing guides, classes and EU shipping from Larchwick Coffee Roasters.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/",
+      "canonical": "/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "Fresh coffee, roasted in small batches"
       ]
@@ -4510,12 +4510,12 @@
       "hops": [],
       "finalUrl": "/?p=13",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Larchwick Coffee Roasters | Fresh Small-Batch Coffee",
       "description": "Fresh, small-batch coffee roasted twice a week. Single origins, blends, brewing guides, classes and EU shipping from Larchwick Coffee Roasters.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/",
+      "canonical": "/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "Fresh coffee, roasted in small batches"
       ]
@@ -4526,12 +4526,12 @@
       "hops": [],
       "finalUrl": "/?p=15",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Larchwick Coffee Roasters | Fresh Small-Batch Coffee",
       "description": "Fresh, small-batch coffee roasted twice a week. Single origins, blends, brewing guides, classes and EU shipping from Larchwick Coffee Roasters.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/",
+      "canonical": "/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "Fresh coffee, roasted in small batches"
       ]
@@ -4542,12 +4542,12 @@
       "hops": [],
       "finalUrl": "/?p=17",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Larchwick Coffee Roasters | Fresh Small-Batch Coffee",
       "description": "Fresh, small-batch coffee roasted twice a week. Single origins, blends, brewing guides, classes and EU shipping from Larchwick Coffee Roasters.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/",
+      "canonical": "/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "Fresh coffee, roasted in small batches"
       ]
@@ -4558,12 +4558,12 @@
       "hops": [],
       "finalUrl": "/?p=22",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Larchwick Coffee Roasters | Fresh Small-Batch Coffee",
       "description": "Fresh, small-batch coffee roasted twice a week. Single origins, blends, brewing guides, classes and EU shipping from Larchwick Coffee Roasters.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/",
+      "canonical": "/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "Fresh coffee, roasted in small batches"
       ]
@@ -4574,12 +4574,12 @@
       "hops": [],
       "finalUrl": "/?p=24",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Larchwick Coffee Roasters | Fresh Small-Batch Coffee",
       "description": "Fresh, small-batch coffee roasted twice a week. Single origins, blends, brewing guides, classes and EU shipping from Larchwick Coffee Roasters.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/",
+      "canonical": "/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "Fresh coffee, roasted in small batches"
       ]
@@ -4590,12 +4590,12 @@
       "hops": [],
       "finalUrl": "/?p=26",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Larchwick Coffee Roasters | Fresh Small-Batch Coffee",
       "description": "Fresh, small-batch coffee roasted twice a week. Single origins, blends, brewing guides, classes and EU shipping from Larchwick Coffee Roasters.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/",
+      "canonical": "/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "Fresh coffee, roasted in small batches"
       ]
@@ -4606,12 +4606,12 @@
       "hops": [],
       "finalUrl": "/?p=28",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Larchwick Coffee Roasters | Fresh Small-Batch Coffee",
       "description": "Fresh, small-batch coffee roasted twice a week. Single origins, blends, brewing guides, classes and EU shipping from Larchwick Coffee Roasters.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/",
+      "canonical": "/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "Fresh coffee, roasted in small batches"
       ]
@@ -4622,12 +4622,12 @@
       "hops": [],
       "finalUrl": "/?p=30",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Larchwick Coffee Roasters | Fresh Small-Batch Coffee",
       "description": "Fresh, small-batch coffee roasted twice a week. Single origins, blends, brewing guides, classes and EU shipping from Larchwick Coffee Roasters.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/",
+      "canonical": "/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "Fresh coffee, roasted in small batches"
       ]
@@ -4638,12 +4638,12 @@
       "hops": [],
       "finalUrl": "/?p=8",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Larchwick Coffee Roasters | Fresh Small-Batch Coffee",
       "description": "Fresh, small-batch coffee roasted twice a week. Single origins, blends, brewing guides, classes and EU shipping from Larchwick Coffee Roasters.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/",
+      "canonical": "/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "Fresh coffee, roasted in small batches"
       ]
@@ -4654,12 +4654,12 @@
       "hops": [],
       "finalUrl": "/?page_id=122",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Larchwick Coffee Roasters | Fresh Small-Batch Coffee",
       "description": "Fresh, small-batch coffee roasted twice a week. Single origins, blends, brewing guides, classes and EU shipping from Larchwick Coffee Roasters.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/",
+      "canonical": "/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "Fresh coffee, roasted in small batches"
       ]
@@ -4670,12 +4670,12 @@
       "hops": [],
       "finalUrl": "/?page_id=63",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Larchwick Coffee Roasters | Fresh Small-Batch Coffee",
       "description": "Fresh, small-batch coffee roasted twice a week. Single origins, blends, brewing guides, classes and EU shipping from Larchwick Coffee Roasters.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/",
+      "canonical": "/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "Fresh coffee, roasted in small batches"
       ]
@@ -4686,12 +4686,12 @@
       "hops": [],
       "finalUrl": "/?page_id=65",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Larchwick Coffee Roasters | Fresh Small-Batch Coffee",
       "description": "Fresh, small-batch coffee roasted twice a week. Single origins, blends, brewing guides, classes and EU shipping from Larchwick Coffee Roasters.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/",
+      "canonical": "/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "Fresh coffee, roasted in small batches"
       ]
@@ -4702,12 +4702,12 @@
       "hops": [],
       "finalUrl": "/?page_id=67",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Larchwick Coffee Roasters | Fresh Small-Batch Coffee",
       "description": "Fresh, small-batch coffee roasted twice a week. Single origins, blends, brewing guides, classes and EU shipping from Larchwick Coffee Roasters.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/",
+      "canonical": "/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "Fresh coffee, roasted in small batches"
       ]
@@ -4718,12 +4718,12 @@
       "hops": [],
       "finalUrl": "/?page_id=69",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Larchwick Coffee Roasters | Fresh Small-Batch Coffee",
       "description": "Fresh, small-batch coffee roasted twice a week. Single origins, blends, brewing guides, classes and EU shipping from Larchwick Coffee Roasters.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/",
+      "canonical": "/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "Fresh coffee, roasted in small batches"
       ]
@@ -4734,12 +4734,12 @@
       "hops": [],
       "finalUrl": "/?page_id=71",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Larchwick Coffee Roasters | Fresh Small-Batch Coffee",
       "description": "Fresh, small-batch coffee roasted twice a week. Single origins, blends, brewing guides, classes and EU shipping from Larchwick Coffee Roasters.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/",
+      "canonical": "/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "Fresh coffee, roasted in small batches"
       ]
@@ -4750,12 +4750,12 @@
       "hops": [],
       "finalUrl": "/?page_id=73",
       "finalStatus": 200,
-      "contentType": "text/html; charset=utf-8",
+      "contentType": "text/html",
       "title": "Larchwick Coffee Roasters | Fresh Small-Batch Coffee",
       "description": "Fresh, small-batch coffee roasted twice a week. Single origins, blends, brewing guides, classes and EU shipping from Larchwick Coffee Roasters.",
-      "canonical": "https://larchwick-astro.larchwick.workers.dev/",
+      "canonical": "/",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      "xRobotsTag": "noindex",
+      "xRobotsTag": null,
       "h1": [
         "Fresh coffee, roasted in small batches"
       ]

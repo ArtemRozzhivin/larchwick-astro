@@ -7,8 +7,10 @@ at https://larchwick.sanity.studio (sign in with your Sanity account).
 
 - The Studio saves every change as a **draft** as you type. Drafts never reach the website.
 - **Publish** (bottom right) makes the change official. Sanity then tells Cloudflare to rebuild
-  the site, and the live site updates by itself a few minutes later. Unpublishing or deleting a
-  document triggers the same rebuild.
+  the site, and the live site updates by itself about a minute later (50–100 seconds when
+  measured). Unpublishing or deleting a document triggers the same rebuild.
+- Publishing several times in a row is fine: every publish starts a rebuild, they run one after
+  another, and the site always ends up with your latest version.
 - If a rebuild fails (for example because of a broken redirect, see below), the website simply
   keeps the previous version. Nothing goes offline; fix the problem and publish again.
 
@@ -81,4 +83,4 @@ that itself redirects. Point **To** at the final address instead.
 
 - Write alt text for every photo; screen readers and search engines rely on it.
 - Keep headings short. The site's display font is condensed and large.
-- Check the live page a few minutes after publishing.
+- Check the live page a minute or two after publishing.

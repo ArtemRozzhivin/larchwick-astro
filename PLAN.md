@@ -722,15 +722,19 @@ why a parity check beats eyeballing.
 
 - [x] Remove the site-wide noindex header (code). Production runs on `workers.dev` (D-3). No build
       env vars are needed (project id, dataset and API version are constants in `studio/env.ts`).
-- [ ] Artem: turn on the build cache; after the dev → main merge, `curl -I` production shows no
-      `X-Robots-Tag`, and the deployed SEO parity run (Phase 6) passes.
-- [ ] Create a Workers Builds deploy hook for `main`, and point a Sanity GROQ webhook at it (1 of
+- [x] Build cache on. 2026-10-16, after the dev → main merge: `curl -I` shows no `X-Robots-Tag`
+      on production and `x-robots-tag: noindex` on the `dev` preview (so Workers Builds does set
+      `WORKERS_CI_BRANCH`), and the deployed SEO parity run passes 216/216 (closes Phase 6).
+- [x] Create a Workers Builds deploy hook for `main`, and point a Sanity GROQ webhook at it (1 of
       the 2 free), filtered to our content types, on create, update and delete.
   - **The hook URL is a credential.** Keep it out of the repo and out of any screenshot or log we
     save, and recreate it if it is ever exposed.
-- [ ] **Measure publish → live:** several runs with `npm run rebuild:watch` (polls the page,
+- [x] **Measure publish → live:** several runs with `npm run rebuild:watch` (polls the page,
       reads the publish time from Sanity, appends a run). Record only build IDs and timestamps (publish time,
       build start and end, first 200 with the new content) in `docs/after/rebuild-times.json`.
+      Result (2026-10-16): 76 s, 99 s and 50 s. The webhook starts a build within 6–11 s; the
+      build itself takes 49–86 s, most of it `npm` install (56 s cold, 20–23 s once the dependency
+      cache is restored); the Astro build is 6–8 s because the image cache survives.
 - [x] Optional: noindex on preview hosts, done from the build (decision 2026-10-16); check a
       preview with `curl -I`. Cloudflare's example pattern
       `https://:version.:subdomain.workers.dev/*` **also matches production on `workers.dev`**.
@@ -752,6 +756,17 @@ why a parity check beats eyeballing.
 JSON.
 **Talking points:** webhook → deploy hook; how quick repeat publishes are debounced; why the hook
 URL is treated as a secret.
+
+Findings (2026-10-16):
+
+- **Repeat publishes are not debounced, and don't need to be.** Run 3 published twice a few seconds
+  apart: each publish started a build, and the second waited in the queue (one build at a time).
+  Each build reads Sanity at its build step, not when it is triggered, so the first build already
+  shipped the second edit. The in-between wording never went live, and the queued build rebuilt
+  the same content. The last publish always wins; the only cost is build minutes.
+- **The hook URL is a credential** because anyone holding it can start production builds as often
+  as they like: no content can change, but it spends the build quota and keeps the queue busy.
+  It lives only in Sanity's webhook settings and Cloudflare, never in the repo or a screenshot.
 
 ### Phase 8 — Performance and accessibility pass
 
