@@ -3,15 +3,17 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light only" />
     <title>New message from the Larchwick contact form</title>
   </head>
-  <body style="margin: 0; padding: 0; background-color: #f7f1e8">
+  <body style="margin: 0; padding: 0; background-color: #f2f3ef">
+    <div style="display: none; max-height: 0; overflow: hidden; opacity: 0">{{{SUBJECT}}}</div>
     <table
       role="presentation"
       width="100%"
       cellpadding="0"
       cellspacing="0"
-      style="background-color: #f7f1e8"
+      style="background-color: #f2f3ef"
     >
       <tr>
         <td align="center" style="padding: 32px 16px">
@@ -20,101 +22,153 @@
             width="100%"
             cellpadding="0"
             cellspacing="0"
-            style="
-              max-width: 600px;
-              background-color: #fffcf7;
-              border: 1px solid #e2d6c6;
-              border-radius: 4px;
-            "
+            style="max-width: 600px"
           >
             <tr>
-              <td style="background-color: #2a1e17; padding: 24px 32px; border-radius: 4px 4px 0 0">
+              <td
+                style="
+                  background-color: #34502f;
+                  padding: 24px 32px 28px;
+                  border-radius: 18px 18px 0 0;
+                "
+              >
                 <p
                   style="
                     margin: 0;
-                    font-family: Georgia, 'Times New Roman', serif;
-                    font-size: 26px;
-                    color: #fffcf7;
+                    font-family: 'Arial Narrow', 'Helvetica Neue', Arial, sans-serif;
+                    font-size: 30px;
+                    font-weight: bold;
+                    line-height: 1;
+                    color: #fbfbf8;
                   "
                 >
                   Larchwick
+                </p>
+                <p
+                  style="
+                    margin: 8px 0 0;
+                    font-family: Arial, Helvetica, sans-serif;
+                    font-size: 14px;
+                    font-weight: bold;
+                    color: #e6b95a;
+                  "
+                >
+                  Contact form
                 </p>
               </td>
             </tr>
             <tr>
               <td
                 style="
-                  padding: 32px;
+                  background-color: #f2f3ef;
+                  padding: 28px 24px 32px;
                   font-family: Arial, Helvetica, sans-serif;
                   font-size: 16px;
                   line-height: 1.6;
-                  color: #4a3f38;
+                  color: #3b2b21;
                 "
               >
-                <h1
-                  style="
-                    margin: 0 0 24px;
-                    font-family: Georgia, 'Times New Roman', serif;
-                    font-size: 24px;
-                    font-weight: normal;
-                    color: #3b2a20;
-                  "
-                >
-                  New message from the contact form
-                </h1>
                 <table
                   role="presentation"
                   width="100%"
                   cellpadding="0"
                   cellspacing="0"
-                  style="font-size: 15px"
-                >
-                  <tr>
-                    <td
-                      style="
-                        padding: 8px 0;
-                        width: 90px;
-                        color: #3b2a20;
-                        font-weight: bold;
-                        vertical-align: top;
-                      "
-                    >
-                      Name
-                    </td>
-                    <td style="padding: 8px 0">{{{NAME}}}</td>
-                  </tr>
-                  <tr>
-                    <td
-                      style="padding: 8px 0; color: #3b2a20; font-weight: bold; vertical-align: top"
-                    >
-                      Email
-                    </td>
-                    <td style="padding: 8px 0">
-                      <a href="mailto:{{{SENDER_EMAIL}}}" style="color: #9a5420"
-                        >{{{SENDER_EMAIL}}}</a
-                      >
-                    </td>
-                  </tr>
-                  <tr>
-                    <td
-                      style="padding: 8px 0; color: #3b2a20; font-weight: bold; vertical-align: top"
-                    >
-                      Subject
-                    </td>
-                    <td style="padding: 8px 0">{{{SUBJECT}}}</td>
-                  </tr>
-                </table>
-                <div
                   style="
-                    margin-top: 24px;
-                    padding: 16px 20px;
-                    background-color: #f7f1e8;
-                    border-left: 4px solid #c8743a;
+                    background-color: #fbfbf8;
+                    border: 2px solid #2a1a10;
+                    border-radius: 14px;
+                    box-shadow: 8px 8px 0 #e6b95a;
                   "
                 >
-                  {{{MESSAGE}}}
-                </div>
-                <p style="margin: 24px 0 0; font-size: 14px">
+                  <tr>
+                    <td style="padding: 24px 24px 28px">
+                      <h1
+                        style="
+                          margin: 0;
+                          font-family: 'Arial Narrow', 'Helvetica Neue', Arial, sans-serif;
+                          font-size: 30px;
+                          font-weight: bold;
+                          line-height: 1.05;
+                          color: #2a1a10;
+                        "
+                      >
+                        New message
+                      </h1>
+                      <table
+                        role="presentation"
+                        width="100%"
+                        cellpadding="0"
+                        cellspacing="0"
+                        style="margin-top: 20px; border-top: 2px solid #2a1a10; font-size: 15px"
+                      >
+                        <tr>
+                          <td
+                            style="
+                              padding: 9px 16px 9px 0;
+                              width: 80px;
+                              border-bottom: 1px solid #d9d8cf;
+                              color: #2a1a10;
+                              font-weight: bold;
+                              vertical-align: top;
+                            "
+                          >
+                            Name
+                          </td>
+                          <td style="padding: 9px 0; border-bottom: 1px solid #d9d8cf">
+                            {{{NAME}}}
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            style="
+                              padding: 9px 16px 9px 0;
+                              border-bottom: 1px solid #d9d8cf;
+                              color: #2a1a10;
+                              font-weight: bold;
+                              vertical-align: top;
+                            "
+                          >
+                            Email
+                          </td>
+                          <td style="padding: 9px 0; border-bottom: 1px solid #d9d8cf">
+                            <a
+                              href="mailto:{{{SENDER_EMAIL}}}"
+                              style="color: #34502f; font-weight: bold"
+                              >{{{SENDER_EMAIL}}}</a
+                            >
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            style="
+                              padding: 9px 16px 9px 0;
+                              border-bottom: 1px solid #d9d8cf;
+                              color: #2a1a10;
+                              font-weight: bold;
+                              vertical-align: top;
+                            "
+                          >
+                            Subject
+                          </td>
+                          <td style="padding: 9px 0; border-bottom: 1px solid #d9d8cf">
+                            {{{SUBJECT}}}
+                          </td>
+                        </tr>
+                      </table>
+                      <div
+                        style="
+                          margin-top: 24px;
+                          padding: 4px 0 4px 18px;
+                          border-left: 6px solid #e6b95a;
+                          color: #3b2b21;
+                        "
+                      >
+                        {{{MESSAGE}}}
+                      </div>
+                    </td>
+                  </tr>
+                </table>
+                <p style="margin: 28px 0 0; font-size: 14px; color: #3b2b21">
                   Reply to this email to answer {{{NAME}}} directly.
                 </p>
               </td>
@@ -122,15 +176,30 @@
             <tr>
               <td
                 style="
-                  padding: 16px 32px;
-                  border-top: 1px solid #e2d6c6;
+                  background-color: #2a1a10;
+                  padding: 20px 32px 24px;
+                  border-radius: 0 0 18px 18px;
                   font-family: Arial, Helvetica, sans-serif;
                   font-size: 12px;
-                  color: #4a3f38;
+                  line-height: 1.6;
+                  color: #dfe6d6;
                 "
               >
-                Sent by the contact form on the Larchwick website. Demo project — fictional
-                business.
+                Sent by the contact form on the Larchwick website.
+                <p
+                  style="
+                    margin: 12px 0 0;
+                    display: inline-block;
+                    padding: 4px 10px;
+                    border: 2px solid #e6b95a;
+                    border-radius: 6px;
+                    font-size: 13px;
+                    font-weight: bold;
+                    color: #e6b95a;
+                  "
+                >
+                  Demo project — fictional business
+                </p>
               </td>
             </tr>
           </table>
