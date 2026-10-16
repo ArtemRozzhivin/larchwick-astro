@@ -5,4 +5,5 @@ import { dataset, projectId } from './env'
 export default defineCliConfig({
   api: { projectId, dataset },
   studioHost: 'larchwick',
+  deployment: { appId: 'ncqtbevvbpyovuqfdiwt9bk9' },
 })
