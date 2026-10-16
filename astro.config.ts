@@ -2,6 +2,7 @@ import sitemap from '@astrojs/sitemap'
 import tailwindcss from '@tailwindcss/vite'
 import { defineConfig, fontProviders } from 'astro/config'
 
+import { redirects } from './src/integrations/redirects'
 import { siteConfig } from './src/lib/config/site'
 
 export default defineConfig({
@@ -53,12 +54,8 @@ export default defineConfig({
     remotePatterns: [{ protocol: 'https', hostname: 'cdn.sanity.io' }],
   },
 
-  // The contact form's thank-you and error pages are noindex, so they stay out of the sitemap.
-  integrations: [
-    sitemap({
-      filter: (page) => !page.includes('/contact/thanks/') && !page.includes('/contact/error/'),
-    }),
-  ],
+  // redirects() runs after sitemap(): it writes dist/_redirects and drops noindex pages from the sitemap.
+  integrations: [sitemap(), redirects()],
 
   vite: {
     plugins: [tailwindcss()],
