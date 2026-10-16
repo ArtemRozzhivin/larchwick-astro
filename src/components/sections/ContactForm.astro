@@ -20,30 +20,44 @@ const { contact } = await getSiteSettings()
 const labels = { ...siteConfig.footer.labels, hours: siteConfig.footer.headings.hours }
 const details = contactDetails(contact, siteConfig.footer.labels)
 const fieldClass =
-  'border-border bg-surface text-heading focus-visible:outline-brand-dark mt-1.5 block w-full rounded-sm border px-3.5 py-2.5'
-const labelClass = 'text-heading text-sm font-medium'
+  'border-espresso/60 bg-surface text-espresso focus-visible:border-larch focus-visible:outline-larch mt-1.5 block w-full rounded-md border-2 px-3.5 py-2.5'
+const labelClass = 'text-espresso font-bold'
 ---
 
 <Section id={id} heading={heading} intro={intro} tone={tone}>
   <div class:list={['grid gap-12', showContactDetails && 'lg:grid-cols-[1fr_20rem]']}>
-    <form method="post" action="/api/contact" class="space-y-5">
+    <form method="post" action="/api/contact" class="reveal space-y-5">
       <div class="grid gap-5 sm:grid-cols-2">
         <label class={labelClass}>
           Your name
-          <input name="name" type="text" autocomplete="name" required class={fieldClass} />
+          <input
+            name="name"
+            type="text"
+            autocomplete="name"
+            required
+            maxlength="100"
+            class={fieldClass}
+          />
         </label>
         <label class={labelClass}>
           Your email
-          <input name="email" type="email" autocomplete="email" required class={fieldClass} />
+          <input
+            name="email"
+            type="email"
+            autocomplete="email"
+            required
+            maxlength="254"
+            class={fieldClass}
+          />
         </label>
       </div>
       <label class:list={[labelClass, 'block']}>
         Subject
-        <input name="subject" type="text" required class={fieldClass} />
+        <input name="subject" type="text" required maxlength="150" class={fieldClass} />
       </label>
       <label class:list={[labelClass, 'block']}>
-        Your message (optional)
-        <textarea name="message" rows="6" class={fieldClass}></textarea>
+        Your message (optional, up to 1,500 characters)
+        <textarea name="message" rows="6" maxlength="1500" class={fieldClass}></textarea>
       </label>
       <div class="hidden" aria-hidden="true">
         <label>
@@ -58,12 +72,17 @@ const labelClass = 'text-heading text-sm font-medium'
 
     {
       showContactDetails && (
-        <address class="space-y-6 not-italic">
+        <address
+          style="--reveal-delay: 1"
+          class="reveal bg-surface border-espresso shadow-label rounded-label space-y-6 self-start border-2 p-6 not-italic"
+        >
           {details.map((detail) => (
             <div>
-              <h2 class="text-heading font-serif text-xl">{detail.label}</h2>
+              <h2 class="text-espresso font-display text-2xl leading-none font-extrabold">
+                {detail.label}
+              </h2>
               <p class="mt-1 flex items-center gap-2">
-                <Icon name={detail.icon} class="text-brand-dark size-4 shrink-0" />
+                <Icon name={detail.icon} class="text-larch size-4 shrink-0" />
                 <a href={detail.href} class="underline underline-offset-4">
                   {detail.value}
                 </a>
@@ -72,11 +91,13 @@ const labelClass = 'text-heading text-sm font-medium'
           ))}
           {contact.hours.length > 0 && (
             <div>
-              <h2 class="text-heading font-serif text-xl">{labels.hours}</h2>
+              <h2 class="text-espresso font-display text-2xl leading-none font-extrabold">
+                {labels.hours}
+              </h2>
               <ul class="mt-1 space-y-1">
                 {contact.hours.map((line) => (
                   <li class="flex items-center gap-2">
-                    <Icon name="clock" class="text-brand-dark size-4 shrink-0" />
+                    <Icon name="clock" class="text-larch size-4 shrink-0" />
                     {line}
                   </li>
                 ))}

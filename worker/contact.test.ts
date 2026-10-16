@@ -1,7 +1,15 @@
 import assert from 'node:assert/strict'
 import { describe, it } from 'node:test'
 
-import { type ContactMessage, handleContact, type SendEmail } from './contact.ts'
+import {
+  type ContactMessage,
+  escapeHtml,
+  handleContact,
+  messageHtml,
+  type ResendConfig,
+  resendPayload,
+  type SendEmail,
+} from './contact.ts'
 
 const ORIGIN = 'https://larchwick-astro.larchwick.workers.dev'
 const ENV = { RESEND_API_KEY: 're_test', CONTACT_TO: 'owner@example.com' }
@@ -17,12 +25,19 @@ function post(fields: Record<string, string>, origin: string | null = ORIGIN): R
   })
 }
 
-function recorder(result = true): { send: SendEmail; sent: ContactMessage[] } {
+function recorder(result = true): {
+  send: SendEmail
+  sent: ContactMessage[]
+  configs: ResendConfig[]
+} {
   const sent: ContactMessage[] = []
+  const configs: ResendConfig[] = []
   return {
     sent,
-    send: async (message) => {
+    configs,
+    send: async (message, config) => {
       sent.push(message)
+      configs.push(config)
       return result
     },
   }
@@ -48,7 +63,7 @@ describe('POST /api/contact', () => {
       { ...VALID, name: '' },
       { ...VALID, subject: '   ' },
       { ...VALID, email: 'not-an-email' },
-      { ...VALID, message: 'x'.repeat(5001) },
+      { ...VALID, message: 'x'.repeat(1501) },
     ]) {
       const { send, sent } = recorder()
       const response = await handleContact(post(fields), ENV, send)
@@ -87,5 +102,55 @@ describe('POST /api/contact', () => {
     const response = await handleContact(new Request(`${ORIGIN}/api/contact`), ENV, recorder().send)
     assert.equal(response.status, 405)
     assert.equal(response.headers.get('Allow'), 'POST')
+  })
+})
+
+describe('Resend payload', () => {
+  const config = { apiKey: 're_test', to: 'owner@example.com' }
+
+  it('uses the stored template, with every visitor value HTML-escaped', () => {
+    const payload = resendPayload(
+      {
+        name: 'Ana <b>',
+        email: 'ana@example.com',
+        subject: 'Beans & "milk"',
+        message: 'Hi\n<script>x</script>',
+      },
+      { ...config, templateId: 'larchwick-contact' },
+    )
+    assert.equal(payload.text, undefined)
+    assert.deepEqual(payload.template, {
+      id: 'larchwick-contact',
+      variables: {
+        NAME: 'Ana &lt;b&gt;',
+        SENDER_EMAIL: 'ana@example.com',
+        SUBJECT: 'Beans &amp; &quot;milk&quot;',
+        MESSAGE: 'Hi<br>&lt;script&gt;x&lt;/script&gt;',
+      },
+    })
+    assert.equal(payload.reply_to, 'ana@example.com')
+    assert.equal(payload.subject, '[Larchwick] Beans & "milk"')
+  })
+
+  it('falls back to plain text when no template is configured', () => {
+    const payload = resendPayload(VALID, config)
+    assert.equal(payload.template, undefined)
+    assert.equal(payload.text, 'From: Ana <ana@example.com>\n\nHello')
+  })
+
+  it('keeps the message variable under the 2,000-character Resend limit without cutting an entity', () => {
+    const html = messageHtml('&'.repeat(1500))
+    assert.ok(html.length <= 2000)
+    assert.match(html, /(&amp;)+…$/)
+  })
+
+  it('escapes all five HTML-sensitive characters', () => {
+    assert.equal(escapeHtml(`&<>"'`), '&amp;&lt;&gt;&quot;&#39;')
+  })
+
+  it('passes the template id from the Worker secrets to the sender', async () => {
+    const { send, configs } = recorder()
+    await handleContact(post(VALID), { ...ENV, RESEND_TEMPLATE_ID: 'larchwick-contact' }, send)
+    assert.equal(configs[0].templateId, 'larchwick-contact')
   })
 })

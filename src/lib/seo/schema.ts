@@ -95,3 +95,26 @@ export function blogPostingSchema(post: {
     inLanguage: siteConfig.lang,
   }
 }
+
+export interface FaqPageSchema extends JsonLd {
+  '@type': 'FAQPage'
+  mainEntity: {
+    '@type': 'Question'
+    name: string
+    acceptedAnswer: { '@type': 'Answer'; text: string }
+  }[]
+}
+
+export function faqPageSchema(
+  questions: readonly { question: string; answer: string }[],
+): FaqPageSchema {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: questions.map(({ question, answer }) => ({
+      '@type': 'Question',
+      name: question,
+      acceptedAnswer: { '@type': 'Answer', text: answer },
+    })),
+  }
+}

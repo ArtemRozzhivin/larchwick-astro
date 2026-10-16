@@ -23,16 +23,16 @@ const {
   eyebrow,
   heading,
   intro,
-  align = 'center',
+  align = 'left',
   width = 'wide',
   tone = 'default',
   class: className = '',
 } = Astro.props
 
 const TONE_CLASSES: Record<Tone, string> = {
-  default: 'bg-surface text-body',
-  muted: 'bg-canvas text-body',
-  inverted: 'bg-dark text-subtle',
+  default: 'bg-paper text-ink',
+  muted: 'bg-surface text-ink border-y-2 border-espresso',
+  inverted: 'bg-larch text-mist',
 }
 
 const hasHeader = Boolean(eyebrow || heading || intro)
@@ -40,16 +40,16 @@ const isCentered = align === 'center'
 const isInverted = tone === 'inverted'
 ---
 
-<section id={id} class:list={['py-12 md:py-20', TONE_CLASSES[tone], className]}>
+<section id={id} class:list={['py-8 md:py-12', TONE_CLASSES[tone], className]}>
   <div class:list={['container-wide', width === 'narrow' && 'max-w-3xl']}>
     {
       hasHeader && (
-        <header class:list={['mb-10 md:mb-12', isCentered && 'mx-auto max-w-2xl text-center']}>
+        <header class:list={['mb-8 max-w-2xl md:mb-10', isCentered && 'mx-auto text-center']}>
           {eyebrow && (
             <p
               class:list={[
-                'mb-3 text-sm font-semibold tracking-widest text-balance uppercase',
-                isInverted ? 'text-brand' : 'text-brand-dark',
+                'reveal mb-3 font-bold text-balance',
+                isInverted ? 'text-needle' : 'text-larch',
               ]}
             >
               {eyebrow}
@@ -58,14 +58,19 @@ const isInverted = tone === 'inverted'
           {heading && (
             <h2
               class:list={[
-                'font-serif text-3xl leading-tight text-balance md:text-4xl',
-                isInverted ? 'text-surface' : 'text-heading',
+                'font-display reveal text-[2.6rem] leading-[0.95] font-black text-balance md:text-6xl',
+                isInverted ? 'text-surface' : 'text-espresso',
               ]}
+              style="--reveal-delay: 1"
             >
               {heading}
             </h2>
           )}
-          {intro && <p class="mt-4 text-lg leading-relaxed text-pretty">{intro}</p>}
+          {intro && (
+            <p class="reveal mt-4 text-lg leading-relaxed text-pretty" style="--reveal-delay: 2">
+              {intro}
+            </p>
+          )}
         </header>
       )
     }

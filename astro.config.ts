@@ -2,6 +2,8 @@ import sitemap from '@astrojs/sitemap'
 import tailwindcss from '@tailwindcss/vite'
 import { defineConfig, fontProviders } from 'astro/config'
 
+import { previewNoindex } from './src/integrations/preview-noindex'
+import { redirects } from './src/integrations/redirects'
 import { siteConfig } from './src/lib/config/site'
 
 export default defineConfig({
@@ -27,19 +29,19 @@ export default defineConfig({
   fonts: [
     {
       provider: fontProviders.fontsource(),
-      name: 'DM Serif Display',
-      cssVariable: '--font-dm-serif-display',
-      weights: [400],
+      name: 'Big Shoulders Display',
+      cssVariable: '--font-big-shoulders',
+      weights: ['600 900'],
       styles: ['normal'],
       subsets: ['latin'],
       formats: ['woff2'],
-      fallbacks: ['Georgia', 'serif'],
+      fallbacks: ['Arial Narrow', 'sans-serif'],
     },
     {
       provider: fontProviders.fontsource(),
-      name: 'Inter',
-      cssVariable: '--font-inter',
-      weights: ['100 900'],
+      name: 'Hanken Grotesk',
+      cssVariable: '--font-hanken',
+      weights: ['400 700'],
       styles: ['normal', 'italic'],
       subsets: ['latin'],
       formats: ['woff2'],
@@ -53,12 +55,9 @@ export default defineConfig({
     remotePatterns: [{ protocol: 'https', hostname: 'cdn.sanity.io' }],
   },
 
-  // The contact form's thank-you and error pages are noindex, so they stay out of the sitemap.
-  integrations: [
-    sitemap({
-      filter: (page) => !page.includes('/contact/thanks/') && !page.includes('/contact/error/'),
-    }),
-  ],
+  // redirects() runs after sitemap(): it writes dist/_redirects and drops noindex pages from the sitemap.
+  // previewNoindex() adds X-Robots-Tag: noindex to dist/_headers on Workers Builds preview branches.
+  integrations: [sitemap(), redirects(), previewNoindex()],
 
   vite: {
     plugins: [tailwindcss()],

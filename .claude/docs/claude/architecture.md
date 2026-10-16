@@ -116,7 +116,8 @@ dist/about/index.html, and every internal href ends in '/', as on WordPress.
 astro.config.ts is the only config, and there is no adapter: dist/ is served as
 static assets by Cloudflare Workers (wrangler.jsonc: html_handling
 force-trailing-slash, not_found_handling 404-page; public/_headers sets
-caching, security headers and noindex until launch). Without an
+caching and security headers; previewNoindex() appends a noindex rule on
+preview branches). Without an
 adapter, `export const prerender = false` is not available. Never flip the
 global mode to 'server'.
 </rendering>

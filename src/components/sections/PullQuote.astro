@@ -12,10 +12,12 @@ const { id, text, citation, tone } = Astro.props
 ---
 
 <Section id={id} tone={tone} width="narrow">
-  <figure class="text-center">
-    <blockquote class="text-heading font-serif text-2xl leading-snug text-balance md:text-3xl">
+  <figure class="reveal border-needle border-l-6 pl-6">
+    <blockquote
+      class="text-larch font-display text-4xl leading-none font-black text-balance md:text-6xl"
+    >
       <p>“{text}”</p>
     </blockquote>
-    {citation && <figcaption class="mt-5">— {citation}</figcaption>}
+    {citation && <figcaption class="mt-5 font-bold">{citation}</figcaption>}
   </figure>
 </Section>

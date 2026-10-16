@@ -7,9 +7,14 @@ export const siteConfig = {
   locale: 'en_US',
   // 1200×630 JPEG; every og:image on the site uses that size.
   ogImage: '/og.jpg',
-  ogImageAlt: 'Close-up of dark roasted coffee beans with the Larchwick name',
-  // Same value as --color-surface in global.css, so the browser bar matches the header.
-  themeColor: '#fffcf7',
+  ogImageAlt:
+    'Larchwick: fresh coffee, roasted in small batches, beside a coffee label for Ethiopia Yirgacheffe',
+  // Same value as --color-paper in global.css, so the browser bar matches the sticky header.
+  themeColor: '#f2f3ef',
+
+  header: {
+    labels: { openMenu: 'Open menu', closeMenu: 'Close menu' },
+  },
 
   footer: {
     headings: { nav: 'Explore', contact: 'Contact', hours: 'Opening hours' },

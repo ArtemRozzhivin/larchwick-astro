@@ -31,8 +31,8 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Contact form tests
-        run: npm run test:worker
+      - name: Unit tests (contact Worker, redirect rules)
+        run: npm test
 
   import-script:
     runs-on: ubuntu-latest

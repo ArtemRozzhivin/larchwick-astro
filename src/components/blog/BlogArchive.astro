@@ -13,24 +13,33 @@ interface Props {
 const { eyebrow, heading, intro, posts } = Astro.props
 ---
 
-<section class="bg-canvas py-14 md:py-20">
+<section class="bg-larch text-mist rounded-b-band py-14 md:py-20">
   <div class="container-wide">
     <header class="max-w-2xl">
       {
         eyebrow && (
-          <p class="text-brand-dark mb-3 text-sm font-semibold tracking-widest uppercase">
+          <p class="text-needle rise-in mb-3 font-bold" style="--rise-delay: 0">
             {eyebrow}
           </p>
         )
       }
-      <h1 class="text-heading font-serif text-4xl leading-tight text-balance sm:text-5xl">
+      <h1
+        class="text-surface font-display rise-in text-[3.2rem] leading-[0.9] font-black text-balance sm:text-7xl"
+        style="--rise-delay: 1"
+      >
         {heading}
       </h1>
-      {intro && <p class="mt-4 text-lg leading-relaxed text-pretty">{intro}</p>}
+      {
+        intro && (
+          <p class="rise-in mt-4 text-lg leading-relaxed text-pretty" style="--rise-delay: 2">
+            {intro}
+          </p>
+        )
+      }
     </header>
   </div>
 </section>
-<section class="bg-surface py-12 md:py-16">
+<section class="py-8 md:py-12">
   <div class="container-wide">
     <PostGrid posts={posts} />
   </div>

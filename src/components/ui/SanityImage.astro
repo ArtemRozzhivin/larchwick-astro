@@ -1,7 +1,7 @@
 ---
 import { Picture } from 'astro:assets'
 
-import { imageSource, type SanityImageValue } from '@lib/sanity/image'
+import { getImagePlaceholders, imageSource, type SanityImageValue } from '@lib/sanity/image'
 
 interface Props {
   image: SanityImageValue
@@ -17,6 +17,9 @@ const { image, widths, sizes, aspectRatio, priority = false, class: className } 
 const { src, width, height } = imageSource(image, Math.max(...widths), aspectRatio)
 const usableWidths = widths.filter((candidate) => candidate <= width)
 const alt = image.decorative ? '' : (image.alt ?? '')
+const placeholders = await getImagePlaceholders()
+const placeholder = image.asset ? placeholders.get(image.asset._ref) : undefined
+const placeholderStyle = placeholder ? `background-image: url(${placeholder})` : undefined
 ---
 
 <Picture
@@ -30,5 +33,6 @@ const alt = image.decorative ? '' : (image.alt ?? '')
   quality={75}
   alt={alt}
   priority={priority}
-  class={className}
+  class:list={[className, placeholder && 'bg-cover bg-center']}
+  style={placeholderStyle}
 />

@@ -343,7 +343,15 @@ function trailing(blocks: readonly Block[], context: ConvertContext): Section[] 
     } else if (block.name === 'buttons') {
       flush()
       const links = buttons(block, context)
-      sections.push(section('cta', context, { primaryCta: links[0], secondaryCta: links[1] }))
+      const quoted = sections.at(-1)?._type === 'quote' ? sections.pop() : undefined
+      sections.push(
+        section('cta', context, {
+          quote: quoted?.text,
+          citation: quoted?.citation,
+          primaryCta: links[0],
+          secondaryCta: links[1],
+        }),
+      )
     } else {
       loose.push(block)
     }

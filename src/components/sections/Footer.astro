@@ -8,19 +8,19 @@ const settings = await getSiteSettings()
 const { contact, navigation: nav } = settings
 const contactItems = contactDetails(contact, footer.labels)
 
-const HEADING = 'font-serif text-surface mb-4 text-xl'
-const LINK = 'hover:text-surface rounded-sm underline-offset-4 transition-colors hover:underline'
+const HEADING = 'font-display text-needle mb-4 text-2xl font-extrabold'
+const LINK = 'hover:text-needle rounded-sm underline-offset-4 transition-colors hover:underline'
 ---
 
-<footer class="bg-dark text-subtle text-sm leading-relaxed">
+<footer class="bg-espresso text-mist text-sm leading-relaxed">
   <div class="container-wide grid gap-10 py-12 sm:grid-cols-2 md:py-16 lg:grid-cols-12 lg:gap-8">
     <div class="lg:col-span-4">
-      <a href="/" class="text-surface rounded-sm font-serif text-2xl leading-none">
+      <a href="/" class="text-surface font-display rounded-sm text-4xl leading-none font-black">
         {settings.siteName}
       </a>
       <p class="mt-4 max-w-xs">{settings.description}</p>
       <p
-        class="border-brand text-surface mt-6 inline-flex rounded-sm border px-3 py-1.5 font-medium"
+        class="border-needle text-needle font-display mt-6 inline-flex -rotate-2 rounded-md border-2 px-3 py-1.5 text-lg font-bold"
       >
         {settings.demoLabel}
       </p>
@@ -47,8 +47,8 @@ const LINK = 'hover:text-surface rounded-sm underline-offset-4 transition-colors
         {
           contactItems.map((item) => (
             <div>
-              <dt class="flex items-center gap-2 text-xs font-semibold tracking-widest uppercase">
-                <Icon name={item.icon} class="text-brand size-4 shrink-0" />
+              <dt class="text-surface flex items-center gap-2 font-bold">
+                <Icon name={item.icon} class="text-needle size-4 shrink-0" />
                 {item.label}
               </dt>
               <dd class="mt-0.5 pl-6">
@@ -68,7 +68,7 @@ const LINK = 'hover:text-surface rounded-sm underline-offset-4 transition-colors
         {
           contact.hours.map((line) => (
             <li class="flex gap-2">
-              <Icon name="clock" class="text-brand mt-1 size-4 shrink-0" />
+              <Icon name="clock" class="text-needle mt-1 size-4 shrink-0" />
               {line}
             </li>
           ))
@@ -77,7 +77,7 @@ const LINK = 'hover:text-surface rounded-sm underline-offset-4 transition-colors
     </div>
   </div>
 
-  <div class="border-surface/15 border-t">
+  <div class="border-t border-white/15">
     <p class="container-wide py-6">{footer.copyright}</p>
   </div>
 </footer>

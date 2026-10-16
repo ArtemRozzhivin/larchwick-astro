@@ -13,11 +13,14 @@ larchwick-astro/
 ├── docs/            Documentation
 │   ├── before/      Evidence from the WordPress site (export, SEO crawl, Lighthouse, screenshots); not Prettier-formatted
 │   ├── internal/    Pages, status, what is still placeholder
+│   ├── after/       Evidence from the new site (SEO snapshot, rebuild-times.json from npm run rebuild:watch)
 │   ├── import-report.md, import-report.json, redirect-map.csv   Written by npm run import:wp; not Prettier-formatted
+│   ├── seo-parity-report.md   Written by npm run seo:compare
+│   ├── editor-guide.md  How to edit and publish in Sanity Studio, for non-developers
 │   ├── pages/       One doc per page, for PM/QA/clients + index
 │   └── STRUCTURE.md this file
 ├── public/          Served as-is: favicon.svg (the Larchwick bean), og.jpg (1200×630), _headers (Cloudflare response headers)
-├── scripts/         Node tools outside the site: credits/, seo-check/, lighthouse-import/ (Node built-ins only) and import-wp/ (WordPress → Sanity; scripts/package.json, Vitest tests)
+├── scripts/         Node tools outside the site: credits/, seo-check/, lighthouse-import/, rebuild-time/ (Node built-ins only) and import-wp/ (WordPress → Sanity; scripts/package.json, Vitest tests)
 ├── src/             Source
 ├── studio/          Sanity Studio (own package.json): schemaTypes/{documents,objects,sections}, desk structure, env.ts (project ID)
 ├── astro.config.ts  The only build config: static output, no adapter, trailing slashes
@@ -61,6 +64,8 @@ src/
 │   ├── content/                Copy, one file per page
 │   │   ├── home.ts             Home: SEO, hero, features, CTA
 │   │   └── not-found.ts        The 404 page
+│   ├── integrations/           redirects.ts (writes dist/_redirects, trims noindex from the sitemap) + redirect-rules.ts,
+│   │                           preview-noindex.ts (noindex header on Workers Builds preview branches)
 │   ├── sanity/                 client.ts (fetch to the Sanity query API), queries.ts (defineQuery),
 │   │                           posts.ts (cached posts/terms, paths, related, archives),
 │   │                           settings.ts (cached Site settings: menu, contact, demo label),
@@ -156,10 +161,11 @@ relative imports inside one folder.
 1. **One `<h1>` per page** — the Hero title (the 404 has its own). Section headings are `<h2>`. Card
    titles are `<h3>` under a section title and `<h2>` when the section has none,
    so no level is skipped.
-2. **Tokens only for colour** — `brand`, `brand-dark`, `heading`, `body`,
-   `surface`, `canvas`, `dark`, `subtle`, `border`, `shadow-soft`, `shadow-card`.
-   No hex or arbitrary values in components, so a rebrand stays a one-file
-   change. Text on a coloured fill is white on `brand-dark`, never on `brand`.
+2. **Tokens only for colour** — `larch`, `larch-deep`, `needle`, `espresso`, `ink`,
+   `mist`, `paper`, `surface`, `stamp`, `border`, `roast-*`, plus the `radius-*`
+   and `shadow-label` tokens. No hex or arbitrary colour values in components, so
+   a rebrand stays a one-file change. Gold (`needle`) is text only on `larch` or
+   `espresso`.
 3. **`Section.astro` owns spacing** — do not re-do padding inside a block that
    already sits in it.
 4. **`siteConfig` owns the brand** — never hardcode a name, URL, or contact detail.

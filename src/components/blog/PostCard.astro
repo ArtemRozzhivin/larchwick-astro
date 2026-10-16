@@ -12,7 +12,7 @@ interface Props {
 const { post, headingLevel: Heading = 'h2' } = Astro.props
 ---
 
-<article class="flex flex-col">
+<article class="reveal flex flex-col">
   {
     post.mainImage && (
       <a href={postPath(post)} tabindex="-1" aria-hidden="true" class="mb-4 block">
@@ -21,14 +21,16 @@ const { post, headingLevel: Heading = 'h2' } = Astro.props
           widths={[400, 640, 800]}
           sizes="(min-width: 64rem) 24rem, (min-width: 40rem) 50vw, 100vw"
           aspectRatio={3 / 2}
-          class="w-full rounded-sm"
+          class="rounded-label w-full"
         />
       </a>
     )
   }
   <PostMeta post={post} />
-  <Heading class="text-heading mt-2 font-serif text-2xl leading-snug text-balance">
-    <a href={postPath(post)} class="hover:text-brand-dark">{post.title}</a>
+  <Heading
+    class="text-espresso font-display mt-2 text-[1.9rem] leading-none font-extrabold text-balance"
+  >
+    <a href={postPath(post)} class="hover:text-larch">{post.title}</a>
   </Heading>
   {post.excerpt && <p class="mt-2 leading-relaxed text-pretty">{post.excerpt}</p>}
 </article>
