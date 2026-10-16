@@ -32,6 +32,8 @@ next build; publishing will trigger that build automatically from Phase 7.
 
 ## Known limitations
 
-- Messages only reach the inbox once Artem has set the Worker secrets `RESEND_API_KEY` and
-  `CONTACT_TO`. Resend's test sender delivers only to the Resend account owner.
+- Messages only reach the inbox once the Worker secrets `RESEND_API_KEY` and `CONTACT_TO` are
+  set. Resend's test sender delivers only to the Resend account owner. With `RESEND_TEMPLATE_ID`
+  set, the email uses the branded Resend template (source: `worker/templates/contact-notification.html`);
+  without it, plain text. Messages are limited to 1,500 characters.
 - There is no rate limit beyond Resend's 100 emails a day.
