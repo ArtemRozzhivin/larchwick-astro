@@ -53,3 +53,7 @@ export const SETTINGS_QUERY = defineQuery(
     demoLabel
   }`,
 )
+
+export const REDIRECTS_QUERY = defineQuery(
+  `*[_type == "redirect" && defined(from) && defined(to)] | order(from asc){ from, to, permanent }`,
+)

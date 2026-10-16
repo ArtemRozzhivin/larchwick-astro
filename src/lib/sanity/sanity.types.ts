@@ -735,3 +735,12 @@ export type SETTINGS_QUERY_RESULT = {
   } | null
   demoLabel: string | null
 } | null
+
+// Source: ../src/lib/sanity/queries.ts
+// Variable: REDIRECTS_QUERY
+// Query: *[_type == "redirect" && defined(from) && defined(to)] | order(from asc){ from, to, permanent }
+export type REDIRECTS_QUERY_RESULT = Array<{
+  from: string
+  to: string
+  permanent: boolean | null
+}>

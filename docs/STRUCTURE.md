@@ -13,7 +13,9 @@ larchwick-astro/
 ├── docs/            Documentation
 │   ├── before/      Evidence from the WordPress site (export, SEO crawl, Lighthouse, screenshots); not Prettier-formatted
 │   ├── internal/    Pages, status, what is still placeholder
+│   ├── after/       Evidence from the new site (SEO snapshot); not Prettier-formatted
 │   ├── import-report.md, import-report.json, redirect-map.csv   Written by npm run import:wp; not Prettier-formatted
+│   ├── seo-parity-report.md   Written by npm run seo:compare
 │   ├── pages/       One doc per page, for PM/QA/clients + index
 │   └── STRUCTURE.md this file
 ├── public/          Served as-is: favicon.svg (the Larchwick bean), og.jpg (1200×630), _headers (Cloudflare response headers)
@@ -61,6 +63,7 @@ src/
 │   ├── content/                Copy, one file per page
 │   │   ├── home.ts             Home: SEO, hero, features, CTA
 │   │   └── not-found.ts        The 404 page
+│   ├── integrations/           redirects.ts (writes dist/_redirects, trims noindex from the sitemap) + redirect-rules.ts
 │   ├── sanity/                 client.ts (fetch to the Sanity query API), queries.ts (defineQuery),
 │   │                           posts.ts (cached posts/terms, paths, related, archives),
 │   │                           settings.ts (cached Site settings: menu, contact, demo label),
