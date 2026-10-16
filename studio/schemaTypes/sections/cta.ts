@@ -8,6 +8,20 @@ export const cta = defineType({
   type: 'object',
   fields: [
     optionalHeadingField,
+    defineField({
+      name: 'quote',
+      title: 'Quote',
+      type: 'text',
+      rows: 3,
+      description: 'Shown large in place of a heading. Only quote fictional people.',
+    }),
+    defineField({
+      name: 'citation',
+      title: 'Who said it',
+      type: 'string',
+      description: 'Name or source, without a leading dash.',
+      hidden: ({ parent }) => !parent?.quote,
+    }),
     defineField({ name: 'text', title: 'Text', type: 'text', rows: 2 }),
     defineField({
       name: 'primaryCta',
