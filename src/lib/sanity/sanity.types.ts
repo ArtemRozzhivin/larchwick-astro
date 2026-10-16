@@ -15,6 +15,19 @@
 export declare const internalGroqTypeReferenceTo: unique symbol
 
 // Source: schema.json
+export type Label = {
+  name?: string
+  origin?: string
+  details?: Array<{
+    label?: string
+    value?: string
+    _type: 'detail'
+    _key: string
+  }>
+  footnote?: string
+  stamp?: string
+}
+
 export type ContactForm = {
   _type: 'contactForm'
   heading?: string
@@ -26,6 +39,8 @@ export type ContactForm = {
 export type Cta = {
   _type: 'cta'
   heading?: string
+  quote?: string
+  citation?: string
   text?: string
   primaryCta?: LinkItem
   secondaryCta?: LinkItem
@@ -95,6 +110,7 @@ export type CardGrid = {
   eyebrow?: string
   heading?: string
   intro?: string
+  layout?: 'cards' | 'bags'
   cards?: Array<{
     image?: AccessibleImage
     eyebrow?: string
@@ -108,6 +124,7 @@ export type CardGrid = {
     }>
     points?: Array<string>
     price?: string
+    roast?: 'light' | 'medium' | 'dark' | 'seasonal'
     cta?: LinkItem
     _type: 'card'
     _key: string
@@ -170,6 +187,7 @@ export type Hero = {
   heading?: string
   text?: string
   image?: AccessibleImage
+  label?: Label
   primaryCta?: LinkItem
   secondaryCta?: LinkItem
   trustList?: Array<string>
@@ -566,6 +584,7 @@ export type Geopoint = {
 }
 
 export type AllSanitySchemaTypes =
+  | Label
   | ContactForm
   | Cta
   | LatestPosts
@@ -743,4 +762,12 @@ export type REDIRECTS_QUERY_RESULT = Array<{
   from: string
   to: string
   permanent: boolean | null
+}>
+
+// Source: ../src/lib/sanity/queries.ts
+// Variable: IMAGE_PLACEHOLDERS_QUERY
+// Query: *[_type == "sanity.imageAsset" && defined(metadata.lqip)]{ _id, "lqip": metadata.lqip }
+export type IMAGE_PLACEHOLDERS_QUERY_RESULT = Array<{
+  _id: string
+  lqip: string | null
 }>

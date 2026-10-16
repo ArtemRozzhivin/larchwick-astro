@@ -6,54 +6,47 @@ nothing — a JS config is ignored unless referenced with @config.
 
 Structure:
   @import 'tailwindcss' source('..')   scans src/ only
-  @theme { --color-*, --shadow-* }     the 9 brand colours and 2 shadows
-  @theme inline { --font-* }           font-serif / font-sans → the Fonts API variables
-  @layer base                          * { border-border }; :focus-visible outline
+  @theme { --color-*, --radius-*, --shadow-* }
+  @theme inline { --font-* }           font-display / font-sans → the Fonts API variables
+  @layer base                          * { border-border }; scroll-padding-top; :focus-visible
   @utility container-wide              the page container
+  @utility reveal                      scroll-driven fade-up (see <motion>)
+  @utility bag-crimp                   the striped top seal of a coffee bag
+  @keyframes rise, press               reveal and the label stamp
 
-Look: the old WordPress site's brand, refined (PLAN.md decision "same brand,
-refined, not a redesign"): warm cream backgrounds, dark-brown serif headings,
-Inter body, copper accents. docs/before/screenshots/ shows the original.
+Look: "Larch and label" (PLAN.md Phase 10). A larch is the conifer whose needles
+turn gold in autumn: larch green bands, needle gold accents, espresso text on
+pale paper. The coffee bag label is the graphic device: a bordered card with a
+hard gold offset shadow, label-and-value rows, and a round roast stamp.
 </source_of_truth>
 
 <tokens>
-Colours = Astra's global colours 0–8 on the old site (PLAN.md Appendix A):
+  utility       value    use
+  larch         #34502f  hero and inverted bands, primary button, links, eyebrows on light
+  larch-deep    #263c22  primary button hover
+  needle        #e6b95a  accent button, CTA band, label shadow, rule accents, text on
+                         larch or espresso only (never text on a light background)
+  espresso      #2a1a10  headings, label borders, footer band, secondary button
+  ink           #3b2b21  body text (the <body> default)
+  mist          #dfe6d6  body text on larch and espresso, category pill fill
+  paper         #f2f3ef  page background (the <body> default), theme-color
+  surface       #fbfbf8  labels, cards, form fields, the muted band, text on larch
+  stamp         #a3362b  the roast stamp and the 404 stamp
+  border        #d9d8cf  label rows and dividers (the base rule's default)
+  roast-light   #e7d6a8  bag colours in the "bags" card layout, light to dark
+  roast-medium  #c98b4e
+  roast-dark    #7a4a2c
 
-  #  utility      value    Appendix name  use
-  0  brand        #c8743a  brand          decorative accent only: icons, underlines,
-                                          borders, eyebrows on dark. Never text on a
-                                          light background, never behind white text
-  1  brand-dark   #9a5420  brand-dark     links, active nav, eyebrows on light,
-                                          primary button fill, secondary button text
-  2  heading      #3b2a20  heading        headings, wordmark, primary button hover
-  3  body         #4a3f38  text           body text (the <body> default)
-  4  surface      #fffcf7  surface        page and card background, text on dark
-  5  canvas       #f7f1e8  bg             muted bands (CTA, FAQ)
-  6  dark         #2a1e17  dark           dark bands: hero, footer, inverted sections
-  7  subtle       #efe6d8  subtle         hover fills; body text on dark
-  8  border       #e2d6c6  border         borders and dividers (the base rule's default)
+  radius-label  14px     labels, cards, FAQ, callouts, small photos
+  radius-photo  18px     photos and the bottom of a bag
+  radius-band   36px     the hero bottom and the CTA band
+  shadow-label  8px 8px 0 needle, the hard offset under a label
 
-The Appendix names "text" and "bg" became `body` and `canvas`, so the utilities
-read as text-body and bg-canvas.
-
-shadows (tinted with the dark brown, rgb 42 30 23):
-  shadow-soft   resting panels (FAQ)
-  shadow-card   raised panels (the open mobile menu)
-
-white is still used for text on a brand-dark fill (5.73:1). Avoid Tailwind's
-gray scale: its cool greys clash with the warm palette, and every pair below is
-already covered by a token.
+Avoid Tailwind's gray scale and plain white/black: every pair below is covered
+by a token.
 </tokens>
 
 <rules>
-Use tokens: bg-brand-dark, text-heading, text-body, bg-canvas, border-border.
-
-Text on a coloured fill: the fill is brand-dark and the text white. Never white
-text on brand (3.49:1 fails AA); that was the old site's button.
-
-On a dark band, text is surface or subtle, eyebrows are brand, buttons use the
-inverse variants.
-
 Never:
 - a hex, rgb, or hsl literal in a component (an SVG asset in public/ may have hex)
 - an arbitrary colour value: bg-[#52d1fc], text-[#0ea5e9]
@@ -63,80 +56,122 @@ Rebranding must stay a one-file change. Every hardcoded colour breaks that
 promise, which is the whole reason the tokens exist.
 
 The only colour outside global.css is siteConfig.themeColor (the theme-color
-meta), which repeats --color-surface.
+meta), which repeats --color-paper. public/favicon.svg and public/og.jpg carry
+the palette as image assets.
 </rules>
 
 <contrast>
 WCAG 2.2 ratios for every text/background pair in use (computed from the hex
-values with the WCAG relative-luminance formula, 2026-10-13). AA needs 4.5:1 for
+values with the WCAG relative-luminance formula, 2026-10-16). AA needs 4.5:1 for
 normal text, 3:1 for large text (24px, or 18.66px bold) and for UI parts such as
-focus rings and state indicators.
+focus rings, field borders and state indicators.
 
   pair                              ratio    where
-  body on surface                    9.96   body text
-  heading on surface                13.34   headings, wordmark, menu links, inverse button text
-  brand-dark on surface              5.60   active nav, eyebrows, secondary button, focus ring
-  brand on surface                   3.41   active-nav underline and the aria-hidden 404
-                                            numeral only (UI part / decorative), never text
-  body on canvas                     9.08   CTA and FAQ text
-  heading on canvas                 12.16   CTA heading
-  brand-dark on canvas               5.11   eyebrow on a muted band, focus ring
-  white on brand-dark                5.73   primary button, skip link
-  white on heading                  13.65   primary button hover
-  brand-dark on subtle               4.64   secondary button hover
-  heading on subtle                 11.04   inverse button hover, menu button hover
-  surface on dark                   15.83   hero h1, footer headings and links, inverse-outline
-                                            button, focus ring on dark
-  subtle on dark                    13.10   hero and footer body text
-  brand on dark                      4.64   hero eyebrow, eyebrow on inverted sections,
-                                            icons and demo-label border in the footer
-  surface/60 on dark                 6.51   inverse-outline button border
+  ink on paper                      12.13   body text
+  espresso on paper                 15.03   headings, nav links
+  larch on paper                     8.07   eyebrows, links, active-nav underline, focus ring
+  ink / espresso on surface   13.04 / 16.16  labels, cards, form fields, muted band
+  larch on surface                   8.68   label origin line, check icons
+  stamp on paper / surface    6.04 / 6.49   the stamps
+  surface on larch                   8.68   hero h1, primary button, focus ring on larch
+  mist on larch                      7.04   hero and inverted-band body text
+  needle on larch                    4.91   eyebrows on larch, check icons
+  surface on larch-deep             11.56   primary button hover
+  espresso on needle                 9.13   accent button, CTA band text
+  larch on needle                    4.91   primary button and its focus ring on the CTA band
+  mist on espresso                  13.10   footer text
+  needle on espresso                 9.13   footer headings, icons, demo label
+  surface on espresso               16.16   secondary and accent button hover
+  espresso on roast-light / medium 11.63 / 5.81   bag text
+  surface on roast-dark / larch    7.12 / 8.68   bag text on dark and seasonal bags
+  larch on mist                      7.04   category pill
+  espresso/60 on surface             4.40   form field border
 
-Before → after (old values read from the WordPress CSS): the Elementor buttons
-were white on brand, 3.49:1, which fails AA; the primary button is now white on
-brand-dark, 5.73:1. The old active nav link was brand-dark (5.60:1) with colour as
-its only signal; it now also has an underline and aria-current.
+needle on paper is about 1.7:1, so gold is never text, and never the only state
+signal, on a light background: the active nav underline is larch, and gold is the
+hover underline only. espresso on larch is 1.86:1, so a button sitting on larch
+uses a surface focus ring (the accent variant does).
 </contrast>
 
 <focus>
 A base rule gives every :focus-visible element a 2px currentColor outline with a
 3px offset, so the ring is as legible as the element's text on light and dark
-bands. Buttons set their outline colour in the variant (brand-dark on light,
-surface on dark), unprefixed so transition-colors doesn't fade it in. Never
-remove the outline without replacing it.
+bands. Buttons set their outline colour in the variant, unprefixed so
+transition-colors doesn't fade it in. Never remove the outline without replacing
+it.
 </focus>
 
-<spacing_and_rhythm>
-Section.astro owns vertical rhythm: py-12 md:py-20 (48/80px), and mb-10 md:mb-12
-under the header. The brief's 40px (py-10) read as cramped against the serif
-headings, so it was refined to these values. Do not re-do padding in a block that
-already sits inside Section.
+<motion>
+All CSS only, all off for prefers-reduced-motion:
 
-Hero: py-16 md:py-24. Header bar: h-16 md:h-20, not sticky (as on the old site).
+- `reveal` (an @utility): an element fades up 2rem as it scrolls into view, driven
+  by animation-timeline: view(), eased out over the first 35vh of the cover range
+  (measured in viewport height, so a title and a tall card take the same ~240px
+  of scrolling). Written as longhands: the minifier would otherwise fold it into
+  an `animation: … view()` shorthand that browsers drop. Browsers without
+  scroll-driven animations (Firefox today) show the content as is. Stagger with an
+  inline style="--reveal-delay: N" (3vh per step).
+  Titles animate on their own: a section header's eyebrow, title and intro reveal
+  in turn (0, 1, 2), as do the image-and-text column's eyebrow, title and button;
+  FAQ group titles, the CTA heading or quote (inside the rising band), cards,
+  steps, stats, post cards, the contact form and its details card all reveal.
+  Rich text (posts, text sections) reveals each paragraph, heading, list and
+  figure on its own, unless it sits inside a block that already rises.
+- `rise-in` and `unveil` (@utilities): the first screen has nothing to scroll, so
+  page headers enter once on load. Hero, blog archive and post header text rise in
+  turn (style="--rise-delay: N", 90 ms steps: eyebrow/meta 0, h1 1, text 2,
+  buttons and label 3, promises 4); the hero photo and the post's featured image
+  fade in from a 1.04 scale. The h1 starts at 90 ms, so LCP moves by about 0.1 s at
+  most.
+- `press` (a keyframe): the roast stamp presses on at 1 s, after the label has
+  landed; the 404 stamp at 0.3 s (motion-safe:animate-[press_…]).
+
+Hover motion stays small: colour changes, and the related-post card gains its
+label shadow.
+</motion>
+
+<spacing_and_rhythm>
+Section.astro owns vertical rhythm: py-8 md:py-12 (32/48px each side, so 64/96px
+between two sections; Artem found 56/80px too loose), and mb-8 md:mb-10 under the
+header. The CTA band's outer padding matches. Headers are left aligned by default (align="center" is still available).
+Do not re-do padding in a block that already sits inside Section.
+
+Hero: a larch band with rounded-b-band; py-16 md:py-24 (cover), py-14 md:py-20
+(banner). With a coffee label, text and label sit in two columns. With a photo,
+the photo fills the right half of the band edge to edge from lg (absolute,
+object-cover, min-h-[32rem]); below lg it runs full width under the text.
+
+The header is sticky (top-0, paper at 95% with a light blur), and
+scroll-padding-top in the base layer keeps anchors below it. Below md the menu
+is a sidebar: a native popover (`popovertarget`, no JavaScript) styled by
+`.drawer` in global.css. It slides in from the right over a dimmed backdrop and
+its links follow one after another (@starting-style). Escape, an outside click
+and the close button shut it, and the page doesn't scroll while it is open.
+Without popover support (pre-2023 browsers) its button is hidden and the footer
+keeps the links.
 
 container-wide (an @utility in global.css) is the page container: 1200px of
-content as on the old site (max-width 79rem including the gutters), with a 16px
-gutter on phones and 32px from md. Use it instead of a per-section
-max-w-… mx-auto px-….
+content as on the old site, with a 16px gutter on phones and 32px from md. Use it
+instead of a per-section max-w-… mx-auto px-….
 </spacing_and_rhythm>
 
 <typography>
 Fonts (astro.config.ts `fonts`, rendered by <Font> in Layout.astro):
-  font-serif  DM Serif Display 400 — every heading and the wordmark
-  font-sans   Inter variable 100–900 — body, UI (the <body> default)
+  font-display  Big Shoulders Display, variable 600–900 — headings, wordmark,
+                stamps, big numbers
+  font-sans     Hanken Grotesk, variable 400–700 — body and UI (the <body> default)
 
-DM Serif Display ships one weight. Never put font-medium/semibold/bold on a serif
-heading: the browser fakes a bold. Headings get their weight from the face.
+Big Shoulders is condensed; set it tight (leading-[0.88] to leading-none) and
+heavy (font-extrabold or font-black). No all-caps labels and no letter-spaced
+eyebrows: eyebrows are font-bold in larch (or needle on larch).
 
 Scale:
-  h1 (Hero)       text-4xl sm:text-5xl lg:text-[3.5rem], leading-tight
-  h1 (404)        text-4xl md:text-5xl
-  h2 (Section)    text-3xl md:text-4xl, leading-tight
-  card title      text-2xl, leading-snug (Features)
-  footer heading  text-xl
-  lead paragraph  text-lg leading-relaxed (hero, section subtitle)
-  body            text-base; leading-relaxed for paragraphs
-  eyebrow         text-sm font-semibold uppercase tracking-widest
+  h1 (Hero cover)  text-[3.6rem] sm:text-7xl xl:text-[6.75rem], leading-[0.88]
+  h1 (banner)      text-[3.2rem] sm:text-6xl lg:text-7xl
+  h2 (Section)     text-[2.6rem] md:text-6xl, leading-[0.95], font-black
+  card title       text-[1.9rem]–text-[2rem], leading-none
+  lead paragraph   text-lg leading-relaxed (hero, section subtitle)
+  body             text-base; leading-relaxed for paragraphs
 
 Headings use text-balance; paragraphs longer than a line use text-pretty.
 </typography>
@@ -144,17 +179,27 @@ Headings use text-balance; paragraphs longer than a line use text-pretty.
 <components>
 Variant-driven components use cva. src/components/ui/button.ts is the reference:
 
-  variant  primary          brand-dark fill, white text, hover heading
-           secondary        brand-dark outline and text, hover subtle
-           inverse          surface fill, heading text (dark bands)
-           inverse-outline  surface outline and text (dark bands)
+  variant  primary          larch fill, surface text, hover larch-deep
+           secondary        espresso outline and text, hover espresso fill
+           accent           needle fill, espresso text (on larch bands)
+           inverse-outline  surface outline and text (on larch bands)
   size     sm | md | lg     (default primary, md)
 
-Radius: Tailwind's default scale; buttons and panels are rounded-sm (4px, the
-brief's value).
+Buttons are rounded-md with a 2px border and bold text.
 
-.astro files call buttonVariants({ variant, size }) and pass the result as the
-class of an <a> or <button>; Hero, CTA and the 404 do.
+CoffeeLabel (src/components/ui/CoffeeLabel.astro) is the label card: name,
+origin line, label/value rows, a bottom line and an optional stamp ("small line"
+newline "big line"). The home hero shows it when the hero's `label` is filled in.
+
+CTA takes an optional quote and citation, shown large in place of a heading
+(About: the founder's quote sits in the band with its buttons). Without a
+heading, quote or text it is a compact band of buttons.
+
+SanityImage paints each image's Sanity LQIP (a blurred ~0.5 KB preview) as the
+img background, so a photo never loads into an empty box.
+
+CardGrid has two layouts: `cards` (label cards with photo, details, points) and
+`bags` (coffee bags coloured by each card's `roast`, with the crimped top).
 </components>
 
 <dark_mode>

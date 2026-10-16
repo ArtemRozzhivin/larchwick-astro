@@ -22,6 +22,9 @@ roastery news.
 ## Key interactions
 
 - Cards, categories and tags all link onward; nothing needs JavaScript.
+- The archive and post headers rise in once on load, and the featured image fades in.
+- Photos show a blurred preview while they load. The post body's paragraphs, headings, lists and
+  images fade up as they scroll into view (off for visitors who reduce motion).
 
 ## Content owner
 

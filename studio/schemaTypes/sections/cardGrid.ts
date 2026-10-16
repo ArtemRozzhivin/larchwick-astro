@@ -17,6 +17,22 @@ export const cardGrid = defineType({
     optionalHeadingField,
     introField,
     defineField({
+      name: 'layout',
+      title: 'Layout',
+      type: 'string',
+      description:
+        "Cards: labels with photos and details. Bags: coffee bags coloured by each card's roast (photos are not shown).",
+      options: {
+        list: [
+          { title: 'Cards', value: 'cards' },
+          { title: 'Bags', value: 'bags' },
+        ],
+        layout: 'radio',
+        direction: 'horizontal',
+      },
+      initialValue: 'cards',
+    }),
+    defineField({
       name: 'cards',
       title: 'Cards',
       type: 'array',
@@ -75,6 +91,20 @@ export const cardGrid = defineType({
               title: 'Price',
               type: 'string',
               description: 'As shown, e.g. "€14 / 250 g".',
+            }),
+            defineField({
+              name: 'roast',
+              title: 'Roast',
+              type: 'string',
+              description: 'Bags layout only: sets the bag colour.',
+              options: {
+                list: [
+                  { title: 'Light', value: 'light' },
+                  { title: 'Medium', value: 'medium' },
+                  { title: 'Dark', value: 'dark' },
+                  { title: 'Seasonal', value: 'seasonal' },
+                ],
+              },
             }),
             defineField({ name: 'cta', title: 'Button', type: 'linkItem' }),
           ],

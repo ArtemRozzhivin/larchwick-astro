@@ -1,32 +1,49 @@
 /* Scan src/ only, so class names quoted in the docs never ship. */
 @import 'tailwindcss' source('..');
 
-/* Brand colours = Astra's global colours 0–8 on the WordPress site (PLAN.md Appendix A). */
+/*
+ * "Larch and label" (PLAN.md Phase 10): a larch is the conifer whose needles turn gold in autumn,
+ * and the coffee bag label is the brand's main graphic device.
+ */
 @theme {
-  --color-brand: #c8743a;
-  --color-brand-dark: #9a5420;
-  --color-heading: #3b2a20;
-  --color-body: #4a3f38;
-  --color-surface: #fffcf7;
-  --color-canvas: #f7f1e8;
-  --color-dark: #2a1e17;
-  --color-subtle: #efe6d8;
-  --color-border: #e2d6c6;
+  --color-larch: #34502f;
+  --color-larch-deep: #263c22;
+  --color-needle: #e6b95a;
+  --color-espresso: #2a1a10;
+  --color-ink: #3b2b21;
+  --color-mist: #dfe6d6;
+  --color-paper: #f2f3ef;
+  --color-surface: #fbfbf8;
+  --color-stamp: #a3362b;
+  --color-border: #d9d8cf;
 
-  /* Tinted with --color-dark, so shadows stay warm on the cream backgrounds. */
-  --shadow-soft: 0 1px 2px 0 rgb(42 30 23 / 0.05), 0 2px 6px -1px rgb(42 30 23 / 0.06);
-  --shadow-card: 0 12px 24px -8px rgb(42 30 23 / 0.16), 0 4px 8px -4px rgb(42 30 23 / 0.08);
+  /* Bag colours by roast level, light to dark. */
+  --color-roast-light: #e7d6a8;
+  --color-roast-medium: #c98b4e;
+  --color-roast-dark: #7a4a2c;
+
+  /* Labels and cards, photos, and the big bands (hero bottom, call to action). */
+  --radius-label: 14px;
+  --radius-photo: 18px;
+  --radius-band: 36px;
+
+  --shadow-label: 8px 8px 0 var(--color-needle);
 }
 
 /* The font variables come from <Font> in Layout.astro (astro.config.ts `fonts`). */
 @theme inline {
-  --font-serif: var(--font-dm-serif-display);
-  --font-sans: var(--font-inter);
+  --font-display: var(--font-big-shoulders);
+  --font-sans: var(--font-hanken);
 }
 
 @layer base {
   * {
     @apply border-border;
+  }
+
+  html {
+    /* The header is sticky, so in-page anchors stop below it. */
+    scroll-padding-top: 6rem;
   }
 
   /* currentColor keeps the ring as legible as the text on light and dark bands alike. */
@@ -39,7 +56,7 @@
 /* 1200px of content, as on the old site, with a 16px gutter on phones and 32px from md. */
 @utility container-wide {
   width: 100%;
-  max-width: 79rem;
+  max-width: 76rem;
   margin-inline: auto;
   padding-inline: 1rem;
 
@@ -48,10 +65,190 @@
   }
 }
 
+/*
+ * Blocks rise into place as they scroll into view: CSS scroll-driven animation, no JavaScript.
+ * Browsers without animation-timeline, and visitors who reduce motion, just see the content.
+ * The range is measured in viewport height, not element height, so every block takes the same
+ * ~35vh of scrolling (two or three wheel steps) whatever its size, eased out.
+ * --reveal-delay staggers items (set it inline: style="--reveal-delay: 1").
+ */
+@utility reveal {
+  @media (prefers-reduced-motion: no-preference) {
+    @supports (animation-timeline: view()) {
+      /* Longhands on purpose: the minifier folds a shorthand plus animation-timeline into
+         `animation: … view()`, which browsers reject, so the animation would never run. */
+      animation-name: rise;
+      animation-fill-mode: both;
+      animation-timing-function: ease-out;
+      animation-timeline: view();
+      animation-range: cover calc(var(--reveal-delay, 0) * 3vh) cover
+        calc(35vh + var(--reveal-delay, 0) * 3vh);
+    }
+  }
+}
+
+/*
+ * First-screen content has nothing to scroll, so it gets a one-time entrance on load instead:
+ * items rise in turn (style="--rise-delay: N", 90 ms steps) and photos fade in. The first step
+ * starts within 0.1 s, so the largest paint (LCP) is not held back.
+ */
+@utility rise-in {
+  @media (prefers-reduced-motion: no-preference) {
+    animation: rise 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+    animation-delay: calc(var(--rise-delay, 0) * 90ms);
+  }
+}
+
+@utility unveil {
+  @media (prefers-reduced-motion: no-preference) {
+    animation: unveil 0.9s ease-out 0.1s both;
+  }
+}
+
+@keyframes unveil {
+  from {
+    opacity: 0;
+    scale: 1.04;
+  }
+  to {
+    opacity: 1;
+    scale: 1;
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(2rem);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* The roast-date stamp presses onto the label once, on load. */
+@keyframes press {
+  from {
+    opacity: 0;
+    rotate: -24deg;
+    scale: 1.6;
+  }
+  to {
+    opacity: 1;
+    rotate: -12deg;
+    scale: 1;
+  }
+}
+
+/* The crimped top seal of a coffee bag. */
+@utility bag-crimp {
+  background: repeating-linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--color-espresso) 22%, transparent) 0 6px,
+    transparent 6px 12px
+  );
+}
+
+/*
+ * The mobile menu (Header.astro): a native popover that slides in from the right over a dimmed
+ * page, its links following one after another. @starting-style gives the entry state; exit
+ * animates where `overlay` is supported and is instant elsewhere.
+ */
+@layer components {
+  .drawer {
+    position: fixed;
+    inset: 0 0 0 auto;
+    width: min(22rem, 88vw);
+    height: 100dvh;
+    max-height: none;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    border-left: 2px solid var(--color-espresso);
+    overflow-y: auto;
+    translate: 100% 0;
+    transition:
+      translate 0.35s cubic-bezier(0.2, 0.8, 0.2, 1),
+      overlay 0.35s allow-discrete,
+      display 0.35s allow-discrete;
+
+    &:popover-open {
+      translate: 0 0;
+    }
+
+    &::backdrop {
+      background-color: transparent;
+      transition:
+        background-color 0.35s,
+        overlay 0.35s allow-discrete,
+        display 0.35s allow-discrete;
+    }
+
+    &:popover-open::backdrop {
+      background-color: color-mix(in srgb, var(--color-espresso) 55%, transparent);
+    }
+
+    & li {
+      opacity: 0;
+      translate: 1.5rem 0;
+      transition:
+        opacity 0.3s,
+        translate 0.3s;
+      transition-delay: calc(0.1s + var(--item, 0) * 0.04s);
+    }
+
+    &:popover-open li {
+      opacity: 1;
+      translate: 0 0;
+    }
+  }
+
+  @starting-style {
+    .drawer:popover-open {
+      translate: 100% 0;
+    }
+
+    .drawer:popover-open::backdrop {
+      background-color: transparent;
+    }
+
+    .drawer:popover-open li {
+      opacity: 0;
+      translate: 1.5rem 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .drawer,
+    .drawer::backdrop,
+    .drawer li {
+      transition: none;
+    }
+  }
+
+  html:has(.drawer:popover-open) {
+    overflow: hidden;
+  }
+
+  /* Without popover support the menu can't open, so hide its button; the footer keeps the links. */
+  @supports not selector(:popover-open) {
+    .drawer,
+    [popovertarget] {
+      display: none;
+    }
+  }
+}
+
 /* Rich text from Sanity (posts, text sections, FAQ answers): plain elements, styled once here. */
 @layer components {
   .rich-text {
     line-height: 1.7;
+
+    /* Each paragraph, heading, list and figure fades up on its own as it scrolls into view. */
+    & > * {
+      @apply reveal;
+    }
 
     & > * + * {
       margin-top: 1.1em;
@@ -60,23 +257,24 @@
     & h2,
     & h3,
     & h4 {
-      color: var(--color-heading);
-      font-family: var(--font-serif);
-      line-height: 1.2;
-      margin-top: 1.8em;
+      color: var(--color-espresso);
+      font-family: var(--font-display);
+      font-weight: 800;
+      line-height: 1;
+      margin-top: 1.6em;
       text-wrap: balance;
     }
 
     & h2 {
-      font-size: 1.875rem;
+      font-size: 2.25rem;
     }
 
     & h3 {
-      font-size: 1.5rem;
+      font-size: 1.75rem;
     }
 
     & h4 {
-      font-size: 1.25rem;
+      font-size: 1.375rem;
     }
 
     & ul,
@@ -97,22 +295,31 @@
     }
 
     & li::marker {
-      color: var(--color-brand-dark);
+      color: var(--color-larch);
+      font-weight: 700;
     }
 
     & a {
-      color: var(--color-brand-dark);
+      color: var(--color-larch);
+      font-weight: 600;
       text-decoration: underline;
+      text-decoration-color: var(--color-needle);
+      text-decoration-thickness: 2px;
       text-underline-offset: 0.2em;
     }
 
     & a:hover {
-      color: var(--color-heading);
+      color: var(--color-espresso);
     }
 
     & strong {
-      color: var(--color-heading);
-      font-weight: 600;
+      color: var(--color-espresso);
+      font-weight: 700;
     }
+  }
+
+  /* Rich text inside a block that already rises (image and text, FAQ) moves with that block. */
+  .reveal .rich-text > * {
+    animation: none;
   }
 }

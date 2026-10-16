@@ -154,6 +154,20 @@ describe('page sections from page blocks', () => {
     })
   })
 
+  it('merges a quote and the buttons right after it into one call to action', () => {
+    const { result } = sections(
+      `<!-- wp:quote --><blockquote class="wp-block-quote"><!-- wp:paragraph --><p>Four coffees we love.</p><!-- /wp:paragraph --><cite>Tomas Varga, founder</cite></blockquote><!-- /wp:quote --><!-- wp:buttons --><div class="wp-block-buttons"><!-- wp:button --><div class="wp-block-button"><a class="wp-block-button__link" href="/products">See our coffees</a></div><!-- /wp:button --></div><!-- /wp:buttons -->`,
+    )
+    expect(result).toEqual([
+      expect.objectContaining({
+        _type: 'cta',
+        quote: 'Four coffees we love.',
+        citation: 'Tomas Varga, founder',
+        primaryCta: expect.objectContaining({ label: 'See our coffees', href: '/products/' }),
+      }),
+    ])
+  })
+
   it('keeps anything unrecognised as a text section', () => {
     const { result } = sections(
       '<!-- wp:paragraph --><p>Beyond our online shop, we work with cafés.</p><!-- /wp:paragraph -->',

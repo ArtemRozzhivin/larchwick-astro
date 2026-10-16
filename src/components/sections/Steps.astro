@@ -25,15 +25,17 @@ const StepHeading = heading ? 'h3' : 'h2'
   <ol class="space-y-8">
     {
       items.map((item, index) => (
-        <li class="flex gap-5">
+        <li class="reveal flex gap-5">
           <span
-            class="border-brand-dark text-brand-dark flex size-10 shrink-0 items-center justify-center rounded-full border-2 font-serif text-lg"
+            class="bg-needle text-espresso font-display flex size-12 shrink-0 items-center justify-center rounded-full text-2xl font-black"
             aria-hidden="true"
           >
             {index + 1}
           </span>
-          <div class="pt-1.5">
-            <StepHeading class="text-heading font-serif text-xl">{item.title}</StepHeading>
+          <div class="pt-1">
+            <StepHeading class="font-display text-espresso text-[1.75rem] leading-none font-extrabold">
+              {item.title}
+            </StepHeading>
             {item.text && <p class="mt-1 leading-relaxed text-pretty">{item.text}</p>}
           </div>
         </li>

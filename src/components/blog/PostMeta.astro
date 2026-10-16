@@ -14,23 +14,21 @@ const dateFormat = new Intl.DateTimeFormat('en-GB', { dateStyle: 'long' })
 const category = post.categories?.[0]
 ---
 
-<p class:list={['flex flex-wrap items-center gap-x-2 gap-y-1 text-sm', className]}>
+<p class:list={['flex flex-wrap items-center gap-x-3 gap-y-1 text-sm', className]}>
   {
     category && (
       <a
         href={termPath({ _type: 'category', slug: category.slug })}
-        class="text-brand-dark font-semibold tracking-wide uppercase hover:underline"
+        class="bg-mist text-larch hover:bg-needle hover:text-espresso rounded-full px-2.5 py-0.5 font-bold transition-colors"
       >
         {category.title}
       </a>
     )
   }
-  {category && post.publishedAt && <span aria-hidden="true">·</span>}
   {
     post.publishedAt && (
       <time datetime={post.publishedAt}>{dateFormat.format(new Date(post.publishedAt))}</time>
     )
   }
-  {byline && <span aria-hidden="true">·</span>}
   {byline && <span>By {blog.byline}</span>}
 </p>
