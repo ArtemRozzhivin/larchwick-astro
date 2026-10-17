@@ -43,8 +43,8 @@ section types), post, category, tag, site settings (singleton) and redirect. The
 (Phase 4) has filled the dataset: 10 posts, 7 pages, 3 categories, 8 tags, site settings, 43
 redirects and 30 images with alt text. Every page now comes from Sanity at build time (plain `fetch`, public dataset, no token): Home,
 the content pages and the blog. The menu, footer and contact details come from Site settings. The Studio is deployed at https://larchwick.sanity.studio (login required). Editors follow
-`docs/editor-guide.md`; publishing rebuilds the site by itself once the Sanity webhook → Cloudflare
-deploy hook is set up (Phase 7).
+`docs/editor-guide.md`; publishing rebuilds the site by itself through a Sanity webhook → Cloudflare deploy hook,
+live about a minute later (50–100 s measured, `docs/after/rebuild-times.json`).
 
 The design is "Larch and label" (Phase 10 redesign, replacing the Phase 2b copy of the old
 look): larch green, needle gold and espresso tokens, Big Shoulders Display and Hanken Grotesk

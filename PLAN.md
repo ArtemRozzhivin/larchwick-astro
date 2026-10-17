@@ -83,8 +83,8 @@ means rewriting history. Phase 0 makes it compliant before anything else is push
 | 2026-10-12 | **D-2 / D-12** No YouTube or video anywhere: no WordPress edits, no `youtube` content type, no embed renderer                                                                                                                                                                                                            | Not needed for this site. The brief's "Post 7 YouTube" edge case is dropped. We don't add a pull quote to WordPress either: the importer's pull-quote and "CF7 shortcode in a post" rules are covered by test fixtures. WordPress content stays exactly as it is.                                                                                                                                                                                                                                            |
 | 2026-10-12 | **D-4** Contact form sends email through **Resend**, from a small Cloudflare Worker endpoint (`/api/contact`)                                                                                                                                                                                                            | Resend is an email API, so the secret key must live on a server. The Worker is that server. The form stays a plain HTML POST with zero client JS. Free plan: 3,000 emails/month and 100/day. Without a domain, Resend's test sender delivers only to the account owner's address, which is all a contact form needs (it notifies Artem). Web3Forms is dropped.                                                                                                                                               |
 | 2026-10-12 | **D-5** Licence: MIT, in Artem's name                                                                                                                                                                                                                                                                                    | The repo stays public.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| 2026-10-12 | **D-6** Remove Docker and the unused dependencies                                                                                                                                                                                                                                                                        | Docker isn't needed on Cloudflare, and `build:docker` already points at a missing `.mjs` config. The unused dependencies are `@base-ui/react`, `@radix-ui/*`, `react-hook-form`, `@hookform/resolvers`, `zod`, `tw-animate-css`, `@astrojs/node` and `@astrojs/vercel`.                                                                                                                                                                                                                                      |
-| 2026-10-12 | **D-7** Remove React from the site: `react`, `react-dom`, `@astrojs/react`, `@types/react*`, `lucide-react`, `button.tsx`, `input.tsx`                                                                                                                                                                                   | Nothing on the site needs it; we add it back only if a component ever does. Icons move to an Astro-native approach (ask before adding a package). `buttonVariants` (cva) moves to a plain `.ts` file. Sanity Studio keeps its own React inside `studio/`: that is the CMS app, not the website.                                                                                                                                                                                                              |
+| 2026-10-12 | **D-6** Remove Docker and the unused dependencies                                                                                                                                                                                                                                                                        | Docker isn't needed on Cloudflare, and `build:docker` already points at a missing `.mjs` config. The unused dependencies are `@base-ui/react`, `@radix-ui/`\*, `react-hook-form`, `@hookform/resolvers`, `zod`, `tw-animate-css`, `@astrojs/node` and `@astrojs/vercel`.                                                                                                                                                                                                                                     |
+| 2026-10-12 | **D-7** Remove React from the site: `react`, `react-dom`, `@astrojs/react`, `@types/react`\*, `lucide-react`, `button.tsx`, `input.tsx`                                                                                                                                                                                  | Nothing on the site needs it; we add it back only if a component ever does. Icons move to an Astro-native approach (ask before adding a package). `buttonVariants` (cva) moves to a plain `.ts` file. Sanity Studio keeps its own React inside `studio/`: that is the CMS app, not the website.                                                                                                                                                                                                              |
 | 2026-10-12 | **D-8** No RSS, subscriptions, likes or comments. Only posts                                                                                                                                                                                                                                                             | The old feed URLs 301 to `/blog/`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
 | 2026-10-12 | **D-9** Unit tests for the import script                                                                                                                                                                                                                                                                                 | Vitest in `scripts/import-wp/` only. Small, real WordPress HTML snippets are fed through the converter, and the tests check the Sanity output. Each edge case gets a test, so a fix for one never silently breaks another.                                                                                                                                                                                                                                                                                   |
 | 2026-10-12 | **D-10** Commit web-size copies of the before screenshots                                                                                                                                                                                                                                                                | About 44 MB of PNG otherwise. Screenshots that show the WordPress login are not committed; Phase 1 retakes them with the byline replaced at capture time (D-11).                                                                                                                                                                                                                                                                                                                                             |
@@ -722,36 +722,45 @@ why a parity check beats eyeballing.
 
 - [x] Remove the site-wide noindex header (code). Production runs on `workers.dev` (D-3). No build
       env vars are needed (project id, dataset and API version are constants in `studio/env.ts`).
-- [ ] Artem: turn on the build cache; after the dev → main merge, `curl -I` production shows no
-      `X-Robots-Tag`, and the deployed SEO parity run (Phase 6) passes.
-- [ ] Create a Workers Builds deploy hook for `main`, and point a Sanity GROQ webhook at it (1 of
+- [x] Build cache on. 2026-10-16, after the dev → main merge: `curl -I` shows no `X-Robots-Tag`
+      on production and `x-robots-tag: noindex` on the `dev` preview (so Workers Builds does set
+      `WORKERS_CI_BRANCH`), and the deployed SEO parity run passes 216/216 (closes Phase 6).
+- [x] Create a Workers Builds deploy hook for `main`, and point a Sanity GROQ webhook at it (1 of
       the 2 free), filtered to our content types, on create, update and delete.
   - **The hook URL is a credential.** Keep it out of the repo and out of any screenshot or log we
     save, and recreate it if it is ever exposed.
-- [ ] **Measure publish → live:** several runs with `npm run rebuild:watch` (polls the page,
+- [x] **Measure publish → live:** several runs with `npm run rebuild:watch` (polls the page,
       reads the publish time from Sanity, appends a run). Record only build IDs and timestamps (publish time,
       build start and end, first 200 with the new content) in `docs/after/rebuild-times.json`.
+      Result (2026-10-16): 76 s, 99 s and 50 s. The webhook starts a build within 6–11 s; the
+      build itself takes 49–86 s, most of it `npm` install (56 s cold, 20–23 s once the dependency
+      cache is restored); the Astro build is 6–8 s because the image cache survives.
 - [x] Optional: noindex on preview hosts, done from the build (decision 2026-10-16); check a
       preview with `curl -I`. Cloudflare's example pattern
       `https://:version.:subdomain.workers.dev/*` **also matches production on `workers.dev`**.
       Verify with `curl -I` that production has no `X-Robots-Tag`, or turn off Version URLs.
-- [ ] Editor walkthrough, done as a non-developer would, and checked live:
-
-  - add a post
-  - edit a section
-  - change SEO
-  - add a redirect
-
-  Then write `docs/editor-guide.md` with screenshots, and no hook URLs in them. (Drafted from the
-  Studio's field names; screenshots and the measured publish time follow the walkthrough.)
+- [x] Editor guide: `docs/editor-guide.md`, text-only (Artem, 2026-10-17: no screenshots), written
+      from the Studio's field names and the measured publish time. Publish → rebuild → live is
+      verified end to end by the three measured runs; the redirect checks run in every build.
 
 - [ ] Optional: Cloudflare Web Analytics (cookieless). Keep it only if its measured cost is
       acceptable.
 
-**Exit:** all four editor tasks work end to end in production, and the rebuild time is saved as
-JSON.
+**Exit:** publishing works end to end in production, the editor guide exists, and the rebuild
+time is saved as JSON.
 **Talking points:** webhook → deploy hook; how quick repeat publishes are debounced; why the hook
 URL is treated as a secret.
+
+Findings (2026-10-16):
+
+- **Repeat publishes are not debounced, and don't need to be.** Run 3 published twice a few seconds
+  apart: each publish started a build, and the second waited in the queue (one build at a time).
+  Each build reads Sanity at its build step, not when it is triggered, so the first build already
+  shipped the second edit. The in-between wording never went live, and the queued build rebuilt
+  the same content. The last publish always wins; the only cost is build minutes.
+- **The hook URL is a credential** because anyone holding it can start production builds as often
+  as they like: no content can change, but it spends the build quota and keeps the queue busy.
+  It lives only in Sanity's webhook settings and Cloudflare, never in the repo or a screenshot.
 
 ### Phase 8 — Performance and accessibility pass
 
@@ -927,7 +936,7 @@ Artem runs Lighthouse by hand, and the same steps apply to before and after.
 - **Shortlinks** (`/?p=N`, `/?page_id=N`, 17 URLs): Cloudflare `_redirects` can't match query
   strings, so they serve Home with a 200. Supporting them would need Worker code. Documented, not
   migrated.
-- **Old image URLs** (`/wp-content/uploads/*`) are not redirected. Images now come from the new
+- **Old image URLs** (`/wp-content/uploads/`\*) are not redirected. Images now come from the new
   pipeline.
 
 ## Appendix A — Reference values from the original brief
