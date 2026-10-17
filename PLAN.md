@@ -5,7 +5,7 @@ time**. Each phase ends with a short "what we did / what's next" and Artem's go-
 next one starts. Tick the boxes as work lands, and log every decision in
 [Decisions](#3-decisions).
 
-Last updated: 2026-10-17 · Current phase: **Phase 7b — AI assistant (planned)**
+Last updated: 2026-10-17 · Current phase: **Phase 7b — AI assistant (in progress)**
 
 | #   | Phase                                    | Status      |
 | --- | ---------------------------------------- | ----------- |
@@ -21,7 +21,7 @@ Last updated: 2026-10-17 · Current phase: **Phase 7b — AI assistant (planned)
 | 5c  | Home, contact form and design polish     | done        |
 | 6   | Redirects and SEO parity                 | done        |
 | 7   | Production and editor workflow           | done        |
-| 7b  | "Ask Larchwick" AI assistant (RAG)       | planned     |
+| 7b  | "Ask Larchwick" AI assistant (RAG)       | in progress |
 | 8   | Performance and accessibility pass       | not started |
 | 9   | Case study and Upwork portfolio entry    | not started |
 | 10  | Redesign ("Larch and label")             | done        |
@@ -778,9 +778,11 @@ the contact page. Decisions 2026-10-17.
   and upserts them into a Vectorize index (ids from a content hash, so unchanged passages are
   skipped and removed ones deleted). Only on `main` builds (the `WORKERS_CI_BRANCH` guard from
   `previewNoindex()`), so previews and local builds never touch the live index. Every publish
-  already triggers a build, so the index follows the content by itself. The build calls the
-  Cloudflare REST API with a scoped API token (encrypted build variable); `npm run rag:index`
-  fills it by hand the first time.
+  already triggers a build, so the index follows the content by itself; the first `main` build
+  after R2 fills it. The build calls the Cloudflare REST API with the Workers Builds build token
+  (it already has Workers AI and Vectorize); `RAG_INDEX_TOKEN` overrides it if ever needed. A
+  failed indexing run is logged and never fails the build. `npm run rag:passages` writes the
+  passages to `.cache/rag/passages.json` for review without sending anything.
 - **Answer in the Worker:** `POST /api/chat`. Validate and cap the question (500 characters),
   rate-limit per visitor (Workers rate-limiting binding), embed it, take the top 5 passages,
   and stream Claude Haiku's answer with the source links. The system prompt allows only the given
@@ -797,12 +799,16 @@ the contact page. Decisions 2026-10-17.
 
 Steps (one PR each):
 
-- [ ] R1 — Artem: Anthropic API key with a monthly spend limit (Cloudflare secret
-      `ANTHROPIC_API_KEY`); a Cloudflare API token for Workers AI and Vectorize (encrypted build
-      variable); create the index: `npx wrangler vectorize create larchwick-content --dimensions=768 --metric=cosine`.
-- [ ] R2 — Chunker (pure, tested) and the `ragIndex()` integration; `npm run rag:index`; the test
-      questions.
+- [x] R1 — Artem (2026-10-17): Anthropic key in the `larchwick` workspace (free Evaluation plan, so
+      nothing can be charged; expires 2026-12-31) as the Cloudflare secret `ANTHROPIC_API_KEY`; the
+      build token covers Workers AI and Vectorize; index `larchwick-content` (768, cosine) created.
+- [x] R2 — Chunker (`src/lib/rag/chunks.ts`, pure, tested) and the `ragIndex()` integration; 87
+      passages (6–101 words) from 7 pages, 10 posts and the contact details; 22 test questions in
+      `scripts/rag-eval/questions.json` (3 off-topic). To verify on the first `main` build: the log
+      line `87 passages: 87 embedded, 0 removed`.
 - [ ] R3 — `/api/chat` in the Worker, with `node:test` tests (AI, Vectorize and Anthropic mocked).
+      When Anthropic refuses (rate limit, free allowance used up, expired key), the answer is a
+      friendly "not available right now" with a link to the contact page, never an error page.
 - [ ] R4 — Chat panel, CSP update, CLAUDE.md and docs.
 - [ ] R5 — `npm run rag:eval` against production; results in `docs/after/rag-eval.json` and the
       case-study notes.

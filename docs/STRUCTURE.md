@@ -20,7 +20,7 @@ larchwick-astro/
 │   ├── pages/       One doc per page, for PM/QA/clients + index
 │   └── STRUCTURE.md this file
 ├── public/          Served as-is: favicon.svg (the Larchwick bean), og.jpg (1200×630), _headers (Cloudflare response headers)
-├── scripts/         Node tools outside the site: credits/, seo-check/, lighthouse-import/, rebuild-time/ (Node built-ins only) and import-wp/ (WordPress → Sanity; scripts/package.json, Vitest tests)
+├── scripts/         Node tools outside the site: credits/, seo-check/, lighthouse-import/, rebuild-time/, rag-eval/ (Node built-ins only) and import-wp/ (WordPress → Sanity; scripts/package.json, Vitest tests)
 ├── src/             Source
 ├── studio/          Sanity Studio (own package.json): schemaTypes/{documents,objects,sections}, desk structure, env.ts (project ID)
 ├── astro.config.ts  The only build config: static output, no adapter, trailing slashes
@@ -65,7 +65,9 @@ src/
 │   │   ├── home.ts             Home: SEO, hero, features, CTA
 │   │   └── not-found.ts        The 404 page
 │   ├── integrations/           redirects.ts (writes dist/_redirects, trims noindex from the sitemap) + redirect-rules.ts,
-│   │                           preview-noindex.ts (noindex header on Workers Builds preview branches)
+│   │                           preview-noindex.ts (noindex header on Workers Builds preview branches),
+│   │                           rag-index.ts (refreshes the assistant's Vectorize index on main builds)
+│   ├── rag/                    chunks.ts (Sanity content → passages for the assistant) + index-plan.ts
 │   ├── sanity/                 client.ts (fetch to the Sanity query API), queries.ts (defineQuery),
 │   │                           posts.ts (cached posts/terms, paths, related, archives),
 │   │                           settings.ts (cached Site settings: menu, contact, demo label),
