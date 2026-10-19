@@ -812,7 +812,13 @@ Steps (one PR each):
       `scripts/rag-eval/questions.json` (3 off-topic). Verified in production (2026-10-19): 88 vectors,
       and `npm run rag:inspect` finds all 87 passages identical to the current content (0 missing,
       0 extra).
-- [ ] R3 — `/api/chat` in the Worker, with `node:test` tests (AI, Vectorize and Anthropic mocked).
+- [x] R3 — `/api/chat` in the Worker (`worker/chat.ts`), with 10 `node:test` tests (AI,
+      Vectorize, the limiter and Anthropic faked): POST and same-origin only, question 1–500
+      characters, 10 questions a minute per visitor (checked before any spend), top 5 passages,
+      `claude-haiku-5-5` with 400 output tokens, the question in `<question>` tags apart from the
+      rules, an event stream of text deltas then the cited pages (from the `[n]` markers). The key
+      appears in no response; Anthropic failures, missing bindings and mid-stream errors become
+      the "not available" message.
       When Anthropic refuses (rate limit, free allowance used up, expired key), the answer is a
       friendly "not available right now" with a link to the contact page, never an error page.
 - [ ] R4 — Chat panel, CSP update, CLAUDE.md and docs.

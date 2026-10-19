@@ -33,7 +33,9 @@ Static output with no Astro adapter: every page is prerendered at build time, wi
 `trailingSlash: 'always'` and `build.format: 'directory'`, so every URL keeps WordPress's
 trailing slash. It is served by Cloudflare Workers Static Assets
 (`wrangler.jsonc`), built and deployed by Workers Builds on every push to `main`. Production is
-indexable (Phase 7); preview builds of other branches send `X-Robots-Tag: noindex`.
+indexable (Phase 7); preview builds of other branches send `X-Robots-Tag: noindex`. The Worker
+also serves `POST /api/chat`, the "Ask Larchwick" assistant's answers (Phase 7b); its chat panel
+arrives in R4.
 
 The site ships zero client JavaScript: no React, no view transitions, no prefetch script.
 
