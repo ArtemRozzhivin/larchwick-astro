@@ -138,12 +138,16 @@ describe('chat endpoint', () => {
     const [{ url, init }] = calls.anthropic
     const body = JSON.parse(String(init.body)) as {
       model: string
+      max_tokens: number
+      output_config: { effort: string }
       system: string
       messages: { content: string }[]
     }
     assert.equal(url, 'https://api.anthropic.com/v1/messages')
     assert.equal((init.headers as Record<string, string>)['x-api-key'], KEY)
     assert.equal(body.model, MODEL)
+    assert.equal(body.max_tokens, 1024)
+    assert.deepEqual(body.output_config, { effort: 'low' })
     assert.match(body.messages[0].content, /\[1\] FAQ: Where do you ship\? \(\/faq\/\)/)
     assert.match(body.messages[0].content, /<question>\nDo you ship to Spain\?\n<\/question>$/)
     assert.doesNotMatch(String(init.body), new RegExp(KEY))
@@ -201,6 +205,22 @@ describe('chat endpoint', () => {
     assert.deepEqual(all.at(-2), { type: 'error', message: MESSAGES.unavailable })
     assert.deepEqual(all.at(-1), { type: 'done' })
     assert.ok(!all.some((item) => item.type === 'sources'))
+  })
+
+  it('marks an answer cut off by the token cap with an ellipsis', async () => {
+    const { env, calls } = setup()
+    const capped = (): Response =>
+      new Response(
+        anthropicEvents('Mira spent eight years as a barista [1], and he still does the c').replace(
+          'event: message_stop',
+          `event: message_delta\ndata: ${JSON.stringify({ type: 'message_delta', delta: { stop_reason: 'max_tokens' } })}\n\nevent: message_stop`,
+        ),
+      )
+    const all = await events(
+      await handleChat(ask('Who works there?'), env, fakeFetch(calls, capped)),
+    )
+    assert.deepEqual(all.at(-3), { type: 'delta', text: '…' })
+    assert.equal(all.at(-2)?.type, 'sources')
   })
 
   it('explains failures only on previews, with the key redacted', async () => {
