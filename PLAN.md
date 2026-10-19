@@ -814,7 +814,8 @@ Steps (one PR each):
       0 extra).
 - [x] R3 — `/api/chat` in the Worker (`worker/chat.ts`), with 10 `node:test` tests (AI,
       Vectorize, the limiter and Anthropic faked): POST and same-origin only, question 1–500
-      characters, 10 questions a minute per visitor (checked before any spend), top 5 passages,
+      characters, 10 questions a minute per visitor (checked before any spend; the limiter is
+      eventually consistent, so a burst gets 429 from about the 14th request), top 5 passages,
       `claude-haiku-5-5` with 400 output tokens, the question in `<question>` tags apart from the
       rules, an event stream of text deltas then the cited pages (from the `[n]` markers). The key
       appears in no response; Anthropic failures, missing bindings and mid-stream errors become
