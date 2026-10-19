@@ -1,4 +1,4 @@
-import { parseEvents, safePath, type Source, sourceLabel, withoutMarkers } from './stream'
+import { answerParts, parseEvents, safePath, type Source, sourceLabel } from './stream'
 
 /**
  * The chat panel's behaviour, loaded the first time the panel opens (ChatPanel.astro). Every
@@ -11,6 +11,8 @@ const STYLES = {
   failed: `${BUBBLE} bg-paper text-stamp border-stamp self-start border-2`,
   thinking: 'text-ink/70 animate-pulse',
   sourcesLabel: 'mt-3 text-sm font-bold',
+  inlineLink:
+    'text-larch decoration-needle hover:text-espresso font-semibold underline decoration-2 underline-offset-4',
   sourceLink:
     'border-espresso text-espresso hover:bg-needle mt-2 mr-2 inline-block rounded-full border-2 px-3 py-1 text-sm font-bold transition-colors',
 } as const
@@ -25,6 +27,24 @@ function element(tag: string, className: string, text = ''): HTMLElement {
   const node = document.createElement(tag)
   node.className = className
   node.textContent = text
+  return node
+}
+
+/** Text and [label](/path/) links, never HTML. */
+function renderText(node: HTMLElement, text: string, streaming = false): void {
+  node.replaceChildren(
+    ...answerParts(text, streaming).map((part) => {
+      if (!part.href) return document.createTextNode(part.text)
+      const link = element('a', STYLES.inlineLink, part.text) as HTMLAnchorElement
+      link.href = part.href
+      return link
+    }),
+  )
+}
+
+function failedText(text: string): HTMLElement {
+  const node = element('p', '')
+  renderText(node, text)
   return node
 }
 
@@ -60,21 +80,22 @@ async function readAnswer(
     for (const event of parsed.events) {
       if (event.type === 'delta') {
         answer += event.text
-        text.textContent = withoutMarkers(answer)
+        renderText(text, answer, true)
         if (!text.isConnected) bubble.replaceChildren(text)
       } else if (event.type === 'sources') {
         renderSources(bubble, event.sources, labels.sources)
       } else if (event.type === 'error') {
         bubble.className = STYLES.failed
-        bubble.replaceChildren(
-          element('p', '', answer ? `${withoutMarkers(answer)} ${event.message}` : event.message),
-        )
+        bubble.replaceChildren(failedText(answer ? `${answer} ${event.message}` : event.message))
       }
     }
   }
-  if (!answer && bubble.className !== STYLES.failed) {
+  if (bubble.className === STYLES.failed) return
+  if (answer) {
+    renderText(text, answer)
+  } else {
     bubble.className = STYLES.failed
-    bubble.replaceChildren(element('p', '', labels.failed))
+    bubble.replaceChildren(failedText(labels.failed))
   }
 }
 
@@ -119,13 +140,13 @@ export function startChat(panel: HTMLElement): void {
       })
       if (!response.ok || !response.body) {
         bubble.className = STYLES.failed
-        bubble.replaceChildren(element('p', '', await errorMessage(response, labels.failed)))
+        bubble.replaceChildren(failedText(await errorMessage(response, labels.failed)))
       } else {
         await readAnswer(response.body, bubble, labels)
       }
     } catch {
       bubble.className = STYLES.failed
-      bubble.replaceChildren(element('p', '', labels.failed))
+      bubble.replaceChildren(failedText(labels.failed))
     } finally {
       log.setAttribute('aria-busy', 'false')
       bubble.scrollIntoView({ block: 'end' })

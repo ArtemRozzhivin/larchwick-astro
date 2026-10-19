@@ -20,7 +20,7 @@ export const chat = {
   thinking: 'Looking through the site',
   sources: 'From these pages',
   failed:
-    "The assistant isn't available right now. Please try again later, or use the contact page.",
+    "The assistant isn't available right now. Please try again later, or use our [contact page](/contact/).",
   note: "Answers are written by AI from this website and can be wrong. Your question goes to Anthropic to write the answer; we don't store it.",
   noScript: 'The assistant needs JavaScript. Our FAQ answers most questions:',
   noScriptLink: { label: 'Read the FAQ', href: '/faq/' },
