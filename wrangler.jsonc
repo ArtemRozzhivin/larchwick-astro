@@ -8,8 +8,9 @@
   // every page is a static asset.
   "main": "worker/index.ts",
   // The assistant: embeddings, the passages that production builds index, and a per-visitor limit.
-  "ai": { "binding": "AI" },
-  "vectorize": [{ "binding": "VECTORIZE", "index_name": "larchwick-content" }],
+  // "remote": `wrangler dev` uses the real services (deploys ignore it); Vectorize has no local mode.
+  "ai": { "binding": "AI", "remote": true },
+  "vectorize": [{ "binding": "VECTORIZE", "index_name": "larchwick-content", "remote": true }],
   "ratelimits": [
     { "name": "CHAT_LIMITER", "namespace_id": "1001", "simple": { "limit": 10, "period": 60 } },
   ],
