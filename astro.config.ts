@@ -3,6 +3,7 @@ import tailwindcss from '@tailwindcss/vite'
 import { defineConfig, fontProviders } from 'astro/config'
 
 import { previewNoindex } from './src/integrations/preview-noindex'
+import { ragIndex } from './src/integrations/rag-index'
 import { redirects } from './src/integrations/redirects'
 import { siteConfig } from './src/lib/config/site'
 
@@ -57,7 +58,8 @@ export default defineConfig({
 
   // redirects() runs after sitemap(): it writes dist/_redirects and drops noindex pages from the sitemap.
   // previewNoindex() adds X-Robots-Tag: noindex to dist/_headers on Workers Builds preview branches.
-  integrations: [sitemap(), redirects(), previewNoindex()],
+  // ragIndex() refreshes the assistant's Vectorize index on production builds (PLAN.md Phase 7b).
+  integrations: [sitemap(), redirects(), previewNoindex(), ragIndex()],
 
   vite: {
     plugins: [tailwindcss()],

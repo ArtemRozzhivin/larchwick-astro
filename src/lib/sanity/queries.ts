@@ -61,3 +61,7 @@ export const REDIRECTS_QUERY = defineQuery(
 export const IMAGE_PLACEHOLDERS_QUERY = defineQuery(
   `*[_type == "sanity.imageAsset" && defined(metadata.lqip)]{ _id, "lqip": metadata.lqip }`,
 )
+
+export const RAG_PAGES_QUERY = defineQuery(
+  `*[_type == "page" && defined(slug.current) && seo.noindex != true]{ title, "slug": slug.current, sections }`,
+)
