@@ -809,8 +809,9 @@ Steps (one PR each):
       build token covers Workers AI and Vectorize; index `larchwick-content` (768, cosine) created.
 - [x] R2 — Chunker (`src/lib/rag/chunks.ts`, pure, tested) and the `ragIndex()` integration; 87
       passages (6–101 words) from 7 pages, 10 posts and the contact details; 22 test questions in
-      `scripts/rag-eval/questions.json` (3 off-topic). To verify on the first `main` build: the log
-      line `87 passages: 87 embedded, 0 removed`.
+      `scripts/rag-eval/questions.json` (3 off-topic). Verified in production (2026-10-19): 88 vectors,
+      and `npm run rag:inspect` finds all 87 passages identical to the current content (0 missing,
+      0 extra).
 - [ ] R3 — `/api/chat` in the Worker, with `node:test` tests (AI, Vectorize and Anthropic mocked).
       When Anthropic refuses (rate limit, free allowance used up, expired key), the answer is a
       friendly "not available right now" with a link to the contact page, never an error page.
