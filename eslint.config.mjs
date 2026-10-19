@@ -75,6 +75,9 @@ export default [
   {
     ...eslintPluginPrettier,
     files: ['**/*.{js,ts}'],
+    // <script> blocks in .astro files reach ESLint as virtual files (Component.astro/1_1.js) and
+    // would be formatted out of context; `prettier --check` already formats the whole .astro file.
+    ignores: ['**/*.astro/**'],
     rules: {
       ...eslintPluginPrettier.rules,
       'prettier/prettier': ['error', prettierConfig],
