@@ -160,10 +160,9 @@ export function sectionDrafts(section: Node): Draft[] {
           lines: [
             ...intro,
             ...list(section.rows).map((row) =>
-              [pair(row.name, row.price), str(row.description), str(row.note)]
-                .filter(Boolean)
-                .join(', '),
+              [pair(row.name, row.price), str(row.description)].filter(Boolean).join(', '),
             ),
+            str(section.note),
           ],
         },
       ]
@@ -223,12 +222,14 @@ export function pagePassages(page: PageSource): Passage[] {
   return toPassages(page.url, page.title, drafts)
 }
 
+// The same format as PostMeta, so the passage says exactly what the page shows.
+const DATE_FORMAT = new Intl.DateTimeFormat('en-GB', { dateStyle: 'long', timeZone: 'UTC' })
+
 export function postPassages(post: PostSource): Passage[] {
-  const published = post.publishedAt ? `Published ${post.publishedAt.slice(0, 10)}` : ''
-  const filed = post.categories?.length ? `in ${post.categories.join(', ')}` : ''
+  const published = post.publishedAt ? DATE_FORMAT.format(new Date(post.publishedAt)) : ''
   const intro = {
     heading: '',
-    lines: [str(post.excerpt), [published, filed].filter(Boolean).join(' ')],
+    lines: [str(post.excerpt), [published, ...(post.categories ?? [])].filter(Boolean).join(', ')],
   }
   const [first, ...rest] = richTextDrafts(post.body)
   return toPassages(post.url, post.title, [

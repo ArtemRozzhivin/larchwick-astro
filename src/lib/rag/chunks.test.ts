@@ -84,7 +84,7 @@ describe('rag passages', () => {
     })
     assert.equal(
       first.text,
-      'Smooth and simple.\nPublished 2026-10-01 in Brewing Guides\nUse coarse coffee.',
+      'Smooth and simple.\n1 October 2026, Brewing Guides\nUse coarse coffee.',
     )
     assert.equal(embeddingText(first), `Cold brew\n${first.text}`)
   })

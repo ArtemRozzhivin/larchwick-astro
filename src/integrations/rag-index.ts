@@ -1,5 +1,5 @@
 import type { AstroIntegration, AstroIntegrationLogger } from 'astro'
-import { mkdir, writeFile } from 'node:fs/promises'
+import { mkdir, readFile, writeFile } from 'node:fs/promises'
 
 import { siteConfig } from '../lib/config/site'
 import {
@@ -10,6 +10,7 @@ import {
   postPassages,
 } from '../lib/rag/chunks'
 import { type IndexMode, indexMode, planIndex } from '../lib/rag/index-plan'
+import { unpublishedWords, visibleText, words } from '../lib/rag/public-check'
 import { sanityFetch } from '../lib/sanity/client'
 import { getPosts, postPath } from '../lib/sanity/posts'
 import { RAG_PAGES_QUERY } from '../lib/sanity/queries'
@@ -166,12 +167,37 @@ async function onlyAccount(token: string): Promise<string | undefined> {
   return json.result?.length === 1 ? json.result[0].id : undefined
 }
 
-async function run(mode: IndexMode, logger: AstroIntegrationLogger): Promise<void> {
+async function unpublished(dir: URL, passages: readonly Passage[]): Promise<string[]> {
+  const pages = new Map<string, Set<string>>()
+  const problems: string[] = []
+  for (const passage of passages) {
+    if (!pages.has(passage.url)) {
+      const html = await readFile(new URL(`.${passage.url}index.html`, dir), 'utf8').catch(() => '')
+      pages.set(passage.url, words(visibleText(html)))
+    }
+    const missing = unpublishedWords(embeddingText(passage), pages.get(passage.url) ?? new Set())
+    if (missing.length > 0) {
+      problems.push(`${passage.url} "${passage.heading}": ${missing.slice(0, 8).join(', ')}`)
+    }
+  }
+  return problems
+}
+
+async function run(mode: IndexMode, logger: AstroIntegrationLogger, dir: URL): Promise<void> {
   const passages = await collectPassages()
+  const problems = await unpublished(dir, passages)
+  if (problems.length > 0) {
+    const report = `${problems.length} passage(s) contain words their page doesn't show:\n${problems.join('\n')}`
+    if (mode === 'dry') throw new Error(report)
+    logger.error(`${report}\nThe index was not updated.`)
+    return
+  }
   if (mode === 'dry') {
     await mkdir('.cache/rag', { recursive: true })
     await writeFile(DRY_RUN_FILE, `${JSON.stringify(passages, null, 2)}\n`)
-    logger.info(`${passages.length} passages written to ${DRY_RUN_FILE} (nothing sent)`)
+    logger.info(
+      `${passages.length} passages written to ${DRY_RUN_FILE}, all public on their pages (nothing sent)`,
+    )
     return
   }
   const token = process.env.RAG_INDEX_TOKEN ?? process.env.CLOUDFLARE_API_TOKEN
@@ -187,13 +213,14 @@ export function ragIndex(): AstroIntegration {
   return {
     name: 'larchwick:rag-index',
     hooks: {
-      'astro:build:done': async ({ logger }) => {
+      'astro:build:done': async ({ dir, logger }) => {
         const mode = indexMode(process.env)
         if (mode === 'skip') return
         try {
-          await run(mode, logger)
+          await run(mode, logger, dir)
         } catch (error) {
-          // A stale assistant must never block publishing: log it and let the deploy go ahead.
+          // The review command should fail loudly; a production build must never be blocked.
+          if (mode === 'dry') throw error
           logger.error(`indexing failed, the site deploys anyway: ${(error as Error).message}`)
         }
       },
