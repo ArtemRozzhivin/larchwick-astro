@@ -783,6 +783,11 @@ the contact page. Decisions 2026-10-17.
   (it already has Workers AI and Vectorize); `RAG_INDEX_TOKEN` overrides it if ever needed. A
   failed indexing run is logged and never fails the build. `npm run rag:passages` writes the
   passages to `.cache/rag/passages.json` for review without sending anything.
+- **Leak guard:** before anything is written, every word of every passage (with its title and
+  heading) must appear in the visible `<body>` text of the built page it links to
+  (`src/lib/rag/public-check.ts`). If one doesn't, a production build skips the index update and
+  logs which passage, and `npm run rag:passages` fails. So the index can only hold what the site
+  already publishes: no drafts, hidden pages or Studio-only fields.
 - **Answer in the Worker:** `POST /api/chat`. Validate and cap the question (500 characters),
   rate-limit per visitor (Workers rate-limiting binding), embed it, take the top 5 passages,
   and stream Claude Haiku's answer with the source links. The system prompt allows only the given
