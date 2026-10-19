@@ -49,6 +49,7 @@ src/
 │   └── Layout.astro            <head>, SEO props, fonts, JSON-LD, skip link, Header, Footer
 │
 ├── components/
+│   ├── chat/                   ChatPanel.astro: the "Ask Larchwick" launcher, popover panel and lazy loader
 │   ├── sections/               The page blocks
 │   │   ├── Section.astro       Layout primitive: container, rhythm, header
 │   │   ├── Header.astro        Wordmark, nav with active state, mobile menu (zero JS)
@@ -63,7 +64,9 @@ src/
 │
 ├── lib/
 │   ├── config/site.ts          Brand, URL, nav, contact, footer — single source
+│   ├── chat/                   client.ts (the panel's behaviour, loaded on open) + stream.ts (pure, tested)
 │   ├── content/                Copy, one file per page
+│   │   ├── chat.ts             The assistant's panel copy and suggested questions
 │   │   ├── home.ts             Home: SEO, hero, features, CTA
 │   │   └── not-found.ts        The 404 page
 │   ├── integrations/           redirects.ts (writes dist/_redirects, trims noindex from the sitemap) + redirect-rules.ts,
@@ -140,8 +143,9 @@ Copy the closest existing section rather than starting from scratch.
 
 ## JavaScript
 
-Every page ships **zero JavaScript**: no view transitions, no prefetch script,
-no React, no islands. The only `<script>` in the HTML is the JSON-LD data block.
+Pages ship **no JavaScript of their own**: no view transitions, no prefetch script,
+no React, no islands. The one exception is the assistant (`components/chat/`,
+`lib/chat/`): a small loader on every page, the chat module only once the panel opens.
 
 Order of preference: HTML → CSS → ask first. The FAQ accordion and the mobile
 menu are `<details>`/`<summary>`; icons are inline SVG from `Icon.astro`. Any

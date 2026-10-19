@@ -11,7 +11,9 @@ Measure, do not guess:
 </baseline>
 
 <javascript_budget>
-The budget is zero. Order of preference, always:
+The budget is the assistant and nothing else: ChatPanel.astro's loader
+(1.9 KB, every page) and src/lib/chat/client.ts (3 KB, fetched on the panel's
+first open). Order of preference, always:
 
 1. HTML does it       <details>/<summary>, <dialog>, anchors, forms
 2. CSS does it        transitions, animations, :hover, :focus-within, group-open:
@@ -20,7 +22,8 @@ The budget is zero. Order of preference, always:
 
 Already solved without JS in this repo — reuse rather than re-solve:
   accordion / FAQ     <details> + group-open: (FAQ.astro)
-  mobile menu         <details> + group-open: (Header.astro)
+  mobile menu         native popover + @starting-style (Header.astro, .drawer)
+  chat panel open     native popover; JS only for sending and streaming
   active nav link     aria-current set at build time from the URL (Header.astro)
   icons               inline SVG from Icon.astro, no runtime
   smooth scroll       motion-safe:scroll-smooth on <html> + #anchor links

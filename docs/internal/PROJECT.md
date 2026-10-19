@@ -37,7 +37,8 @@ indexable (Phase 7); preview builds of other branches send `X-Robots-Tag: noinde
 also serves `POST /api/chat`, the "Ask Larchwick" assistant's answers (Phase 7b); its chat panel
 arrives in R4.
 
-The site ships zero client JavaScript: no React, no view transitions, no prefetch script.
+The only client JavaScript is the "Ask Larchwick" assistant (a 1.9 KB loader on every page,
+the 3 KB chat module when its panel opens): no React, no view transitions, no prefetch script.
 
 Content model (Phase 3): Sanity project `zboja23d`, public `production` dataset, edited in the
 Studio in `studio/` (`npm run studio`, http://localhost:3333). Documents: page (built from 14
