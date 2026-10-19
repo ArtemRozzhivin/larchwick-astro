@@ -6,6 +6,8 @@
   // an entry here. They only read the index (writes happen in `main` builds), and get their own
   // rate-limit counters. Their secrets are separate too: `npx wrangler preview secret put NAME`.
   "previews": {
+    // Previews only: a failed chat answer also says why (key redacted). Production never sets it.
+    "vars": { "CHAT_DEBUG": "1" },
     "ai": { "binding": "AI" },
     "vectorize": [{ "binding": "VECTORIZE", "index_name": "larchwick-content" }],
     "ratelimits": [

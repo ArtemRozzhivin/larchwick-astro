@@ -203,6 +203,24 @@ describe('chat endpoint', () => {
     assert.ok(!all.some((item) => item.type === 'sources'))
   })
 
+  it('explains failures only on previews, with the key redacted', async () => {
+    const { env, calls } = setup()
+    const failing = fakeFetch(calls, () =>
+      Response.json({ error: { message: `model not found for ${KEY}` } }, { status: 404 }),
+    )
+    const production = await handleChat(ask('Hi?'), env, failing)
+    assert.deepEqual(await production.json(), { error: MESSAGES.unavailable })
+    const preview = await handleChat(ask('Hi?'), { ...env, CHAT_DEBUG: '1' }, failing)
+    const body = (await preview.json()) as { debug: string }
+    assert.match(body.debug, /^Anthropic answered 404: .*model not found for \[redacted\]/)
+    assert.doesNotMatch(JSON.stringify(body), new RegExp(KEY))
+    const unset = await handleChat(ask('Hi?'), { CHAT_DEBUG: '1' }, failing)
+    assert.equal(
+      ((await unset.json()) as { debug: string }).debug,
+      'missing AI, VECTORIZE, CHAT_LIMITER, ANTHROPIC_API_KEY',
+    )
+  })
+
   it('stays unavailable, not broken, when the key or a binding is missing', async () => {
     const { env, calls } = setup({ key: '' })
     const response = await handleChat(ask('Hi?'), env, fakeFetch(calls, streamed('x')))

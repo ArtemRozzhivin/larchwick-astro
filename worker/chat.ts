@@ -13,7 +13,12 @@ export interface ChatEnv {
   }
   CHAT_LIMITER?: { limit(_options: { key: string }): Promise<{ success: boolean }> }
   ANTHROPIC_API_KEY?: string
+  /** "1" on previews only (wrangler.jsonc `previews.vars`): failures also say why, key redacted. */
+  CHAT_DEBUG?: string
 }
+
+type ReadyEnv = ChatEnv &
+  Required<Pick<ChatEnv, 'AI' | 'VECTORIZE' | 'CHAT_LIMITER' | 'ANTHROPIC_API_KEY'>>
 
 export interface Excerpt {
   title: string
@@ -78,7 +83,10 @@ function asExcerpt(metadata: Record<string, unknown> | undefined): Excerpt | und
     : undefined
 }
 
-export async function retrieve(question: string, env: Required<ChatEnv>): Promise<Excerpt[]> {
+export async function retrieve(
+  question: string,
+  env: Pick<ReadyEnv, 'AI' | 'VECTORIZE'>,
+): Promise<Excerpt[]> {
   const { data } = await env.AI.run(EMBEDDING_MODEL, { text: [question] })
   const { matches } = await env.VECTORIZE.query(data[0], {
     topK: TOP_K,
@@ -188,8 +196,27 @@ export async function askClaude(prompt: Prompt, apiKey: string, fetcher: Fetch):
   })
 }
 
-function hasBindings(env: ChatEnv): env is Required<ChatEnv> {
-  return Boolean(env.AI && env.VECTORIZE && env.CHAT_LIMITER && env.ANTHROPIC_API_KEY)
+const REQUIRED = ['AI', 'VECTORIZE', 'CHAT_LIMITER', 'ANTHROPIC_API_KEY'] as const
+
+function missing(env: ChatEnv): string[] {
+  return REQUIRED.filter((name) => !env[name])
+}
+
+function isReady(env: ChatEnv): env is ReadyEnv {
+  return missing(env).length === 0
+}
+
+/** Logs why, never the question; previews (CHAT_DEBUG) also return the reason. */
+function unavailable(env: ChatEnv, reason: string): Response {
+  const safe = env.ANTHROPIC_API_KEY
+    ? reason.replaceAll(env.ANTHROPIC_API_KEY, '[redacted]')
+    : reason
+  console.error(`Chat: ${safe}`)
+  const body =
+    env.CHAT_DEBUG === '1'
+      ? { error: MESSAGES.unavailable, debug: safe }
+      : { error: MESSAGES.unavailable }
+  return json(body, 503)
 }
 
 export async function handleChat(
@@ -206,10 +233,7 @@ export async function handleChat(
   }
   const question = await readQuestion(request)
   if (!question) return json({ error: MESSAGES.invalid }, 400)
-  if (!hasBindings(env)) {
-    console.error('Chat: a binding or ANTHROPIC_API_KEY is missing')
-    return json({ error: MESSAGES.unavailable }, 503)
-  }
+  if (!isReady(env)) return unavailable(env, `missing ${missing(env).join(', ')}`)
   const visitor = request.headers.get('CF-Connecting-IP') ?? 'unknown'
   if (!(await env.CHAT_LIMITER.limit({ key: visitor })).success) {
     return json({ error: MESSAGES.busy }, 429)
@@ -222,9 +246,8 @@ export async function handleChat(
       fetcher,
     )
     if (!upstream.ok || !upstream.body) {
-      // Status only: the visitor's question is never logged.
-      console.error(`Chat: Anthropic answered ${upstream.status}`)
-      return json({ error: MESSAGES.unavailable }, 503)
+      const detail = await upstream.text().catch(() => '')
+      return unavailable(env, `Anthropic answered ${upstream.status}: ${detail.slice(0, 300)}`)
     }
     return new Response(toClientStream(upstream.body, excerpts), {
       headers: {
@@ -234,7 +257,6 @@ export async function handleChat(
       },
     })
   } catch (error) {
-    console.error(`Chat: ${(error as Error).message}`)
-    return json({ error: MESSAGES.unavailable }, 503)
+    return unavailable(env, (error as Error).message)
   }
 }
