@@ -676,7 +676,7 @@ query and one terms query; posts carry `og:type` article, article times and Blog
 
 **Exit:** the site is feature-complete, and we have reviewed it together at all three widths.
 **Talking points:** why a contact form needs a tiny server (the Resend key is a secret); how a page builder in Sanity becomes typed Astro components; why the site
-ships zero JS; why images are optimised at build time and not on request.
+ships no JS beyond the assistant's lazily loaded panel; why images are optimised at build time and not on request.
 
 ### Phase 6 — Redirects and SEO parity
 
@@ -809,12 +809,25 @@ Steps (one PR each):
       build token covers Workers AI and Vectorize; index `larchwick-content` (768, cosine) created.
 - [x] R2 — Chunker (`src/lib/rag/chunks.ts`, pure, tested) and the `ragIndex()` integration; 87
       passages (6–101 words) from 7 pages, 10 posts and the contact details; 22 test questions in
-      `scripts/rag-eval/questions.json` (3 off-topic). To verify on the first `main` build: the log
-      line `87 passages: 87 embedded, 0 removed`.
-- [ ] R3 — `/api/chat` in the Worker, with `node:test` tests (AI, Vectorize and Anthropic mocked).
+      `scripts/rag-eval/questions.json` (3 off-topic). Verified in production (2026-10-19): 88 vectors,
+      and `npm run rag:inspect` finds all 87 passages identical to the current content (0 missing,
+      0 extra).
+- [x] R3 — `/api/chat` in the Worker (`worker/chat.ts`), with 10 `node:test` tests (AI,
+      Vectorize, the limiter and Anthropic faked): POST and same-origin only, question 1–500
+      characters, 10 questions a minute per visitor (checked before any spend; the limiter is
+      eventually consistent, so a burst gets 429 from about the 14th request), top 5 passages,
+      `claude-haiku-5-5` with 400 output tokens, the question in `<question>` tags apart from the
+      rules, an event stream of text deltas then the cited pages (from the `[n]` markers). The key
+      appears in no response; Anthropic failures, missing bindings and mid-stream errors become
+      the "not available" message.
       When Anthropic refuses (rate limit, free allowance used up, expired key), the answer is a
       friendly "not available right now" with a link to the contact page, never an error page.
-- [ ] R4 — Chat panel, CSP update, CLAUDE.md and docs.
+- [x] R4 — Chat panel (`src/components/chat/ChatPanel.astro`, in Layout): a gold launcher
+      (icon-only below `sm`) opens a popover panel (bottom sheet on phones, 25rem card from
+      `sm`) with suggested questions, the streamed answer without the `[n]` markers, and the cited
+      pages as links (on-site paths only, all text via `textContent`). JS: a 1.9 KB loader on
+      every page, the 3 KB chat module on the first open. CSP `script-src 'self'`; every zero-JS
+      statement in the docs updated.
 - [ ] R5 — `npm run rag:eval` against production; results in `docs/after/rag-eval.json` and the
       case-study notes.
 

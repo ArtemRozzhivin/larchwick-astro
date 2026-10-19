@@ -10,7 +10,7 @@ Two goals, in this order: the page loads fast, and the next page takes an hour.
 
 Both come from the same rule — **a page is a Layout plus an ordered list of section components, and all copy lives in a content file.** Nothing in a section component is page-specific.
 
-The site ships zero client JavaScript. Every section here is static `.astro`, and there is no React. If something seems to need interactivity, check whether HTML or CSS already does it, and ask before writing any script.
+The only client JavaScript is the "Ask Larchwick" assistant's panel. Every section here is static `.astro`, and there is no React. If something seems to need interactivity, check whether HTML or CSS already does it, and ask before writing any script.
 </prime_directive>
 
 <fast_path>
@@ -62,7 +62,7 @@ Reference: `src/pages/index.astro` + `src/lib/content/home.ts`.
 | Component            | For                                   | Key props                                         |
 | -------------------- | ------------------------------------- | ------------------------------------------------- |
 | `Section.astro`      | layout primitive every block sits on  | `id`, `eyebrow`, `title`, `subtitle`, `align`, `tone` |
-| `Header.astro`       | wordmark, nav with active state, `<details>` mobile menu, zero JS | none (reads `siteConfig`) |
+| `Header.astro`       | wordmark, nav with active state, popover sidebar menu, zero JS | none (reads Site settings) |
 | `Hero.astro`         | above-the-fold dark band              | `eyebrow`, `title`, `subtitle`, `primaryCta`, `secondaryCta`, `points` |
 | `Features.astro`     | value props in a grid                 | `eyebrow`, `title`, `subtitle`, `items`, `columns` |
 | `FAQ.astro`          | accordion, native `<details>`, zero JS | `eyebrow`, `title`, `items`                       |
@@ -91,7 +91,7 @@ Copy the closest existing section as the starting point rather than writing one 
 </section_contract>
 
 <zero_js>
-Every page ships zero JavaScript: no view transitions, no prefetch script, no islands. Keep it that way.
+Pages ship no JavaScript of their own: no view transitions, no prefetch script, no islands. The assistant's loader is the one exception. Keep it that way.
 
 Already solved without JS in this repo — reuse these patterns:
 

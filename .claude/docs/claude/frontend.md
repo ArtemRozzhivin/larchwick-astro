@@ -40,9 +40,10 @@ to `#features` without editing the component.
 </props>
 
 <client_js>
-Zero client JavaScript. No React, no client: directive, no <script> in a
-component or page (the JSON-LD <script type="application/ld+json"> is data, not
-code).
+No client JavaScript beyond the assistant. No React, no client: directive, no
+<script> in a component or page except ChatPanel.astro's loader (the JSON-LD
+<script type="application/ld+json"> is data, not code). The CSP allows only
+bundled scripts from our origin, so an inline script would be blocked.
 
 If a component seems to need interactivity, ask before writing any: a small
 Astro <script> or a UI framework is an architecture decision.

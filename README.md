@@ -148,8 +148,9 @@ folder.
 
 ## Performance
 
-A page ships **zero JavaScript**: no view transitions, no prefetch script, no
-islands, and no React. The only `<script>` in the HTML is the JSON-LD data block.
+Pages ship **no JavaScript of their own**: no view transitions, no prefetch script, no
+islands, and no React. The one exception is the "Ask Larchwick" assistant: a 1.9 KB loader
+on every page and a 3 KB chat module that downloads only when the panel opens.
 
 That is protected by one rule: **HTML → CSS → ask first.**
 
@@ -290,11 +291,19 @@ every canonical/OG URL come from it.
 
 ### Environment variables
 
-Add them to `.env` (copied from `.env.example`). Variables prefixed with `PUBLIC_`
-can reach client code; the others are read at build time only. There is no
-server, so anything a page renders is baked into the static HTML.
+`npm run dev` and `npm run build` need none: the Sanity project, dataset and API version are
+constants in `studio/env.ts`, and the dataset is public. Two optional local files, both
+gitignored, each with a committed example:
 
----
+- `.env` (from `.env.example`): `SANITY_WRITE_TOKEN`, for the import script and one-off content
+  writes.
+- `.dev.vars` (from `.dev.vars.example`): read by `npx wrangler dev` to run the Worker locally,
+  with the contact form's Resend settings and `ANTHROPIC_API_KEY` for the assistant. The AI and
+  Vectorize bindings are remote, so a local `/api/chat` queries the real index (read-only) after
+  `npx wrangler login`.
+
+In production the same names are Cloudflare secrets. `WORKERS_CI_BRANCH` (set by Workers Builds)
+and `RAG_INDEX` (set by `npm run rag:passages`) are never put in a file.
 
 ## Importing from WordPress
 

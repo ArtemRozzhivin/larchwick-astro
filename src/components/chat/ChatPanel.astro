@@ -1,0 +1,106 @@
+---
+/**
+ * The "Ask Larchwick" assistant (PLAN.md Phase 7b). Opening and closing is a native popover, like
+ * the mobile menu. The script below is the site's only client JavaScript: a few lines that load
+ * the chat module (src/lib/chat/client.ts) the first time the panel opens.
+ */
+import { chat } from '@lib/content/chat'
+import { buttonVariants } from '@components/ui/button'
+import Icon from '@components/ui/Icon.astro'
+
+const PANEL_ID = 'chat-panel'
+const ICON_BUTTON =
+  'text-espresso hover:bg-paper flex size-10 shrink-0 cursor-pointer items-center justify-center rounded-md transition-colors'
+---
+
+<button
+  type="button"
+  popovertarget={PANEL_ID}
+  class="chat-launcher bg-needle text-espresso border-espresso hover:bg-espresso hover:text-surface fixed right-4 bottom-4 z-40 inline-flex size-14 cursor-pointer items-center justify-center gap-2 rounded-full border-2 font-bold transition-colors sm:size-auto sm:px-5 sm:py-3 md:right-6 md:bottom-6"
+>
+  <Icon name="message-circle" class="size-6 sm:size-5" />
+  <span class="sr-only sm:not-sr-only">{chat.button}</span>
+</button>
+
+<div
+  id={PANEL_ID}
+  popover
+  aria-labelledby="chat-title"
+  class="chat-panel bg-surface text-ink border-espresso rounded-label shadow-label border-2"
+  data-thinking={chat.thinking}
+  data-sources={chat.sources}
+  data-failed={chat.failed}
+>
+  <div class="flex h-full flex-col">
+    <div class="border-espresso flex items-center justify-between gap-3 border-b-2 py-3 pr-3 pl-5">
+      <h2 id="chat-title" class="font-display text-espresso text-3xl leading-none font-black">
+        {chat.title}
+      </h2>
+      <button type="button" popovertarget={PANEL_ID} popovertargetaction="hide" class={ICON_BUTTON}>
+        <span class="sr-only">{chat.close}</span>
+        <Icon name="x" class="size-5" />
+      </button>
+    </div>
+
+    <div role="log" data-chat-log class="flex flex-1 flex-col gap-3 overflow-y-auto px-5 py-4">
+      <p class="leading-relaxed text-pretty">{chat.intro}</p>
+      <div data-chat-suggestions>
+        <p class="text-sm font-bold">{chat.suggestionsLabel}</p>
+        <ul class="mt-2 flex flex-wrap gap-2">
+          {
+            chat.suggestions.map((suggestion) => (
+              <li>
+                <button
+                  type="button"
+                  data-suggestion
+                  class="border-espresso text-espresso hover:bg-needle cursor-pointer rounded-full border-2 px-3 py-1 text-left text-sm font-bold transition-colors"
+                >
+                  {suggestion}
+                </button>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+      <noscript>
+        <p class="text-stamp font-bold">
+          {chat.noScript}
+          <a href={chat.noScriptLink.href} class="underline underline-offset-4">
+            {chat.noScriptLink.label}
+          </a>
+        </p>
+      </noscript>
+    </div>
+
+    <form data-chat-form class="border-border border-t px-5 pt-3 pb-4">
+      <label for="chat-question" class="sr-only">{chat.label}</label>
+      <div class="flex gap-2">
+        <input
+          id="chat-question"
+          name="question"
+          type="text"
+          required
+          maxlength="500"
+          autocomplete="off"
+          placeholder={chat.placeholder}
+          class="border-espresso/60 bg-surface text-espresso focus-visible:border-larch focus-visible:outline-larch min-w-0 flex-1 rounded-md border-2 px-3 py-2"
+        />
+        <button type="submit" class={buttonVariants({ variant: 'primary', size: 'sm' })}>
+          <Icon name="send" />
+          <span class="sr-only">{chat.send}</span>
+        </button>
+      </div>
+      <p class="mt-2 text-xs leading-snug text-pretty">{chat.note}</p>
+    </form>
+  </div>
+</div>
+
+<script>
+  const panel = document.getElementById('chat-panel')
+  if (panel) {
+    panel.addEventListener('toggle', (event) => {
+      if (event.newState !== 'open') return
+      void import('../../lib/chat/client').then(({ startChat }) => startChat(panel))
+    })
+  }
+</script>

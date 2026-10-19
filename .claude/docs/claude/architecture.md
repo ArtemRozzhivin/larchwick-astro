@@ -123,8 +123,10 @@ global mode to 'server'.
 </rendering>
 
 <javascript>
-The site ships zero client JavaScript. There is no React and no client:
-directive anywhere. Icon.astro renders inline SVG with no runtime.
+The only client JavaScript is the "Ask Larchwick" assistant: ChatPanel.astro's
+loader (1.9 KB, every page) dynamically imports src/lib/chat/client.ts (3 KB) on
+the panel's first open. There is no React and no client: directive anywhere.
+Icon.astro renders inline SVG with no runtime.
 
 If something seems to need interactivity, ask first: a small Astro <script> or
 a UI framework is an architecture decision, not a default.
