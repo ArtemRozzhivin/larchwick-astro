@@ -1,0 +1,43 @@
+[
+  {
+    "run": 1,
+    "document": "wp-post-28",
+    "url": "https://larchwick-astro.larchwick.workers.dev/blog/autumn-seasonal-blend/",
+    "publishedAt": "2026-10-16T16:41:28Z",
+    "firstLiveAt": "2026-10-16T16:42:44.057Z",
+    "secondsToLive": 76,
+    "buildId": "90c9ba82",
+    "buildStartedAt": "2026-10-16T16:41:33.728Z",
+    "buildEndedAt": "2026-10-16T16:42:47.797Z"
+  },
+  {
+    "run": 2,
+    "document": "wp-post-28",
+    "url": "https://larchwick-astro.larchwick.workers.dev/blog/autumn-seasonal-blend/",
+    "publishedAt": "2026-10-16T16:45:26Z",
+    "firstLiveAt": "2026-10-16T16:47:04.993Z",
+    "secondsToLive": 99,
+    "buildId": "d06983b5",
+    "buildStartedAt": "2026-10-16T16:45:37.089Z",
+    "buildEndedAt": "2026-10-16T16:47:03.127Z"
+  },
+  {
+    "run": 3,
+    "document": "wp-post-28",
+    "url": "https://larchwick-astro.larchwick.workers.dev/blog/autumn-seasonal-blend/",
+    "publishedAt": "2026-10-16T16:49:36Z",
+    "firstLiveAt": "2026-10-16T16:50:26.462Z",
+    "secondsToLive": 50,
+    "buildId": "8f1cb3c9",
+    "buildStartedAt": "2026-10-16T16:49:35.894Z",
+    "buildEndedAt": "2026-10-16T16:50:25.020Z",
+    "note": "Double publish a few seconds apart (cinnamon, then nutmeg); publishedAt is the second publish. The first build read Sanity after both publishes, so it shipped nutmeg and the intermediate wording was never live. The second publish still queued its own build (c014162c, 16:50:30.215Z to 16:51:14.352Z), which rebuilt the same content.",
+    "extraBuilds": [
+      {
+        "buildId": "c014162c",
+        "buildStartedAt": "2026-10-16T16:50:30.215Z",
+        "buildEndedAt": "2026-10-16T16:51:14.352Z"
+      }
+    ]
+  }
+]

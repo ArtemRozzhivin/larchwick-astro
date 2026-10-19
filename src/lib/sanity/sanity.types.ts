@@ -771,3 +771,52 @@ export type IMAGE_PLACEHOLDERS_QUERY_RESULT = Array<{
   _id: string
   lqip: string | null
 }>
+
+// Source: ../src/lib/sanity/queries.ts
+// Variable: RAG_PAGES_QUERY
+// Query: *[_type == "page" && defined(slug.current) && seo.noindex != true]{ title, "slug": slug.current, sections }
+export type RAG_PAGES_QUERY_RESULT = Array<{
+  title: string | null
+  slug: string | null
+  sections: Array<
+    | ({
+        _key: string
+      } & CardGrid)
+    | ({
+        _key: string
+      } & ContactForm)
+    | ({
+        _key: string
+      } & Cta)
+    | ({
+        _key: string
+      } & Faq)
+    | ({
+        _key: string
+      } & FeatureGrid)
+    | ({
+        _key: string
+      } & Hero)
+    | ({
+        _key: string
+      } & ImageText)
+    | ({
+        _key: string
+      } & LatestPosts)
+    | ({
+        _key: string
+      } & PriceTable)
+    | ({
+        _key: string
+      } & Quote)
+    | ({
+        _key: string
+      } & Stats)
+    | ({
+        _key: string
+      } & Steps)
+    | ({
+        _key: string
+      } & TextBlock)
+  > | null
+}>

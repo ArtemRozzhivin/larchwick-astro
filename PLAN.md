@@ -5,7 +5,7 @@ time**. Each phase ends with a short "what we did / what's next" and Artem's go-
 next one starts. Tick the boxes as work lands, and log every decision in
 [Decisions](#3-decisions).
 
-Last updated: 2026-10-14 · Current phase: **Phase 6 — in progress**
+Last updated: 2026-10-17 · Current phase: **Phase 7b — AI assistant (in progress)**
 
 | #   | Phase                                    | Status      |
 | --- | ---------------------------------------- | ----------- |
@@ -19,11 +19,12 @@ Last updated: 2026-10-14 · Current phase: **Phase 6 — in progress**
 | 5a  | Data layer and page rendering            | done        |
 | 5b  | Blog templates                           | done        |
 | 5c  | Home, contact form and design polish     | done        |
-| 6   | Redirects and SEO parity                 | in progress |
-| 7   | Production and editor workflow           | not started |
+| 6   | Redirects and SEO parity                 | done        |
+| 7   | Production and editor workflow           | done        |
+| 7b  | "Ask Larchwick" AI assistant (RAG)       | in progress |
 | 8   | Performance and accessibility pass       | not started |
 | 9   | Case study and Upwork portfolio entry    | not started |
-| 10  | Redesign (later, not scheduled)          | not started |
+| 10  | Redesign ("Larch and label")             | done        |
 
 ---
 
@@ -83,8 +84,8 @@ means rewriting history. Phase 0 makes it compliant before anything else is push
 | 2026-10-12 | **D-2 / D-12** No YouTube or video anywhere: no WordPress edits, no `youtube` content type, no embed renderer                                                                                                                                                                                                            | Not needed for this site. The brief's "Post 7 YouTube" edge case is dropped. We don't add a pull quote to WordPress either: the importer's pull-quote and "CF7 shortcode in a post" rules are covered by test fixtures. WordPress content stays exactly as it is.                                                                                                                                                                                                                                            |
 | 2026-10-12 | **D-4** Contact form sends email through **Resend**, from a small Cloudflare Worker endpoint (`/api/contact`)                                                                                                                                                                                                            | Resend is an email API, so the secret key must live on a server. The Worker is that server. The form stays a plain HTML POST with zero client JS. Free plan: 3,000 emails/month and 100/day. Without a domain, Resend's test sender delivers only to the account owner's address, which is all a contact form needs (it notifies Artem). Web3Forms is dropped.                                                                                                                                               |
 | 2026-10-12 | **D-5** Licence: MIT, in Artem's name                                                                                                                                                                                                                                                                                    | The repo stays public.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| 2026-10-12 | **D-6** Remove Docker and the unused dependencies                                                                                                                                                                                                                                                                        | Docker isn't needed on Cloudflare, and `build:docker` already points at a missing `.mjs` config. The unused dependencies are `@base-ui/react`, `@radix-ui/*`, `react-hook-form`, `@hookform/resolvers`, `zod`, `tw-animate-css`, `@astrojs/node` and `@astrojs/vercel`.                                                                                                                                                                                                                                      |
-| 2026-10-12 | **D-7** Remove React from the site: `react`, `react-dom`, `@astrojs/react`, `@types/react*`, `lucide-react`, `button.tsx`, `input.tsx`                                                                                                                                                                                   | Nothing on the site needs it; we add it back only if a component ever does. Icons move to an Astro-native approach (ask before adding a package). `buttonVariants` (cva) moves to a plain `.ts` file. Sanity Studio keeps its own React inside `studio/`: that is the CMS app, not the website.                                                                                                                                                                                                              |
+| 2026-10-12 | **D-6** Remove Docker and the unused dependencies                                                                                                                                                                                                                                                                        | Docker isn't needed on Cloudflare, and `build:docker` already points at a missing `.mjs` config. The unused dependencies are `@base-ui/react`, `@radix-ui/`\*, `react-hook-form`, `@hookform/resolvers`, `zod`, `tw-animate-css`, `@astrojs/node` and `@astrojs/vercel`.                                                                                                                                                                                                                                     |
+| 2026-10-12 | **D-7** Remove React from the site: `react`, `react-dom`, `@astrojs/react`, `@types/react`\*, `lucide-react`, `button.tsx`, `input.tsx`                                                                                                                                                                                  | Nothing on the site needs it; we add it back only if a component ever does. Icons move to an Astro-native approach (ask before adding a package). `buttonVariants` (cva) moves to a plain `.ts` file. Sanity Studio keeps its own React inside `studio/`: that is the CMS app, not the website.                                                                                                                                                                                                              |
 | 2026-10-12 | **D-8** No RSS, subscriptions, likes or comments. Only posts                                                                                                                                                                                                                                                             | The old feed URLs 301 to `/blog/`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
 | 2026-10-12 | **D-9** Unit tests for the import script                                                                                                                                                                                                                                                                                 | Vitest in `scripts/import-wp/` only. Small, real WordPress HTML snippets are fed through the converter, and the tests check the Sanity output. Each edge case gets a test, so a fix for one never silently breaks another.                                                                                                                                                                                                                                                                                   |
 | 2026-10-12 | **D-10** Commit web-size copies of the before screenshots                                                                                                                                                                                                                                                                | About 44 MB of PNG otherwise. Screenshots that show the WordPress login are not committed; Phase 1 retakes them with the byline replaced at capture time (D-11).                                                                                                                                                                                                                                                                                                                                             |
@@ -115,6 +116,9 @@ means rewriting history. Phase 0 makes it compliant before anything else is push
 | 2026-10-16 | Slashless URLs of live pages get explicit 301 rules (`/about` → `/about/`) instead of Cloudflare's 307                                                                                                                                                                                                                   | One permanent hop, as WordPress did; the rules are generated from the built routes.                                                                                                                                                                                                                                                                                                                                                                                                                          |
 | 2026-10-16 | Redesign moved before Phase 7, as "Larch and label": larch green, needle gold and espresso; Big Shoulders Display and Hanken Grotesk; the coffee bag label (bordered card, gold offset shadow, roast stamp) as the graphic device; a sticky header; scroll-driven fade-ups in CSS only. Supersedes "same brand, refined" | Artem wanted it before launch: the rebuild still looked like the WordPress theme. He picked this direction from three mockups (roast log, larch and label, origin) as the most unique and least templated. Same content model, same URLs and SEO, zero client JS kept; the case study becomes "rebuilt and redesigned", and the after-Lighthouse run in Phase 8 measures the new design.                                                                                                                     |
 | 2026-10-16 | Preview builds get `X-Robots-Tag: noindex` from the build (`previewNoindex()` appends it to `dist/_headers` when `WORKERS_CI_BRANCH` is not `main`), not from a host pattern in `public/_headers`                                                                                                                        | Cloudflare's example host pattern `https://:version.:subdomain.workers.dev/*` also matches production on `workers.dev`. The branch is known for certain at build time, and preview versions carry their own assets, so production can never inherit the header. Unit-tested; verified with `curl -I` on a preview and on production after the first deploy.                                                                                                                                                  |
+| 2026-10-17 | New Phase 7b, before Phase 8: "Ask Larchwick", a RAG assistant that answers only from the site's own content and cites its pages                                                                                                                                                                                         | Artem's request. Placed before the performance pass so the after-measurement covers the final site.                                                                                                                                                                                                                                                                                                                                                                                                          |
+| 2026-10-17 | RAG stack: Cloudflare Vectorize for the vectors and Workers AI (`@cf/baai/bge-base-en-v1.5`, 768 dims) for embeddings; Claude Haiku (`claude-haiku-5-5`, Anthropic API) writes the answers                                                                                                                               | Vectorize and Workers AI sit on the platform the Worker already runs on: bindings, no extra vendor, and the free tier covers ~150 passages many times over. Supabase was considered; free projects pause after a week without traffic, which would break a rarely visited demo. Claude follows "answer only from these excerpts" far better than the free open models; it is paid per use (well under a cent a question) and gets a monthly spend limit.                                                     |
+| 2026-10-17 | The chat panel is the site's first client JavaScript: one small module, loaded only when the panel opens, with the CSP widened to `script-src 'self'` and `connect-src 'self'`                                                                                                                                           | A streamed, in-page chat needs JS; the no-JS alternative (a form that returns a full answer page) was judged too clunky. Every other part of the site stays zero-JS, and Phase 8 measures the cost. CLAUDE.md's prime directive is updated in the same change.                                                                                                                                                                                                                                               |
 
 ### Open
 
@@ -722,36 +726,101 @@ why a parity check beats eyeballing.
 
 - [x] Remove the site-wide noindex header (code). Production runs on `workers.dev` (D-3). No build
       env vars are needed (project id, dataset and API version are constants in `studio/env.ts`).
-- [ ] Artem: turn on the build cache; after the dev → main merge, `curl -I` production shows no
-      `X-Robots-Tag`, and the deployed SEO parity run (Phase 6) passes.
-- [ ] Create a Workers Builds deploy hook for `main`, and point a Sanity GROQ webhook at it (1 of
+- [x] Build cache on. 2026-10-16, after the dev → main merge: `curl -I` shows no `X-Robots-Tag`
+      on production and `x-robots-tag: noindex` on the `dev` preview (so Workers Builds does set
+      `WORKERS_CI_BRANCH`), and the deployed SEO parity run passes 216/216 (closes Phase 6).
+- [x] Create a Workers Builds deploy hook for `main`, and point a Sanity GROQ webhook at it (1 of
       the 2 free), filtered to our content types, on create, update and delete.
   - **The hook URL is a credential.** Keep it out of the repo and out of any screenshot or log we
     save, and recreate it if it is ever exposed.
-- [ ] **Measure publish → live:** several runs with `npm run rebuild:watch` (polls the page,
+- [x] **Measure publish → live:** several runs with `npm run rebuild:watch` (polls the page,
       reads the publish time from Sanity, appends a run). Record only build IDs and timestamps (publish time,
       build start and end, first 200 with the new content) in `docs/after/rebuild-times.json`.
+      Result (2026-10-16): 76 s, 99 s and 50 s. The webhook starts a build within 6–11 s; the
+      build itself takes 49–86 s, most of it `npm` install (56 s cold, 20–23 s once the dependency
+      cache is restored); the Astro build is 6–8 s because the image cache survives.
 - [x] Optional: noindex on preview hosts, done from the build (decision 2026-10-16); check a
       preview with `curl -I`. Cloudflare's example pattern
       `https://:version.:subdomain.workers.dev/*` **also matches production on `workers.dev`**.
       Verify with `curl -I` that production has no `X-Robots-Tag`, or turn off Version URLs.
-- [ ] Editor walkthrough, done as a non-developer would, and checked live:
-
-  - add a post
-  - edit a section
-  - change SEO
-  - add a redirect
-
-  Then write `docs/editor-guide.md` with screenshots, and no hook URLs in them. (Drafted from the
-  Studio's field names; screenshots and the measured publish time follow the walkthrough.)
+- [x] Editor guide: `docs/editor-guide.md`, text-only (Artem, 2026-10-17: no screenshots), written
+      from the Studio's field names and the measured publish time. Publish → rebuild → live is
+      verified end to end by the three measured runs; the redirect checks run in every build.
 
 - [ ] Optional: Cloudflare Web Analytics (cookieless). Keep it only if its measured cost is
       acceptable.
 
-**Exit:** all four editor tasks work end to end in production, and the rebuild time is saved as
-JSON.
+**Exit:** publishing works end to end in production, the editor guide exists, and the rebuild
+time is saved as JSON.
 **Talking points:** webhook → deploy hook; how quick repeat publishes are debounced; why the hook
 URL is treated as a secret.
+
+Findings (2026-10-16):
+
+- **Repeat publishes are not debounced, and don't need to be.** Run 3 published twice a few seconds
+  apart: each publish started a build, and the second waited in the queue (one build at a time).
+  Each build reads Sanity at its build step, not when it is triggered, so the first build already
+  shipped the second edit. The in-between wording never went live, and the queued build rebuilt
+  the same content. The last publish always wins; the only cost is build minutes.
+- **The hook URL is a credential** because anyone holding it can start production builds as often
+  as they like: no content can change, but it spends the build quota and keeps the queue busy.
+  It lives only in Sanity's webhook settings and Cloudflare, never in the repo or a screenshot.
+
+### Phase 7b — "Ask Larchwick" AI assistant (RAG)
+
+Answers visitors' questions (coffees, shipping, wholesale, brewing, opening hours) from the site's
+own content only, with links to the pages it used; otherwise it says it doesn't know and points to
+the contact page. Decisions 2026-10-17.
+
+- **Index at build time.** A `ragIndex()` integration reads the same Sanity content the pages use
+  (page sections, posts, FAQ answers, site settings), splits it at headings and FAQ items into
+  passages of roughly 100–400 words, each with its page title and URL, embeds them with Workers AI
+  and upserts them into a Vectorize index (ids from a content hash, so unchanged passages are
+  skipped and removed ones deleted). Only on `main` builds (the `WORKERS_CI_BRANCH` guard from
+  `previewNoindex()`), so previews and local builds never touch the live index. Every publish
+  already triggers a build, so the index follows the content by itself; the first `main` build
+  after R2 fills it. The build calls the Cloudflare REST API with the Workers Builds build token
+  (it already has Workers AI and Vectorize); `RAG_INDEX_TOKEN` overrides it if ever needed. A
+  failed indexing run is logged and never fails the build. `npm run rag:passages` writes the
+  passages to `.cache/rag/passages.json` for review without sending anything.
+- **Leak guard:** before anything is written, every word of every passage (with its title and
+  heading) must appear in the visible `<body>` text of the built page it links to
+  (`src/lib/rag/public-check.ts`). If one doesn't, a production build skips the index update and
+  logs which passage, and `npm run rag:passages` fails. So the index can only hold what the site
+  already publishes: no drafts, hidden pages or Studio-only fields.
+- **Answer in the Worker:** `POST /api/chat`. Validate and cap the question (500 characters),
+  rate-limit per visitor (Workers rate-limiting binding), embed it, take the top 5 passages,
+  and stream Claude Haiku's answer with the source links. The system prompt allows only the given
+  excerpts and on-topic questions. Bindings: `AI`, `VECTORIZE`; secret `ANTHROPIC_API_KEY`.
+- **UI:** an "Ask Larchwick" button opens a panel (popover, like the mobile menu). One small
+  module, loaded when the panel opens, sends the question and renders the streamed answer and
+  sources. Note under the input: answers come from AI and can be wrong; questions go to Anthropic
+  to write the answer and are not stored by us.
+- **Guardrails:** length caps on question and answer, rate limit, monthly spend limit in the
+  Anthropic console, no logging of questions, the demo label in the panel.
+- **Evaluation:** 15–20 test questions, each with the page that should answer it.
+  `npm run rag:eval` reports retrieval hits (right page in the top 5) and whether the answer cites
+  it; the numbers go into the case study.
+
+Steps (one PR each):
+
+- [x] R1 — Artem (2026-10-17): Anthropic key in the `larchwick` workspace (free Evaluation plan, so
+      nothing can be charged; expires 2026-12-31) as the Cloudflare secret `ANTHROPIC_API_KEY`; the
+      build token covers Workers AI and Vectorize; index `larchwick-content` (768, cosine) created.
+- [x] R2 — Chunker (`src/lib/rag/chunks.ts`, pure, tested) and the `ragIndex()` integration; 87
+      passages (6–101 words) from 7 pages, 10 posts and the contact details; 22 test questions in
+      `scripts/rag-eval/questions.json` (3 off-topic). To verify on the first `main` build: the log
+      line `87 passages: 87 embedded, 0 removed`.
+- [ ] R3 — `/api/chat` in the Worker, with `node:test` tests (AI, Vectorize and Anthropic mocked).
+      When Anthropic refuses (rate limit, free allowance used up, expired key), the answer is a
+      friendly "not available right now" with a link to the contact page, never an error page.
+- [ ] R4 — Chat panel, CSP update, CLAUDE.md and docs.
+- [ ] R5 — `npm run rag:eval` against production; results in `docs/after/rag-eval.json` and the
+      case-study notes.
+
+**Exit:** the assistant answers the test questions from the right pages in production, refuses
+off-topic ones, stays within the rate limit and spend limit, and every other page still ships no
+JavaScript.
 
 ### Phase 8 — Performance and accessibility pass
 
@@ -927,7 +996,7 @@ Artem runs Lighthouse by hand, and the same steps apply to before and after.
 - **Shortlinks** (`/?p=N`, `/?page_id=N`, 17 URLs): Cloudflare `_redirects` can't match query
   strings, so they serve Home with a 200. Supporting them would need Worker code. Documented, not
   migrated.
-- **Old image URLs** (`/wp-content/uploads/*`) are not redirected. Images now come from the new
+- **Old image URLs** (`/wp-content/uploads/`\*) are not redirected. Images now come from the new
   pipeline.
 
 ## Appendix A — Reference values from the original brief
