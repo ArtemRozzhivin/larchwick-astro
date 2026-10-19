@@ -2,8 +2,16 @@
   // Must match the Worker name in the Cloudflare dashboard, or Workers Builds refuses to deploy.
   "name": "larchwick-astro",
   "compatibility_date": "2026-10-06",
-  // Branch builds run `npx wrangler preview`, which requires this block (empty = defaults).
-  "previews": {},
+  // Branch builds run `npx wrangler preview`. Previews don't inherit top-level bindings: each needs
+  // an entry here. They only read the index (writes happen in `main` builds), and get their own
+  // rate-limit counters. Their secrets are separate too: `npx wrangler preview secret put NAME`.
+  "previews": {
+    "ai": { "binding": "AI" },
+    "vectorize": [{ "binding": "VECTORIZE", "index_name": "larchwick-content" }],
+    "ratelimits": [
+      { "name": "CHAT_LIMITER", "namespace_id": "1002", "simple": { "limit": 10, "period": 60 } },
+    ],
+  },
   // Only /api/* reaches the script (the contact form, PLAN.md D-4; the assistant, Phase 7b);
   // every page is a static asset.
   "main": "worker/index.ts",
