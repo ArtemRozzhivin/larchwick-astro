@@ -16,6 +16,12 @@ placeholder content · `placeholder` — template content only.
 | [Blog](blog.md)                   | `/blog/`, posts, categories, tags                           | The imported posts and their archives                | real   |
 | [Content pages](content-pages.md) | `/about/`, `/services/`, `/products/`, `/faq/`, `/contact/` | Built from Sanity page documents                     | real   |
 
+## On every page
+
+The "Ask Larchwick" button (bottom right; a round chat icon on phones) opens the AI assistant, which
+answers from this website's content and links the pages it used (PLAN.md Phase 7b). Its copy is in
+`src/lib/content/chat.ts`.
+
 ## Adding a page
 
 Add a row here and create `docs/pages/<page>.md` in the same change that adds the

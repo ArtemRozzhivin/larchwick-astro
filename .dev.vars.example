@@ -1,0 +1,13 @@
+# Copy to .dev.vars (gitignored) to run the Worker locally: `npm run build && npx wrangler dev`.
+# Production uses the same names as Cloudflare secrets (larchwick-astro → Settings → Variables and Secrets).
+# Never commit real values.
+
+# Contact form (/api/contact). Without them the form redirects to /contact/error/.
+RESEND_API_KEY=
+CONTACT_TO=
+# Optional: the Resend template id; without it the email is plain text.
+RESEND_TEMPLATE_ID=
+
+# The assistant (/api/chat). Its AI and Vectorize bindings are remote, so local runs query the
+# real index (read-only) and need `npx wrangler login`. Without a key it answers "not available".
+ANTHROPIC_API_KEY=

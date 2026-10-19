@@ -2,10 +2,28 @@
   // Must match the Worker name in the Cloudflare dashboard, or Workers Builds refuses to deploy.
   "name": "larchwick-astro",
   "compatibility_date": "2026-10-06",
-  // Branch builds run `npx wrangler preview`, which requires this block (empty = defaults).
-  "previews": {},
-  // Only /api/* reaches the script (the contact form, PLAN.md D-4); every page is a static asset.
+  // Branch builds run `npx wrangler preview`. Previews don't inherit top-level bindings: each needs
+  // an entry here. They only read the index (writes happen in `main` builds), and get their own
+  // rate-limit counters. Their secrets are separate too: `npx wrangler preview secret put NAME`.
+  "previews": {
+    // Previews only: a failed chat answer also says why (key redacted). Production never sets it.
+    "vars": { "CHAT_DEBUG": "1" },
+    "ai": { "binding": "AI" },
+    "vectorize": [{ "binding": "VECTORIZE", "index_name": "larchwick-content" }],
+    "ratelimits": [
+      { "name": "CHAT_LIMITER", "namespace_id": "1002", "simple": { "limit": 10, "period": 60 } },
+    ],
+  },
+  // Only /api/* reaches the script (the contact form, PLAN.md D-4; the assistant, Phase 7b);
+  // every page is a static asset.
   "main": "worker/index.ts",
+  // The assistant: embeddings, the passages that production builds index, and a per-visitor limit.
+  // "remote": `wrangler dev` uses the real services (deploys ignore it); Vectorize has no local mode.
+  "ai": { "binding": "AI", "remote": true },
+  "vectorize": [{ "binding": "VECTORIZE", "index_name": "larchwick-content", "remote": true }],
+  "ratelimits": [
+    { "name": "CHAT_LIMITER", "namespace_id": "1001", "simple": { "limit": 10, "period": 60 } },
+  ],
   "assets": {
     "run_worker_first": ["/api/*"],
     "directory": "./dist",

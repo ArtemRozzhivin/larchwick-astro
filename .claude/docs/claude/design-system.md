@@ -198,6 +198,13 @@ heading, quote or text it is a compact band of buttons.
 SanityImage paints each image's Sanity LQIP (a blurred ~0.5 KB preview) as the
 img background, so a photo never loads into an empty box.
 
+ChatPanel (src/components/chat/) is the assistant: a needle (gold) launcher
+with an espresso border, icon-only below sm, and a popover panel styled as a
+label (surface, 2px espresso border, rounded-label, shadow-label). Questions are
+larch bubbles on the right; answers are paper bubbles with a border, errors use
+stamp. `.chat-panel` in global.css positions it (bottom sheet on phones, 25rem
+card from sm) and fades it up 1rem on open (none for reduced motion).
+
 CardGrid has two layouts: `cards` (label cards with photo, details, points) and
 `bags` (coffee bags coloured by each card's `roast`, with the crimped top).
 </components>

@@ -42,9 +42,9 @@ Every deviation is a finding. If the code and the docs disagree and the code loo
 </step_2_load_project_rules>
 
 <step_3_shipped_javascript>
-This is the highest-value check in this repo. The site ships zero client JavaScript, and any script at all is an architecture decision that needs the user's approval.
+This is the highest-value check in this repo. The only client JavaScript is the approved assistant (`src/components/chat/ChatPanel.astro` and `src/lib/chat/`, PLAN.md Phase 7b); any other script is an architecture decision that needs the user's approval.
 
-- **Any `client:` directive, React or other framework component (`.tsx`, `.jsx`), or `<script>` that is not `type="application/ld+json"`** → Critical, unless the user approved it for this task.
+- **Any `client:` directive, React or other framework component (`.tsx`, `.jsx`), or `<script>` that is not `type="application/ld+json"` or the assistant's loader in ChatPanel.astro** → Critical, unless the user approved it for this task. The assistant's module must stay lazily imported (a dynamic `import()` on the panel's first open).
 - `<ClientRouter />` (view transitions) or Astro `prefetch` in the config → Critical: both inject a client script.
 - A script doing something HTML/CSS already does — accordion (`<details>`), menu toggle (`<details>`), tabs (`:target`), reveal-on-scroll (CSS), form validation (native attributes) → name the pattern to use instead.
 - An icon added any other way than `Icon.astro` inline SVG (an icon package, an `<img>` of an SVG sprite) → Warning.

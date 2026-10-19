@@ -10,6 +10,8 @@ export const ICON_NAMES = [
   'clock',
   'menu',
   'x',
+  'message-circle',
+  'send',
 ] as const
 
 export type IconName = (typeof ICON_NAMES)[number]

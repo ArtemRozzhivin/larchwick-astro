@@ -23,6 +23,7 @@
     "seo:compare": "node scripts/seo-check/compare.ts",
     "rebuild:watch": "node scripts/rebuild-time/watch.ts",
     "rag:passages": "RAG_INDEX=dry astro build",
+    "rag:inspect": "node scripts/rag-eval/inspect.ts",
     "lighthouse:import": "node scripts/lighthouse-import/import.ts",
     "test": "node --test 'worker/**/*.test.ts' 'src/**/*.test.ts'",
     "import:wp": "node --env-file-if-exists=.env scripts/import-wp/import.ts",
