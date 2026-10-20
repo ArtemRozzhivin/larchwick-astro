@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict'
 import { describe, it } from 'node:test'
 
-import { parseEvents, safePath, sourceLabel, withoutMarkers } from './stream.ts'
+import { answerParts, parseEvents, safePath, sourceLabel, withoutMarkers } from './stream.ts'
 
 describe('chat stream', () => {
   it('reads complete events and keeps the unfinished tail', () => {
@@ -39,6 +39,29 @@ describe('chat stream', () => {
     ]) {
       assert.equal(safePath(url), null, url)
     }
+  })
+
+  it('turns [label](/path/) into links to our own pages only', () => {
+    assert.deepEqual(answerParts('Write to us via our [contact page](/contact/) [2].'), [
+      { text: 'Write to us via our ' },
+      { text: 'contact page', href: '/contact/' },
+      { text: '.' },
+    ])
+    assert.deepEqual(answerParts('See [this](https://evil.example/) or [that](javascript:x).'), [
+      { text: 'See ' },
+      { text: 'this' },
+      { text: ' or ' },
+      { text: 'that' },
+      { text: '.' },
+    ])
+    assert.deepEqual(answerParts('No links here.'), [{ text: 'No links here.' }])
+  })
+
+  it('holds back an unfinished link or marker while streaming, never at the end', () => {
+    assert.deepEqual(answerParts('Use our [contact pa', true), [{ text: 'Use our ' }])
+    assert.deepEqual(answerParts('Use our [contact page](/cont', true), [{ text: 'Use our ' }])
+    assert.deepEqual(answerParts('We ship to the EU [1', true), [{ text: 'We ship to the EU ' }])
+    assert.deepEqual(answerParts('A stray [ bracket', false), [{ text: 'A stray [ bracket' }])
   })
 
   it('labels a source with its page and heading', () => {

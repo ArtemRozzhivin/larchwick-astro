@@ -816,7 +816,8 @@ Steps (one PR each):
       Vectorize, the limiter and Anthropic faked): POST and same-origin only, question 1–500
       characters, 10 questions a minute per visitor (checked before any spend; the limiter is
       eventually consistent, so a burst gets 429 from about the 14th request), top 5 passages,
-      `claude-haiku-5-5` with 400 output tokens, the question in `<question>` tags apart from the
+      `claude-haiku-5-5` at effort `low` with up to 1,024 output tokens (it thinks by default and the
+      thinking counts toward the cap; at 400, answers were cut mid-word), the question in `<question>` tags apart from the
       rules, an event stream of text deltas then the cited pages (from the `[n]` markers). The key
       appears in no response; Anthropic failures, missing bindings and mid-stream errors become
       the "not available" message.
@@ -824,9 +825,10 @@ Steps (one PR each):
       friendly "not available right now" with a link to the contact page, never an error page.
 - [x] R4 — Chat panel (`src/components/chat/ChatPanel.astro`, in Layout): a gold launcher
       (icon-only below `sm`) opens a popover panel (bottom sheet on phones, 25rem card from
-      `sm`) with suggested questions, the streamed answer without the `[n]` markers, and the cited
+      `sm`) with suggested questions, the streamed answer without the `[n]` markers (its
+      `[label](/path/)` links rendered as links to our own pages), and the cited
       pages as links (on-site paths only, all text via `textContent`). JS: a 1.9 KB loader on
-      every page, the 3 KB chat module on the first open. CSP `script-src 'self'`; every zero-JS
+      every page, the 3.6 KB chat module on the first open. CSP `script-src 'self'`; every zero-JS
       statement in the docs updated.
 - [ ] R5 — `npm run rag:eval` against production; results in `docs/after/rag-eval.json` and the
       case-study notes.

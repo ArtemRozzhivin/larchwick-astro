@@ -124,7 +124,7 @@ global mode to 'server'.
 
 <javascript>
 The only client JavaScript is the "Ask Larchwick" assistant: ChatPanel.astro's
-loader (1.9 KB, every page) dynamically imports src/lib/chat/client.ts (3 KB) on
+loader (1.9 KB, every page) dynamically imports src/lib/chat/client.ts (3.6 KB) on
 the panel's first open. There is no React and no client: directive anywhere.
 Icon.astro renders inline SVG with no runtime.
 
