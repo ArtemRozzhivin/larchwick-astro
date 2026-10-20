@@ -24,6 +24,7 @@
     "rebuild:watch": "node scripts/rebuild-time/watch.ts",
     "rag:passages": "RAG_INDEX=dry astro build",
     "rag:inspect": "node scripts/rag-eval/inspect.ts",
+    "rag:eval": "node scripts/rag-eval/eval.ts",
     "lighthouse:import": "node scripts/lighthouse-import/import.ts",
     "test": "node --test 'worker/**/*.test.ts' 'src/**/*.test.ts'",
     "import:wp": "node --env-file-if-exists=.env scripts/import-wp/import.ts",

@@ -260,6 +260,9 @@ npm run credits            # Rebuild CREDITS.md
 npm run seo:crawl          # Crawl the WordPress "before" site (SEO snapshot)
 npm run seo:compare        # Check every old URL against the new site (default: wrangler dev on :8787)
 npm test                   # Unit tests: contact Worker and redirect rules (node --test)
+npm run rag:passages       # Build the assistant's passages without indexing; fails on a leak
+npm run rag:inspect        # Compare the production vector index with the current content
+npm run rag:eval           # Ask the live assistant 22 test questions; production → docs/after/rag-eval.json
 npm run lighthouse:import  # File saved Lighthouse JSON reports into docs/
 npm run studio             # Sanity Studio at http://localhost:3333 (first time: npm install --prefix studio)
 npm run studio:typegen     # Regenerate src/lib/sanity/sanity.types.ts after a schema change
