@@ -3,6 +3,10 @@
 Claude's private engineering log. Technical detail belongs here — file paths, what
 was rejected and why, what a change cost in shipped kB. Newest date on top.
 
+## 2026-10-20
+
+- [Feat]: Phase 7b R5, `npm run rag:eval` (`scripts/rag-eval/eval.ts`). Per question in `scripts/rag-eval/questions.json`: retrieval repeated read-only with the developer's wrangler login (`wrangler auth token --json`, kept in memory, sent only to api.cloudflare.com; on error 10000 it asks wrangler for a fresh token once, since the first production run died at question 7 with "Authentication error"), using `EMBEDDING_MODEL` and `TOP_K` imported from `worker/chat.ts` (`EMBEDDING_MODEL` now exported) so it can't drift; then the live `/api/chat` with our Origin, 6.5 s apart (limiter 10/min). Scores: retrieval rank of the first expected page, pass = answered and cited an expected page (off-topic: answered and cited nothing), plus failures, answers ending "…", bare paths outside `[label](/path/)` links, median first-token and total time. Production writes `docs/after/rag-eval.json`, any other URL `.cache/rag/eval.json`. Production run 2026-10-20 (after PR #26): retrieval 19/19 (18 at rank 1, pour-over at rank 5), cited 19/19, off-topic 2/3 (the cat poem was declined but followed by a cited House Espresso recommendation), 0 failures, 0 cut off, 0 bare paths, median first token 1,183 ms, total 1,557 ms.
+
 ## 2026-10-19
 
 - [Fix]: production answers stopped mid-word ("…and he still does the c") at ~65 words. Cause: Claude Haiku 5.5 runs adaptive thinking when `thinking` is unset (effort `medium` by default), the hidden thinking counts toward `max_tokens`, and our stream forwards only `text_delta`, so at `max_tokens: 400` most of the budget went to invisible thinking. Fix: `max_tokens` 1024 (billing is per token generated, so the cap only adds headroom) and `output_config: {effort: 'low'}` (the Haiku 5.5 guidance for short answers: thinking stays on, shorter, sometimes skipped); a `message_delta` with `stop_reason: 'max_tokens'` now appends "…" and logs `Chat: the answer reached max_tokens`. Not `thinking: disabled`: the guidance prefers effort as the lever.
