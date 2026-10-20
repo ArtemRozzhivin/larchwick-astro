@@ -5,7 +5,7 @@ time**. Each phase ends with a short "what we did / what's next" and Artem's go-
 next one starts. Tick the boxes as work lands, and log every decision in
 [Decisions](#3-decisions).
 
-Last updated: 2026-10-17 · Current phase: **Phase 7b — AI assistant (in progress)**
+Last updated: 2026-10-20 · Current phase: **Phase 8 — performance and accessibility pass (next)**
 
 | #   | Phase                                    | Status      |
 | --- | ---------------------------------------- | ----------- |
@@ -21,7 +21,7 @@ Last updated: 2026-10-17 · Current phase: **Phase 7b — AI assistant (in progr
 | 5c  | Home, contact form and design polish     | done        |
 | 6   | Redirects and SEO parity                 | done        |
 | 7   | Production and editor workflow           | done        |
-| 7b  | "Ask Larchwick" AI assistant (RAG)       | in progress |
+| 7b  | "Ask Larchwick" AI assistant (RAG)       | done        |
 | 8   | Performance and accessibility pass       | not started |
 | 9   | Case study and Upwork portfolio entry    | not started |
 | 10  | Redesign ("Larch and label")             | done        |
@@ -830,8 +830,14 @@ Steps (one PR each):
       pages as links (on-site paths only, all text via `textContent`). JS: a 1.9 KB loader on
       every page, the 3.6 KB chat module on the first open. CSP `script-src 'self'`; every zero-JS
       statement in the docs updated.
-- [ ] R5 — `npm run rag:eval` against production; results in `docs/after/rag-eval.json` and the
-      case-study notes.
+- [x] R5 — `npm run rag:eval` (`scripts/rag-eval/eval.ts`): for each question in
+      `questions.json` it repeats the Worker's retrieval read-only (Workers AI embedding + Vectorize
+      top 5, through your wrangler login) and asks the live `/api/chat`; production results go to
+      `docs/after/rag-eval.json`. About a cent of Anthropic credit per run. Production, 2026-10-20:
+      the right page in the top 5 for 19/19 on-topic questions (18 at rank 1), the answer cites it
+      19/19, 0 errors, 0 cut off, 0 bare paths; first word after a median 1.2 s, full answer 1.6 s.
+      Off-topic 2/3 declined without citing: the cat poem was declined, then a House Espresso
+      recommendation followed with its source.
 
 **Exit:** the assistant answers the test questions from the right pages in production, refuses
 off-topic ones, stays within the rate limit and spend limit, and every other page still ships no

@@ -13,7 +13,7 @@ larchwick-astro/
 ├── docs/            Documentation
 │   ├── before/      Evidence from the WordPress site (export, SEO crawl, Lighthouse, screenshots); not Prettier-formatted
 │   ├── internal/    Pages, status, what is still placeholder
-│   ├── after/       Evidence from the new site (SEO snapshot, rebuild-times.json from npm run rebuild:watch)
+│   ├── after/       Evidence from the new site (SEO snapshot, rebuild-times.json from npm run rebuild:watch, rag-eval.json from npm run rag:eval)
 │   ├── import-report.md, import-report.json, redirect-map.csv   Written by npm run import:wp; not Prettier-formatted
 │   ├── seo-parity-report.md   Written by npm run seo:compare
 │   ├── editor-guide.md  How to edit and publish in Sanity Studio, for non-developers
