@@ -38,7 +38,7 @@ also serves `POST /api/chat`, the "Ask Larchwick" assistant's answers (Phase 7b)
 arrives in R4.
 
 The only client JavaScript is the "Ask Larchwick" assistant (a 1.9 KB loader on every page,
-the 3 KB chat module when its panel opens): no React, no view transitions, no prefetch script.
+the 3.6 KB chat module when its panel opens): no React, no view transitions, no prefetch script.
 
 Content model (Phase 3): Sanity project `zboja23d`, public `production` dataset, edited in the
 Studio in `studio/` (`npm run studio`, http://localhost:3333). Documents: page (built from 14

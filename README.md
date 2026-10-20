@@ -150,7 +150,7 @@ folder.
 
 Pages ship **no JavaScript of their own**: no view transitions, no prefetch script, no
 islands, and no React. The one exception is the "Ask Larchwick" assistant: a 1.9 KB loader
-on every page and a 3 KB chat module that downloads only when the panel opens.
+on every page and a 3.6 KB chat module that downloads only when the panel opens.
 
 That is protected by one rule: **HTML → CSS → ask first.**
 

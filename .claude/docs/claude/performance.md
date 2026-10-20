@@ -12,7 +12,7 @@ Measure, do not guess:
 
 <javascript_budget>
 The budget is the assistant and nothing else: ChatPanel.astro's loader
-(1.9 KB, every page) and src/lib/chat/client.ts (3 KB, fetched on the panel's
+(1.9 KB, every page) and src/lib/chat/client.ts (3.6 KB, fetched on the panel's
 first open). Order of preference, always:
 
 1. HTML does it       <details>/<summary>, <dialog>, anchors, forms
