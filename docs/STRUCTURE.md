@@ -20,7 +20,7 @@ larchwick-astro/
 │   ├── pages/       One doc per page, for PM/QA/clients + index
 │   └── STRUCTURE.md this file
 ├── public/          Served as-is: favicon.svg (the Larchwick bean), og.jpg (1200×630), _headers (Cloudflare response headers)
-├── scripts/         Node tools outside the site: credits/, seo-check/, lighthouse-import/, rebuild-time/, rag-eval/ (Node built-ins only) and import-wp/ (WordPress → Sanity; scripts/package.json, Vitest tests)
+├── scripts/         Node tools outside the site: credits/, seo-check/, lighthouse-import/, lighthouse-run/, rebuild-time/, rag-eval/ (Node built-ins only) and import-wp/ (WordPress → Sanity; scripts/package.json, Vitest tests)
 ├── src/             Source
 ├── studio/          Sanity Studio (own package.json): schemaTypes/{documents,objects,sections}, desk structure, env.ts (project ID)
 ├── astro.config.ts  The only build config: static output, no adapter, trailing slashes

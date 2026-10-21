@@ -1041,6 +1041,21 @@ picked "Larch and label".
 Artem runs Lighthouse by hand, and the same steps apply to before and after.
 `scripts/lighthouse-import/` collects and summarises the saved reports.
 
+**Phase 8 (2026-10-21, Artem's decision): the paired session is scripted.**
+`npm run lighthouse:run` (`scripts/lighthouse-run/run.ts`) runs the same protocol with the
+Lighthouse CLI (pinned `lighthouse@13.5.0`) in the same Brave, headless:
+
+- **Coverage:** 9 URLs, mobile then desktop, 5 runs for home and 3 for the rest.
+- **Order:** the two sides alternate run by run, so drift in the machine's speed lands on both.
+- **Output:** reports are saved as `docs/<side>/lighthouse/inbox/<page>-<device>-<n>.json` for
+  `npm run lighthouse:import`.
+- **The Astro side:** the local build served by `npx wrangler dev --port 8787`, reached as
+  `http://larchwick-astro.local` through Chrome's `--host-resolver-rules` (no `/etc/hosts` edit).
+- **No HTTPS upgrade:** Brave's HTTPS upgrade is disabled by flag, which is what Shields off did
+  by hand.
+- **Desktop:** the CLI's `--preset=desktop` (1350 px emulated) replaces the window width, the
+  same for both sides.
+
 - **Browser:**
   - Use one browser for both sides; currently Brave, which is Chromium-based.
   - Turn Shields **off** for the measured site.
