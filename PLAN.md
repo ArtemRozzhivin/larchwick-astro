@@ -953,16 +953,31 @@ visitor who declines (and Lighthouse) loads nothing from Google.
   The deployed set is reported separately. Fix until the targets are met, or document honestly
   why one isn't.
 
-- [ ] JS audit: count `astro-island` in `dist`, and list every script shipped with its reason.
-- [ ] Image audit: every `<img>` has width, height, alt and the right loading value; the LCP image
-      has priority.
-- [ ] Manual accessibility pass:
-  - keyboard only
-  - skip link
-  - focus rings
-  - heading order
-  - axe
-  - alt text: 30 of 30
+- [x] JS audit (2026-10-21): 0 `astro-island` in `dist`; scripts: the ChatPanel loader (2.1 KB),
+      the consent script (2.1 KB) and their shared event module (1.7 KB) on every page, the chat
+      module (4.1 KB) on the panel's first open, plus JSON-LD data blocks. Nothing else.
+- [x] Image audit (2026-10-21): all 95 `<img>` in `dist` have width, height and alt; only the 5
+      page-banner photos have an empty alt, on purpose (decorative beside the H1).
+  - **Fixed:** the blog index and archives lazy-loaded their LCP image (the first card). The
+    first card now gets `priority` (`PostGrid prioritizeFirst`): eager, `fetchpriority=high`.
+  - **Fixed:** Astro's `quality: 75` made AVIF larger than WebP (a 960 px photo: AVIF 104 KB,
+    WebP 77 KB). Quality 50 looks the same at 100% (checked side by side) and halves the bytes.
+    Measured locally, images: home 51 → 19 KB, blog 515 → 224 KB, services 140 → 56 KB; the
+    blog page weighs 613 → 320 KB.
+  - **Tried and dropped:** inlining the CSS (`inlineStylesheets: 'always'`). Each page's HTML
+    went from 10 to 18 KB gzipped and the CSS could no longer be cached; FCP stayed at 1.06 s
+    and LCP got slightly worse (home 1.58 → 1.73 s).
+- [x] Manual accessibility pass (2026-10-21, production, 9 URLs):
+  - **Keyboard only:** Tab order skip link → consent banner → wordmark → menu → content; every
+    stop shows a focus ring.
+  - **Headings:** one H1 per page and no skipped levels. The banner's H2 comes first only while
+    the banner is open.
+  - **axe 4.10, all rules, after scrolling the page:** 0 violations on all 9 URLs, and no element
+    is left below full opacity.
+  - **Lighthouse "color contrast" (Accessibility 97 on blog, FAQ, products, services and the
+    pour-over post):** blocks caught mid-way through the scroll fade-in, e.g. `#e9ece6` on
+    `#f1f2ee`, contrast 1.06. axe at load flags the same 3–15 nodes, and after scrolling 0.
+  - **Alt text:** every content image has one; the 5 banner photos are decorative.
 - [ ] Write `docs/after/README.md` in the same shape as `docs/before/README.md`.
 
 **Exit:** the after numbers are saved as JSON, with a summary next to the before numbers.
