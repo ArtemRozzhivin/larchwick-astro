@@ -5,7 +5,7 @@ time**. Each phase ends with a short "what we did / what's next" and Artem's go-
 next one starts. Tick the boxes as work lands, and log every decision in
 [Decisions](#3-decisions).
 
-Last updated: 2026-10-20 · Current phase: **Phase 7c — Google Analytics 4 with consent (planned)**
+Last updated: 2026-10-20 · Current phase: **Phase 7c — Google Analytics 4 with consent (in progress)**
 
 | #   | Phase                                    | Status      |
 | --- | ---------------------------------------- | ----------- |
@@ -22,7 +22,7 @@ Last updated: 2026-10-20 · Current phase: **Phase 7c — Google Analytics 4 wit
 | 6   | Redirects and SEO parity                 | done        |
 | 7   | Production and editor workflow           | done        |
 | 7b  | "Ask Larchwick" AI assistant (RAG)       | done        |
-| 7c  | Google Analytics 4 with consent          | not started |
+| 7c  | Google Analytics 4 with consent          | in progress |
 | 8   | Performance and accessibility pass       | not started |
 | 9   | Case study and Upwork portfolio entry    | not started |
 | 10  | Redesign ("Larch and label")             | done        |
@@ -886,13 +886,28 @@ Events (★ = key event in GA):
 
 Steps (one PR each):
 
-- [ ] G1 — Artem: GA4 property and a web data stream for the production URL. Settings: data
-      retention 14 months, Google signals off, enhanced measurement with page views, scrolls and
-      outbound clicks only (form interactions and site search off). Send the Measurement ID
-      (`G-…`).
-- [ ] G2 — Privacy page in Sanity and the footer links ("Privacy", "Cookie settings").
-- [ ] G3 — Consent banner and the GA loader (production only), CSP for Google's domains, the
-      JavaScript budget and every "only JavaScript is the assistant" statement updated.
+- [x] G1 — Artem (2026-10-21): GA4 property "Larchwick (demo)" with the web stream "Larchwick
+      production" for the production URL; Measurement ID `G-C7SVR1FYHZ` (in
+      `siteConfig.analytics`). Data retention 14 months, Google signals off, enhanced measurement
+      with page views, scrolls and outbound clicks only.
+- [x] G2 — Privacy page: Sanity `page` `drafts.page-privacy` (slug `privacy`; hero + one text
+      section: the short version, hosting, analytics only with consent and its two cookies, the
+      contact form, the assistant, GDPR rights), drafted by Claude, published by Artem when G3
+      reaches production. "Privacy" link in the footer's bottom bar. Shipped in one PR with G3,
+      since the page describes the banner.
+- [x] G3 — `ConsentBanner.astro` (manual popover, first in `<body>`, bottom left / full width on
+      phones, Accept and Decline the same size) with `src/lib/analytics/consent.ts` (2 KB): no
+      choice → banner; Accept → `localStorage`, Consent Mode defaults (analytics granted, ads
+      denied), `gtag.js` after `load` + idle, `cookie_domain` = the host; Decline →
+      `ga-disable-<id>`, consent update, `_ga` cookies deleted; "Cookie settings" in the footer
+      (hidden without JavaScript) reopens it with focus on Accept and returns focus after the
+      choice. Measurement ID only in production builds (`measurementId()`, tested). CSP: Google's
+      tag and collection domains in `script-src`, `img-src` and `connect-src`. Astro inlined the
+      2 KB script (chunks under 4 KB are inlined, and the CSP blocks inline scripts), so
+      `vite.build.assetsInlineLimit` never inlines `.js` now. Checked in headless Brave against a
+      production-like build on `wrangler dev` with GA's collect URLs blocked: first visit no
+      Google request and no cookies; Accept loads `gtag.js` and sets `_ga`/`_ga_C7SVR1FYHZ`;
+      Decline removes them and the next page loads nothing from Google; no CSP violations.
 - [ ] G4 — The events above, each confirmed in GA DebugView; key events marked in GA.
 - [ ] G5 — Checks: Lighthouse with and without consent, no CSP violations, the banner by
       keyboard and screen reader, no requests to Google before "Accept".
