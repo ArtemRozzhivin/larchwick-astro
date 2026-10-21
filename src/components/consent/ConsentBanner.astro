@@ -50,7 +50,9 @@ const id = measurementId(process.env, siteConfig.analytics.measurementId)
 <script>
   import { CONSENT_BANNER_ID } from '../../lib/analytics/config'
   import { startConsent } from '../../lib/analytics/consent'
+  import { startTracking } from '../../lib/analytics/track'
 
   const banner = document.getElementById(CONSENT_BANNER_ID)
   if (banner) startConsent(banner)
+  startTracking()
 </script>

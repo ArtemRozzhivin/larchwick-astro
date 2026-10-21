@@ -1,3 +1,4 @@
+import { track } from '../analytics/track'
 import { answerParts, parseEvents, safePath, type Source, sourceLabel } from './stream'
 
 /**
@@ -37,6 +38,8 @@ function renderText(node: HTMLElement, text: string, streaming = false): void {
       if (!part.href) return document.createTextNode(part.text)
       const link = element('a', STYLES.inlineLink, part.text) as HTMLAnchorElement
       link.href = part.href
+      link.dataset.track = 'chat_source_click'
+      link.dataset.trackLinkUrl = part.href
       return link
     }),
   )
@@ -54,10 +57,13 @@ function renderSources(bubble: HTMLElement, sources: readonly Source[], label: s
     if (!href) return []
     const link = element('a', STYLES.sourceLink, sourceLabel(source)) as HTMLAnchorElement
     link.href = href
+    link.dataset.track = 'chat_source_click'
+    link.dataset.trackLinkUrl = href
     return [link]
   })
   if (links.length === 0) return
   const box = element('div', '')
+  box.dataset.chatSources = ''
   box.append(element('p', STYLES.sourcesLabel, label), ...links)
   bubble.append(box)
 }
@@ -120,9 +126,11 @@ export function startChat(panel: HTMLElement): void {
   }
   let busy = false
 
-  const ask = async (question: string): Promise<void> => {
+  const ask = async (question: string, source: 'suggestion' | 'typed'): Promise<void> => {
     if (busy || !question) return
     busy = true
+    track('chat_question', { question_source: source })
+    let result: 'answered' | 'failed' | 'busy' = 'failed'
     send.disabled = true
     input.value = ''
     panel.querySelector('[data-chat-suggestions]')?.remove()
@@ -139,15 +147,21 @@ export function startChat(panel: HTMLElement): void {
         body: JSON.stringify({ question }),
       })
       if (!response.ok || !response.body) {
+        if (response.status === 429) result = 'busy'
         bubble.className = STYLES.failed
         bubble.replaceChildren(failedText(await errorMessage(response, labels.failed)))
       } else {
         await readAnswer(response.body, bubble, labels)
+        if (bubble.className !== STYLES.failed) result = 'answered'
       }
     } catch {
       bubble.className = STYLES.failed
       bubble.replaceChildren(failedText(labels.failed))
     } finally {
+      track('chat_answer', {
+        answer_result: result,
+        source_count: bubble.querySelectorAll('[data-chat-sources] a').length,
+      })
       log.setAttribute('aria-busy', 'false')
       bubble.scrollIntoView({ block: 'end' })
       busy = false
@@ -158,9 +172,9 @@ export function startChat(panel: HTMLElement): void {
 
   form.addEventListener('submit', (event) => {
     event.preventDefault()
-    void ask(input.value.trim())
+    void ask(input.value.trim(), 'typed')
   })
   for (const button of panel.querySelectorAll<HTMLButtonElement>('[data-suggestion]')) {
-    button.addEventListener('click', () => void ask(button.textContent?.trim() ?? ''))
+    button.addEventListener('click', () => void ask(button.textContent?.trim() ?? '', 'suggestion'))
   }
 }

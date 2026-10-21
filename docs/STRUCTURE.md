@@ -64,7 +64,7 @@ src/
 │       └── Icon.astro          Inline SVG icon by name (Lucide paths, ISC)
 │
 ├── lib/
-│   ├── analytics/              config.ts (Measurement ID gate, cookie helpers; pure, tested) + consent.ts (the banner's behaviour, gtag loader)
+│   ├── analytics/              config.ts (Measurement ID gate, cookie helpers; pure, tested) + consent.ts (the banner's behaviour, gtag loader) + track.ts (events: data-track attributes, saved clicks)
 │   ├── config/site.ts          Brand, URL, nav, contact, footer, analytics ID — single source
 │   ├── chat/                   client.ts (the panel's behaviour, loaded on open) + stream.ts (pure, tested)
 │   ├── content/                Copy, one file per page

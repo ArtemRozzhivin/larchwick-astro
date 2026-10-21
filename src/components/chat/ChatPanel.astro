@@ -96,10 +96,13 @@ const ICON_BUTTON =
 </div>
 
 <script>
+  import { track } from '../../lib/analytics/track'
+
   const panel = document.getElementById('chat-panel')
   if (panel) {
     panel.addEventListener('toggle', (event) => {
       if (event.newState !== 'open') return
+      track('chat_open')
       void import('../../lib/chat/client').then(({ startChat }) => startChat(panel))
     })
   }

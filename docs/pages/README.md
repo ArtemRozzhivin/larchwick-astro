@@ -25,7 +25,8 @@ answers from this website's content and links the pages it used (PLAN.md Phase 7
 On the first visit a small banner (bottom left; full width on phones) asks whether Google Analytics
 may measure the visit. Nothing is sent to Google before "Accept", and only production sends data
 (PLAN.md Phase 7c). "Privacy" and "Cookie settings" (which reopens the banner) are at the bottom of
-the footer. Its copy is in `src/lib/content/consent.ts`.
+the footer. Its copy is in `src/lib/content/consent.ts`. After "Accept", hero and call-to-action
+buttons, email and phone links and the assistant send events to GA (PLAN.md Phase 7c lists them).
 
 ## Adding a page
 

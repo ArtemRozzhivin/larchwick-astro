@@ -149,9 +149,10 @@ folder.
 ## Performance
 
 Pages ship **no JavaScript of their own**: no view transitions, no prefetch script, no
-islands, and no React. The one exception is the "Ask Larchwick" assistant: a 1.9 KB loader
-on every page and a 3.6 KB chat module that downloads only when the panel opens. The analytics
-consent banner adds 2 KB on every page; Google Analytics loads only after a visitor accepts.
+islands, and no React. The one exception is the "Ask Larchwick" assistant: a 2.1 KB loader
+on every page and a 4.1 KB chat module that downloads only when the panel opens. The analytics
+consent banner adds 2.1 KB and the shared event module 1.7 KB on every page; Google Analytics
+loads only after a visitor accepts.
 
 That is protected by one rule: **HTML → CSS → ask first.**
 
