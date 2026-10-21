@@ -6,16 +6,22 @@ import PostCard from './PostCard.astro'
 interface Props {
   posts: readonly Post[]
   headingLevel?: 'h2' | 'h3'
+  /** The grid starts the page (blog index, archives), so its first image is the LCP. */
+  prioritizeFirst?: boolean
 }
 
-const { posts, headingLevel } = Astro.props
+const { posts, headingLevel, prioritizeFirst = false } = Astro.props
 ---
 
 <ul class="grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
   {
-    posts.map((post) => (
+    posts.map((post, index) => (
       <li>
-        <PostCard post={post} headingLevel={headingLevel} />
+        <PostCard
+          post={post}
+          headingLevel={headingLevel}
+          priority={prioritizeFirst && index === 0}
+        />
       </li>
     ))
   }
