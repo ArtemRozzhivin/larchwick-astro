@@ -26,7 +26,8 @@ disclaimer. The first section is the hero, which holds the page's only H1.
 - The contact form posts to `/api/contact`, a small Cloudflare Worker that checks the fields and
   the hidden honeypot, sends the message through Resend, and redirects to `/contact/thanks/` or
   `/contact/error/` (both noindex, not in the sitemap). Copy for those two pages is in
-  `src/lib/content/contact.ts`.
+  `src/lib/content/contact.ts`. With analytics accepted, the thanks page sends the `generate_lead`
+  key event (once; a reload doesn't count again).
 
 ## Content owner
 

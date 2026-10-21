@@ -37,9 +37,9 @@ indexable (Phase 7); preview builds of other branches send `X-Robots-Tag: noinde
 also serves `POST /api/chat`, the "Ask Larchwick" assistant's answers (Phase 7b); its chat panel
 arrives in R4.
 
-The only client JavaScript is the "Ask Larchwick" assistant (a 1.9 KB loader on every page,
-the 3.6 KB chat module when its panel opens) and the analytics consent banner (2 KB on every
-page; Google Analytics 4 loads only after "Accept", on production, Phase 7c): no React, no view
+The only client JavaScript is the "Ask Larchwick" assistant (a 2.1 KB loader on every page,
+the 4.1 KB chat module when its panel opens) and the analytics consent banner (2.1 KB plus a
+1.7 KB shared event module on every page; Google Analytics 4 loads only after "Accept", on production, Phase 7c): no React, no view
 transitions, no prefetch script. Pages: the content pages include `/privacy/` (Sanity `page`).
 
 Content model (Phase 3): Sanity project `zboja23d`, public `production` dataset, edited in the

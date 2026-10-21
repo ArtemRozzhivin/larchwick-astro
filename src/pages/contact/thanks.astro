@@ -7,7 +7,11 @@ const { seo, heading, message, primaryCta, secondaryCta } = contactResult.thanks
 ---
 
 <Layout title={seo.title} description={seo.description} noindex>
-  <section class="bg-paper py-20 md:py-28">
+  <section
+    class="bg-paper py-20 md:py-28"
+    data-track-view="generate_lead"
+    data-track-form-name="contact"
+  >
     <div class="container-wide max-w-2xl text-center">
       <h1
         class="text-espresso font-display text-4xl leading-tight font-extrabold text-balance sm:text-5xl"
