@@ -101,6 +101,9 @@ const hasLabel = Boolean(label?.name)
                   variant: index === 0 ? 'accent' : 'inverse-outline',
                   size: 'lg',
                 })}
+                data-track="cta_click"
+                data-track-cta-label={cta?.label}
+                data-track-cta-location="hero"
               >
                 {cta?.label}
               </a>
