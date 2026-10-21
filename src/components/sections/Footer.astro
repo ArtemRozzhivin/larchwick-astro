@@ -1,4 +1,5 @@
 ---
+import { CONSENT_BANNER_ID } from '@lib/analytics/config'
 import { siteConfig } from '@lib/config/site'
 import { contactDetails, getSiteSettings } from '@lib/sanity/settings'
 import Icon from '@components/ui/Icon.astro'
@@ -78,6 +79,22 @@ const LINK = 'hover:text-needle rounded-sm underline-offset-4 transition-colors 
   </div>
 
   <div class="border-t border-white/15">
-    <p class="container-wide py-6">{footer.copyright}</p>
+    <div class="container-wide flex flex-wrap items-center gap-x-6 gap-y-3 py-6">
+      <p>{footer.copyright}</p>
+      <ul class="flex flex-wrap gap-x-6 gap-y-2">
+        <li>
+          <a href={footer.legal.privacy.href} class={LINK}>{footer.legal.privacy.label}</a>
+        </li>
+        <li data-consent-settings hidden>
+          <button
+            type="button"
+            popovertarget={CONSENT_BANNER_ID}
+            class:list={[LINK, 'cursor-pointer']}
+          >
+            {footer.legal.cookieSettings}
+          </button>
+        </li>
+      </ul>
+    </div>
   </div>
 </footer>

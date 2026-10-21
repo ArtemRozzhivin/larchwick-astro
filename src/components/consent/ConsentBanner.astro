@@ -1,0 +1,56 @@
+---
+/**
+ * The analytics consent banner (PLAN.md Phase 7c): a manual popover, shown by its script on the
+ * first visit and from "Cookie settings" in the footer. Google Analytics loads only after "Accept",
+ * and only on production builds, which are the only ones that get the Measurement ID.
+ */
+import { CONSENT_BANNER_ID, measurementId } from '@lib/analytics/config'
+import { siteConfig } from '@lib/config/site'
+import { consent } from '@lib/content/consent'
+import { buttonVariants } from '@components/ui/button'
+
+const id = measurementId(process.env, siteConfig.analytics.measurementId)
+---
+
+<div
+  id={CONSENT_BANNER_ID}
+  popover="manual"
+  role="dialog"
+  aria-labelledby="consent-title"
+  aria-describedby="consent-text"
+  class="consent-banner bg-surface text-ink border-espresso rounded-label shadow-label border-2 p-5"
+  data-measurement-id={id}
+>
+  <h2 id="consent-title" class="font-display text-espresso text-2xl leading-tight font-black">
+    {consent.title}
+  </h2>
+  <p id="consent-text" class="mt-2 text-sm leading-relaxed">
+    {consent.text}
+    <a
+      href={consent.privacy.href}
+      class="text-larch decoration-needle hover:text-espresso font-semibold underline decoration-2 underline-offset-4"
+    >
+      {consent.privacy.label}
+    </a>
+  </p>
+  <div class="mt-4 flex gap-3">
+    <button type="button" data-consent="granted" class={buttonVariants({ size: 'sm' })}>
+      {consent.accept}
+    </button>
+    <button
+      type="button"
+      data-consent="denied"
+      class={buttonVariants({ variant: 'secondary', size: 'sm' })}
+    >
+      {consent.decline}
+    </button>
+  </div>
+</div>
+
+<script>
+  import { CONSENT_BANNER_ID } from '../../lib/analytics/config'
+  import { startConsent } from '../../lib/analytics/consent'
+
+  const banner = document.getElementById(CONSENT_BANNER_ID)
+  if (banner) startConsent(banner)
+</script>

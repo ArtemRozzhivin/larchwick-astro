@@ -7,6 +7,7 @@ import { siteConfig } from '@lib/config/site'
 import { getSiteSettings } from '@lib/sanity/settings'
 import type { JsonLd } from '@lib/seo/schema'
 import ChatPanel from '@components/chat/ChatPanel.astro'
+import ConsentBanner from '@components/consent/ConsentBanner.astro'
 import Footer from '@components/sections/Footer.astro'
 import Header from '@components/sections/Header.astro'
 
@@ -106,6 +107,7 @@ const jsonLdBlocks = (Array.isArray(jsonLd) ? jsonLd : [jsonLd]).map((node) =>
     >
       Skip to content
     </a>
+    <ConsentBanner />
     <Header />
     <main id="main" tabindex="-1" class="flex flex-1 flex-col outline-none">
       <slot />

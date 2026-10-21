@@ -12,6 +12,9 @@ export const siteConfig = {
   // Same value as --color-paper in global.css, so the browser bar matches the sticky header.
   themeColor: '#f2f3ef',
 
+  // Google Analytics 4 (PLAN.md Phase 7c): public, built into production pages only.
+  analytics: { measurementId: 'G-C7SVR1FYHZ' },
+
   header: {
     labels: { openMenu: 'Open menu', closeMenu: 'Close menu' },
   },
@@ -20,6 +23,10 @@ export const siteConfig = {
     headings: { nav: 'Explore', contact: 'Contact', hours: 'Opening hours' },
     labels: { email: 'Email', wholesaleEmail: 'Wholesale enquiries', phone: 'Phone' },
     copyright: `© ${new Date().getFullYear()} Larchwick`,
+    legal: {
+      privacy: { label: 'Privacy', href: '/privacy/' },
+      cookieSettings: 'Cookie settings',
+    },
   },
 } as const
 

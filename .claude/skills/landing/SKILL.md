@@ -10,7 +10,7 @@ Two goals, in this order: the page loads fast, and the next page takes an hour.
 
 Both come from the same rule — **a page is a Layout plus an ordered list of section components, and all copy lives in a content file.** Nothing in a section component is page-specific.
 
-The only client JavaScript is the "Ask Larchwick" assistant's panel. Every section here is static `.astro`, and there is no React. If something seems to need interactivity, check whether HTML or CSS already does it, and ask before writing any script.
+The only client JavaScript is the "Ask Larchwick" assistant's panel and the analytics consent banner. Every section here is static `.astro`, and there is no React. If something seems to need interactivity, check whether HTML or CSS already does it, and ask before writing any script.
 </prime_directive>
 
 <fast_path>

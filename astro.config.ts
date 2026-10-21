@@ -63,5 +63,7 @@ export default defineConfig({
 
   vite: {
     plugins: [tailwindcss()],
+    // Astro inlines script chunks under 4 KB, and the CSP (script-src 'self') blocks inline scripts.
+    build: { assetsInlineLimit: (file) => (file.endsWith('.js') ? false : undefined) },
   },
 })
