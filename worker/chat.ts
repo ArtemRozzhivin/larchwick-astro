@@ -37,7 +37,7 @@ type Fetch = (_input: string, _init: RequestInit) => Promise<Response>
 export const QUESTION_MAX = 500
 export const TOP_K = 5
 export const MODEL = 'claude-haiku-5-5'
-const EMBEDDING_MODEL = '@cf/baai/bge-base-en-v1.5'
+export const EMBEDDING_MODEL = '@cf/baai/bge-base-en-v1.5'
 // Haiku 5.5 thinks before it answers and the thinking counts toward this cap; low effort keeps it short.
 const MAX_TOKENS = 1024
 const EFFORT = 'low'

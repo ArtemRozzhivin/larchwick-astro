@@ -7,8 +7,9 @@ status: real
 
 ## Purpose
 
-About, Services, Products, FAQ and Contact. Each is a `page` document in Sanity Studio, imported
-from WordPress in Phase 4 and edited in the Studio from now on. One route,
+About, Services, Products, FAQ and Contact, plus Privacy. Each is a `page` document in Sanity
+Studio: the first five imported from WordPress in Phase 4, Privacy written for Phase 7c (how the
+site handles data: hosting, analytics only with consent, the contact form, the assistant). One route,
 `src/pages/[slug].astro`, builds every page except Home (`home`) and the blog index (`blog`).
 
 ## Sections

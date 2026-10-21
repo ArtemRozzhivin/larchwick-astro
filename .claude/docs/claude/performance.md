@@ -11,9 +11,11 @@ Measure, do not guess:
 </baseline>
 
 <javascript_budget>
-The budget is the assistant and nothing else: ChatPanel.astro's loader
-(1.9 KB, every page) and src/lib/chat/client.ts (3.6 KB, fetched on the panel's
-first open). Order of preference, always:
+The budget is the assistant and the consent banner, nothing else: ChatPanel.astro's
+loader (1.9 KB, every page), src/lib/chat/client.ts (3.6 KB, fetched on the panel's
+first open) and ConsentBanner.astro's script (2 KB, every page). Google's gtag.js is
+not ours to size: it loads only after "Accept", on production, once the page is idle,
+so a first visit and Lighthouse never fetch it. Order of preference, always:
 
 1. HTML does it       <details>/<summary>, <dialog>, anchors, forms
 2. CSS does it        transitions, animations, :hover, :focus-within, group-open:

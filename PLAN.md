@@ -5,7 +5,7 @@ time**. Each phase ends with a short "what we did / what's next" and Artem's go-
 next one starts. Tick the boxes as work lands, and log every decision in
 [Decisions](#3-decisions).
 
-Last updated: 2026-10-17 · Current phase: **Phase 7b — AI assistant (in progress)**
+Last updated: 2026-10-20 · Current phase: **Phase 7c — Google Analytics 4 with consent (in progress)**
 
 | #   | Phase                                    | Status      |
 | --- | ---------------------------------------- | ----------- |
@@ -21,7 +21,8 @@ Last updated: 2026-10-17 · Current phase: **Phase 7b — AI assistant (in progr
 | 5c  | Home, contact form and design polish     | done        |
 | 6   | Redirects and SEO parity                 | done        |
 | 7   | Production and editor workflow           | done        |
-| 7b  | "Ask Larchwick" AI assistant (RAG)       | in progress |
+| 7b  | "Ask Larchwick" AI assistant (RAG)       | done        |
+| 7c  | Google Analytics 4 with consent          | in progress |
 | 8   | Performance and accessibility pass       | not started |
 | 9   | Case study and Upwork portfolio entry    | not started |
 | 10  | Redesign ("Larch and label")             | done        |
@@ -119,6 +120,8 @@ means rewriting history. Phase 0 makes it compliant before anything else is push
 | 2026-10-17 | New Phase 7b, before Phase 8: "Ask Larchwick", a RAG assistant that answers only from the site's own content and cites its pages                                                                                                                                                                                         | Artem's request. Placed before the performance pass so the after-measurement covers the final site.                                                                                                                                                                                                                                                                                                                                                                                                          |
 | 2026-10-17 | RAG stack: Cloudflare Vectorize for the vectors and Workers AI (`@cf/baai/bge-base-en-v1.5`, 768 dims) for embeddings; Claude Haiku (`claude-haiku-5-5`, Anthropic API) writes the answers                                                                                                                               | Vectorize and Workers AI sit on the platform the Worker already runs on: bindings, no extra vendor, and the free tier covers ~150 passages many times over. Supabase was considered; free projects pause after a week without traffic, which would break a rarely visited demo. Claude follows "answer only from these excerpts" far better than the free open models; it is paid per use (well under a cent a question) and gets a monthly spend limit.                                                     |
 | 2026-10-17 | The chat panel is the site's first client JavaScript: one small module, loaded only when the panel opens, with the CSP widened to `script-src 'self'` and `connect-src 'self'`                                                                                                                                           | A streamed, in-page chat needs JS; the no-JS alternative (a form that returns a full answer page) was judged too clunky. Every other part of the site stays zero-JS, and Phase 8 measures the cost. CLAUDE.md's prime directive is updated in the same change.                                                                                                                                                                                                                                               |
+| 2026-10-21 | New Phase 7c, before Phase 8: Google Analytics 4 with a consent banner; nothing from Google loads until the visitor accepts                                                                                                                                                                                              | Artem's request. GA sets cookies and the business sells across the EU, so consent comes first; loading `gtag.js` only after "Accept" also keeps the site as fast as today for everyone who doesn't accept (and for Lighthouse). Before Phase 8 so the performance pass measures the final site. Cloudflare Web Analytics (cookieless, no banner) was considered: page views only, no events or conversions.                                                                                                  |
+| 2026-10-21 | GA4 through `gtag.js` directly, not Google Tag Manager; events sent from our code; production builds only                                                                                                                                                                                                                | Lighter and reviewable in the repo; GTM pays off when marketers add tags without deploys, which this site doesn't need. Previews and local builds never send data. The Measurement ID is public config, not a secret.                                                                                                                                                                                                                                                                                        |
 
 ### Open
 
@@ -830,12 +833,87 @@ Steps (one PR each):
       pages as links (on-site paths only, all text via `textContent`). JS: a 1.9 KB loader on
       every page, the 3.6 KB chat module on the first open. CSP `script-src 'self'`; every zero-JS
       statement in the docs updated.
-- [ ] R5 — `npm run rag:eval` against production; results in `docs/after/rag-eval.json` and the
-      case-study notes.
+- [x] R5 — `npm run rag:eval` (`scripts/rag-eval/eval.ts`): for each question in
+      `questions.json` it repeats the Worker's retrieval read-only (Workers AI embedding + Vectorize
+      top 5, through your wrangler login) and asks the live `/api/chat`; production results go to
+      `docs/after/rag-eval.json`. About a cent of Anthropic credit per run. Production, 2026-10-20:
+      the right page in the top 5 for 19/19 on-topic questions (18 at rank 1), the answer cites it
+      19/19, 0 errors, 0 cut off, 0 bare paths; first word after a median 1.2 s, full answer 1.6 s.
+      Off-topic 2/3 declined without citing: the cat poem was declined, then a House Espresso
+      recommendation followed with its source.
 
 **Exit:** the assistant answers the test questions from the right pages in production, refuses
 off-topic ones, stays within the rate limit and spend limit, and every other page still ships no
 JavaScript.
+
+### Phase 7c — Google Analytics 4 with consent
+
+Measure visits, leads and how the assistant is used, without slowing the site or tracking anyone
+who hasn't agreed. Decisions 2026-10-21 (Artem).
+
+- **Consent first.** A small banner (native `popover`, like the menu and the chat panel; one
+  bundled script of about 1–2 KB) asks once: "Accept" or "Decline". Nothing from Google loads
+  before "Accept": no `gtag.js`, no cookies, no requests (Consent Mode v2 basic). The choice is
+  remembered; a "Cookie settings" link in the footer reopens the banner, and declining later stops
+  tracking and removes the `_ga` cookies.
+- **GA4 via `gtag.js`, production only.** Loaded by our own bundled script after consent (an
+  inline snippet would be blocked by the CSP). The Measurement ID is only built into `main` builds
+  (the `WORKERS_CI_BRANCH` guard), so previews and local runs never send data. CSP gains
+  Google's tag and collection domains in `script-src`, `connect-src` and `img-src`.
+- **Events without per-component scripts.** Links and buttons get `data-track` attributes; one
+  delegated listener sends them. The chat client and the contact result and 404 pages send theirs
+  through the same module.
+- **Never sent:** names, email addresses, message text, or the assistant's question text (the
+  panel promises we don't store questions).
+- **Privacy page** (Sanity `page`, slug `privacy`, text drafted by Claude and marked as a demo):
+  GA, the assistant (Anthropic), the contact form (Resend), how to change consent. Linked from
+  the footer and the banner.
+
+Events (★ = key event in GA):
+
+| Event               | When                              | Parameters                                      |
+| ------------------- | --------------------------------- | ----------------------------------------------- |
+| `page_view`         | every page (automatic)            | –                                               |
+| `generate_lead` ★   | `/contact/thanks/` shown          | `form: contact`                                 |
+| `contact_click` ★   | email or phone link clicked       | `method: email \| phone`                        |
+| `cta_click`         | hero and CTA band buttons         | `label`, `location`                             |
+| `chat_open`         | assistant panel opened            | –                                               |
+| `chat_question` ★   | question sent                     | `source: suggestion \| typed`                   |
+| `chat_answer`       | answer finished                   | `result: answered \| failed \| busy`, `sources` |
+| `chat_source_click` | source link in an answer clicked  | `page`                                          |
+| `page_not_found`    | 404 page shown                    | `path`, `referrer`                              |
+| scrolls, outbound   | GA enhanced measurement (no code) | –                                               |
+
+Steps (one PR each):
+
+- [x] G1 — Artem (2026-10-21): GA4 property "Larchwick (demo)" with the web stream "Larchwick
+      production" for the production URL; Measurement ID `G-C7SVR1FYHZ` (in
+      `siteConfig.analytics`). Data retention 14 months, Google signals off, enhanced measurement
+      with page views, scrolls and outbound clicks only.
+- [x] G2 — Privacy page: Sanity `page` `drafts.page-privacy` (slug `privacy`; hero + one text
+      section: the short version, hosting, analytics only with consent and its two cookies, the
+      contact form, the assistant, GDPR rights), drafted by Claude, published by Artem when G3
+      reaches production. "Privacy" link in the footer's bottom bar. Shipped in one PR with G3,
+      since the page describes the banner.
+- [x] G3 — `ConsentBanner.astro` (manual popover, first in `<body>`, bottom left / full width on
+      phones, Accept and Decline the same size) with `src/lib/analytics/consent.ts` (2 KB): no
+      choice → banner; Accept → `localStorage`, Consent Mode defaults (analytics granted, ads
+      denied), `gtag.js` after `load` + idle, `cookie_domain` = the host; Decline →
+      `ga-disable-<id>`, consent update, `_ga` cookies deleted; "Cookie settings" in the footer
+      (hidden without JavaScript) reopens it with focus on Accept and returns focus after the
+      choice. Measurement ID only in production builds (`measurementId()`, tested). CSP: Google's
+      tag and collection domains in `script-src`, `img-src` and `connect-src`. Astro inlined the
+      2 KB script (chunks under 4 KB are inlined, and the CSP blocks inline scripts), so
+      `vite.build.assetsInlineLimit` never inlines `.js` now. Checked in headless Brave against a
+      production-like build on `wrangler dev` with GA's collect URLs blocked: first visit no
+      Google request and no cookies; Accept loads `gtag.js` and sets `_ga`/`_ga_C7SVR1FYHZ`;
+      Decline removes them and the next page loads nothing from Google; no CSP violations.
+- [ ] G4 — The events above, each confirmed in GA DebugView; key events marked in GA.
+- [ ] G5 — Checks: Lighthouse with and without consent, no CSP violations, the banner by
+      keyboard and screen reader, no requests to Google before "Accept".
+
+**Exit:** GA4 receives page views and the events above in production, only after consent; a
+visitor who declines (and Lighthouse) loads nothing from Google.
 
 ### Phase 8 — Performance and accessibility pass
 

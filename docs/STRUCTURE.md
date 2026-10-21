@@ -13,7 +13,7 @@ larchwick-astro/
 ├── docs/            Documentation
 │   ├── before/      Evidence from the WordPress site (export, SEO crawl, Lighthouse, screenshots); not Prettier-formatted
 │   ├── internal/    Pages, status, what is still placeholder
-│   ├── after/       Evidence from the new site (SEO snapshot, rebuild-times.json from npm run rebuild:watch)
+│   ├── after/       Evidence from the new site (SEO snapshot, rebuild-times.json from npm run rebuild:watch, rag-eval.json from npm run rag:eval)
 │   ├── import-report.md, import-report.json, redirect-map.csv   Written by npm run import:wp; not Prettier-formatted
 │   ├── seo-parity-report.md   Written by npm run seo:compare
 │   ├── editor-guide.md  How to edit and publish in Sanity Studio, for non-developers
@@ -50,6 +50,7 @@ src/
 │
 ├── components/
 │   ├── chat/                   ChatPanel.astro: the "Ask Larchwick" launcher, popover panel and lazy loader
+│   ├── consent/                ConsentBanner.astro: the analytics consent banner (Google Analytics only after Accept)
 │   ├── sections/               The page blocks
 │   │   ├── Section.astro       Layout primitive: container, rhythm, header
 │   │   ├── Header.astro        Wordmark, nav with active state, mobile menu (zero JS)
@@ -63,10 +64,12 @@ src/
 │       └── Icon.astro          Inline SVG icon by name (Lucide paths, ISC)
 │
 ├── lib/
-│   ├── config/site.ts          Brand, URL, nav, contact, footer — single source
+│   ├── analytics/              config.ts (Measurement ID gate, cookie helpers; pure, tested) + consent.ts (the banner's behaviour, gtag loader)
+│   ├── config/site.ts          Brand, URL, nav, contact, footer, analytics ID — single source
 │   ├── chat/                   client.ts (the panel's behaviour, loaded on open) + stream.ts (pure, tested)
 │   ├── content/                Copy, one file per page
 │   │   ├── chat.ts             The assistant's panel copy and suggested questions
+│   │   ├── consent.ts          The consent banner's copy
 │   │   ├── home.ts             Home: SEO, hero, features, CTA
 │   │   └── not-found.ts        The 404 page
 │   ├── integrations/           redirects.ts (writes dist/_redirects, trims noindex from the sitemap) + redirect-rules.ts,
