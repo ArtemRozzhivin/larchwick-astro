@@ -871,18 +871,18 @@ who hasn't agreed. Decisions 2026-10-21 (Artem).
 
 Events (★ = key event in GA):
 
-| Event               | When                              | Parameters                                      |
-| ------------------- | --------------------------------- | ----------------------------------------------- |
-| `page_view`         | every page (automatic)            | –                                               |
-| `generate_lead` ★   | `/contact/thanks/` shown          | `form: contact`                                 |
-| `contact_click` ★   | email or phone link clicked       | `method: email \| phone`                        |
-| `cta_click`         | hero and CTA band buttons         | `label`, `location`                             |
-| `chat_open`         | assistant panel opened            | –                                               |
-| `chat_question` ★   | question sent                     | `source: suggestion \| typed`                   |
-| `chat_answer`       | answer finished                   | `result: answered \| failed \| busy`, `sources` |
-| `chat_source_click` | source link in an answer clicked  | `page`                                          |
-| `page_not_found`    | 404 page shown                    | `path`, `referrer`                              |
-| scrolls, outbound   | GA enhanced measurement (no code) | –                                               |
+| Event               | When                                     | Parameters                                                      |
+| ------------------- | ---------------------------------------- | --------------------------------------------------------------- |
+| `page_view`         | every page (automatic)                   | –                                                               |
+| `generate_lead` ★   | `/contact/thanks/` shown (not on reload) | `form_name: contact`                                            |
+| `contact_click` ★   | email or phone link clicked              | `contact_method: email \| phone`                                |
+| `cta_click`         | hero and CTA band buttons                | `cta_label`, `cta_location: hero \| cta`                        |
+| `chat_open`         | assistant panel opened                   | –                                                               |
+| `chat_question` ★   | question sent                            | `question_source: suggestion \| typed`                          |
+| `chat_answer`       | answer finished                          | `answer_result: answered \| failed \| busy`, `source_count`     |
+| `chat_source_click` | link in an answer clicked                | `link_url`                                                      |
+| `page_not_found`    | 404 page shown                           | – (GA's own `page_location` and `page_referrer` say where from) |
+| scrolls, outbound   | GA enhanced measurement (no code)        | –                                                               |
 
 Steps (one PR each):
 
@@ -908,7 +908,16 @@ Steps (one PR each):
       production-like build on `wrangler dev` with GA's collect URLs blocked: first visit no
       Google request and no cookies; Accept loads `gtag.js` and sets `_ga`/`_ga_C7SVR1FYHZ`;
       Decline removes them and the next page loads nothing from Google; no CSP violations.
-- [ ] G4 — The events above, each confirmed in GA DebugView; key events marked in GA.
+- [x] G4 — The events above (`src/lib/analytics/track.ts`): `data-track="<event>"` plus
+      `data-track-<param>` attributes on links and buttons (Hero and CTA buttons, chat links) and
+      `data-track-view` on the thanks and 404 pages, read by one delegated listener started with
+      the consent script; `mailto:`/`tel:` links detected by their href; the chat events from
+      `ChatPanel.astro` and `src/lib/chat/client.ts`. A tracked click that leaves for another of
+      our pages is saved in `sessionStorage` and sent by the next page (sent on click, it was lost
+      as the page unloaded); a reload of the thanks page sends no second lead. Checked against a
+      production-like build with GA's collect requests blocked and their bodies read: every event
+      and parameter above arrives (chat_source_click needs a real answer: production). Then
+      Artem: register the parameters as custom dimensions and mark the three key events in GA.
 - [ ] G5 — Checks: Lighthouse with and without consent, no CSP violations, the banner by
       keyboard and screen reader, no requests to Google before "Accept".
 

@@ -12,8 +12,9 @@ Measure, do not guess:
 
 <javascript_budget>
 The budget is the assistant and the consent banner, nothing else: ChatPanel.astro's
-loader (1.9 KB, every page), src/lib/chat/client.ts (3.6 KB, fetched on the panel's
-first open) and ConsentBanner.astro's script (2 KB, every page). Google's gtag.js is
+loader (2.1 KB, every page), src/lib/chat/client.ts (4.1 KB, fetched on the panel's
+first open), ConsentBanner.astro's script (2.1 KB, every page) and the event module
+they share (src/lib/analytics/track.ts, 1.7 KB, every page). Google's gtag.js is
 not ours to size: it loads only after "Accept", on production, once the page is idle,
 so a first visit and Lighthouse never fetch it. Order of preference, always:
 
