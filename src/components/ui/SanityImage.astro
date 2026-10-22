@@ -20,6 +20,8 @@ const alt = image.decorative ? '' : (image.alt ?? '')
 const placeholders = await getImagePlaceholders()
 const placeholder = image.asset ? placeholders.get(image.asset._ref) : undefined
 const placeholderStyle = placeholder ? `background-image: url(${placeholder})` : undefined
+// AVIF's scale: 50 looks like 75 does in JPEG or WebP, at about half the bytes (PLAN.md Phase 8).
+const QUALITY = 50
 ---
 
 <Picture
@@ -30,7 +32,7 @@ const placeholderStyle = placeholder ? `background-image: url(${placeholder})` :
   sizes={sizes}
   formats={['avif', 'webp']}
   fallbackFormat="jpg"
-  quality={75}
+  quality={QUALITY}
   alt={alt}
   priority={priority}
   class:list={[className, placeholder && 'bg-cover bg-center']}

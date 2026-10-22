@@ -142,7 +142,10 @@ Yoast schema). WordPress is not edited, so every tool removes it when it capture
 
 ## Still to come
 
-- Artem's manual Lighthouse runs, following the checklist above. Once they are imported, their
-  date, the confirmed Brave and Chromium versions and the Lighthouse version are added here.
+- ~~Artem's manual Lighthouse runs~~: replaced by the scripted paired session of 2026-10-22
+  (`npm run lighthouse:run`, PLAN.md §10), now in `lighthouse/` with its `summary.md`: Brave
+  154.1.96.59 (Chromium 154) headless, Lighthouse 13.5.0, the WordPress versions above
+  re-checked that day. The comparison with the Astro side is in
+  [`docs/after/README.md`](../after/README.md).
 - Optional screenshots, taken by Artem. Pages with a byline (the blog and the posts) are left out
   unless the byline is cropped.

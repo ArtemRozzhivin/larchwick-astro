@@ -1,0 +1,2322 @@
+[
+  {
+    "page": "home",
+    "device": "mobile",
+    "run": 1,
+    "file": "home/mobile/run-1.json.gz",
+    "requestedUrl": "http://larchwick-astro.local/",
+    "lighthouseVersion": "13.5.0",
+    "fetchTime": "2026-10-22T07:48:33.774Z",
+    "hostUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+    "benchmarkIndex": 3148.5,
+    "formFactor": "mobile",
+    "screenWidth": 412,
+    "throttlingMethod": "simulate",
+    "throttling": {
+      "rttMs": 150,
+      "throughputKbps": 1638.4,
+      "requestLatencyMs": 562.5,
+      "downloadThroughputKbps": 1474.5600000000002,
+      "uploadThroughputKbps": 675,
+      "cpuSlowdownMultiplier": 4
+    },
+    "scores": {
+      "performance": 100,
+      "accessibility": 100,
+      "best-practices": 78,
+      "seo": 100
+    },
+    "firstContentfulPaintMs": 1060.7224999999999,
+    "largestContentfulPaintMs": 1583.578,
+    "totalBlockingTimeMs": 0,
+    "cumulativeLayoutShift": 0,
+    "speedIndexMs": 1060.7224999999999,
+    "totalByteWeight": 117957,
+    "requestCount": 13,
+    "scriptTransferSize": 5533,
+    "httpsAuditScores": {
+      "is-on-https": 0,
+      "redirects-http": 0
+    }
+  },
+  {
+    "page": "home",
+    "device": "mobile",
+    "run": 2,
+    "file": "home/mobile/run-2.json.gz",
+    "requestedUrl": "http://larchwick-astro.local/",
+    "lighthouseVersion": "13.5.0",
+    "fetchTime": "2026-10-22T07:48:56.587Z",
+    "hostUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+    "benchmarkIndex": 3131,
+    "formFactor": "mobile",
+    "screenWidth": 412,
+    "throttlingMethod": "simulate",
+    "throttling": {
+      "rttMs": 150,
+      "throughputKbps": 1638.4,
+      "requestLatencyMs": 562.5,
+      "downloadThroughputKbps": 1474.5600000000002,
+      "uploadThroughputKbps": 675,
+      "cpuSlowdownMultiplier": 4
+    },
+    "scores": {
+      "performance": 100,
+      "accessibility": 100,
+      "best-practices": 78,
+      "seo": 100
+    },
+    "firstContentfulPaintMs": 1059.4025,
+    "largestContentfulPaintMs": 1582.522,
+    "totalBlockingTimeMs": 0,
+    "cumulativeLayoutShift": 0,
+    "speedIndexMs": 1059.4025,
+    "totalByteWeight": 117957,
+    "requestCount": 13,
+    "scriptTransferSize": 5533,
+    "httpsAuditScores": {
+      "is-on-https": 0,
+      "redirects-http": 0
+    }
+  },
+  {
+    "page": "home",
+    "device": "mobile",
+    "run": 3,
+    "file": "home/mobile/run-3.json.gz",
+    "requestedUrl": "http://larchwick-astro.local/",
+    "lighthouseVersion": "13.5.0",
+    "fetchTime": "2026-10-22T07:49:19.560Z",
+    "hostUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+    "benchmarkIndex": 3145.5,
+    "formFactor": "mobile",
+    "screenWidth": 412,
+    "throttlingMethod": "simulate",
+    "throttling": {
+      "rttMs": 150,
+      "throughputKbps": 1638.4,
+      "requestLatencyMs": 562.5,
+      "downloadThroughputKbps": 1474.5600000000002,
+      "uploadThroughputKbps": 675,
+      "cpuSlowdownMultiplier": 4
+    },
+    "scores": {
+      "performance": 100,
+      "accessibility": 100,
+      "best-practices": 78,
+      "seo": 100
+    },
+    "firstContentfulPaintMs": 1057.4850000000001,
+    "largestContentfulPaintMs": 1580.9879999999998,
+    "totalBlockingTimeMs": 0,
+    "cumulativeLayoutShift": 0,
+    "speedIndexMs": 1057.4850000000001,
+    "totalByteWeight": 117957,
+    "requestCount": 13,
+    "scriptTransferSize": 5533,
+    "httpsAuditScores": {
+      "is-on-https": 0,
+      "redirects-http": 0
+    }
+  },
+  {
+    "page": "home",
+    "device": "mobile",
+    "run": 4,
+    "file": "home/mobile/run-4.json.gz",
+    "requestedUrl": "http://larchwick-astro.local/",
+    "lighthouseVersion": "13.5.0",
+    "fetchTime": "2026-10-22T07:49:42.547Z",
+    "hostUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+    "benchmarkIndex": 3160.5,
+    "formFactor": "mobile",
+    "screenWidth": 412,
+    "throttlingMethod": "simulate",
+    "throttling": {
+      "rttMs": 150,
+      "throughputKbps": 1638.4,
+      "requestLatencyMs": 562.5,
+      "downloadThroughputKbps": 1474.5600000000002,
+      "uploadThroughputKbps": 675,
+      "cpuSlowdownMultiplier": 4
+    },
+    "scores": {
+      "performance": 100,
+      "accessibility": 100,
+      "best-practices": 78,
+      "seo": 100
+    },
+    "firstContentfulPaintMs": 1059.8925,
+    "largestContentfulPaintMs": 1582.9140000000002,
+    "totalBlockingTimeMs": 0,
+    "cumulativeLayoutShift": 0,
+    "speedIndexMs": 1059.8925,
+    "totalByteWeight": 117957,
+    "requestCount": 13,
+    "scriptTransferSize": 5533,
+    "httpsAuditScores": {
+      "is-on-https": 0,
+      "redirects-http": 0
+    }
+  },
+  {
+    "page": "home",
+    "device": "mobile",
+    "run": 5,
+    "file": "home/mobile/run-5.json.gz",
+    "requestedUrl": "http://larchwick-astro.local/",
+    "lighthouseVersion": "13.5.0",
+    "fetchTime": "2026-10-22T07:50:05.090Z",
+    "hostUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+    "benchmarkIndex": 3115.5,
+    "formFactor": "mobile",
+    "screenWidth": 412,
+    "throttlingMethod": "simulate",
+    "throttling": {
+      "rttMs": 150,
+      "throughputKbps": 1638.4,
+      "requestLatencyMs": 562.5,
+      "downloadThroughputKbps": 1474.5600000000002,
+      "uploadThroughputKbps": 675,
+      "cpuSlowdownMultiplier": 4
+    },
+    "scores": {
+      "performance": 100,
+      "accessibility": 100,
+      "best-practices": 78,
+      "seo": 100
+    },
+    "firstContentfulPaintMs": 1062.415,
+    "largestContentfulPaintMs": 1584.9320000000002,
+    "totalBlockingTimeMs": 0,
+    "cumulativeLayoutShift": 0,
+    "speedIndexMs": 1062.415,
+    "totalByteWeight": 117957,
+    "requestCount": 13,
+    "scriptTransferSize": 5533,
+    "httpsAuditScores": {
+      "is-on-https": 0,
+      "redirects-http": 0
+    }
+  },
+  {
+    "page": "home",
+    "device": "desktop",
+    "run": 1,
+    "file": "home/desktop/run-1.json.gz",
+    "requestedUrl": "http://larchwick-astro.local/",
+    "lighthouseVersion": "13.5.0",
+    "fetchTime": "2026-10-22T07:50:27.703Z",
+    "hostUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+    "benchmarkIndex": 3150.5,
+    "formFactor": "desktop",
+    "screenWidth": 1350,
+    "throttlingMethod": "simulate",
+    "throttling": {
+      "rttMs": 40,
+      "throughputKbps": 10240,
+      "requestLatencyMs": 0,
+      "downloadThroughputKbps": 0,
+      "uploadThroughputKbps": 0,
+      "cpuSlowdownMultiplier": 1
+    },
+    "scores": {
+      "performance": 100,
+      "accessibility": 100,
+      "best-practices": 78,
+      "seo": 100
+    },
+    "firstContentfulPaintMs": 268.99125,
+    "largestContentfulPaintMs": 387.193,
+    "totalBlockingTimeMs": 0,
+    "cumulativeLayoutShift": 0,
+    "speedIndexMs": 297.88441043071833,
+    "totalByteWeight": 135151,
+    "requestCount": 16,
+    "scriptTransferSize": 5533,
+    "httpsAuditScores": {
+      "is-on-https": 0,
+      "redirects-http": 0
+    }
+  },
+  {
+    "page": "home",
+    "device": "desktop",
+    "run": 2,
+    "file": "home/desktop/run-2.json.gz",
+    "requestedUrl": "http://larchwick-astro.local/",
+    "lighthouseVersion": "13.5.0",
+    "fetchTime": "2026-10-22T07:50:50.390Z",
+    "hostUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+    "benchmarkIndex": 3198,
+    "formFactor": "desktop",
+    "screenWidth": 1350,
+    "throttlingMethod": "simulate",
+    "throttling": {
+      "rttMs": 40,
+      "throughputKbps": 10240,
+      "requestLatencyMs": 0,
+      "downloadThroughputKbps": 0,
+      "uploadThroughputKbps": 0,
+      "cpuSlowdownMultiplier": 1
+    },
+    "scores": {
+      "performance": 100,
+      "accessibility": 100,
+      "best-practices": 78,
+      "seo": 100
+    },
+    "firstContentfulPaintMs": 268.24249999999995,
+    "largestContentfulPaintMs": 368.24249999999995,
+    "totalBlockingTimeMs": 0,
+    "cumulativeLayoutShift": 0,
+    "speedIndexMs": 300.8315024029383,
+    "totalByteWeight": 135151,
+    "requestCount": 16,
+    "scriptTransferSize": 5533,
+    "httpsAuditScores": {
+      "is-on-https": 0,
+      "redirects-http": 0
+    }
+  },
+  {
+    "page": "home",
+    "device": "desktop",
+    "run": 3,
+    "file": "home/desktop/run-3.json.gz",
+    "requestedUrl": "http://larchwick-astro.local/",
+    "lighthouseVersion": "13.5.0",
+    "fetchTime": "2026-10-22T07:51:13.293Z",
+    "hostUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+    "benchmarkIndex": 3141.5,
+    "formFactor": "desktop",
+    "screenWidth": 1350,
+    "throttlingMethod": "simulate",
+    "throttling": {
+      "rttMs": 40,
+      "throughputKbps": 10240,
+      "requestLatencyMs": 0,
+      "downloadThroughputKbps": 0,
+      "uploadThroughputKbps": 0,
+      "cpuSlowdownMultiplier": 1
+    },
+    "scores": {
+      "performance": 100,
+      "accessibility": 100,
+      "best-practices": 78,
+      "seo": 100
+    },
+    "firstContentfulPaintMs": 268.56,
+    "largestContentfulPaintMs": 386.84799999999996,
+    "totalBlockingTimeMs": 0,
+    "cumulativeLayoutShift": 0,
+    "speedIndexMs": 306.5941194330791,
+    "totalByteWeight": 135151,
+    "requestCount": 16,
+    "scriptTransferSize": 5533,
+    "httpsAuditScores": {
+      "is-on-https": 0,
+      "redirects-http": 0
+    }
+  },
+  {
+    "page": "home",
+    "device": "desktop",
+    "run": 4,
+    "file": "home/desktop/run-4.json.gz",
+    "requestedUrl": "http://larchwick-astro.local/",
+    "lighthouseVersion": "13.5.0",
+    "fetchTime": "2026-10-22T07:51:36.109Z",
+    "hostUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+    "benchmarkIndex": 3171.5,
+    "formFactor": "desktop",
+    "screenWidth": 1350,
+    "throttlingMethod": "simulate",
+    "throttling": {
+      "rttMs": 40,
+      "throughputKbps": 10240,
+      "requestLatencyMs": 0,
+      "downloadThroughputKbps": 0,
+      "uploadThroughputKbps": 0,
+      "cpuSlowdownMultiplier": 1
+    },
+    "scores": {
+      "performance": 100,
+      "accessibility": 100,
+      "best-practices": 78,
+      "seo": 100
+    },
+    "firstContentfulPaintMs": 270.6,
+    "largestContentfulPaintMs": 370.6,
+    "totalBlockingTimeMs": 0,
+    "cumulativeLayoutShift": 0,
+    "speedIndexMs": 300.201509401987,
+    "totalByteWeight": 135151,
+    "requestCount": 16,
+    "scriptTransferSize": 5533,
+    "httpsAuditScores": {
+      "is-on-https": 0,
+      "redirects-http": 0
+    }
+  },
+  {
+    "page": "home",
+    "device": "desktop",
+    "run": 5,
+    "file": "home/desktop/run-5.json.gz",
+    "requestedUrl": "http://larchwick-astro.local/",
+    "lighthouseVersion": "13.5.0",
+    "fetchTime": "2026-10-22T07:51:58.709Z",
+    "hostUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+    "benchmarkIndex": 3083.5,
+    "formFactor": "desktop",
+    "screenWidth": 1350,
+    "throttlingMethod": "simulate",
+    "throttling": {
+      "rttMs": 40,
+      "throughputKbps": 10240,
+      "requestLatencyMs": 0,
+      "downloadThroughputKbps": 0,
+      "uploadThroughputKbps": 0,
+      "cpuSlowdownMultiplier": 1
+    },
+    "scores": {
+      "performance": 100,
+      "accessibility": 100,
+      "best-practices": 78,
+      "seo": 100
+    },
+    "firstContentfulPaintMs": 268.63625,
+    "largestContentfulPaintMs": 368.63625,
+    "totalBlockingTimeMs": 0,
+    "cumulativeLayoutShift": 0,
+    "speedIndexMs": 296.7756316634038,
+    "totalByteWeight": 135151,
+    "requestCount": 16,
+    "scriptTransferSize": 5533,
+    "httpsAuditScores": {
+      "is-on-https": 0,
+      "redirects-http": 0
+    }
+  },
+  {
+    "page": "about",
+    "device": "mobile",
+    "run": 1,
+    "file": "about/mobile/run-1.json.gz",
+    "requestedUrl": "http://larchwick-astro.local/about/",
+    "lighthouseVersion": "13.5.0",
+    "fetchTime": "2026-10-22T07:52:20.921Z",
+    "hostUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+    "benchmarkIndex": 3199,
+    "formFactor": "mobile",
+    "screenWidth": 412,
+    "throttlingMethod": "simulate",
+    "throttling": {
+      "rttMs": 150,
+      "throughputKbps": 1638.4,
+      "requestLatencyMs": 562.5,
+      "downloadThroughputKbps": 1474.5600000000002,
+      "uploadThroughputKbps": 675,
+      "cpuSlowdownMultiplier": 4
+    },
+    "scores": {
+      "performance": 100,
+      "accessibility": 100,
+      "best-practices": 78,
+      "seo": 100
+    },
+    "firstContentfulPaintMs": 1059.24125,
+    "largestContentfulPaintMs": 1882.393,
+    "totalBlockingTimeMs": 0,
+    "cumulativeLayoutShift": 0,
+    "speedIndexMs": 1059.24125,
+    "totalByteWeight": 229158,
+    "requestCount": 16,
+    "scriptTransferSize": 5533,
+    "httpsAuditScores": {
+      "is-on-https": 0,
+      "redirects-http": 0
+    }
+  },
+  {
+    "page": "about",
+    "device": "mobile",
+    "run": 2,
+    "file": "about/mobile/run-2.json.gz",
+    "requestedUrl": "http://larchwick-astro.local/about/",
+    "lighthouseVersion": "13.5.0",
+    "fetchTime": "2026-10-22T07:52:42.784Z",
+    "hostUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+    "benchmarkIndex": 3171.5,
+    "formFactor": "mobile",
+    "screenWidth": 412,
+    "throttlingMethod": "simulate",
+    "throttling": {
+      "rttMs": 150,
+      "throughputKbps": 1638.4,
+      "requestLatencyMs": 562.5,
+      "downloadThroughputKbps": 1474.5600000000002,
+      "uploadThroughputKbps": 675,
+      "cpuSlowdownMultiplier": 4
+    },
+    "scores": {
+      "performance": 100,
+      "accessibility": 100,
+      "best-practices": 78,
+      "seo": 100
+    },
+    "firstContentfulPaintMs": 1057.3899999999999,
+    "largestContentfulPaintMs": 1880.912,
+    "totalBlockingTimeMs": 0,
+    "cumulativeLayoutShift": 0,
+    "speedIndexMs": 1057.3899999999999,
+    "totalByteWeight": 229158,
+    "requestCount": 16,
+    "scriptTransferSize": 5533,
+    "httpsAuditScores": {
+      "is-on-https": 0,
+      "redirects-http": 0
+    }
+  },
+  {
+    "page": "about",
+    "device": "mobile",
+    "run": 3,
+    "file": "about/mobile/run-3.json.gz",
+    "requestedUrl": "http://larchwick-astro.local/about/",
+    "lighthouseVersion": "13.5.0",
+    "fetchTime": "2026-10-22T07:53:04.613Z",
+    "hostUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+    "benchmarkIndex": 3211,
+    "formFactor": "mobile",
+    "screenWidth": 412,
+    "throttlingMethod": "simulate",
+    "throttling": {
+      "rttMs": 150,
+      "throughputKbps": 1638.4,
+      "requestLatencyMs": 562.5,
+      "downloadThroughputKbps": 1474.5600000000002,
+      "uploadThroughputKbps": 675,
+      "cpuSlowdownMultiplier": 4
+    },
+    "scores": {
+      "performance": 100,
+      "accessibility": 100,
+      "best-practices": 78,
+      "seo": 100
+    },
+    "firstContentfulPaintMs": 1065.40625,
+    "largestContentfulPaintMs": 1887.3249999999998,
+    "totalBlockingTimeMs": 0,
+    "cumulativeLayoutShift": 0,
+    "speedIndexMs": 1065.40625,
+    "totalByteWeight": 229158,
+    "requestCount": 16,
+    "scriptTransferSize": 5533,
+    "httpsAuditScores": {
+      "is-on-https": 0,
+      "redirects-http": 0
+    }
+  },
+  {
+    "page": "about",
+    "device": "desktop",
+    "run": 1,
+    "file": "about/desktop/run-1.json.gz",
+    "requestedUrl": "http://larchwick-astro.local/about/",
+    "lighthouseVersion": "13.5.0",
+    "fetchTime": "2026-10-22T07:53:26.429Z",
+    "hostUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+    "benchmarkIndex": 3141,
+    "formFactor": "desktop",
+    "screenWidth": 1350,
+    "throttlingMethod": "simulate",
+    "throttling": {
+      "rttMs": 40,
+      "throughputKbps": 10240,
+      "requestLatencyMs": 0,
+      "downloadThroughputKbps": 0,
+      "uploadThroughputKbps": 0,
+      "cpuSlowdownMultiplier": 1
+    },
+    "scores": {
+      "performance": 100,
+      "accessibility": 100,
+      "best-practices": 78,
+      "seo": 100
+    },
+    "firstContentfulPaintMs": 275.605,
+    "largestContentfulPaintMs": 412.4839999999999,
+    "totalBlockingTimeMs": 0,
+    "cumulativeLayoutShift": 0,
+    "speedIndexMs": 279.1771549327145,
+    "totalByteWeight": 188359,
+    "requestCount": 16,
+    "scriptTransferSize": 5533,
+    "httpsAuditScores": {
+      "is-on-https": 0,
+      "redirects-http": 0
+    }
+  },
+  {
+    "page": "about",
+    "device": "desktop",
+    "run": 2,
+    "file": "about/desktop/run-2.json.gz",
+    "requestedUrl": "http://larchwick-astro.local/about/",
+    "lighthouseVersion": "13.5.0",
+    "fetchTime": "2026-10-22T07:53:48.226Z",
+    "hostUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+    "benchmarkIndex": 3140.5,
+    "formFactor": "desktop",
+    "screenWidth": 1350,
+    "throttlingMethod": "simulate",
+    "throttling": {
+      "rttMs": 40,
+      "throughputKbps": 10240,
+      "requestLatencyMs": 0,
+      "downloadThroughputKbps": 0,
+      "uploadThroughputKbps": 0,
+      "cpuSlowdownMultiplier": 1
+    },
+    "scores": {
+      "performance": 100,
+      "accessibility": 100,
+      "best-practices": 78,
+      "seo": 100
+    },
+    "firstContentfulPaintMs": 268.43375000000003,
+    "largestContentfulPaintMs": 406.74699999999996,
+    "totalBlockingTimeMs": 0,
+    "cumulativeLayoutShift": 0,
+    "speedIndexMs": 268.43375000000003,
+    "totalByteWeight": 188359,
+    "requestCount": 16,
+    "scriptTransferSize": 5533,
+    "httpsAuditScores": {
+      "is-on-https": 0,
+      "redirects-http": 0
+    }
+  },
+  {
+    "page": "about",
+    "device": "desktop",
+    "run": 3,
+    "file": "about/desktop/run-3.json.gz",
+    "requestedUrl": "http://larchwick-astro.local/about/",
+    "lighthouseVersion": "13.5.0",
+    "fetchTime": "2026-10-22T07:54:10.067Z",
+    "hostUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+    "benchmarkIndex": 3149,
+    "formFactor": "desktop",
+    "screenWidth": 1350,
+    "throttlingMethod": "simulate",
+    "throttling": {
+      "rttMs": 40,
+      "throughputKbps": 10240,
+      "requestLatencyMs": 0,
+      "downloadThroughputKbps": 0,
+      "uploadThroughputKbps": 0,
+      "cpuSlowdownMultiplier": 1
+    },
+    "scores": {
+      "performance": 100,
+      "accessibility": 100,
+      "best-practices": 78,
+      "seo": 100
+    },
+    "firstContentfulPaintMs": 272.04125,
+    "largestContentfulPaintMs": 409.6329999999999,
+    "totalBlockingTimeMs": 0,
+    "cumulativeLayoutShift": 0,
+    "speedIndexMs": 272.04125,
+    "totalByteWeight": 188359,
+    "requestCount": 16,
+    "scriptTransferSize": 5533,
+    "httpsAuditScores": {
+      "is-on-https": 0,
+      "redirects-http": 0
+    }
+  },
+  {
+    "page": "services",
+    "device": "mobile",
+    "run": 1,
+    "file": "services/mobile/run-1.json.gz",
+    "requestedUrl": "http://larchwick-astro.local/services/",
+    "lighthouseVersion": "13.5.0",
+    "fetchTime": "2026-10-22T07:54:31.796Z",
+    "hostUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+    "benchmarkIndex": 3154,
+    "formFactor": "mobile",
+    "screenWidth": 412,
+    "throttlingMethod": "simulate",
+    "throttling": {
+      "rttMs": 150,
+      "throughputKbps": 1638.4,
+      "requestLatencyMs": 562.5,
+      "downloadThroughputKbps": 1474.5600000000002,
+      "uploadThroughputKbps": 675,
+      "cpuSlowdownMultiplier": 4
+    },
+    "scores": {
+      "performance": 99,
+      "accessibility": 97,
+      "best-practices": 78,
+      "seo": 100
+    },
+    "firstContentfulPaintMs": 1058.66,
+    "largestContentfulPaintMs": 1956.928,
+    "totalBlockingTimeMs": 0,
+    "cumulativeLayoutShift": 0,
+    "speedIndexMs": 1058.66,
+    "totalByteWeight": 152528,
+    "requestCount": 10,
+    "scriptTransferSize": 5533,
+    "httpsAuditScores": {
+      "is-on-https": 0,
+      "redirects-http": 0
+    }
+  },
+  {
+    "page": "services",
+    "device": "mobile",
+    "run": 2,
+    "file": "services/mobile/run-2.json.gz",
+    "requestedUrl": "http://larchwick-astro.local/services/",
+    "lighthouseVersion": "13.5.0",
+    "fetchTime": "2026-10-22T07:54:53.444Z",
+    "hostUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+    "benchmarkIndex": 3164,
+    "formFactor": "mobile",
+    "screenWidth": 412,
+    "throttlingMethod": "simulate",
+    "throttling": {
+      "rttMs": 150,
+      "throughputKbps": 1638.4,
+      "requestLatencyMs": 562.5,
+      "downloadThroughputKbps": 1474.5600000000002,
+      "uploadThroughputKbps": 675,
+      "cpuSlowdownMultiplier": 4
+    },
+    "scores": {
+      "performance": 99,
+      "accessibility": 97,
+      "best-practices": 78,
+      "seo": 100
+    },
+    "firstContentfulPaintMs": 1059.1599999999999,
+    "largestContentfulPaintMs": 1957.328,
+    "totalBlockingTimeMs": 0,
+    "cumulativeLayoutShift": 0,
+    "speedIndexMs": 1059.1599999999999,
+    "totalByteWeight": 152528,
+    "requestCount": 10,
+    "scriptTransferSize": 5533,
+    "httpsAuditScores": {
+      "is-on-https": 0,
+      "redirects-http": 0
+    }
+  },
+  {
+    "page": "services",
+    "device": "mobile",
+    "run": 3,
+    "file": "services/mobile/run-3.json.gz",
+    "requestedUrl": "http://larchwick-astro.local/services/",
+    "lighthouseVersion": "13.5.0",
+    "fetchTime": "2026-10-22T07:55:15.230Z",
+    "hostUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+    "benchmarkIndex": 3199.5,
+    "formFactor": "mobile",
+    "screenWidth": 412,
+    "throttlingMethod": "simulate",
+    "throttling": {
+      "rttMs": 150,
+      "throughputKbps": 1638.4,
+      "requestLatencyMs": 562.5,
+      "downloadThroughputKbps": 1474.5600000000002,
+      "uploadThroughputKbps": 675,
+      "cpuSlowdownMultiplier": 4
+    },
+    "scores": {
+      "performance": 99,
+      "accessibility": 97,
+      "best-practices": 78,
+      "seo": 100
+    },
+    "firstContentfulPaintMs": 1060.23,
+    "largestContentfulPaintMs": 1958.1839999999997,
+    "totalBlockingTimeMs": 0,
+    "cumulativeLayoutShift": 0,
+    "speedIndexMs": 1060.23,
+    "totalByteWeight": 152528,
+    "requestCount": 10,
+    "scriptTransferSize": 5533,
+    "httpsAuditScores": {
+      "is-on-https": 0,
+      "redirects-http": 0
+    }
+  },
+  {
+    "page": "services",
+    "device": "desktop",
+    "run": 1,
+    "file": "services/desktop/run-1.json.gz",
+    "requestedUrl": "http://larchwick-astro.local/services/",
+    "lighthouseVersion": "13.5.0",
+    "fetchTime": "2026-10-22T07:55:36.828Z",
+    "hostUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+    "benchmarkIndex": 3215.5,
+    "formFactor": "desktop",
+    "screenWidth": 1350,
+    "throttlingMethod": "simulate",
+    "throttling": {
+      "rttMs": 40,
+      "throughputKbps": 10240,
+      "requestLatencyMs": 0,
+      "downloadThroughputKbps": 0,
+      "uploadThroughputKbps": 0,
+      "cpuSlowdownMultiplier": 1
+    },
+    "scores": {
+      "performance": 100,
+      "accessibility": 97,
+      "best-practices": 78,
+      "seo": 100
+    },
+    "firstContentfulPaintMs": 268.86249999999995,
+    "largestContentfulPaintMs": 447.09,
+    "totalBlockingTimeMs": 0,
+    "cumulativeLayoutShift": 0,
+    "speedIndexMs": 276.1936459110925,
+    "totalByteWeight": 152528,
+    "requestCount": 10,
+    "scriptTransferSize": 5533,
+    "httpsAuditScores": {
+      "is-on-https": 0,
+      "redirects-http": 0
+    }
+  },
+  {
+    "page": "services",
+    "device": "desktop",
+    "run": 2,
+    "file": "services/desktop/run-2.json.gz",
+    "requestedUrl": "http://larchwick-astro.local/services/",
+    "lighthouseVersion": "13.5.0",
+    "fetchTime": "2026-10-22T07:55:58.486Z",
+    "hostUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+    "benchmarkIndex": 3142,
+    "formFactor": "desktop",
+    "screenWidth": 1350,
+    "throttlingMethod": "simulate",
+    "throttling": {
+      "rttMs": 40,
+      "throughputKbps": 10240,
+      "requestLatencyMs": 0,
+      "downloadThroughputKbps": 0,
+      "uploadThroughputKbps": 0,
+      "cpuSlowdownMultiplier": 1
+    },
+    "scores": {
+      "performance": 100,
+      "accessibility": 97,
+      "best-practices": 78,
+      "seo": 100
+    },
+    "firstContentfulPaintMs": 267.235,
+    "largestContentfulPaintMs": 405.788,
+    "totalBlockingTimeMs": 0,
+    "cumulativeLayoutShift": 0,
+    "speedIndexMs": 283.622509922419,
+    "totalByteWeight": 152528,
+    "requestCount": 10,
+    "scriptTransferSize": 5533,
+    "httpsAuditScores": {
+      "is-on-https": 0,
+      "redirects-http": 0
+    }
+  },
+  {
+    "page": "services",
+    "device": "desktop",
+    "run": 3,
+    "file": "services/desktop/run-3.json.gz",
+    "requestedUrl": "http://larchwick-astro.local/services/",
+    "lighthouseVersion": "13.5.0",
+    "fetchTime": "2026-10-22T07:56:20.097Z",
+    "hostUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+    "benchmarkIndex": 3126,
+    "formFactor": "desktop",
+    "screenWidth": 1350,
+    "throttlingMethod": "simulate",
+    "throttling": {
+      "rttMs": 40,
+      "throughputKbps": 10240,
+      "requestLatencyMs": 0,
+      "downloadThroughputKbps": 0,
+      "uploadThroughputKbps": 0,
+      "cpuSlowdownMultiplier": 1
+    },
+    "scores": {
+      "performance": 100,
+      "accessibility": 97,
+      "best-practices": 78,
+      "seo": 100
+    },
+    "firstContentfulPaintMs": 267.20500000000004,
+    "largestContentfulPaintMs": 445.764,
+    "totalBlockingTimeMs": 0,
+    "cumulativeLayoutShift": 0,
+    "speedIndexMs": 295.4124866491328,
+    "totalByteWeight": 152528,
+    "requestCount": 10,
+    "scriptTransferSize": 5533,
+    "httpsAuditScores": {
+      "is-on-https": 0,
+      "redirects-http": 0
+    }
+  },
+  {
+    "page": "products",
+    "device": "mobile",
+    "run": 1,
+    "file": "products/mobile/run-1.json.gz",
+    "requestedUrl": "http://larchwick-astro.local/products/",
+    "lighthouseVersion": "13.5.0",
+    "fetchTime": "2026-10-22T07:56:41.815Z",
+    "hostUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+    "benchmarkIndex": 3209.5,
+    "formFactor": "mobile",
+    "screenWidth": 412,
+    "throttlingMethod": "simulate",
+    "throttling": {
+      "rttMs": 150,
+      "throughputKbps": 1638.4,
+      "requestLatencyMs": 562.5,
+      "downloadThroughputKbps": 1474.5600000000002,
+      "uploadThroughputKbps": 675,
+      "cpuSlowdownMultiplier": 4
+    },
+    "scores": {
+      "performance": 100,
+      "accessibility": 97,
+      "best-practices": 78,
+      "seo": 100
+    },
+    "firstContentfulPaintMs": 1057.3825,
+    "largestContentfulPaintMs": 1655.906,
+    "totalBlockingTimeMs": 0,
+    "cumulativeLayoutShift": 0,
+    "speedIndexMs": 1057.3825,
+    "totalByteWeight": 126382,
+    "requestCount": 10,
+    "scriptTransferSize": 5533,
+    "httpsAuditScores": {
+      "is-on-https": 0,
+      "redirects-http": 0
+    }
+  },
+  {
+    "page": "products",
+    "device": "mobile",
+    "run": 2,
+    "file": "products/mobile/run-2.json.gz",
+    "requestedUrl": "http://larchwick-astro.local/products/",
+    "lighthouseVersion": "13.5.0",
+    "fetchTime": "2026-10-22T07:57:03.535Z",
+    "hostUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+    "benchmarkIndex": 3155.5,
+    "formFactor": "mobile",
+    "screenWidth": 412,
+    "throttlingMethod": "simulate",
+    "throttling": {
+      "rttMs": 150,
+      "throughputKbps": 1638.4,
+      "requestLatencyMs": 562.5,
+      "downloadThroughputKbps": 1474.5600000000002,
+      "uploadThroughputKbps": 675,
+      "cpuSlowdownMultiplier": 4
+    },
+    "scores": {
+      "performance": 100,
+      "accessibility": 97,
+      "best-practices": 78,
+      "seo": 100
+    },
+    "firstContentfulPaintMs": 1059.1374999999998,
+    "largestContentfulPaintMs": 1657.31,
+    "totalBlockingTimeMs": 0,
+    "cumulativeLayoutShift": 0,
+    "speedIndexMs": 1059.1374999999998,
+    "totalByteWeight": 126382,
+    "requestCount": 10,
+    "scriptTransferSize": 5533,
+    "httpsAuditScores": {
+      "is-on-https": 0,
+      "redirects-http": 0
+    }
+  },
+  {
+    "page": "products",
+    "device": "mobile",
+    "run": 3,
+    "file": "products/mobile/run-3.json.gz",
+    "requestedUrl": "http://larchwick-astro.local/products/",
+    "lighthouseVersion": "13.5.0",
+    "fetchTime": "2026-10-22T07:57:25.197Z",
+    "hostUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+    "benchmarkIndex": 3153,
+    "formFactor": "mobile",
+    "screenWidth": 412,
+    "throttlingMethod": "simulate",
+    "throttling": {
+      "rttMs": 150,
+      "throughputKbps": 1638.4,
+      "requestLatencyMs": 562.5,
+      "downloadThroughputKbps": 1474.5600000000002,
+      "uploadThroughputKbps": 675,
+      "cpuSlowdownMultiplier": 4
+    },
+    "scores": {
+      "performance": 100,
+      "accessibility": 97,
+      "best-practices": 78,
+      "seo": 100
+    },
+    "firstContentfulPaintMs": 1064.1775000000002,
+    "largestContentfulPaintMs": 1661.342,
+    "totalBlockingTimeMs": 0,
+    "cumulativeLayoutShift": 0,
+    "speedIndexMs": 1064.1775000000002,
+    "totalByteWeight": 126382,
+    "requestCount": 10,
+    "scriptTransferSize": 5533,
+    "httpsAuditScores": {
+      "is-on-https": 0,
+      "redirects-http": 0
+    }
+  },
+  {
+    "page": "products",
+    "device": "desktop",
+    "run": 1,
+    "file": "products/desktop/run-1.json.gz",
+    "requestedUrl": "http://larchwick-astro.local/products/",
+    "lighthouseVersion": "13.5.0",
+    "fetchTime": "2026-10-22T07:57:48.211Z",
+    "hostUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+    "benchmarkIndex": 3078.5,
+    "formFactor": "desktop",
+    "screenWidth": 1350,
+    "throttlingMethod": "simulate",
+    "throttling": {
+      "rttMs": 40,
+      "throughputKbps": 10240,
+      "requestLatencyMs": 0,
+      "downloadThroughputKbps": 0,
+      "uploadThroughputKbps": 0,
+      "cpuSlowdownMultiplier": 1
+    },
+    "scores": {
+      "performance": 100,
+      "accessibility": 97,
+      "best-practices": 78,
+      "seo": 100
+    },
+    "firstContentfulPaintMs": 267.32500000000005,
+    "largestContentfulPaintMs": 365.86,
+    "totalBlockingTimeMs": 0,
+    "cumulativeLayoutShift": 0,
+    "speedIndexMs": 300.32957641835014,
+    "totalByteWeight": 126382,
+    "requestCount": 10,
+    "scriptTransferSize": 5533,
+    "httpsAuditScores": {
+      "is-on-https": 0,
+      "redirects-http": 0
+    }
+  },
+  {
+    "page": "products",
+    "device": "desktop",
+    "run": 2,
+    "file": "products/desktop/run-2.json.gz",
+    "requestedUrl": "http://larchwick-astro.local/products/",
+    "lighthouseVersion": "13.5.0",
+    "fetchTime": "2026-10-22T07:58:12.387Z",
+    "hostUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+    "benchmarkIndex": 3136.5,
+    "formFactor": "desktop",
+    "screenWidth": 1350,
+    "throttlingMethod": "simulate",
+    "throttling": {
+      "rttMs": 40,
+      "throughputKbps": 10240,
+      "requestLatencyMs": 0,
+      "downloadThroughputKbps": 0,
+      "uploadThroughputKbps": 0,
+      "cpuSlowdownMultiplier": 1
+    },
+    "scores": {
+      "performance": 100,
+      "accessibility": 97,
+      "best-practices": 78,
+      "seo": 100
+    },
+    "firstContentfulPaintMs": 267.5325,
+    "largestContentfulPaintMs": 366.02599999999995,
+    "totalBlockingTimeMs": 0,
+    "cumulativeLayoutShift": 0,
+    "speedIndexMs": 279.20049015794496,
+    "totalByteWeight": 126382,
+    "requestCount": 10,
+    "scriptTransferSize": 5533,
+    "httpsAuditScores": {
+      "is-on-https": 0,
+      "redirects-http": 0
+    }
+  },
+  {
+    "page": "products",
+    "device": "desktop",
+    "run": 3,
+    "file": "products/desktop/run-3.json.gz",
+    "requestedUrl": "http://larchwick-astro.local/products/",
+    "lighthouseVersion": "13.5.0",
+    "fetchTime": "2026-10-22T07:58:35.314Z",
+    "hostUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+    "benchmarkIndex": 3087.5,
+    "formFactor": "desktop",
+    "screenWidth": 1350,
+    "throttlingMethod": "simulate",
+    "throttling": {
+      "rttMs": 40,
+      "throughputKbps": 10240,
+      "requestLatencyMs": 0,
+      "downloadThroughputKbps": 0,
+      "uploadThroughputKbps": 0,
+      "cpuSlowdownMultiplier": 1
+    },
+    "scores": {
+      "performance": 100,
+      "accessibility": 97,
+      "best-practices": 78,
+      "seo": 100
+    },
+    "firstContentfulPaintMs": 267.67,
+    "largestContentfulPaintMs": 366.136,
+    "totalBlockingTimeMs": 0,
+    "cumulativeLayoutShift": 0,
+    "speedIndexMs": 286.553576934738,
+    "totalByteWeight": 126382,
+    "requestCount": 10,
+    "scriptTransferSize": 5533,
+    "httpsAuditScores": {
+      "is-on-https": 0,
+      "redirects-http": 0
+    }
+  },
+  {
+    "page": "faq",
+    "device": "mobile",
+    "run": 1,
+    "file": "faq/mobile/run-1.json.gz",
+    "requestedUrl": "http://larchwick-astro.local/faq/",
+    "lighthouseVersion": "13.5.0",
+    "fetchTime": "2026-10-22T07:58:58.398Z",
+    "hostUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+    "benchmarkIndex": 3150,
+    "formFactor": "mobile",
+    "screenWidth": 412,
+    "throttlingMethod": "simulate",
+    "throttling": {
+      "rttMs": 150,
+      "throughputKbps": 1638.4,
+      "requestLatencyMs": 562.5,
+      "downloadThroughputKbps": 1474.5600000000002,
+      "uploadThroughputKbps": 675,
+      "cpuSlowdownMultiplier": 4
+    },
+    "scores": {
+      "performance": 100,
+      "accessibility": 97,
+      "best-practices": 78,
+      "seo": 100
+    },
+    "firstContentfulPaintMs": 1057.205,
+    "largestContentfulPaintMs": 1655.764,
+    "totalBlockingTimeMs": 0,
+    "cumulativeLayoutShift": 0,
+    "speedIndexMs": 1057.205,
+    "totalByteWeight": 110636,
+    "requestCount": 10,
+    "scriptTransferSize": 5533,
+    "httpsAuditScores": {
+      "is-on-https": 0,
+      "redirects-http": 0
+    }
+  },
+  {
+    "page": "faq",
+    "device": "mobile",
+    "run": 2,
+    "file": "faq/mobile/run-2.json.gz",
+    "requestedUrl": "http://larchwick-astro.local/faq/",
+    "lighthouseVersion": "13.5.0",
+    "fetchTime": "2026-10-22T07:59:19.862Z",
+    "hostUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+    "benchmarkIndex": 3202.5,
+    "formFactor": "mobile",
+    "screenWidth": 412,
+    "throttlingMethod": "simulate",
+    "throttling": {
+      "rttMs": 150,
+      "throughputKbps": 1638.4,
+      "requestLatencyMs": 562.5,
+      "downloadThroughputKbps": 1474.5600000000002,
+      "uploadThroughputKbps": 675,
+      "cpuSlowdownMultiplier": 4
+    },
+    "scores": {
+      "performance": 100,
+      "accessibility": 97,
+      "best-practices": 78,
+      "seo": 100
+    },
+    "firstContentfulPaintMs": 1060.6125000000002,
+    "largestContentfulPaintMs": 1658.4900000000002,
+    "totalBlockingTimeMs": 0,
+    "cumulativeLayoutShift": 0,
+    "speedIndexMs": 1060.6125000000002,
+    "totalByteWeight": 110636,
+    "requestCount": 10,
+    "scriptTransferSize": 5533,
+    "httpsAuditScores": {
+      "is-on-https": 0,
+      "redirects-http": 0
+    }
+  },
+  {
+    "page": "faq",
+    "device": "mobile",
+    "run": 3,
+    "file": "faq/mobile/run-3.json.gz",
+    "requestedUrl": "http://larchwick-astro.local/faq/",
+    "lighthouseVersion": "13.5.0",
+    "fetchTime": "2026-10-22T07:59:41.291Z",
+    "hostUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+    "benchmarkIndex": 3188.5,
+    "formFactor": "mobile",
+    "screenWidth": 412,
+    "throttlingMethod": "simulate",
+    "throttling": {
+      "rttMs": 150,
+      "throughputKbps": 1638.4,
+      "requestLatencyMs": 562.5,
+      "downloadThroughputKbps": 1474.5600000000002,
+      "uploadThroughputKbps": 675,
+      "cpuSlowdownMultiplier": 4
+    },
+    "scores": {
+      "performance": 100,
+      "accessibility": 97,
+      "best-practices": 78,
+      "seo": 100
+    },
+    "firstContentfulPaintMs": 1057.0249999999999,
+    "largestContentfulPaintMs": 1655.62,
+    "totalBlockingTimeMs": 0,
+    "cumulativeLayoutShift": 0,
+    "speedIndexMs": 1057.0249999999999,
+    "totalByteWeight": 110636,
+    "requestCount": 10,
+    "scriptTransferSize": 5533,
+    "httpsAuditScores": {
+      "is-on-https": 0,
+      "redirects-http": 0
+    }
+  },
+  {
+    "page": "faq",
+    "device": "desktop",
+    "run": 1,
+    "file": "faq/desktop/run-1.json.gz",
+    "requestedUrl": "http://larchwick-astro.local/faq/",
+    "lighthouseVersion": "13.5.0",
+    "fetchTime": "2026-10-22T08:00:03.067Z",
+    "hostUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+    "benchmarkIndex": 3113.5,
+    "formFactor": "desktop",
+    "screenWidth": 1350,
+    "throttlingMethod": "simulate",
+    "throttling": {
+      "rttMs": 40,
+      "throughputKbps": 10240,
+      "requestLatencyMs": 0,
+      "downloadThroughputKbps": 0,
+      "uploadThroughputKbps": 0,
+      "cpuSlowdownMultiplier": 1
+    },
+    "scores": {
+      "performance": 100,
+      "accessibility": 97,
+      "best-practices": 78,
+      "seo": 100
+    },
+    "firstContentfulPaintMs": 273.59499999999997,
+    "largestContentfulPaintMs": 370.876,
+    "totalBlockingTimeMs": 0,
+    "cumulativeLayoutShift": 0,
+    "speedIndexMs": 283.0150989269594,
+    "totalByteWeight": 110636,
+    "requestCount": 10,
+    "scriptTransferSize": 5533,
+    "httpsAuditScores": {
+      "is-on-https": 0,
+      "redirects-http": 0
+    }
+  },
+  {
+    "page": "faq",
+    "device": "desktop",
+    "run": 2,
+    "file": "faq/desktop/run-2.json.gz",
+    "requestedUrl": "http://larchwick-astro.local/faq/",
+    "lighthouseVersion": "13.5.0",
+    "fetchTime": "2026-10-22T08:00:25.006Z",
+    "hostUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+    "benchmarkIndex": 3125,
+    "formFactor": "desktop",
+    "screenWidth": 1350,
+    "throttlingMethod": "simulate",
+    "throttling": {
+      "rttMs": 40,
+      "throughputKbps": 10240,
+      "requestLatencyMs": 0,
+      "downloadThroughputKbps": 0,
+      "uploadThroughputKbps": 0,
+      "cpuSlowdownMultiplier": 1
+    },
+    "scores": {
+      "performance": 100,
+      "accessibility": 97,
+      "best-practices": 78,
+      "seo": 100
+    },
+    "firstContentfulPaintMs": 277.03000000000003,
+    "largestContentfulPaintMs": 373.624,
+    "totalBlockingTimeMs": 0,
+    "cumulativeLayoutShift": 0,
+    "speedIndexMs": 300.00473816532593,
+    "totalByteWeight": 110643,
+    "requestCount": 10,
+    "scriptTransferSize": 5533,
+    "httpsAuditScores": {
+      "is-on-https": 0,
+      "redirects-http": 0
+    }
+  },
+  {
+    "page": "faq",
+    "device": "desktop",
+    "run": 3,
+    "file": "faq/desktop/run-3.json.gz",
+    "requestedUrl": "http://larchwick-astro.local/faq/",
+    "lighthouseVersion": "13.5.0",
+    "fetchTime": "2026-10-22T08:00:46.619Z",
+    "hostUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+    "benchmarkIndex": 3165,
+    "formFactor": "desktop",
+    "screenWidth": 1350,
+    "throttlingMethod": "simulate",
+    "throttling": {
+      "rttMs": 40,
+      "throughputKbps": 10240,
+      "requestLatencyMs": 0,
+      "downloadThroughputKbps": 0,
+      "uploadThroughputKbps": 0,
+      "cpuSlowdownMultiplier": 1
+    },
+    "scores": {
+      "performance": 100,
+      "accessibility": 97,
+      "best-practices": 78,
+      "seo": 100
+    },
+    "firstContentfulPaintMs": 269.37,
+    "largestContentfulPaintMs": 367.496,
+    "totalBlockingTimeMs": 0,
+    "cumulativeLayoutShift": 0,
+    "speedIndexMs": 282.8470509300659,
+    "totalByteWeight": 110636,
+    "requestCount": 10,
+    "scriptTransferSize": 5533,
+    "httpsAuditScores": {
+      "is-on-https": 0,
+      "redirects-http": 0
+    }
+  },
+  {
+    "page": "contact",
+    "device": "mobile",
+    "run": 1,
+    "file": "contact/mobile/run-1.json.gz",
+    "requestedUrl": "http://larchwick-astro.local/contact/",
+    "lighthouseVersion": "13.5.0",
+    "fetchTime": "2026-10-22T08:01:08.287Z",
+    "hostUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+    "benchmarkIndex": 3231,
+    "formFactor": "mobile",
+    "screenWidth": 412,
+    "throttlingMethod": "simulate",
+    "throttling": {
+      "rttMs": 150,
+      "throughputKbps": 1638.4,
+      "requestLatencyMs": 562.5,
+      "downloadThroughputKbps": 1474.5600000000002,
+      "uploadThroughputKbps": 675,
+      "cpuSlowdownMultiplier": 4
+    },
+    "scores": {
+      "performance": 100,
+      "accessibility": 100,
+      "best-practices": 78,
+      "seo": 100
+    },
+    "firstContentfulPaintMs": 1056.5875,
+    "largestContentfulPaintMs": 1655.27,
+    "totalBlockingTimeMs": 0,
+    "cumulativeLayoutShift": 0,
+    "speedIndexMs": 1056.5875,
+    "totalByteWeight": 130978,
+    "requestCount": 10,
+    "scriptTransferSize": 5533,
+    "httpsAuditScores": {
+      "is-on-https": 0,
+      "redirects-http": 0
+    }
+  },
+  {
+    "page": "contact",
+    "device": "mobile",
+    "run": 2,
+    "file": "contact/mobile/run-2.json.gz",
+    "requestedUrl": "http://larchwick-astro.local/contact/",
+    "lighthouseVersion": "13.5.0",
+    "fetchTime": "2026-10-22T08:01:29.823Z",
+    "hostUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+    "benchmarkIndex": 3234.5,
+    "formFactor": "mobile",
+    "screenWidth": 412,
+    "throttlingMethod": "simulate",
+    "throttling": {
+      "rttMs": 150,
+      "throughputKbps": 1638.4,
+      "requestLatencyMs": 562.5,
+      "downloadThroughputKbps": 1474.5600000000002,
+      "uploadThroughputKbps": 675,
+      "cpuSlowdownMultiplier": 4
+    },
+    "scores": {
+      "performance": 100,
+      "accessibility": 100,
+      "best-practices": 78,
+      "seo": 100
+    },
+    "firstContentfulPaintMs": 1058.1399999999999,
+    "largestContentfulPaintMs": 1656.5120000000002,
+    "totalBlockingTimeMs": 0,
+    "cumulativeLayoutShift": 0,
+    "speedIndexMs": 1058.1399999999999,
+    "totalByteWeight": 130978,
+    "requestCount": 10,
+    "scriptTransferSize": 5533,
+    "httpsAuditScores": {
+      "is-on-https": 0,
+      "redirects-http": 0
+    }
+  },
+  {
+    "page": "contact",
+    "device": "mobile",
+    "run": 3,
+    "file": "contact/mobile/run-3.json.gz",
+    "requestedUrl": "http://larchwick-astro.local/contact/",
+    "lighthouseVersion": "13.5.0",
+    "fetchTime": "2026-10-22T08:01:51.479Z",
+    "hostUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+    "benchmarkIndex": 3205,
+    "formFactor": "mobile",
+    "screenWidth": 412,
+    "throttlingMethod": "simulate",
+    "throttling": {
+      "rttMs": 150,
+      "throughputKbps": 1638.4,
+      "requestLatencyMs": 562.5,
+      "downloadThroughputKbps": 1474.5600000000002,
+      "uploadThroughputKbps": 675,
+      "cpuSlowdownMultiplier": 4
+    },
+    "scores": {
+      "performance": 100,
+      "accessibility": 100,
+      "best-practices": 78,
+      "seo": 100
+    },
+    "firstContentfulPaintMs": 1061.355,
+    "largestContentfulPaintMs": 1659.0839999999998,
+    "totalBlockingTimeMs": 0,
+    "cumulativeLayoutShift": 0,
+    "speedIndexMs": 1061.355,
+    "totalByteWeight": 130978,
+    "requestCount": 10,
+    "scriptTransferSize": 5533,
+    "httpsAuditScores": {
+      "is-on-https": 0,
+      "redirects-http": 0
+    }
+  },
+  {
+    "page": "contact",
+    "device": "desktop",
+    "run": 1,
+    "file": "contact/desktop/run-1.json.gz",
+    "requestedUrl": "http://larchwick-astro.local/contact/",
+    "lighthouseVersion": "13.5.0",
+    "fetchTime": "2026-10-22T08:02:13.193Z",
+    "hostUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+    "benchmarkIndex": 3203,
+    "formFactor": "desktop",
+    "screenWidth": 1350,
+    "throttlingMethod": "simulate",
+    "throttling": {
+      "rttMs": 40,
+      "throughputKbps": 10240,
+      "requestLatencyMs": 0,
+      "downloadThroughputKbps": 0,
+      "uploadThroughputKbps": 0,
+      "cpuSlowdownMultiplier": 1
+    },
+    "scores": {
+      "performance": 100,
+      "accessibility": 97,
+      "best-practices": 78,
+      "seo": 100
+    },
+    "firstContentfulPaintMs": 267.6425,
+    "largestContentfulPaintMs": 366.114,
+    "totalBlockingTimeMs": 0,
+    "cumulativeLayoutShift": 0,
+    "speedIndexMs": 285.9877611670862,
+    "totalByteWeight": 130978,
+    "requestCount": 10,
+    "scriptTransferSize": 5533,
+    "httpsAuditScores": {
+      "is-on-https": 0,
+      "redirects-http": 0
+    }
+  },
+  {
+    "page": "contact",
+    "device": "desktop",
+    "run": 2,
+    "file": "contact/desktop/run-2.json.gz",
+    "requestedUrl": "http://larchwick-astro.local/contact/",
+    "lighthouseVersion": "13.5.0",
+    "fetchTime": "2026-10-22T08:02:34.844Z",
+    "hostUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+    "benchmarkIndex": 3168.5,
+    "formFactor": "desktop",
+    "screenWidth": 1350,
+    "throttlingMethod": "simulate",
+    "throttling": {
+      "rttMs": 40,
+      "throughputKbps": 10240,
+      "requestLatencyMs": 0,
+      "downloadThroughputKbps": 0,
+      "uploadThroughputKbps": 0,
+      "cpuSlowdownMultiplier": 1
+    },
+    "scores": {
+      "performance": 100,
+      "accessibility": 97,
+      "best-practices": 78,
+      "seo": 100
+    },
+    "firstContentfulPaintMs": 267.0925,
+    "largestContentfulPaintMs": 365.674,
+    "totalBlockingTimeMs": 0,
+    "cumulativeLayoutShift": 0,
+    "speedIndexMs": 280.08054014588095,
+    "totalByteWeight": 130978,
+    "requestCount": 10,
+    "scriptTransferSize": 5533,
+    "httpsAuditScores": {
+      "is-on-https": 0,
+      "redirects-http": 0
+    }
+  },
+  {
+    "page": "contact",
+    "device": "desktop",
+    "run": 3,
+    "file": "contact/desktop/run-3.json.gz",
+    "requestedUrl": "http://larchwick-astro.local/contact/",
+    "lighthouseVersion": "13.5.0",
+    "fetchTime": "2026-10-22T08:02:56.486Z",
+    "hostUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+    "benchmarkIndex": 3149.5,
+    "formFactor": "desktop",
+    "screenWidth": 1350,
+    "throttlingMethod": "simulate",
+    "throttling": {
+      "rttMs": 40,
+      "throughputKbps": 10240,
+      "requestLatencyMs": 0,
+      "downloadThroughputKbps": 0,
+      "uploadThroughputKbps": 0,
+      "cpuSlowdownMultiplier": 1
+    },
+    "scores": {
+      "performance": 100,
+      "accessibility": 97,
+      "best-practices": 78,
+      "seo": 100
+    },
+    "firstContentfulPaintMs": 267.47249999999997,
+    "largestContentfulPaintMs": 365.97799999999995,
+    "totalBlockingTimeMs": 0,
+    "cumulativeLayoutShift": 0,
+    "speedIndexMs": 280.60649442039823,
+    "totalByteWeight": 130978,
+    "requestCount": 10,
+    "scriptTransferSize": 5533,
+    "httpsAuditScores": {
+      "is-on-https": 0,
+      "redirects-http": 0
+    }
+  },
+  {
+    "page": "blog",
+    "device": "mobile",
+    "run": 1,
+    "file": "blog/mobile/run-1.json.gz",
+    "requestedUrl": "http://larchwick-astro.local/blog/",
+    "lighthouseVersion": "13.5.0",
+    "fetchTime": "2026-10-22T08:03:18.273Z",
+    "hostUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+    "benchmarkIndex": 3230.5,
+    "formFactor": "mobile",
+    "screenWidth": 412,
+    "throttlingMethod": "simulate",
+    "throttling": {
+      "rttMs": 150,
+      "throughputKbps": 1638.4,
+      "requestLatencyMs": 562.5,
+      "downloadThroughputKbps": 1474.5600000000002,
+      "uploadThroughputKbps": 675,
+      "cpuSlowdownMultiplier": 4
+    },
+    "scores": {
+      "performance": 99,
+      "accessibility": 97,
+      "best-practices": 78,
+      "seo": 100
+    },
+    "firstContentfulPaintMs": 1060.77875,
+    "largestContentfulPaintMs": 2033.623,
+    "totalBlockingTimeMs": 0,
+    "cumulativeLayoutShift": 0,
+    "speedIndexMs": 1060.77875,
+    "totalByteWeight": 327813,
+    "requestCount": 26,
+    "scriptTransferSize": 5533,
+    "httpsAuditScores": {
+      "is-on-https": 0,
+      "redirects-http": 0
+    }
+  },
+  {
+    "page": "blog",
+    "device": "mobile",
+    "run": 2,
+    "file": "blog/mobile/run-2.json.gz",
+    "requestedUrl": "http://larchwick-astro.local/blog/",
+    "lighthouseVersion": "13.5.0",
+    "fetchTime": "2026-10-22T08:03:40.581Z",
+    "hostUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+    "benchmarkIndex": 3215.5,
+    "formFactor": "mobile",
+    "screenWidth": 412,
+    "throttlingMethod": "simulate",
+    "throttling": {
+      "rttMs": 150,
+      "throughputKbps": 1638.4,
+      "requestLatencyMs": 562.5,
+      "downloadThroughputKbps": 1474.5600000000002,
+      "uploadThroughputKbps": 675,
+      "cpuSlowdownMultiplier": 4
+    },
+    "scores": {
+      "performance": 99,
+      "accessibility": 97,
+      "best-practices": 78,
+      "seo": 100
+    },
+    "firstContentfulPaintMs": 1061.04375,
+    "largestContentfulPaintMs": 2108.835,
+    "totalBlockingTimeMs": 0,
+    "cumulativeLayoutShift": 0,
+    "speedIndexMs": 1061.04375,
+    "totalByteWeight": 327813,
+    "requestCount": 26,
+    "scriptTransferSize": 5533,
+    "httpsAuditScores": {
+      "is-on-https": 0,
+      "redirects-http": 0
+    }
+  },
+  {
+    "page": "blog",
+    "device": "mobile",
+    "run": 3,
+    "file": "blog/mobile/run-3.json.gz",
+    "requestedUrl": "http://larchwick-astro.local/blog/",
+    "lighthouseVersion": "13.5.0",
+    "fetchTime": "2026-10-22T08:04:02.506Z",
+    "hostUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+    "benchmarkIndex": 3236.5,
+    "formFactor": "mobile",
+    "screenWidth": 412,
+    "throttlingMethod": "simulate",
+    "throttling": {
+      "rttMs": 150,
+      "throughputKbps": 1638.4,
+      "requestLatencyMs": 562.5,
+      "downloadThroughputKbps": 1474.5600000000002,
+      "uploadThroughputKbps": 675,
+      "cpuSlowdownMultiplier": 4
+    },
+    "scores": {
+      "performance": 99,
+      "accessibility": 97,
+      "best-practices": 78,
+      "seo": 100
+    },
+    "firstContentfulPaintMs": 1061.855,
+    "largestContentfulPaintMs": 2034.484,
+    "totalBlockingTimeMs": 0,
+    "cumulativeLayoutShift": 0,
+    "speedIndexMs": 1061.855,
+    "totalByteWeight": 327813,
+    "requestCount": 26,
+    "scriptTransferSize": 5533,
+    "httpsAuditScores": {
+      "is-on-https": 0,
+      "redirects-http": 0
+    }
+  },
+  {
+    "page": "blog",
+    "device": "desktop",
+    "run": 1,
+    "file": "blog/desktop/run-1.json.gz",
+    "requestedUrl": "http://larchwick-astro.local/blog/",
+    "lighthouseVersion": "13.5.0",
+    "fetchTime": "2026-10-22T08:04:24.387Z",
+    "hostUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+    "benchmarkIndex": 3193.5,
+    "formFactor": "desktop",
+    "screenWidth": 1350,
+    "throttlingMethod": "simulate",
+    "throttling": {
+      "rttMs": 40,
+      "throughputKbps": 10240,
+      "requestLatencyMs": 0,
+      "downloadThroughputKbps": 0,
+      "uploadThroughputKbps": 0,
+      "cpuSlowdownMultiplier": 1
+    },
+    "scores": {
+      "performance": 100,
+      "accessibility": 97,
+      "best-practices": 78,
+      "seo": 100
+    },
+    "firstContentfulPaintMs": 270.02,
+    "largestContentfulPaintMs": 434.0279999999999,
+    "totalBlockingTimeMs": 0,
+    "cumulativeLayoutShift": 0,
+    "speedIndexMs": 270.02,
+    "totalByteWeight": 197268,
+    "requestCount": 28,
+    "scriptTransferSize": 5533,
+    "httpsAuditScores": {
+      "is-on-https": 0,
+      "redirects-http": 0
+    }
+  },
+  {
+    "page": "blog",
+    "device": "desktop",
+    "run": 2,
+    "file": "blog/desktop/run-2.json.gz",
+    "requestedUrl": "http://larchwick-astro.local/blog/",
+    "lighthouseVersion": "13.5.0",
+    "fetchTime": "2026-10-22T08:04:46.312Z",
+    "hostUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+    "benchmarkIndex": 3150,
+    "formFactor": "desktop",
+    "screenWidth": 1350,
+    "throttlingMethod": "simulate",
+    "throttling": {
+      "rttMs": 40,
+      "throughputKbps": 10240,
+      "requestLatencyMs": 0,
+      "downloadThroughputKbps": 0,
+      "uploadThroughputKbps": 0,
+      "cpuSlowdownMultiplier": 1
+    },
+    "scores": {
+      "performance": 100,
+      "accessibility": 97,
+      "best-practices": 78,
+      "seo": 100
+    },
+    "firstContentfulPaintMs": 268.75374999999997,
+    "largestContentfulPaintMs": 407.00299999999993,
+    "totalBlockingTimeMs": 0,
+    "cumulativeLayoutShift": 0,
+    "speedIndexMs": 268.75374999999997,
+    "totalByteWeight": 197268,
+    "requestCount": 28,
+    "scriptTransferSize": 5533,
+    "httpsAuditScores": {
+      "is-on-https": 0,
+      "redirects-http": 0
+    }
+  },
+  {
+    "page": "blog",
+    "device": "desktop",
+    "run": 3,
+    "file": "blog/desktop/run-3.json.gz",
+    "requestedUrl": "http://larchwick-astro.local/blog/",
+    "lighthouseVersion": "13.5.0",
+    "fetchTime": "2026-10-22T08:05:08.321Z",
+    "hostUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+    "benchmarkIndex": 3227,
+    "formFactor": "desktop",
+    "screenWidth": 1350,
+    "throttlingMethod": "simulate",
+    "throttling": {
+      "rttMs": 40,
+      "throughputKbps": 10240,
+      "requestLatencyMs": 0,
+      "downloadThroughputKbps": 0,
+      "uploadThroughputKbps": 0,
+      "cpuSlowdownMultiplier": 1
+    },
+    "scores": {
+      "performance": 100,
+      "accessibility": 97,
+      "best-practices": 78,
+      "seo": 100
+    },
+    "firstContentfulPaintMs": 269.35,
+    "largestContentfulPaintMs": 407.48,
+    "totalBlockingTimeMs": 0,
+    "cumulativeLayoutShift": 0,
+    "speedIndexMs": 269.35,
+    "totalByteWeight": 197268,
+    "requestCount": 28,
+    "scriptTransferSize": 5533,
+    "httpsAuditScores": {
+      "is-on-https": 0,
+      "redirects-http": 0
+    }
+  },
+  {
+    "page": "post-pour-over",
+    "device": "mobile",
+    "run": 1,
+    "file": "post-pour-over/mobile/run-1.json.gz",
+    "requestedUrl": "http://larchwick-astro.local/blog/how-to-brew-pour-over-at-home/",
+    "lighthouseVersion": "13.5.0",
+    "fetchTime": "2026-10-22T08:05:30.165Z",
+    "hostUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+    "benchmarkIndex": 3184.5,
+    "formFactor": "mobile",
+    "screenWidth": 412,
+    "throttlingMethod": "simulate",
+    "throttling": {
+      "rttMs": 150,
+      "throughputKbps": 1638.4,
+      "requestLatencyMs": 562.5,
+      "downloadThroughputKbps": 1474.5600000000002,
+      "uploadThroughputKbps": 675,
+      "cpuSlowdownMultiplier": 4
+    },
+    "scores": {
+      "performance": 100,
+      "accessibility": 97,
+      "best-practices": 78,
+      "seo": 100
+    },
+    "firstContentfulPaintMs": 1060.605,
+    "largestContentfulPaintMs": 1883.484,
+    "totalBlockingTimeMs": 0,
+    "cumulativeLayoutShift": 0,
+    "speedIndexMs": 1060.605,
+    "totalByteWeight": 197685,
+    "requestCount": 17,
+    "scriptTransferSize": 5533,
+    "httpsAuditScores": {
+      "is-on-https": 0,
+      "redirects-http": 0
+    }
+  },
+  {
+    "page": "post-pour-over",
+    "device": "mobile",
+    "run": 2,
+    "file": "post-pour-over/mobile/run-2.json.gz",
+    "requestedUrl": "http://larchwick-astro.local/blog/how-to-brew-pour-over-at-home/",
+    "lighthouseVersion": "13.5.0",
+    "fetchTime": "2026-10-22T08:05:51.897Z",
+    "hostUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+    "benchmarkIndex": 3204,
+    "formFactor": "mobile",
+    "screenWidth": 412,
+    "throttlingMethod": "simulate",
+    "throttling": {
+      "rttMs": 150,
+      "throughputKbps": 1638.4,
+      "requestLatencyMs": 562.5,
+      "downloadThroughputKbps": 1474.5600000000002,
+      "uploadThroughputKbps": 675,
+      "cpuSlowdownMultiplier": 4
+    },
+    "scores": {
+      "performance": 100,
+      "accessibility": 97,
+      "best-practices": 78,
+      "seo": 100
+    },
+    "firstContentfulPaintMs": 1059.53125,
+    "largestContentfulPaintMs": 1882.625,
+    "totalBlockingTimeMs": 0,
+    "cumulativeLayoutShift": 0,
+    "speedIndexMs": 1059.53125,
+    "totalByteWeight": 197685,
+    "requestCount": 17,
+    "scriptTransferSize": 5533,
+    "httpsAuditScores": {
+      "is-on-https": 0,
+      "redirects-http": 0
+    }
+  },
+  {
+    "page": "post-pour-over",
+    "device": "mobile",
+    "run": 3,
+    "file": "post-pour-over/mobile/run-3.json.gz",
+    "requestedUrl": "http://larchwick-astro.local/blog/how-to-brew-pour-over-at-home/",
+    "lighthouseVersion": "13.5.0",
+    "fetchTime": "2026-10-22T08:06:13.689Z",
+    "hostUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+    "benchmarkIndex": 3182.5,
+    "formFactor": "mobile",
+    "screenWidth": 412,
+    "throttlingMethod": "simulate",
+    "throttling": {
+      "rttMs": 150,
+      "throughputKbps": 1638.4,
+      "requestLatencyMs": 562.5,
+      "downloadThroughputKbps": 1474.5600000000002,
+      "uploadThroughputKbps": 675,
+      "cpuSlowdownMultiplier": 4
+    },
+    "scores": {
+      "performance": 100,
+      "accessibility": 97,
+      "best-practices": 78,
+      "seo": 100
+    },
+    "firstContentfulPaintMs": 1060.6062499999998,
+    "largestContentfulPaintMs": 1883.4849999999997,
+    "totalBlockingTimeMs": 0,
+    "cumulativeLayoutShift": 0,
+    "speedIndexMs": 1060.6062499999998,
+    "totalByteWeight": 197685,
+    "requestCount": 17,
+    "scriptTransferSize": 5533,
+    "httpsAuditScores": {
+      "is-on-https": 0,
+      "redirects-http": 0
+    }
+  },
+  {
+    "page": "post-pour-over",
+    "device": "desktop",
+    "run": 1,
+    "file": "post-pour-over/desktop/run-1.json.gz",
+    "requestedUrl": "http://larchwick-astro.local/blog/how-to-brew-pour-over-at-home/",
+    "lighthouseVersion": "13.5.0",
+    "fetchTime": "2026-10-22T08:06:35.395Z",
+    "hostUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+    "benchmarkIndex": 3119,
+    "formFactor": "desktop",
+    "screenWidth": 1350,
+    "throttlingMethod": "simulate",
+    "throttling": {
+      "rttMs": 40,
+      "throughputKbps": 10240,
+      "requestLatencyMs": 0,
+      "downloadThroughputKbps": 0,
+      "uploadThroughputKbps": 0,
+      "cpuSlowdownMultiplier": 1
+    },
+    "scores": {
+      "performance": 100,
+      "accessibility": 100,
+      "best-practices": 78,
+      "seo": 100
+    },
+    "firstContentfulPaintMs": 269.41499999999996,
+    "largestContentfulPaintMs": 407.532,
+    "totalBlockingTimeMs": 0,
+    "cumulativeLayoutShift": 0,
+    "speedIndexMs": 338.9747926781932,
+    "totalByteWeight": 170430,
+    "requestCount": 18,
+    "scriptTransferSize": 5533,
+    "httpsAuditScores": {
+      "is-on-https": 0,
+      "redirects-http": 0
+    }
+  },
+  {
+    "page": "post-pour-over",
+    "device": "desktop",
+    "run": 2,
+    "file": "post-pour-over/desktop/run-2.json.gz",
+    "requestedUrl": "http://larchwick-astro.local/blog/how-to-brew-pour-over-at-home/",
+    "lighthouseVersion": "13.5.0",
+    "fetchTime": "2026-10-22T08:06:57.105Z",
+    "hostUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+    "benchmarkIndex": 3147.5,
+    "formFactor": "desktop",
+    "screenWidth": 1350,
+    "throttlingMethod": "simulate",
+    "throttling": {
+      "rttMs": 40,
+      "throughputKbps": 10240,
+      "requestLatencyMs": 0,
+      "downloadThroughputKbps": 0,
+      "uploadThroughputKbps": 0,
+      "cpuSlowdownMultiplier": 1
+    },
+    "scores": {
+      "performance": 100,
+      "accessibility": 100,
+      "best-practices": 78,
+      "seo": 100
+    },
+    "firstContentfulPaintMs": 270.29499999999996,
+    "largestContentfulPaintMs": 408.236,
+    "totalBlockingTimeMs": 0,
+    "cumulativeLayoutShift": 0,
+    "speedIndexMs": 324.13764590197593,
+    "totalByteWeight": 170430,
+    "requestCount": 18,
+    "scriptTransferSize": 5533,
+    "httpsAuditScores": {
+      "is-on-https": 0,
+      "redirects-http": 0
+    }
+  },
+  {
+    "page": "post-pour-over",
+    "device": "desktop",
+    "run": 3,
+    "file": "post-pour-over/desktop/run-3.json.gz",
+    "requestedUrl": "http://larchwick-astro.local/blog/how-to-brew-pour-over-at-home/",
+    "lighthouseVersion": "13.5.0",
+    "fetchTime": "2026-10-22T08:07:18.795Z",
+    "hostUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+    "benchmarkIndex": 3173.5,
+    "formFactor": "desktop",
+    "screenWidth": 1350,
+    "throttlingMethod": "simulate",
+    "throttling": {
+      "rttMs": 40,
+      "throughputKbps": 10240,
+      "requestLatencyMs": 0,
+      "downloadThroughputKbps": 0,
+      "uploadThroughputKbps": 0,
+      "cpuSlowdownMultiplier": 1
+    },
+    "scores": {
+      "performance": 100,
+      "accessibility": 100,
+      "best-practices": 78,
+      "seo": 100
+    },
+    "firstContentfulPaintMs": 268.835,
+    "largestContentfulPaintMs": 407.068,
+    "totalBlockingTimeMs": 0,
+    "cumulativeLayoutShift": 0,
+    "speedIndexMs": 344.32803090133166,
+    "totalByteWeight": 170430,
+    "requestCount": 18,
+    "scriptTransferSize": 5533,
+    "httpsAuditScores": {
+      "is-on-https": 0,
+      "redirects-http": 0
+    }
+  },
+  {
+    "page": "post-ethiopia",
+    "device": "mobile",
+    "run": 1,
+    "file": "post-ethiopia/mobile/run-1.json.gz",
+    "requestedUrl": "http://larchwick-astro.local/blog/ethiopia-yirgacheffe/",
+    "lighthouseVersion": "13.5.0",
+    "fetchTime": "2026-10-22T08:07:40.914Z",
+    "hostUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+    "benchmarkIndex": 3195,
+    "formFactor": "mobile",
+    "screenWidth": 412,
+    "throttlingMethod": "simulate",
+    "throttling": {
+      "rttMs": 150,
+      "throughputKbps": 1638.4,
+      "requestLatencyMs": 562.5,
+      "downloadThroughputKbps": 1474.5600000000002,
+      "uploadThroughputKbps": 675,
+      "cpuSlowdownMultiplier": 4
+    },
+    "scores": {
+      "performance": 99,
+      "accessibility": 100,
+      "best-practices": 78,
+      "seo": 100
+    },
+    "firstContentfulPaintMs": 1062.75625,
+    "largestContentfulPaintMs": 2260.205,
+    "totalBlockingTimeMs": 0,
+    "cumulativeLayoutShift": 0,
+    "speedIndexMs": 1062.75625,
+    "totalByteWeight": 272836,
+    "requestCount": 20,
+    "scriptTransferSize": 5533,
+    "httpsAuditScores": {
+      "is-on-https": 0,
+      "redirects-http": 0
+    }
+  },
+  {
+    "page": "post-ethiopia",
+    "device": "mobile",
+    "run": 2,
+    "file": "post-ethiopia/mobile/run-2.json.gz",
+    "requestedUrl": "http://larchwick-astro.local/blog/ethiopia-yirgacheffe/",
+    "lighthouseVersion": "13.5.0",
+    "fetchTime": "2026-10-22T08:08:02.714Z",
+    "hostUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+    "benchmarkIndex": 3164.5,
+    "formFactor": "mobile",
+    "screenWidth": 412,
+    "throttlingMethod": "simulate",
+    "throttling": {
+      "rttMs": 150,
+      "throughputKbps": 1638.4,
+      "requestLatencyMs": 562.5,
+      "downloadThroughputKbps": 1474.5600000000002,
+      "uploadThroughputKbps": 675,
+      "cpuSlowdownMultiplier": 4
+    },
+    "scores": {
+      "performance": 99,
+      "accessibility": 100,
+      "best-practices": 78,
+      "seo": 100
+    },
+    "firstContentfulPaintMs": 1061.8787499999999,
+    "largestContentfulPaintMs": 2259.5029999999997,
+    "totalBlockingTimeMs": 0,
+    "cumulativeLayoutShift": 0,
+    "speedIndexMs": 1061.8787499999999,
+    "totalByteWeight": 272836,
+    "requestCount": 20,
+    "scriptTransferSize": 5533,
+    "httpsAuditScores": {
+      "is-on-https": 0,
+      "redirects-http": 0
+    }
+  },
+  {
+    "page": "post-ethiopia",
+    "device": "mobile",
+    "run": 3,
+    "file": "post-ethiopia/mobile/run-3.json.gz",
+    "requestedUrl": "http://larchwick-astro.local/blog/ethiopia-yirgacheffe/",
+    "lighthouseVersion": "13.5.0",
+    "fetchTime": "2026-10-22T08:08:24.534Z",
+    "hostUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+    "benchmarkIndex": 3173.5,
+    "formFactor": "mobile",
+    "screenWidth": 412,
+    "throttlingMethod": "simulate",
+    "throttling": {
+      "rttMs": 150,
+      "throughputKbps": 1638.4,
+      "requestLatencyMs": 562.5,
+      "downloadThroughputKbps": 1474.5600000000002,
+      "uploadThroughputKbps": 675,
+      "cpuSlowdownMultiplier": 4
+    },
+    "scores": {
+      "performance": 99,
+      "accessibility": 100,
+      "best-practices": 78,
+      "seo": 100
+    },
+    "firstContentfulPaintMs": 1061.0375,
+    "largestContentfulPaintMs": 2258.83,
+    "totalBlockingTimeMs": 0,
+    "cumulativeLayoutShift": 0,
+    "speedIndexMs": 1061.0375,
+    "totalByteWeight": 272836,
+    "requestCount": 20,
+    "scriptTransferSize": 5533,
+    "httpsAuditScores": {
+      "is-on-https": 0,
+      "redirects-http": 0
+    }
+  },
+  {
+    "page": "post-ethiopia",
+    "device": "desktop",
+    "run": 1,
+    "file": "post-ethiopia/desktop/run-1.json.gz",
+    "requestedUrl": "http://larchwick-astro.local/blog/ethiopia-yirgacheffe/",
+    "lighthouseVersion": "13.5.0",
+    "fetchTime": "2026-10-22T08:08:46.327Z",
+    "hostUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+    "benchmarkIndex": 3093,
+    "formFactor": "desktop",
+    "screenWidth": 1350,
+    "throttlingMethod": "simulate",
+    "throttling": {
+      "rttMs": 40,
+      "throughputKbps": 10240,
+      "requestLatencyMs": 0,
+      "downloadThroughputKbps": 0,
+      "uploadThroughputKbps": 0,
+      "cpuSlowdownMultiplier": 1
+    },
+    "scores": {
+      "performance": 100,
+      "accessibility": 100,
+      "best-practices": 78,
+      "seo": 100
+    },
+    "firstContentfulPaintMs": 272.1675,
+    "largestContentfulPaintMs": 449.7339999999999,
+    "totalBlockingTimeMs": 0,
+    "cumulativeLayoutShift": 0,
+    "speedIndexMs": 346.4445281654219,
+    "totalByteWeight": 191596,
+    "requestCount": 20,
+    "scriptTransferSize": 5533,
+    "httpsAuditScores": {
+      "is-on-https": 0,
+      "redirects-http": 0
+    }
+  },
+  {
+    "page": "post-ethiopia",
+    "device": "desktop",
+    "run": 2,
+    "file": "post-ethiopia/desktop/run-2.json.gz",
+    "requestedUrl": "http://larchwick-astro.local/blog/ethiopia-yirgacheffe/",
+    "lighthouseVersion": "13.5.0",
+    "fetchTime": "2026-10-22T08:09:08.076Z",
+    "hostUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+    "benchmarkIndex": 3210,
+    "formFactor": "desktop",
+    "screenWidth": 1350,
+    "throttlingMethod": "simulate",
+    "throttling": {
+      "rttMs": 40,
+      "throughputKbps": 10240,
+      "requestLatencyMs": 0,
+      "downloadThroughputKbps": 0,
+      "uploadThroughputKbps": 0,
+      "cpuSlowdownMultiplier": 1
+    },
+    "scores": {
+      "performance": 100,
+      "accessibility": 100,
+      "best-practices": 78,
+      "seo": 100
+    },
+    "firstContentfulPaintMs": 268.54375,
+    "largestContentfulPaintMs": 446.8349999999999,
+    "totalBlockingTimeMs": 0,
+    "cumulativeLayoutShift": 0,
+    "speedIndexMs": 357.31597691156975,
+    "totalByteWeight": 191596,
+    "requestCount": 20,
+    "scriptTransferSize": 5533,
+    "httpsAuditScores": {
+      "is-on-https": 0,
+      "redirects-http": 0
+    }
+  },
+  {
+    "page": "post-ethiopia",
+    "device": "desktop",
+    "run": 3,
+    "file": "post-ethiopia/desktop/run-3.json.gz",
+    "requestedUrl": "http://larchwick-astro.local/blog/ethiopia-yirgacheffe/",
+    "lighthouseVersion": "13.5.0",
+    "fetchTime": "2026-10-22T08:09:29.878Z",
+    "hostUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+    "benchmarkIndex": 3207.5,
+    "formFactor": "desktop",
+    "screenWidth": 1350,
+    "throttlingMethod": "simulate",
+    "throttling": {
+      "rttMs": 40,
+      "throughputKbps": 10240,
+      "requestLatencyMs": 0,
+      "downloadThroughputKbps": 0,
+      "uploadThroughputKbps": 0,
+      "cpuSlowdownMultiplier": 1
+    },
+    "scores": {
+      "performance": 100,
+      "accessibility": 100,
+      "best-practices": 78,
+      "seo": 100
+    },
+    "firstContentfulPaintMs": 272.12375,
+    "largestContentfulPaintMs": 449.69899999999996,
+    "totalBlockingTimeMs": 0,
+    "cumulativeLayoutShift": 0,
+    "speedIndexMs": 338.0918474125484,
+    "totalByteWeight": 191596,
+    "requestCount": 20,
+    "scriptTransferSize": 5533,
+    "httpsAuditScores": {
+      "is-on-https": 0,
+      "redirects-http": 0
+    }
+  }
+]

@@ -7,9 +7,11 @@ import PostMeta from './PostMeta.astro'
 interface Props {
   post: Post
   headingLevel?: 'h2' | 'h3'
+  /** The card's image is the page's largest element (first card of an archive): load it first. */
+  priority?: boolean
 }
 
-const { post, headingLevel: Heading = 'h2' } = Astro.props
+const { post, headingLevel: Heading = 'h2', priority = false } = Astro.props
 ---
 
 <article class="reveal flex flex-col">
@@ -21,6 +23,7 @@ const { post, headingLevel: Heading = 'h2' } = Astro.props
           widths={[400, 640, 800]}
           sizes="(min-width: 64rem) 24rem, (min-width: 40rem) 50vw, 100vw"
           aspectRatio={3 / 2}
+          priority={priority}
           class="rounded-label w-full"
         />
       </a>
