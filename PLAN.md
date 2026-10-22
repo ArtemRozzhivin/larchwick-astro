@@ -24,7 +24,6 @@ Last updated: 2026-10-20 · Current phase: **Phase 8 — performance and accessi
 | 7b  | "Ask Larchwick" AI assistant (RAG)       | done        |
 | 7c  | Google Analytics 4 with consent          | done        |
 | 8   | Performance and accessibility pass       | in progress |
-| 9   | Case study and Upwork portfolio entry    | not started |
 | 10  | Redesign ("Larch and label")             | done        |
 
 ---
@@ -122,6 +121,7 @@ means rewriting history. Phase 0 makes it compliant before anything else is push
 | 2026-10-17 | The chat panel is the site's first client JavaScript: one small module, loaded only when the panel opens, with the CSP widened to `script-src 'self'` and `connect-src 'self'`                                                                                                                                           | A streamed, in-page chat needs JS; the no-JS alternative (a form that returns a full answer page) was judged too clunky. Every other part of the site stays zero-JS, and Phase 8 measures the cost. CLAUDE.md's prime directive is updated in the same change.                                                                                                                                                                                                                                               |
 | 2026-10-21 | New Phase 7c, before Phase 8: Google Analytics 4 with a consent banner; nothing from Google loads until the visitor accepts                                                                                                                                                                                              | Artem's request. GA sets cookies and the business sells across the EU, so consent comes first; loading `gtag.js` only after "Accept" also keeps the site as fast as today for everyone who doesn't accept (and for Lighthouse). Before Phase 8 so the performance pass measures the final site. Cloudflare Web Analytics (cookieless, no banner) was considered: page views only, no events or conversions.                                                                                                  |
 | 2026-10-21 | GA4 through `gtag.js` directly, not Google Tag Manager; events sent from our code; production builds only                                                                                                                                                                                                                | Lighter and reviewable in the repo; GTM pays off when marketers add tags without deploys, which this site doesn't need. Previews and local builds never send data. The Measurement ID is public config, not a secret.                                                                                                                                                                                                                                                                                        |
+| 2026-10-22 | Phase 9 (case study and Upwork portfolio entry) removed from the plan                                                                                                                                                                                                                                                    | Artem's decision.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
 
 ### Open
 
@@ -359,7 +359,7 @@ able to explain on a client call.
   - It writes `CREDITS.md`.
   - `CREDITS.md` also lists the fonts (OFL) and the icons.
     `og.png` is added when it arrives.
-- [x] README: a "Demo project — fictional business" header. The full rewrite comes in Phase 9.
+- [x] README: a "Demo project — fictional business" header.
 
 **Exit:** the already-public repo is compliant: a licence, credits, no private data, and the
 evidence committed.
@@ -991,38 +991,6 @@ visitor who declines (and Lighthouse) loads nothing from Google.
 **Exit:** the after numbers are saved as JSON, with a summary next to the before numbers.
 **Talking points:** what actually moved the numbers, using evidence from the reports, not guesses.
 
-### Phase 9 — Case study and Upwork portfolio entry
-
-- [ ] Write `docs/case-study.md`:
-  - problem
-  - approach
-  - key decisions and why
-  - import report numbers
-  - before/after table: measured values only, with their conditions
-  - the editor workflow
-  - limitations
-- [ ] Final README:
-  - what it is, with the demo label
-  - architecture
-  - how to run each part
-  - the importer guide
-- [ ] After screenshots at 360, 768 and 1280 px. The before set is from Phase 1.
-- [ ] Upwork entry (appendix A):
-  - Page and post counts come from `docs/import-report.md`. Say that Home was rebuilt by hand.
-  - Instead of "kept every URL working", quote the parity report's figures and name the shortlink
-    limitation.
-  - X→Y and A→B are the D-13 headline numbers.
-- [ ] Final check against §2:
-  - every sentence and number traces to a file in `docs/`
-  - the credits are complete
-  - no private data in any file
-  - the labels are everywhere
-  - the licence is present
-  - no employer code
-  - no fake testimonials
-
-**Exit:** the definition of done in §1 holds.
-
 ### Phase 10 — Redesign ("Larch and label")
 
 Moved before Phase 7 (decision 2026-10-16). Artem, 2026-10-15: the rebuilt site still looked like
@@ -1193,7 +1161,7 @@ Fonts: DM Serif Display for headings, Inter for body, both self-hosted. Layout: 
 
 - Title: "WordPress to Astro + Sanity Migration (Personal Project)".
 - Skills: Astro, Sanity, Website Migration, Technical SEO, TypeScript, Tailwind CSS.
-- Description template (brackets filled only from `docs/`, wording adjusted per Phase 9):
+- Description template (brackets filled only from `docs/`):
 
   > Demo WordPress site I built for a fictional coffee roaster. I moved [N] pages and [N] posts to
   > Astro + Sanity with an automated import script, kept every URL working with 301 redirects, and
