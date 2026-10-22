@@ -5,7 +5,7 @@ time**. Each phase ends with a short "what we did / what's next" and Artem's go-
 next one starts. Tick the boxes as work lands, and log every decision in
 [Decisions](#3-decisions).
 
-Last updated: 2026-10-20 · Current phase: **Phase 8 — performance and accessibility pass (in progress)**
+Last updated: 2026-10-22 · Current phase: **all phases done**
 
 | #   | Phase                                    | Status      |
 | --- | ---------------------------------------- | ----------- |
@@ -23,7 +23,7 @@ Last updated: 2026-10-20 · Current phase: **Phase 8 — performance and accessi
 | 7   | Production and editor workflow           | done        |
 | 7b  | "Ask Larchwick" AI assistant (RAG)       | done        |
 | 7c  | Google Analytics 4 with consent          | done        |
-| 8   | Performance and accessibility pass       | in progress |
+| 8   | Performance and accessibility pass       | done        |
 | 10  | Redesign ("Larch and label")             | done        |
 
 ---
@@ -37,10 +37,9 @@ portfolio case study with **measured** before/after numbers.
 **Done means:**
 
 - Every phase below is ticked.
-- The site is live on Cloudflare, and the repo is public with a README and a case study.
+- The site is live on Cloudflare, and the repo is public with a README.
 - The SEO parity report shows no losses.
 - The Lighthouse targets are met, with the proof saved.
-- The portfolio draft contains only numbers that trace to `docs/`.
 - Every rule in §2 holds.
 
 **The repo is already public.** `github.com/ArtemRozzhivin/larchwick-astro` has been public since
@@ -121,7 +120,7 @@ means rewriting history. Phase 0 makes it compliant before anything else is push
 | 2026-10-17 | The chat panel is the site's first client JavaScript: one small module, loaded only when the panel opens, with the CSP widened to `script-src 'self'` and `connect-src 'self'`                                                                                                                                           | A streamed, in-page chat needs JS; the no-JS alternative (a form that returns a full answer page) was judged too clunky. Every other part of the site stays zero-JS, and Phase 8 measures the cost. CLAUDE.md's prime directive is updated in the same change.                                                                                                                                                                                                                                               |
 | 2026-10-21 | New Phase 7c, before Phase 8: Google Analytics 4 with a consent banner; nothing from Google loads until the visitor accepts                                                                                                                                                                                              | Artem's request. GA sets cookies and the business sells across the EU, so consent comes first; loading `gtag.js` only after "Accept" also keeps the site as fast as today for everyone who doesn't accept (and for Lighthouse). Before Phase 8 so the performance pass measures the final site. Cloudflare Web Analytics (cookieless, no banner) was considered: page views only, no events or conversions.                                                                                                  |
 | 2026-10-21 | GA4 through `gtag.js` directly, not Google Tag Manager; events sent from our code; production builds only                                                                                                                                                                                                                | Lighter and reviewable in the repo; GTM pays off when marketers add tags without deploys, which this site doesn't need. Previews and local builds never send data. The Measurement ID is public config, not a secret.                                                                                                                                                                                                                                                                                        |
-| 2026-10-22 | Phase 9 (case study and Upwork portfolio entry) removed from the plan                                                                                                                                                                                                                                                    | Artem's decision.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| 2026-10-22 | Phase 9 (case study and Upwork portfolio entry) removed from the plan, with the case study and the portfolio draft in §1's "done" list; Phase 8's deployed-set measurement dropped                                                                                                                                       | Artem's decision.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
 
 ### Open
 
@@ -957,9 +956,8 @@ visitor who declines (and Lighthouse) loads nothing from Google.
   - Best Practices ≥ 95 ✓ on the deployed site (100). The local primary set scores 78 on both
     sides, because plain http fails `is-on-https` and `redirects-http`.
 
-- [ ] The deployed set (production, https), reported separately: measured once this branch is
-      live.
-
+- [x] The deployed set: not measured, by Artem's decision (2026-10-22). The 2026-10-21
+      production scan (Performance 95–100, Best Practices 100) is the deployed reference.
 - [x] JS audit (2026-10-21): 0 `astro-island` in `dist`; scripts: the ChatPanel loader (2.1 KB),
       the consent script (2.1 KB) and their shared event module (1.7 KB) on every page, the chat
       module (4.1 KB) on the panel's first open, plus JSON-LD data blocks. Nothing else.
