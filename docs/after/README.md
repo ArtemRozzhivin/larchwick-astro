@@ -117,9 +117,3 @@ The WordPress author's login appears in the WordPress pages. `npm run lighthouse
 it from every stored report and refuses to write if any trace is left; the raw inbox files stay
 on the machine and are gitignored. The Astro reports also have their embedded screenshots and
 `data:` image placeholders removed.
-
-## Still to come
-
-- The deployed set: the same 9 URLs measured on production
-  (`https://larchwick-astro.larchwick.workers.dev`) once this branch is live, reported separately
-  from the paired local session.

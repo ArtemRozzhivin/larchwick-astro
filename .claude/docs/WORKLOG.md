@@ -5,6 +5,8 @@ was rejected and why, what a change cost in shipped kB. Newest date on top.
 
 ## 2026-10-22
 
+- [Docs]: plan closed. Artem removed Phase 9 (case study and Upwork entry) and the Phase 8 deployed-set measurement; §1's done list no longer asks for a case study or a portfolio draft; Phase 8 marked done, so every phase in the plan is done. `docs/after/README.md` drops its "Still to come".
+
 - [Docs]: Phase 8 paired Lighthouse session. WordPress versions re-checked read-only (generator meta, Yoast comment, asset `ver=`, `Server` and `X-Powered-By`), all unchanged. `npm run lighthouse:run` against LocalWP and the local build on `wrangler dev`: 116 runs in about an hour, 0 runtime errors; both sides imported (the importer scrubbed the WordPress login and removed screenshots and `data:` images). Headline: home mobile 69 → 100, 1,118 → 115 KiB. Mobile, all 9 URLs: Performance 99–100, Accessibility 97–100, SEO 100, Best Practices 78 (http). Evidence from the median home runs: images 595 → 19 KiB, fonts 290 → 70 KiB (WordPress: 3 local icon and theme fonts plus 1 Google Font), JS 164 → 5 KiB, CSS 38 KiB in 19 files → 8 KiB in 1, render-blocking 21 → 1, third-party requests 5 → 0. Main-thread JS 133 → 33 ms, but style, layout and rendering 68 → 129 ms (the scroll-driven fade-ins), so total main-thread time is about equal (394 vs 383 ms); TBT 0 on both. `docs/after/README.md` written; `docs/before/README.md` points to the session. The deployed set follows after merge.
 
 ## 2026-10-21
