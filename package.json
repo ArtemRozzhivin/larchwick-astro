@@ -26,6 +26,7 @@
     "rag:inspect": "node scripts/rag-eval/inspect.ts",
     "rag:eval": "node scripts/rag-eval/eval.ts",
     "lighthouse:import": "node scripts/lighthouse-import/import.ts",
+    "lighthouse:run": "node scripts/lighthouse-run/run.ts",
     "test": "node --test 'worker/**/*.test.ts' 'src/**/*.test.ts'",
     "import:wp": "node --env-file-if-exists=.env scripts/import-wp/import.ts",
     "studio": "npm --prefix studio run dev",

@@ -5,7 +5,7 @@ time**. Each phase ends with a short "what we did / what's next" and Artem's go-
 next one starts. Tick the boxes as work lands, and log every decision in
 [Decisions](#3-decisions).
 
-Last updated: 2026-10-20 · Current phase: **Phase 8 — performance and accessibility pass (next)**
+Last updated: 2026-10-20 · Current phase: **Phase 8 — performance and accessibility pass (in progress)**
 
 | #   | Phase                                    | Status      |
 | --- | ---------------------------------------- | ----------- |
@@ -23,8 +23,7 @@ Last updated: 2026-10-20 · Current phase: **Phase 8 — performance and accessi
 | 7   | Production and editor workflow           | done        |
 | 7b  | "Ask Larchwick" AI assistant (RAG)       | done        |
 | 7c  | Google Analytics 4 with consent          | done        |
-| 8   | Performance and accessibility pass       | not started |
-| 9   | Case study and Upwork portfolio entry    | not started |
+| 8   | Performance and accessibility pass       | in progress |
 | 10  | Redesign ("Larch and label")             | done        |
 
 ---
@@ -122,6 +121,7 @@ means rewriting history. Phase 0 makes it compliant before anything else is push
 | 2026-10-17 | The chat panel is the site's first client JavaScript: one small module, loaded only when the panel opens, with the CSP widened to `script-src 'self'` and `connect-src 'self'`                                                                                                                                           | A streamed, in-page chat needs JS; the no-JS alternative (a form that returns a full answer page) was judged too clunky. Every other part of the site stays zero-JS, and Phase 8 measures the cost. CLAUDE.md's prime directive is updated in the same change.                                                                                                                                                                                                                                               |
 | 2026-10-21 | New Phase 7c, before Phase 8: Google Analytics 4 with a consent banner; nothing from Google loads until the visitor accepts                                                                                                                                                                                              | Artem's request. GA sets cookies and the business sells across the EU, so consent comes first; loading `gtag.js` only after "Accept" also keeps the site as fast as today for everyone who doesn't accept (and for Lighthouse). Before Phase 8 so the performance pass measures the final site. Cloudflare Web Analytics (cookieless, no banner) was considered: page views only, no events or conversions.                                                                                                  |
 | 2026-10-21 | GA4 through `gtag.js` directly, not Google Tag Manager; events sent from our code; production builds only                                                                                                                                                                                                                | Lighter and reviewable in the repo; GTM pays off when marketers add tags without deploys, which this site doesn't need. Previews and local builds never send data. The Measurement ID is public config, not a secret.                                                                                                                                                                                                                                                                                        |
+| 2026-10-22 | Phase 9 (case study and Upwork portfolio entry) removed from the plan                                                                                                                                                                                                                                                    | Artem's decision.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
 
 ### Open
 
@@ -359,7 +359,7 @@ able to explain on a client call.
   - It writes `CREDITS.md`.
   - `CREDITS.md` also lists the fonts (OFL) and the icons.
     `og.png` is added when it arrives.
-- [x] README: a "Demo project — fictional business" header. The full rewrite comes in Phase 9.
+- [x] README: a "Demo project — fictional business" header.
 
 **Exit:** the already-public repo is compliant: a licence, credits, no private data, and the
 evidence committed.
@@ -940,65 +940,56 @@ visitor who declines (and Lighthouse) loads nothing from Google.
 
 ### Phase 8 — Performance and accessibility pass
 
-- [ ] **Paired session:** re-run the before set (after checking the WordPress versions are unchanged) and the after set on the
-      same machine, with the same browser version and window, on the same day. The primary table uses this
-      session; the Phase 1 numbers stay as the archived first baseline.
-- [ ] Targets (mobile), on the primary set for all 9 URLs:
+- [x] **Paired session (2026-10-22, scripted, PLAN §10):**
+  - **Setup:** WordPress versions re-checked, unchanged. 116 runs (9 URLs × mobile/desktop ×
+    5 or 3 runs × 2 sites), the two sites alternating run by run, all imported
+    (`docs/{before,after}/lighthouse/`).
+  - **Headline (home, mobile, median of 5):** Performance **69 → 100**, total bytes
+    **1,118 → 115 KiB**.
+  - **Every page, mobile:** Performance 68–94 → 99–100, LCP 2.6–7.1 s → 1.6–2.3 s.
+  - **Write-up:** `docs/after/README.md`, with the full table and what moved the numbers.
+  - The Phase 1 numbers stay as the archived first look.
+- [x] Targets (mobile), on the primary set for all 9 URLs:
 
-  - Performance ≥ 95
-  - SEO 100
-  - Accessibility ≥ 95
-  - Best Practices ≥ 95
+  - Performance ≥ 95 ✓ (99–100)
+  - SEO 100 ✓
+  - Accessibility ≥ 95 ✓ (97–100; the 97s are the fade-in, kept by Artem's choice)
+  - Best Practices ≥ 95 ✓ on the deployed site (100). The local primary set scores 78 on both
+    sides, because plain http fails `is-on-https` and `redirects-http`.
 
-  The deployed set is reported separately. Fix until the targets are met, or document honestly
-  why one isn't.
+- [ ] The deployed set (production, https), reported separately: measured once this branch is
+      live.
 
-- [ ] JS audit: count `astro-island` in `dist`, and list every script shipped with its reason.
-- [ ] Image audit: every `<img>` has width, height, alt and the right loading value; the LCP image
-      has priority.
-- [ ] Manual accessibility pass:
-  - keyboard only
-  - skip link
-  - focus rings
-  - heading order
-  - axe
-  - alt text: 30 of 30
-- [ ] Write `docs/after/README.md` in the same shape as `docs/before/README.md`.
+- [x] JS audit (2026-10-21): 0 `astro-island` in `dist`; scripts: the ChatPanel loader (2.1 KB),
+      the consent script (2.1 KB) and their shared event module (1.7 KB) on every page, the chat
+      module (4.1 KB) on the panel's first open, plus JSON-LD data blocks. Nothing else.
+- [x] Image audit (2026-10-21): all 95 `<img>` in `dist` have width, height and alt; only the 5
+      page-banner photos have an empty alt, on purpose (decorative beside the H1).
+  - **Fixed:** the blog index and archives lazy-loaded their LCP image (the first card). The
+    first card now gets `priority` (`PostGrid prioritizeFirst`): eager, `fetchpriority=high`.
+  - **Fixed:** Astro's `quality: 75` made AVIF larger than WebP (a 960 px photo: AVIF 104 KB,
+    WebP 77 KB). Quality 50 looks the same at 100% (checked side by side) and halves the bytes.
+    Measured locally, images: home 51 → 19 KB, blog 515 → 224 KB, services 140 → 56 KB; the
+    blog page weighs 613 → 320 KB.
+  - **Tried and dropped:** inlining the CSS (`inlineStylesheets: 'always'`). Each page's HTML
+    went from 10 to 18 KB gzipped and the CSS could no longer be cached; FCP stayed at 1.06 s
+    and LCP got slightly worse (home 1.58 → 1.73 s).
+- [x] Manual accessibility pass (2026-10-21, production, 9 URLs):
+  - **Keyboard only:** Tab order skip link → consent banner → wordmark → menu → content; every
+    stop shows a focus ring.
+  - **Headings:** one H1 per page and no skipped levels. The banner's H2 comes first only while
+    the banner is open.
+  - **axe 4.10, all rules, after scrolling the page:** 0 violations on all 9 URLs, and no element
+    is left below full opacity.
+  - **Lighthouse "color contrast" (Accessibility 97 on blog, FAQ, products, services and the
+    pour-over post):** blocks caught mid-way through the scroll fade-in, e.g. `#e9ece6` on
+    `#f1f2ee`, contrast 1.06. axe at load flags the same 3–15 nodes, and after scrolling 0.
+  - **Alt text:** every content image has one; the 5 banner photos are decorative.
+- [x] `docs/after/README.md`, in the same shape as `docs/before/README.md`: results, what moved
+      the numbers, how to read them, the environment and privacy.
 
 **Exit:** the after numbers are saved as JSON, with a summary next to the before numbers.
 **Talking points:** what actually moved the numbers, using evidence from the reports, not guesses.
-
-### Phase 9 — Case study and Upwork portfolio entry
-
-- [ ] Write `docs/case-study.md`:
-  - problem
-  - approach
-  - key decisions and why
-  - import report numbers
-  - before/after table: measured values only, with their conditions
-  - the editor workflow
-  - limitations
-- [ ] Final README:
-  - what it is, with the demo label
-  - architecture
-  - how to run each part
-  - the importer guide
-- [ ] After screenshots at 360, 768 and 1280 px. The before set is from Phase 1.
-- [ ] Upwork entry (appendix A):
-  - Page and post counts come from `docs/import-report.md`. Say that Home was rebuilt by hand.
-  - Instead of "kept every URL working", quote the parity report's figures and name the shortlink
-    limitation.
-  - X→Y and A→B are the D-13 headline numbers.
-- [ ] Final check against §2:
-  - every sentence and number traces to a file in `docs/`
-  - the credits are complete
-  - no private data in any file
-  - the labels are everywhere
-  - the licence is present
-  - no employer code
-  - no fake testimonials
-
-**Exit:** the definition of done in §1 holds.
 
 ### Phase 10 — Redesign ("Larch and label")
 
@@ -1025,6 +1016,21 @@ picked "Larch and label".
 
 Artem runs Lighthouse by hand, and the same steps apply to before and after.
 `scripts/lighthouse-import/` collects and summarises the saved reports.
+
+**Phase 8 (2026-10-21, Artem's decision): the paired session is scripted.**
+`npm run lighthouse:run` (`scripts/lighthouse-run/run.ts`) runs the same protocol with the
+Lighthouse CLI (pinned `lighthouse@13.5.0`) in the same Brave, headless:
+
+- **Coverage:** 9 URLs, mobile then desktop, 5 runs for home and 3 for the rest.
+- **Order:** the two sides alternate run by run, so drift in the machine's speed lands on both.
+- **Output:** reports are saved as `docs/<side>/lighthouse/inbox/<page>-<device>-<n>.json` for
+  `npm run lighthouse:import`.
+- **The Astro side:** the local build served by `npx wrangler dev --port 8787`, reached as
+  `http://larchwick-astro.local` through Chrome's `--host-resolver-rules` (no `/etc/hosts` edit).
+- **No HTTPS upgrade:** Brave's HTTPS upgrade is disabled by flag, which is what Shields off did
+  by hand.
+- **Desktop:** the CLI's `--preset=desktop` (1350 px emulated) replaces the window width, the
+  same for both sides.
 
 - **Browser:**
   - Use one browser for both sides; currently Brave, which is Chromium-based.
@@ -1155,7 +1161,7 @@ Fonts: DM Serif Display for headings, Inter for body, both self-hosted. Layout: 
 
 - Title: "WordPress to Astro + Sanity Migration (Personal Project)".
 - Skills: Astro, Sanity, Website Migration, Technical SEO, TypeScript, Tailwind CSS.
-- Description template (brackets filled only from `docs/`, wording adjusted per Phase 9):
+- Description template (brackets filled only from `docs/`):
 
   > Demo WordPress site I built for a fictional coffee roaster. I moved [N] pages and [N] posts to
   > Astro + Sanity with an automated import script, kept every URL working with 301 redirects, and
