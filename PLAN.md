@@ -5,7 +5,7 @@ time**. Each phase ends with a short "what we did / what's next" and Artem's go-
 next one starts. Tick the boxes as work lands, and log every decision in
 [Decisions](#3-decisions).
 
-Last updated: 2026-10-20 · Current phase: **Phase 8 — performance and accessibility pass (next)**
+Last updated: 2026-10-20 · Current phase: **Phase 8 — performance and accessibility pass (in progress)**
 
 | #   | Phase                                    | Status      |
 | --- | ---------------------------------------- | ----------- |
@@ -23,7 +23,7 @@ Last updated: 2026-10-20 · Current phase: **Phase 8 — performance and accessi
 | 7   | Production and editor workflow           | done        |
 | 7b  | "Ask Larchwick" AI assistant (RAG)       | done        |
 | 7c  | Google Analytics 4 with consent          | done        |
-| 8   | Performance and accessibility pass       | not started |
+| 8   | Performance and accessibility pass       | in progress |
 | 9   | Case study and Upwork portfolio entry    | not started |
 | 10  | Redesign ("Larch and label")             | done        |
 
@@ -940,18 +940,25 @@ visitor who declines (and Lighthouse) loads nothing from Google.
 
 ### Phase 8 — Performance and accessibility pass
 
-- [ ] **Paired session:** re-run the before set (after checking the WordPress versions are unchanged) and the after set on the
-      same machine, with the same browser version and window, on the same day. The primary table uses this
-      session; the Phase 1 numbers stay as the archived first baseline.
-- [ ] Targets (mobile), on the primary set for all 9 URLs:
+- [x] **Paired session (2026-10-22, scripted, PLAN §10):**
+  - **Setup:** WordPress versions re-checked, unchanged. 116 runs (9 URLs × mobile/desktop ×
+    5 or 3 runs × 2 sites), the two sites alternating run by run, all imported
+    (`docs/{before,after}/lighthouse/`).
+  - **Headline (home, mobile, median of 5):** Performance **69 → 100**, total bytes
+    **1,118 → 115 KiB**.
+  - **Every page, mobile:** Performance 68–94 → 99–100, LCP 2.6–7.1 s → 1.6–2.3 s.
+  - **Write-up:** `docs/after/README.md`, with the full table and what moved the numbers.
+  - The Phase 1 numbers stay as the archived first look.
+- [x] Targets (mobile), on the primary set for all 9 URLs:
 
-  - Performance ≥ 95
-  - SEO 100
-  - Accessibility ≥ 95
-  - Best Practices ≥ 95
+  - Performance ≥ 95 ✓ (99–100)
+  - SEO 100 ✓
+  - Accessibility ≥ 95 ✓ (97–100; the 97s are the fade-in, kept by Artem's choice)
+  - Best Practices ≥ 95 ✓ on the deployed site (100). The local primary set scores 78 on both
+    sides, because plain http fails `is-on-https` and `redirects-http`.
 
-  The deployed set is reported separately. Fix until the targets are met, or document honestly
-  why one isn't.
+- [ ] The deployed set (production, https), reported separately: measured once this branch is
+      live.
 
 - [x] JS audit (2026-10-21): 0 `astro-island` in `dist`; scripts: the ChatPanel loader (2.1 KB),
       the consent script (2.1 KB) and their shared event module (1.7 KB) on every page, the chat
@@ -978,7 +985,8 @@ visitor who declines (and Lighthouse) loads nothing from Google.
     pour-over post):** blocks caught mid-way through the scroll fade-in, e.g. `#e9ece6` on
     `#f1f2ee`, contrast 1.06. axe at load flags the same 3–15 nodes, and after scrolling 0.
   - **Alt text:** every content image has one; the 5 banner photos are decorative.
-- [ ] Write `docs/after/README.md` in the same shape as `docs/before/README.md`.
+- [x] `docs/after/README.md`, in the same shape as `docs/before/README.md`: results, what moved
+      the numbers, how to read them, the environment and privacy.
 
 **Exit:** the after numbers are saved as JSON, with a summary next to the before numbers.
 **Talking points:** what actually moved the numbers, using evidence from the reports, not guesses.
