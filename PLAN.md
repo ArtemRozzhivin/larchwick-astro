@@ -5,7 +5,7 @@ time**. Each phase ends with a short "what we did / what's next" and Artem's go-
 next one starts. Tick the boxes as work lands, and log every decision in
 [Decisions](#3-decisions).
 
-Last updated: 2026-10-20 · Current phase: **Phase 7c — Google Analytics 4 with consent (in progress)**
+Last updated: 2026-10-20 · Current phase: **Phase 8 — performance and accessibility pass (next)**
 
 | #   | Phase                                    | Status      |
 | --- | ---------------------------------------- | ----------- |
@@ -22,7 +22,7 @@ Last updated: 2026-10-20 · Current phase: **Phase 7c — Google Analytics 4 wit
 | 6   | Redirects and SEO parity                 | done        |
 | 7   | Production and editor workflow           | done        |
 | 7b  | "Ask Larchwick" AI assistant (RAG)       | done        |
-| 7c  | Google Analytics 4 with consent          | in progress |
+| 7c  | Google Analytics 4 with consent          | done        |
 | 8   | Performance and accessibility pass       | not started |
 | 9   | Case study and Upwork portfolio entry    | not started |
 | 10  | Redesign ("Larch and label")             | done        |
@@ -918,8 +918,22 @@ Steps (one PR each):
       production-like build with GA's collect requests blocked and their bodies read: every event
       and parameter above arrives (chat_source_click needs a real answer: production). Then
       Artem: register the parameters as custom dimensions and mark the three key events in GA.
-- [ ] G5 — Checks: Lighthouse with and without consent, no CSP violations, the banner by
-      keyboard and screen reader, no requests to Google before "Accept".
+- [x] G5 — Checks on production (2026-10-21), headless Brave with GA's collect requests blocked
+      and their bodies read:
+  - **Before consent:** 0 requests to Google; the banner shows without taking focus.
+  - **Events:** every event in the table arrives with its parameters: `cta_click` (sent from
+    `/products/`), `chat_answer {answered, 3}` from a real answer, `chat_source_click
+{/about/}`, `generate_lead` once, `page_not_found`, `contact_click`. No CSP violations.
+  - **Lighthouse 13 CLI, mobile, home, without consent** (3 runs): Performance 99–100,
+    LCP 1.7–1.8 s, TBT 0 ms, CLS 0, 5.6 KB of JavaScript, no Google request. The LCP element
+    is the header wordmark, not the banner.
+  - **With consent:** the CLI kept serving `gtag.js` from cache, so there was no clean cold
+    run. TBT was 10–20 ms with GA running.
+  - **`gtag.js` itself:** 165 KB brotli (494 KB unpacked), cacheable for 15 minutes
+    (`max-age=900`).
+  - Phase 8's manual runs add one "after Accept" run per device for the case study.
+  - Artem: star `generate_lead`, `contact_click` and `chat_question` once they appear under
+    Admin → Events.
 
 **Exit:** GA4 receives page views and the events above in production, only after consent; a
 visitor who declines (and Lighthouse) loads nothing from Google.

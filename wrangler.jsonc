@@ -17,6 +17,9 @@
   // Only /api/* reaches the script (the contact form, PLAN.md D-4; the assistant, Phase 7b);
   // every page is a static asset.
   "main": "worker/index.ts",
+  // Workers Logs: the dashboard's Logs tab for each run of the script (only /api/*). Handlers log
+  // failures only, never a question or a form message.
+  "observability": { "enabled": true },
   // The assistant: embeddings, the passages that production builds index, and a per-visitor limit.
   // "remote": `wrangler dev` uses the real services (deploys ignore it); Vectorize has no local mode.
   "ai": { "binding": "AI", "remote": true },
