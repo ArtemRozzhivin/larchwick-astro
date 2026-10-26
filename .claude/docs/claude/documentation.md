@@ -37,7 +37,9 @@ Newest date section on top, one per day.
 rejected and why, what was NOT verified, and — for this template especially —
 what a change cost in shipped kB.
 
-Append only; never rewrite an existing entry.
+Entries describe what shipped. While the work is not yet merged to main, its
+entries may be corrected in place; once merged they are append-only, and a
+correction is a new bullet.
 </worklog>
 
 <project_doc>

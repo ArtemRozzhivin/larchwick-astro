@@ -21,7 +21,8 @@ the old Elementor layout; the importer never overwrites them).
    and three ticked promises. Beside it, the hero's **Coffee label** for Ethiopia Yirgacheffe
    (origin, process, altitude, variety, roast, tasting notes, "€14 for 250 g") with a "Roasted to
    order, Mon & Thu" stamp that presses on once on load. The hero photo stays in Sanity but is
-   hidden while the label is filled in.
+   hidden while the label is filled in. On the narrowest phones (320 px wide) the label's name
+   gets smaller, so a long word still fits beside the stamp.
 2. **Features** — "Roasted to order", "Fully traceable" and "Brewing help", each with a cup icon.
 3. **Our coffees** — the **Bags** layout: four coffee bags (Ethiopia Yirgacheffe, Colombia
    Huila, House Espresso, Autumn Blend) coloured by roast, with one line, the roast and the 250 g
@@ -44,7 +45,10 @@ settings in Sanity.
 
 - Page title and description: the old site's Yoast values, word for word, stored in Sanity.
 - Shared links show the Larchwick coffee-bean preview image.
-- Search engines get Organization and WebSite structured data (name, website, email, phone).
+- Search engines get Organization and WebSite structured data (name, website, logo, email,
+  phone). The logo is a square version of the coffee-bean icon.
+- In the sitemap, Home is dated with its latest edit or the newest post, whichever is later,
+  since it lists the newest posts.
 
 ## Content owner
 
@@ -52,5 +56,5 @@ Edited in Sanity Studio (Pages → Home). Changes go live with the next build.
 
 ## Known limitations
 
-- The design still follows the WordPress site closely; a redesign is planned for later (PLAN.md
-  Phase 10).
+- The footer's contact details are placeholders by design (a fictional business): a reserved
+  `.example` email address and a made-up phone number.

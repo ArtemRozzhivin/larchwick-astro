@@ -1,7 +1,8 @@
 # Project Structure
 
-A landing page here is **a Layout plus an ordered list of sections, with all copy
-in a content file**. That split is the whole point: the next page takes an hour.
+A page here is **a Layout plus an ordered list of sections**, with its content in Sanity
+and the remaining fixed copy in `src/lib/content/`. That split is the whole point: the
+next page takes an hour.
 
 ---
 
@@ -19,13 +20,13 @@ larchwick-astro/
 │   ├── editor-guide.md  How to edit and publish in Sanity Studio, for non-developers
 │   ├── pages/       One doc per page, for PM/QA/clients + index
 │   └── STRUCTURE.md this file
-├── public/          Served as-is: favicon.svg (the Larchwick bean), og.jpg (1200×630), _headers (Cloudflare response headers)
-├── scripts/         Node tools outside the site: credits/, seo-check/, lighthouse-import/, lighthouse-run/, rebuild-time/, rag-eval/ (Node built-ins only) and import-wp/ (WordPress → Sanity; scripts/package.json, Vitest tests)
+├── public/          Served as-is: favicon.svg (the Larchwick bean), logo.png (512×512, the JSON-LD logo), og.jpg (1200×630), _headers (Cloudflare response headers)
+├── scripts/         Node tools outside the site: credits/, seo-check/, lighthouse-import/, lighthouse-run/, rebuild-time/, rag-eval/ (Node built-ins only), shared/ (their common code, Node built-ins only: wxr.ts WXR parser, html.ts entity decoding, http.ts request: a GET that returns 3xx responses unfollowed and retries once on a network error, 429 or 5xx, markdown.ts tables, privacy.ts the WordPress login scrubber for the SEO crawl and the Lighthouse import) and import-wp/ (WordPress → Sanity; scripts/package.json, Vitest tests; `npm --prefix scripts run check` type-checks it and shared/)
 ├── src/             Source
-├── studio/          Sanity Studio (own package.json): schemaTypes/{documents,objects,sections}, desk structure, env.ts (project ID)
+├── studio/          Sanity Studio (own package.json): schemaTypes/{documents,objects,sections}, desk structure, env.ts (project ID), homePage.ts (HOME_SLUG, isHomePage(); import-free, because src/lib/routes.ts imports it)
 ├── astro.config.ts  The only build config: static output, no adapter, trailing slashes
 ├── wrangler.jsonc   Cloudflare Worker: serves dist/ as static assets (trailing-slash redirects, 404 page); worker/ handles /api/*
-├── worker/          The contact form endpoint (/api/contact → Resend) and its node:test tests
+├── worker/          /api/contact (→ Resend) and /api/chat (the assistant), rate-limit.ts (visitor keys: IPv4 address or IPv6 /64), node:test tests, test-fakes.ts (the tests' rate-limiter fakes; not a test file, not bundled)
 ├── .env.example     SANITY_WRITE_TOKEN for scripts; copy to .env (gitignored). The site build needs no env
 ├── .dev.vars.example Local Worker settings for `wrangler dev` (Resend, ANTHROPIC_API_KEY); copy to .dev.vars
 ├── .node-version    Node 24, read by CI and the Cloudflare build
@@ -40,48 +41,71 @@ larchwick-astro/
 
 ```
 src/
-├── pages/                      Routes. One file = one URL.
-│   ├── index.astro             Home — Layout + sections, no copy
+├── pages/                      Routes. One file = one URL (a [param] file = one URL per value).
+│   ├── index.astro             Home — the Sanity `home` page through SectionRenderer
+│   ├── [slug].astro            Every other Sanity page (about, services, products, faq, contact, privacy)
+│   ├── blog/                   index.astro, [slug].astro (posts), category/[slug].astro, tag/[slug].astro
+│   ├── contact/[result].astro  /contact/thanks/ and /contact/error/ (noindex), one per CONTACT_RESULTS entry, on a Section; copy from content/contact.ts
 │   ├── 404.astro               Header, footer, and its own markup in a Section; copy from content/not-found.ts
 │   └── robots.txt.ts           Generated from siteConfig at build time
 │
 ├── layouts/
-│   └── Layout.astro            <head>, SEO props, fonts, JSON-LD, skip link, Header, Footer
+│   └── Layout.astro            <head>, SEO props, fonts, JSON-LD, skip link, consent banner, Header, Footer, chat panel
 │
 ├── components/
+│   ├── blog/                   BlogArchive, PostCard, PostGrid, PostMeta, and the post page's PostHeader, PostTags, PostNav
 │   ├── chat/                   ChatPanel.astro: the "Ask Larchwick" launcher, popover panel and lazy loader
 │   ├── consent/                ConsentBanner.astro: the analytics consent banner (Google Analytics only after Accept)
+│   ├── rich-text/              RichText.astro (Portable Text) and its figure, gallery, table, callout, quote and link parts
 │   ├── sections/               The page blocks
-│   │   ├── Section.astro       Layout primitive: container, rhythm, header
-│   │   ├── Header.astro        Wordmark, nav with active state, mobile menu (zero JS)
-│   │   ├── Hero.astro
-│   │   ├── Features.astro
+│   │   ├── Section.astro       Layout primitive: container, rhythm, header; exports Tone and LightTone
+│   │   ├── SectionHeader.astro The eyebrow/heading/intro header, coloured for the tone (Section, ImageText)
+│   │   ├── SectionRenderer.astro  One `case` per Sanity section type
+│   │   ├── heading.ts          itemHeading(): h3 under a section heading, h2 without
+│   │   ├── Header.astro        Wordmark, nav with active state, popover menu (zero JS)
 │   │   ├── FAQ.astro           <details> accordion (zero JS)
-│   │   ├── CTA.astro
-│   │   └── Footer.astro
+│   │   └── …                   Hero, TextBlock, ImageText, Features, Stats, CardGrid, PriceTable,
+│   │                           Steps, LatestPosts, CTA, ContactForm, PullQuote, Footer
 │   └── ui/                     Primitives
-│       ├── button.ts           cva variants; .astro uses buttonVariants()
+│       ├── button.ts           buttonVariants, ButtonVariant, iconButtonVariants (cva)
+│       ├── field.ts            fieldVariants: text inputs and textareas (cva)
+│       ├── link.ts             inlineLinkClass, pillVariants(): plain strings, also used by the chat module
+│       ├── CtaButtons.astro    The hero's and CTA band's button row from Sanity links (cta_click tracking)
+│       ├── SpecList.astro      Label/value rows, as on a coffee label
+│       ├── CoffeeLabel.astro, SanityImage.astro
 │       └── Icon.astro          Inline SVG icon by name (Lucide paths, ISC)
 │
+├── integrations/               redirects.ts (writes dist/_redirects, drops noindex and canonical-elsewhere pages from the sitemap) + redirect-rules.ts,
+│                               preview-noindex.ts (noindex header on preview branches),
+│                               rag-index.ts (refreshes the assistant's Vectorize index on main builds)
+│
 ├── lib/
-│   ├── analytics/              config.ts (Measurement ID gate, cookie helpers; pure, tested) + consent.ts (the banner's behaviour, gtag loader) + track.ts (events: data-track attributes, saved clicks)
-│   ├── config/site.ts          Brand, URL, nav, contact, footer, analytics ID — single source
-│   ├── chat/                   client.ts (the panel's behaviour, loaded on open) + stream.ts (pure, tested)
-│   ├── content/                Copy, one file per page
+│   ├── analytics/              config.ts (Measurement ID gate, cookie helpers, the banner and <main> ids; pure, tested) + consent.ts (the banner's behaviour, gtag loader) + track.ts (events: data-track attributes, saved clicks)
+│   ├── config/site.ts          Brand, URL, OG defaults, logo, analytics ID, header and footer labels — single source
+│   ├── chat/                   client.ts (the panel's behaviour, loaded on open) + stream.ts (pure, tested; QUESTION_MAX)
+│   │                           + config.ts (CHAT_PANEL_ID)
+│   ├── contact/limits.ts       LIMITS: the form's field lengths, checked by the inputs and the Worker
+│   ├── errors.ts               errorMessage(), isTimeout(): the Worker, the sitemap and the index build
+│   ├── content/                Copy that isn't Sanity content
+│   │   ├── blog.ts             Blog labels, breadcrumbs, archive title and description templates
 │   │   ├── chat.ts             The assistant's panel copy and suggested questions
 │   │   ├── consent.ts          The consent banner's copy
-│   │   ├── home.ts             Home: SEO, hero, features, CTA
-│   │   └── not-found.ts        The 404 page
-│   ├── integrations/           redirects.ts (writes dist/_redirects, trims noindex from the sitemap) + redirect-rules.ts,
-│   │                           preview-noindex.ts (noindex header on Workers Builds preview branches),
-│   │                           rag-index.ts (refreshes the assistant's Vectorize index on main builds)
-│   ├── rag/                    chunks.ts (Sanity content → passages for the assistant) + index-plan.ts
+│   │   ├── contact.ts          The contact form's field labels and the thanks/error pages
+│   │   ├── not-found.ts        The 404 page
+│   │   └── ui.ts               Fixed labels beside Sanity content: roast lines, callout titles
+│   ├── format/date.ts          formatPostDate(): en-GB, UTC (the post page and the assistant's passages)
+│   ├── rag/                    config.ts (index name, model, namespace, Excerpt/Passage, EXCERPT_FIELDS) + chunks.ts (Sanity content →
+│   │                           passages) + index-plan.ts (what to embed and delete, listAllIds(), LIST_PAGE_SIZE) + public-check.ts (the leak guard)
+│   ├── routes.ts               HOME_SLUG (re-exported from studio/homePage.ts), CONTACT_SLUG, BLOG_PATH, CONTACT_RESULTS; pagePath(), postPath(), termPath(), contactResultPath()
 │   ├── sanity/                 client.ts (fetch to the Sanity query API), queries.ts (defineQuery),
-│   │                           posts.ts (cached posts/terms, paths, related, archives),
-│   │                           settings.ts (cached Site settings: menu, contact, demo label),
-│   │                           image.ts (crop/hotspot URLs), sanity.types.ts (TypeGen; never edit)
-│   ├── seo/schema.ts           Typed JSON-LD builders (Organization, WebSite)
-│   └── types/icon.ts           Allowed icon names
+│   │                           posts.ts (cached posts/terms, termArchives(): which terms get an archive, related and neighbouring posts, sitemap dates),
+│   │                           archives.ts (category and tag archive paths, SEO and noindex),
+│   │                           settings.ts (cached Site settings: menu, contact, demo label), text.ts (plain text),
+│   │                           image.ts (crop/hotspot URLs, social images), sanity.types.ts (TypeGen; never edit)
+│   ├── seo/                    schema.ts (JSON-LD: Organization, WebSite, BlogPosting, BreadcrumbList, FAQPage),
+│   │                           canonical.ts (canonicalUrl()), layout-seo.ts (layoutSeo(), homeSeo(): seo fields → Layout props),
+│   │                           sitemap.ts (<lastmod> dates, which built pages the sitemap leaves out)
+│   └── types/                  icon.ts (allowed icon names), link.ts (Link, UsableLink, isUsableLink); import via index.ts (@lib/types)
 │
 └── styles/global.css           Tailwind v4 @theme tokens, base rules, container
 ```
@@ -90,27 +114,21 @@ src/
 
 ## Building a page
 
-1. **Copy** → `src/lib/content/<page>.ts`, one exported object, `as const`.
-2. **Page** → `src/pages/<page>.astro`: a Layout and the sections you need.
-3. **New block** → only if nothing in `sections/` fits.
+Pages are Sanity `page` documents: one with slug `<slug>` is built at `/<slug>/` by
+`src/pages/[slug].astro`, which renders its sections through `SectionRenderer.astro`. A
+new page is made in the Studio, with no code change.
 
-```astro
----
-import { pricing } from '@lib/content/pricing'
-import FAQ from '@components/sections/FAQ.astro'
-import Hero from '@components/sections/Hero.astro'
-import Layout from '@layouts/Layout.astro'
----
+A new section type: its schema in `studio/schemaTypes/sections/` (added to `sectionTypes` in
+its `index.ts`, which builds `SECTION_TYPES`; `lightToneField` unless the block works on the
+dark band), a
+component in `src/components/sections/` whose props use the schema's field names, a
+`case` in `SectionRenderer.astro`, then `npm run studio:typegen`.
 
-<Layout {...pricing.seo}>
-  <Hero {...pricing.hero} />
-  <FAQ {...pricing.faq} />
-</Layout>
-```
-
-`Layout` renders the skip link, header and footer on every page. A content
-file's `seo` object (`title`, `description`) is spread into it; `title` is the
-exact `<title>`.
+`Layout` renders the skip link, header, footer, consent banner and chat panel on every
+page. Sanity pages, posts and the blog index spread `layoutSeo()` into it: title,
+description, social image, `noindex` and canonical from the document's `seo` fields, each
+falling back to the route's defaults. Home uses `homeSeo()`, which leaves out noindex and
+canonical; term archives get theirs from `sanity/archives.ts`. `title` is the exact `<title>`.
 
 ---
 
@@ -120,7 +138,7 @@ Every block in `sections/` follows the same shape, so they stay interchangeable:
 
 - a typed `interface Props` in the frontmatter, `readonly` arrays for lists
 - **all copy arrives via props** — never baked into the component
-- an optional `id` with a default, so in-page anchors work
+- an optional `id` with **no default**, so two sections of one type on a page never share one
 - built on `Section.astro` unless it needs a full-bleed layout
 - static markup, no `client:` directive
 - colour from tokens only
@@ -131,27 +149,34 @@ Copy the closest existing section rather than starting from scratch.
 
 ## Where does this go?
 
-| What                                    | Where                        |
-| --------------------------------------- | ---------------------------- |
-| Words a visitor reads on one page       | `src/lib/content/<page>.ts`  |
-| Brand name, URL, nav, contact, footer   | `src/lib/config/site.ts`     |
-| A reusable page block                   | `src/components/sections/`   |
-| A small reusable element (button, icon) | `src/components/ui/`         |
-| A colour, shadow, or font token         | `src/styles/global.css`      |
-| A font family or weight                 | `fonts` in `astro.config.ts` |
-| JSON-LD structured data                 | `src/lib/seo/schema.ts`      |
-| A route                                 | `src/pages/`                 |
+| What                                                     | Where                                                 |
+| -------------------------------------------------------- | ----------------------------------------------------- |
+| Page content, posts, the menu, contact details           | Sanity Studio (`studio/schemaTypes/` for its fields)  |
+| Copy that isn't Sanity content (labels, result pages)    | `src/lib/content/`                                    |
+| Brand name, URL, OG defaults, UI labels                  | `src/lib/config/site.ts`                              |
+| A reusable page block                                    | `src/components/sections/`                            |
+| A small reusable element (button, icon)                  | `src/components/ui/`                                  |
+| A shared class string (button, field, inline link, pill) | `src/components/ui/*.ts`                              |
+| A colour, shadow, or font token                          | `src/styles/global.css`                               |
+| A font family or weight                                  | `fonts` in `astro.config.ts`                          |
+| JSON-LD structured data                                  | `src/lib/seo/schema.ts`                               |
+| A route                                                  | `src/pages/`                                          |
+| A URL path (page, post, archive, contact result)         | `src/lib/routes.ts`                                   |
+| Code or a constant the Worker and the pages share        | `src/lib/` (the Worker imports it, never the reverse) |
+| Code two or more Node scripts share                      | `scripts/shared/` (Node built-ins only)               |
 
 ---
 
 ## JavaScript
 
 Pages ship **no JavaScript of their own**: no view transitions, no prefetch script,
-no React, no islands. The one exception is the assistant (`components/chat/`,
-`lib/chat/`): a small loader on every page, the chat module only once the panel opens.
+no React, no islands. The exceptions are the assistant (`components/chat/`,
+`lib/chat/`: a small loader on every page, the chat module only once the panel opens)
+and the consent banner (`components/consent/`, `lib/analytics/`).
 
-Order of preference: HTML → CSS → ask first. The FAQ accordion and the mobile
-menu are `<details>`/`<summary>`; icons are inline SVG from `Icon.astro`. Any
+Order of preference: HTML → CSS → ask first. The FAQ accordion is
+`<details>`/`<summary>` and the mobile menu a native popover; icons are inline SVG
+from `Icon.astro`. Any
 script, or a UI framework, is an architecture decision that needs approval.
 
 ---
@@ -169,9 +194,10 @@ relative imports inside one folder.
 
 ## Conventions
 
-1. **One `<h1>` per page** — the Hero title (the 404 has its own). Section headings are `<h2>`. Card
-   titles are `<h3>` under a section title and `<h2>` when the section has none,
-   so no level is skipped.
+1. **One `<h1>` per page** — the Hero title on Sanity pages; posts, the blog index and
+   archives, the contact result pages and the 404 render their own. Section headings are `<h2>`. Card
+   titles are `<h3>` under a section title and `<h2>` when the section has none
+   (`itemHeading()` in `sections/heading.ts`), so no level is skipped.
 2. **Tokens only for colour** — `larch`, `larch-deep`, `needle`, `espresso`, `ink`,
    `mist`, `paper`, `surface`, `stamp`, `border`, `roast-*`, plus the `radius-*`
    and `shadow-label` tokens. No hex or arbitrary colour values in components, so
@@ -179,10 +205,13 @@ relative imports inside one folder.
    `espresso`.
 3. **`Section.astro` owns spacing** — do not re-do padding inside a block that
    already sits in it.
-4. **`siteConfig` owns the brand** — never hardcode a name, URL, or contact detail.
+4. **Site settings and `siteConfig` own the brand** — the menu, contact details and
+   description come from Site settings; the name, URL and UI labels from `siteConfig`. Never
+   hardcode either.
 5. **Trailing slashes** — every internal link ends in `/` (`/about/`, never
    `/about`); `trailingSlash: 'always'` and `build.format: 'directory'` keep
    WordPress's URLs.
-6. **Images** — `astro:assets` `<Image>` for anything in `src/assets/`; a raw
-   `<img>` only for files already in `public/`, always with `width`, `height`,
-   `loading`, and `decoding`.
+6. **Images** — Sanity images through `src/components/ui/SanityImage.astro`
+   (downloaded and re-encoded at build time, served from our origin, with width,
+   height and a srcset); a raw `<img>` only for files already in `public/`, always
+   with `width`, `height`, `loading`, and `decoding`.

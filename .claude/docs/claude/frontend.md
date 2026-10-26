@@ -1,7 +1,8 @@
 <file_types>
 .astro   anything rendered. Static, ships no JS.
-.ts      config, content, types, and shared class strings (button.ts exposes
-         buttonVariants, which .astro files use as a class string).
+.ts      config, content, types, and shared class strings (ui/button.ts and
+         ui/field.ts export cva variants; ui/link.ts exports plain strings,
+         because the lazy chat module uses them and must not carry cva).
 
 There are no .tsx files: the site has no React (PLAN.md D-7).
 </file_types>
@@ -13,16 +14,16 @@ then any derived constants. Template after the fence.
   ---
   interface Props {
     id?: string
-    title: string
+    heading: string
     items: readonly { label: string }[]
   }
 
-  const { id = 'features', title, items } = Astro.props
+  const { id, heading, items } = Astro.props
   ---
 
 Conditional classes use class:list, not string concatenation:
 
-  <div class:list={['rounded-sm p-6', isActive && 'bg-subtle', className]}>
+  <div class:list={['rounded-sm p-6', isActive && 'bg-surface', className]}>
 
 Pull anything longer than one short expression out of the template into a named
 const above the fence.
@@ -35,13 +36,15 @@ not with `??` scattered through the template.
 Content arrays are `readonly` — content files are `as const`, and a mutable
 `Item[]` will not accept them.
 
-An `id` prop with a sensible default belongs on every section, so pages can link
-to `#features` without editing the component.
+Every section takes an optional `id` with no default. A fixed default would
+give two sections of one type on a page the same id; pass one when a page needs
+an anchor.
 </props>
 
 <client_js>
-No client JavaScript beyond the assistant. No React, no client: directive, no
-<script> in a component or page except ChatPanel.astro's loader (the JSON-LD
+No client JavaScript beyond the assistant and the consent banner. No React, no
+client: directive, no <script> in a component or page except ChatPanel.astro's
+loader and ConsentBanner.astro's script (the JSON-LD
 <script type="application/ld+json"> is data, not code). The CSP allows only
 bundled scripts from our origin, so an inline script would be blocked.
 
@@ -68,16 +71,31 @@ Decorative SVG gets aria-hidden="true"; meaningful images get real alt text.
 Focus: a base rule in global.css gives every :focus-visible element a 2px
 currentColor outline (3px offset); buttons set their own outline colour in the
 cva variant. Never remove an outline without replacing it.
-Layout.astro renders a "Skip to content" link as the first focusable element
-(visible on focus) that targets <main id="main" tabindex="-1">.
+Layout.astro renders a "Skip to content" link (label in
+siteConfig.header.labels.skipToContent) as the first focusable element, visible
+on focus above the sticky header (focus:z-60), that targets
+<main id="main" tabindex="-1">.
 State is never colour alone: the active nav link gets an underline and
 aria-current ("page" on an exact match, "true" on an ancestor such as /blog/
 for /blog/<slug>/).
-Exactly one <h1> per page (the Hero title, or the 404's heading); section
+Exactly one <h1> per page: the Hero title on Sanity pages; posts, the blog index
+and archives, the contact result pages and the 404 render their own. Section
 headings are <h2>. Card
 titles inside a section are <h3> under a section title, and <h2> when the
-section has none (Features picks the level from its title), so no level is
-skipped.
+section has none (itemHeading() in sections/heading.ts picks the level; Features,
+CardGrid, FAQ, Steps, LatestPosts and the contact details use it), so no level
+is skipped.
+
+The assistant's panel is a non-modal popover with role="dialog". Its input and
+send button sit in a <fieldset disabled> until the loader has attached the
+listener that cancels a native submit (which would GET the question into the
+URL). The thinking status is static text beside a pulsing aria-hidden dot. While
+the answer streams, its bubble is aria-live="off" and the draft inert (hidden
+from screen readers, and its links can't be tabbed to or clicked); the finished
+answer and its sources go in once, as new nodes that are not inert, so the log
+announces each answer once. Over the per-visitor limit the 429 asks the visitor
+to wait a minute; over the site-wide one it says the assistant is busy. Escape closes the consent banner without
+storing a choice; after a first-visit choice, focus moves to #main.
 </accessibility>
 
 <forms>
@@ -86,7 +104,16 @@ native HTML (required, type="email", maxlength); the server re-checks it.
 
 The contact form (Phase 5c, PLAN.md D-4) posts to /api/contact, a small
 Cloudflare Worker script beside the static assets. It sends the message through
-Resend, then 303-redirects to a static thank-you page.
+Resend, then 303-redirects to a static thank-you page. The fields' maxlength
+comes from LIMITS in src/lib/contact/limits.ts, which the Worker checks too (line
+breaks counted once, as the textarea does), and their labels from contactForm in
+src/lib/content/contact.ts. Each visitor (an IPv4 address or an IPv6 /64) can
+send 2 messages a minute (CONTACT_LIMITER); more, a limiter or send failure, or a
+Resend call past 10 s go to /contact/error/. There is no site-wide or daily cap
+(PLAN D-27): a single script on one address uses up Resend's free 100 a day in
+about 50 minutes (3,000 a month in about 25 hours), and real messages then land
+on /contact/error/. Accepted for the demo; a Durable Object daily counter or
+Turnstile is the next step.
 
 No form or validation library is installed. Astro's own zod is v4 (astro/zod),
 and none of our code imports it.
@@ -94,9 +121,21 @@ and none of our code imports it.
 
 <ui_primitives>
 src/components/ui/
-  button.ts    cva variants (primary, secondary, inverse, inverse-outline;
-               sm/md/lg); .astro files call buttonVariants() for a class string
-  Icon.astro   inline SVG by name (Lucide 0.563.0 paths, ISC), no runtime
+  button.ts         buttonVariants (primary, secondary, accent,
+                    inverse-outline; sm/md/lg), ButtonVariant, and
+                    iconButtonVariants (square icon-only buttons; sm/md)
+  field.ts          fieldVariants: text inputs and textareas (sm/md)
+  link.ts           inlineLinkClass and pillVariants() (tags, chat
+                    suggestions and sources), plain strings, no cva
+  CtaButtons.astro  the hero's and the CTA band's button row from Sanity
+                    links; keeps the cta_click data-track attributes
+  SpecList.astro    label/value rows, as on a coffee label
+  CoffeeLabel.astro, SanityImage.astro
+  Icon.astro        inline SVG by name (Lucide 0.563.0 paths, ISC), no runtime
+
+src/lib/types/link.ts holds Link (a Sanity linkItem's label and href),
+UsableLink and isUsableLink(): render a link only when both are set. Import
+types through the barrel, @lib/types.
 
 Extend a primitive with a new cva variant rather than forking it. A new icon is
 a name in ICON_NAMES (src/lib/types/icon.ts) plus its nodes in Icon.astro,

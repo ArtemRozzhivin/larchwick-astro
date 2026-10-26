@@ -1,20 +1,25 @@
 <baseline>
-A page on this site ships 0 kB of JavaScript: no ClientRouter, no prefetch
-script, no islands. The only <script> in the HTML is the JSON-LD data block.
+Pages ship no JavaScript of their own: no ClientRouter, no prefetch script, no
+islands. The only scripts are the four bundled files in the budget below; every
+other <script> in the HTML is a JSON-LD data block.
 
 That is the number to protect. Every review asks what a change adds to it.
 
 Measure, do not guess:
   npm run build
-  find dist -name '*.js'                      nothing means no JS shipped
-  grep -o '<script[^>]*>' dist/index.html     only type="application/ld+json"
+  wc -c dist/_astro/*.js                      exactly four files (2026-10-24: 2,302 B
+                                              chat loader, 2,434 B consent, 4,359 B
+                                              chat module, 1,698 B events)
+  grep -o '<script[^>]*>' dist/index.html     the two module scripts + ld+json blocks
 </baseline>
 
 <javascript_budget>
 The budget is the assistant and the consent banner, nothing else: ChatPanel.astro's
-loader (2.1 KB, every page), src/lib/chat/client.ts (4.1 KB, fetched on the panel's
-first open), ConsentBanner.astro's script (2.1 KB, every page) and the event module
-they share (src/lib/analytics/track.ts, 1.7 KB, every page). Google's gtag.js is
+loader (2.2 KB, every page), src/lib/chat/client.ts (4.3 KB, fetched on the panel's
+first open), ConsentBanner.astro's script (2.4 KB, every page) and the event module
+they share (src/lib/analytics/track.ts, 1.7 KB, every page). The chat module imports
+its link and pill classes from src/components/ui/link.ts, which are plain strings on
+purpose: importing a cva helper there would ship cva to the browser. Google's gtag.js is
 not ours to size: it loads only after "Accept", on production, once the page is idle,
 so a first visit and Lighthouse never fetch it. Order of preference, always:
 
@@ -41,29 +46,35 @@ first).
 </navigation>
 
 <images>
-Anything in src/assets/ goes through astro:assets:
-
-  import { Image } from 'astro:assets'
-  import hero from '../assets/hero.png'
-  <Image src={hero} alt="…" widths={[480, 960, 1440]} loading="eager" />
-
-It emits width/height (no layout shift), modern formats, and a srcset.
+Every image comes from Sanity and goes through src/components/ui/SanityImage.astro
+(astro:assets <Picture>: downloaded and re-encoded to AVIF and WebP with a JPEG
+fallback at build time, served from our origin, with width/height and a srcset).
+There is no src/assets/. The image most likely to be the LCP gets `priority`
+(eager, fetchpriority high): the hero when it is the first section
+(SectionRenderer passes `priority={index === 0}`), a post's main image
+(PostHeader), and the first card on the blog index and archives (BlogArchive →
+PostGrid prioritizeFirst). Every other image is lazy. ImageText takes no
+priority prop, so a page an editor starts with an image-and-text section gets a
+lazy LCP image; a new image section that can come first needs a `priority` prop
+and the same `priority={index === 0}` in SectionRenderer.
 
 Rules:
-- above the fold → loading="eager"; everything else → lazy (the default)
 - raw <img> only for files already in public/, and then always with explicit
   width, height, loading, and decoding
 - alt="" for decorative, real text for meaningful
 - an <img> without width/height is a layout-shift bug, not a style nit
 
-Sanity images go through src/components/ui/SanityImage.astro (astro:assets
-<Picture>, downloaded and resized at build time, served from our origin). The
-first section's image gets priority (eager, fetchpriority high). Each image also
-gets its Sanity LQIP as an inline background (getImagePlaceholders() in
+Each image also gets its Sanity LQIP as an inline background (getImagePlaceholders() in
 src/lib/sanity/image.ts, one query per build): about 0.5 KB of HTML per image
 (blog index, 10 cards: 5 KB raw), no extra request, and no LCP effect, since
 Chrome ignores low-entropy placeholder images for LCP. The CSP already allows
 data: images and inline styles.
+
+`sizes` must describe the column the image really fills, or the browser fetches a
+larger file than it shows. ImageText's photo is half the container from md:
+"(min-width: 76rem) 34.25rem, (min-width: 48rem) calc(50vw - 3.75rem), 100vw",
+derived from the container's width and padding and the grid gap (the formula is a
+comment beside it in ImageText.astro; change it with either).
 </images>
 
 <fonts>
@@ -98,12 +109,21 @@ Every extra family, weight or style adds payload — ask before adding one.
 Tailwind v4 generates only the classes it finds in its sources, so the
 stylesheet stays small on its own. global.css limits those sources to src/
 (`@import 'tailwindcss' source('..')`), so class names quoted in PLAN.md or the
-docs never ship. Two things spoil that:
+docs never ship, and `@source not` leaves out test files (`*.test.ts`) and
+src/integrations/, which hold no markup. Everything else under src/ is scanned,
+comments and strings included: a class-like word there ships a utility to every
+page (a test suite named "sitemap filter" shipped a `filter` rule before the
+exclusion). Today only `.table` ships that way, from the Sanity block type
+`table` named in code. Stylesheet on 2026-10-24: 36,430 B (dist/_astro/*.css).
+Two things spoil that:
 - long arbitrary values repeated across files (extract a token instead)
 - hand-written CSS in global.css that duplicates a utility
 
 global.css should hold tokens, the two base rules (border colour, focus outline)
 and the container utility. Not much else.
+
+No backdrop-filter on the sticky header: a blur behind a fixed element is
+re-composited on every scroll frame. The header is solid paper.
 </css>
 
 <third_party>
@@ -118,8 +138,9 @@ A marketing tag added "temporarily" is the most common permanent regression.
 
 <checklist>
 Before calling a page done:
-- [ ] npm run build passes, and dist/ contains no .js file
-- [ ] no client: directive and no <script> other than JSON-LD
+- [ ] npm run build passes, and dist/_astro/ holds only the four budgeted .js files
+- [ ] no client: directive and no <script> other than ChatPanel's, ConsentBanner's
+      and JSON-LD
 - [ ] every image has width/height and the right loading value
 - [ ] exactly one <h1>
 - [ ] no render-blocking third-party script
