@@ -1,3 +1,4 @@
+import { inlineLinkClass, pillVariants } from '../../components/ui/link'
 import { track } from '../analytics/track'
 import { answerParts, parseEvents, safePath, type Source, sourceLabel } from './stream'
 
@@ -10,12 +11,12 @@ const STYLES = {
   question: `${BUBBLE} bg-larch text-surface self-end`,
   answer: `${BUBBLE} bg-paper text-ink border-border self-start border`,
   failed: `${BUBBLE} bg-paper text-stamp border-stamp self-start border-2`,
-  thinking: 'text-ink/70 animate-pulse',
+  // The dot pulses, not the text: fading text would drop below 4.5:1 contrast.
+  thinking: 'text-ink flex items-center gap-2',
+  thinkingDot: 'bg-larch size-2 shrink-0 rounded-full motion-safe:animate-pulse',
   sourcesLabel: 'mt-3 text-sm font-bold',
-  inlineLink:
-    'text-larch decoration-needle hover:text-espresso font-semibold underline decoration-2 underline-offset-4',
-  sourceLink:
-    'border-espresso text-espresso hover:bg-needle mt-2 mr-2 inline-block rounded-full border-2 px-3 py-1 text-sm font-bold transition-colors',
+  inlineLink: inlineLinkClass,
+  sourceLink: `${pillVariants()} mt-2 mr-2`,
 } as const
 
 interface Labels {
@@ -45,13 +46,37 @@ function renderText(node: HTMLElement, text: string, streaming = false): void {
   )
 }
 
-function failedText(text: string): HTMLElement {
+function textElement(text: string): HTMLElement {
   const node = element('p', '')
   renderText(node, text)
   return node
 }
 
-function renderSources(bubble: HTMLElement, sources: readonly Source[], label: string): void {
+/**
+ * The bubble stays silent while it streams (aria-live="off", and the draft inert, which hides it
+ * from screen readers that still report changes inside the log and keeps its links out of the Tab
+ * sequence); its final content goes in as new nodes, not inert, once live updates are back on, so
+ * the log announces the whole answer once.
+ */
+function settle(bubble: HTMLElement, ...nodes: HTMLElement[]): void {
+  bubble.removeAttribute('aria-live')
+  bubble.replaceChildren(...nodes)
+}
+
+function fail(bubble: HTMLElement, text: string): void {
+  bubble.className = STYLES.failed
+  settle(bubble, textElement(text))
+}
+
+function thinkingStatus(label: string): HTMLElement {
+  const dot = element('span', STYLES.thinkingDot)
+  dot.setAttribute('aria-hidden', 'true')
+  const status = element('p', STYLES.thinking)
+  status.append(dot, label)
+  return status
+}
+
+function sourcesBox(sources: readonly Source[], label: string): HTMLElement | null {
   const links = sources.flatMap((source) => {
     const href = safePath(source.url)
     if (!href) return []
@@ -61,11 +86,11 @@ function renderSources(bubble: HTMLElement, sources: readonly Source[], label: s
     link.dataset.trackLinkUrl = href
     return [link]
   })
-  if (links.length === 0) return
+  if (links.length === 0) return null
   const box = element('div', '')
   box.dataset.chatSources = ''
   box.append(element('p', STYLES.sourcesLabel, label), ...links)
-  bubble.append(box)
+  return box
 }
 
 async function readAnswer(
@@ -73,11 +98,13 @@ async function readAnswer(
   bubble: HTMLElement,
   labels: Labels,
 ): Promise<void> {
-  const text = element('p', '')
+  const draft = element('p', '')
+  draft.inert = true
   const reader = body.getReader()
   const decoder = new TextDecoder()
   let buffer = ''
   let answer = ''
+  let sources: HTMLElement | null = null
   for (;;) {
     const { value, done } = await reader.read()
     if (done) break
@@ -86,23 +113,21 @@ async function readAnswer(
     for (const event of parsed.events) {
       if (event.type === 'delta') {
         answer += event.text
-        renderText(text, answer, true)
-        if (!text.isConnected) bubble.replaceChildren(text)
+        renderText(draft, answer, true)
+        if (!draft.isConnected) {
+          bubble.setAttribute('aria-live', 'off')
+          bubble.replaceChildren(draft)
+        }
       } else if (event.type === 'sources') {
-        renderSources(bubble, event.sources, labels.sources)
+        sources = sourcesBox(event.sources, labels.sources)
       } else if (event.type === 'error') {
-        bubble.className = STYLES.failed
-        bubble.replaceChildren(failedText(answer ? `${answer} ${event.message}` : event.message))
+        fail(bubble, answer ? `${answer} ${event.message}` : event.message)
       }
     }
   }
   if (bubble.className === STYLES.failed) return
-  if (answer) {
-    renderText(text, answer)
-  } else {
-    bubble.className = STYLES.failed
-    bubble.replaceChildren(failedText(labels.failed))
-  }
+  if (answer) settle(bubble, textElement(answer), ...(sources ? [sources] : []))
+  else fail(bubble, labels.failed)
 }
 
 async function errorMessage(response: Response, fallback: string): Promise<string> {
@@ -129,6 +154,8 @@ export function startChat(panel: HTMLElement): void {
   const ask = async (question: string, source: 'suggestion' | 'typed'): Promise<void> => {
     if (busy || !question) return
     busy = true
+    // A suggestion removes the button that has focus; move focus first so it doesn't drop to <body>.
+    input.focus()
     track('chat_question', { question_source: source })
     let result: 'answered' | 'failed' | 'busy' = 'failed'
     send.disabled = true
@@ -136,9 +163,8 @@ export function startChat(panel: HTMLElement): void {
     panel.querySelector('[data-chat-suggestions]')?.remove()
     log.append(element('p', STYLES.question, question))
     const bubble = element('div', STYLES.answer)
-    bubble.append(element('p', STYLES.thinking, labels.thinking))
+    bubble.append(thinkingStatus(labels.thinking))
     log.append(bubble)
-    log.setAttribute('aria-busy', 'true')
     bubble.scrollIntoView({ block: 'end' })
     try {
       const response = await fetch('/api/chat', {
@@ -148,21 +174,18 @@ export function startChat(panel: HTMLElement): void {
       })
       if (!response.ok || !response.body) {
         if (response.status === 429) result = 'busy'
-        bubble.className = STYLES.failed
-        bubble.replaceChildren(failedText(await errorMessage(response, labels.failed)))
+        fail(bubble, await errorMessage(response, labels.failed))
       } else {
         await readAnswer(response.body, bubble, labels)
         if (bubble.className !== STYLES.failed) result = 'answered'
       }
     } catch {
-      bubble.className = STYLES.failed
-      bubble.replaceChildren(failedText(labels.failed))
+      fail(bubble, labels.failed)
     } finally {
       track('chat_answer', {
         answer_result: result,
         source_count: bubble.querySelectorAll('[data-chat-sources] a').length,
       })
-      log.setAttribute('aria-busy', 'false')
       bubble.scrollIntoView({ block: 'end' })
       busy = false
       send.disabled = false

@@ -2,9 +2,11 @@ import { mkdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { basename, isAbsolute, join, relative, resolve } from 'node:path'
 import { parseArgs } from 'node:util'
 
-import { describeError, Fetcher } from './http.ts'
-import { buildInventory, compareUrls, GROUPS, parseWxr } from './inventory.ts'
-import { type Author, parseAuthors, Scrubber } from './privacy.ts'
+import { describeError } from '../shared/http.ts'
+import { type Author, parseAuthors, Scrubber } from '../shared/privacy.ts'
+import { parseWxr } from '../shared/wxr.ts'
+import { Fetcher } from './http.ts'
+import { buildInventory, compareUrls, GROUPS } from './inventory.ts'
 import { countRecords, crawlUrl, type Snapshot, type SnapshotRecord, toJson } from './snapshot.ts'
 
 const ROOT = resolve(import.meta.dirname, '../..')
@@ -96,7 +98,7 @@ async function main(): Promise<void> {
   const options = readOptions()
   const fetcher = new Fetcher(options.cacheDir, options.fromCache)
   const crawledAt = readCrawledAt(options)
-  const items = parseWxr(readFileSync(options.wxrPath, 'utf8'))
+  const { items } = parseWxr(readFileSync(options.wxrPath, 'utf8'))
   const authors = await readAuthors(options.base, fetcher)
   const scrubber = new Scrubber(authors)
 

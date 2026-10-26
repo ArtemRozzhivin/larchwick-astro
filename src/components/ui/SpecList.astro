@@ -1,0 +1,41 @@
+---
+/**
+ * Label and value rows under an espresso rule, as on a coffee bag label (the hero's label, the
+ * details on a card).
+ */
+interface Spec {
+  label?: string
+  value?: string
+}
+
+interface Props {
+  items: readonly Spec[]
+  size?: 'sm' | 'md'
+  class?: string
+}
+
+const { items, size = 'md', class: className } = Astro.props
+
+const isSmall = size === 'sm'
+---
+
+<dl
+  class:list={[
+    'border-espresso grid grid-cols-[auto_1fr] border-t-2',
+    isSmall && 'text-sm',
+    className,
+  ]}
+>
+  {
+    items.map((item) => (
+      <>
+        <dt
+          class:list={['border-border border-b font-bold', isSmall ? 'py-1.5 pr-4' : 'py-2 pr-5']}
+        >
+          {item.label}
+        </dt>
+        <dd class:list={['border-border border-b', isSmall ? 'py-1.5' : 'py-2']}>{item.value}</dd>
+      </>
+    ))
+  }
+</dl>

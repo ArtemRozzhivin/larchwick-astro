@@ -33,7 +33,7 @@ export type ContactForm = {
   heading?: string
   intro?: string
   showContactDetails?: boolean
-  tone?: 'default' | 'muted' | 'inverted'
+  tone?: 'default' | 'muted'
 }
 
 export type Cta = {
@@ -53,7 +53,7 @@ export type LatestPosts = {
   heading?: string
   count?: number
   cta?: LinkItem
-  tone?: 'default' | 'muted' | 'inverted'
+  tone?: 'default' | 'muted'
 }
 
 export type Steps = {
@@ -67,7 +67,7 @@ export type Steps = {
     _type: 'step'
     _key: string
   }>
-  tone?: 'default' | 'muted' | 'inverted'
+  tone?: 'default' | 'muted'
 }
 
 export type Faq = {
@@ -86,7 +86,7 @@ export type Faq = {
     _type: 'faqGroup'
     _key: string
   }>
-  tone?: 'default' | 'muted' | 'inverted'
+  tone?: 'default' | 'muted'
 }
 
 export type PriceTable = {
@@ -102,7 +102,7 @@ export type PriceTable = {
     _key: string
   }>
   note?: string
-  tone?: 'default' | 'muted' | 'inverted'
+  tone?: 'default' | 'muted'
 }
 
 export type CardGrid = {
@@ -130,7 +130,7 @@ export type CardGrid = {
     _key: string
   }>
   cta?: LinkItem
-  tone?: 'default' | 'muted' | 'inverted'
+  tone?: 'default' | 'muted'
 }
 
 export type Stats = {
@@ -143,7 +143,7 @@ export type Stats = {
     _type: 'stat'
     _key: string
   }>
-  tone?: 'default' | 'muted' | 'inverted'
+  tone?: 'default' | 'muted'
 }
 
 export type FeatureGrid = {
@@ -158,7 +158,7 @@ export type FeatureGrid = {
     _type: 'feature'
     _key: string
   }>
-  tone?: 'default' | 'muted' | 'inverted'
+  tone?: 'default' | 'muted'
 }
 
 export type ImageText = {
@@ -169,7 +169,7 @@ export type ImageText = {
   image?: AccessibleImage
   imagePosition?: 'left' | 'right'
   cta?: LinkItem
-  tone?: 'default' | 'muted' | 'inverted'
+  tone?: 'default' | 'muted'
 }
 
 export type TextBlock = {
@@ -177,7 +177,7 @@ export type TextBlock = {
   eyebrow?: string
   heading?: string
   body?: BlockContent
-  tone?: 'default' | 'muted' | 'inverted'
+  tone?: 'default' | 'muted'
 }
 
 export type Hero = {
@@ -710,11 +710,12 @@ export type POSTS_QUERY_RESULT = Array<{
 
 // Source: ../src/lib/sanity/queries.ts
 // Variable: TERMS_QUERY
-// Query: *[_type in ["category", "tag"] && defined(slug.current)] | order(title asc){    _id,    _type,    title,    "slug": slug.current,    description  }
+// Query: *[_type in ["category", "tag"] && defined(slug.current)] | order(title asc){    _id,    _type,    _updatedAt,    title,    "slug": slug.current,    description  }
 export type TERMS_QUERY_RESULT = Array<
   | {
       _id: string
       _type: 'category'
+      _updatedAt: string
       title: string | null
       slug: string | null
       description: string | null
@@ -722,11 +723,21 @@ export type TERMS_QUERY_RESULT = Array<
   | {
       _id: string
       _type: 'tag'
+      _updatedAt: string
       title: string | null
       slug: string | null
       description: string | null
     }
 >
+
+// Source: ../src/lib/sanity/queries.ts
+// Variable: PAGE_DATES_QUERY
+// Query: *[_type == "page" && defined(slug.current)]{    "slug": slug.current,    _updatedAt,    "listsPosts": slug.current == "blog" || count(sections[_type == "latestPosts"]) > 0  }
+export type PAGE_DATES_QUERY_RESULT = Array<{
+  slug: string | null
+  _updatedAt: string
+  listsPosts: boolean | true | null
+}>
 
 // Source: ../src/lib/sanity/queries.ts
 // Variable: BLOG_PAGE_QUERY

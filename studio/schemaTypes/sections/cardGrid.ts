@@ -3,9 +3,9 @@ import { defineArrayMember, defineField, defineType } from 'sanity'
 import {
   eyebrowField,
   introField,
+  lightToneField,
   optionalHeadingField,
   sectionPreview,
-  toneField,
 } from '../fields'
 
 export const cardGrid = defineType({
@@ -114,7 +114,7 @@ export const cardGrid = defineType({
       validation: (rule) => rule.required().min(1),
     }),
     defineField({ name: 'cta', title: 'Button under the cards', type: 'linkItem' }),
-    toneField,
+    lightToneField,
   ],
   preview: sectionPreview('Cards'),
 })

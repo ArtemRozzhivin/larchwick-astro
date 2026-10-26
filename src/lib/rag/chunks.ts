@@ -1,17 +1,12 @@
 import { createHash } from 'node:crypto'
 
+import { formatPostDate } from '../format/date.ts'
+import { type Excerpt, EXCERPT_FIELDS, type Passage } from './config.ts'
+
 /**
  * Splits the site's Sanity content into passages for the "Ask Larchwick" index (PLAN.md
  * Phase 7b). Pure: no Sanity or network access, so it is tested with plain objects.
  */
-export interface Passage {
-  id: string
-  url: string
-  title: string
-  heading: string
-  text: string
-}
-
 export interface PageSource {
   title: string
   url: string
@@ -198,19 +193,20 @@ export function splitLong(lines: readonly string[], maxWords = MAX_WORDS): strin
   return parts.filter((part) => part.length > 0).map((part) => part.join('\n'))
 }
 
-export function passageId(url: string, heading: string, text: string): string {
-  return createHash('sha256').update(`${url}\n${heading}\n${text}`).digest('hex').slice(0, 32)
+/** A hash of everything stored with the passage, so any change to it is re-indexed. */
+export function passageId(excerpt: Excerpt): string {
+  return createHash('sha256')
+    .update(EXCERPT_FIELDS.map((field) => excerpt[field]).join('\n'))
+    .digest('hex')
+    .slice(0, 32)
 }
 
 function toPassages(url: string, title: string, drafts: readonly Draft[]): Passage[] {
   return drafts.flatMap((draft) =>
-    splitLong(draft.lines.filter(Boolean)).map((text) => ({
-      id: passageId(url, draft.heading, text),
-      url,
-      title,
-      heading: draft.heading,
-      text,
-    })),
+    splitLong(draft.lines.filter(Boolean)).map((text) => {
+      const stored = { url, title, heading: draft.heading, text }
+      return { id: passageId(stored), ...stored }
+    }),
   )
 }
 
@@ -222,11 +218,8 @@ export function pagePassages(page: PageSource): Passage[] {
   return toPassages(page.url, page.title, drafts)
 }
 
-// The same format as PostMeta, so the passage says exactly what the page shows.
-const DATE_FORMAT = new Intl.DateTimeFormat('en-GB', { dateStyle: 'long', timeZone: 'UTC' })
-
 export function postPassages(post: PostSource): Passage[] {
-  const published = post.publishedAt ? DATE_FORMAT.format(new Date(post.publishedAt)) : ''
+  const published = post.publishedAt ? formatPostDate(post.publishedAt) : ''
   const intro = {
     heading: '',
     lines: [str(post.excerpt), [published, ...(post.categories ?? [])].filter(Boolean).join(', ')],

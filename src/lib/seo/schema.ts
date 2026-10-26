@@ -1,5 +1,9 @@
-import { siteConfig } from '@lib/config/site'
+import type { PAGE_QUERY_RESULT } from '@lib/sanity/sanity.types'
 import type { SiteSettings } from '@lib/sanity/settings'
+
+// Relative, with extensions, so `node --test` can load this module (it doesn't resolve @lib).
+import { siteConfig } from '../config/site.ts'
+import { plainText } from '../sanity/text.ts'
 
 export interface JsonLd {
   '@context': 'https://schema.org'
@@ -12,6 +16,7 @@ export interface OrganizationSchema extends JsonLd {
   '@id': string
   name: string
   url: string
+  logo: string
   description: string
   email?: string
   telephone?: string
@@ -39,6 +44,7 @@ export function organizationSchema(settings: SiteSettings): OrganizationSchema {
     '@id': organizationId,
     name: siteConfig.title,
     url: homeUrl,
+    logo: new URL(siteConfig.logo, siteConfig.url).href,
     description: settings.description,
     ...(settings.contact.email && { email: settings.contact.email }),
     ...(settings.contact.phone && { telephone: settings.contact.phone }),
@@ -67,7 +73,7 @@ export interface BlogPostingSchema extends JsonLd {
   datePublished: string
   dateModified: string
   image?: string
-  author: { '@type': 'Organization'; name: string; url: string }
+  author: { '@type': 'Organization'; '@id': string; name: string; url: string }
   publisher: { '@id': string }
   inLanguage: string
 }
@@ -79,7 +85,6 @@ export function blogPostingSchema(post: {
   publishedAt: string
   modifiedAt: string
   image?: string
-  byline: string
 }): BlogPostingSchema {
   return {
     '@context': 'https://schema.org',
@@ -90,10 +95,56 @@ export function blogPostingSchema(post: {
     datePublished: post.publishedAt,
     dateModified: post.modifiedAt,
     ...(post.image && { image: post.image }),
-    author: { '@type': 'Organization', name: post.byline, url: homeUrl },
+    author: {
+      '@type': 'Organization',
+      '@id': organizationId,
+      name: siteConfig.title,
+      url: homeUrl,
+    },
     publisher: { '@id': organizationId },
     inLanguage: siteConfig.lang,
   }
+}
+
+export interface BreadcrumbListSchema extends JsonLd {
+  '@type': 'BreadcrumbList'
+  itemListElement: { '@type': 'ListItem'; position: number; name: string; item: string }[]
+}
+
+/** `crumbs` from the home page down to the current page; paths become absolute URLs. */
+export function breadcrumbListSchema(
+  crumbs: readonly { name: string; path: string }[],
+): BreadcrumbListSchema {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: crumbs.map(({ name, path }, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name,
+      item: new URL(path, siteConfig.url).href,
+    })),
+  }
+}
+
+type PageSection = NonNullable<NonNullable<PAGE_QUERY_RESULT>['sections']>[number]
+
+export interface FaqQuestion {
+  question: string
+  answer: string
+}
+
+/** Every question in the page's FAQ sections, with its answer as plain text. */
+export function faqQuestions(sections: readonly PageSection[]): FaqQuestion[] {
+  return sections.flatMap((section) =>
+    section._type === 'faq'
+      ? (section.groups ?? []).flatMap((group) =>
+          (group.items ?? []).flatMap((item) =>
+            item.question ? [{ question: item.question, answer: plainText(item.answer) }] : [],
+          ),
+        )
+      : [],
+  )
 }
 
 export interface FaqPageSchema extends JsonLd {
@@ -105,9 +156,7 @@ export interface FaqPageSchema extends JsonLd {
   }[]
 }
 
-export function faqPageSchema(
-  questions: readonly { question: string; answer: string }[],
-): FaqPageSchema {
+export function faqPageSchema(questions: readonly FaqQuestion[]): FaqPageSchema {
   return {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',

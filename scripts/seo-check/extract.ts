@@ -1,3 +1,5 @@
+import { decodeEntities } from '../shared/html.ts'
+
 export interface PageSeo {
   title: string | null
   description: string | null
@@ -5,87 +7,6 @@ export interface PageSeo {
   robots: string | null
   h1: string[]
 }
-
-const NAMED_ENTITIES = new Map([
-  ['amp', '&'],
-  ['lt', '<'],
-  ['gt', '>'],
-  ['quot', '"'],
-  ['apos', "'"],
-  ['nbsp', ' '],
-  ['shy', '­'],
-  ['ndash', '–'],
-  ['mdash', '—'],
-  ['hellip', '…'],
-  ['lsquo', '‘'],
-  ['rsquo', '’'],
-  ['sbquo', '‚'],
-  ['ldquo', '“'],
-  ['rdquo', '”'],
-  ['bdquo', '„'],
-  ['laquo', '«'],
-  ['raquo', '»'],
-  ['lsaquo', '‹'],
-  ['rsaquo', '›'],
-  ['prime', '′'],
-  ['Prime', '″'],
-  ['bull', '•'],
-  ['middot', '·'],
-  ['times', '×'],
-  ['divide', '÷'],
-  ['minus', '−'],
-  ['plusmn', '±'],
-  ['deg', '°'],
-  ['frac12', '½'],
-  ['frac14', '¼'],
-  ['frac34', '¾'],
-  ['copy', '©'],
-  ['reg', '®'],
-  ['trade', '™'],
-  ['sect', '§'],
-  ['para', '¶'],
-  ['euro', '€'],
-  ['pound', '£'],
-  ['yen', '¥'],
-  ['cent', '¢'],
-  ['iexcl', '¡'],
-  ['iquest', '¿'],
-  ['aacute', 'á'],
-  ['agrave', 'à'],
-  ['acirc', 'â'],
-  ['auml', 'ä'],
-  ['atilde', 'ã'],
-  ['aring', 'å'],
-  ['aelig', 'æ'],
-  ['ccedil', 'ç'],
-  ['eacute', 'é'],
-  ['egrave', 'è'],
-  ['ecirc', 'ê'],
-  ['euml', 'ë'],
-  ['iacute', 'í'],
-  ['igrave', 'ì'],
-  ['icirc', 'î'],
-  ['iuml', 'ï'],
-  ['ntilde', 'ñ'],
-  ['oacute', 'ó'],
-  ['ograve', 'ò'],
-  ['ocirc', 'ô'],
-  ['ouml', 'ö'],
-  ['otilde', 'õ'],
-  ['oslash', 'ø'],
-  ['uacute', 'ú'],
-  ['ugrave', 'ù'],
-  ['ucirc', 'û'],
-  ['uuml', 'ü'],
-  ['yacute', 'ý'],
-  ['yuml', 'ÿ'],
-  ['szlig', 'ß'],
-  ['Aacute', 'Á'],
-  ['Auml', 'Ä'],
-  ['Eacute', 'É'],
-  ['Ouml', 'Ö'],
-  ['Uuml', 'Ü'],
-])
 
 const TAG_BODY = `(?:[^>"']|"[^"]*"|'[^']*')*`
 const NON_CONTENT = new RegExp(
@@ -97,24 +18,6 @@ const BREAKING_TAG = /^<\/?(?:br|p|div|li|tr|td|th)\b/i
 const TITLE = new RegExp(`<title\\b${TAG_BODY}>([\\s\\S]*?)</title\\s*>`, 'i')
 const H1 = new RegExp(`<h1\\b${TAG_BODY}>([\\s\\S]*?)</h1\\s*>`, 'gi')
 const ATTRIBUTE = /([^\s"'<>/=]+)(?:\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s"'=<>`]+)))?/g
-
-function codePoint(code: number): string {
-  const isValid = code > 0 && code <= 0x10ffff && (code < 0xd800 || code > 0xdfff)
-  return isValid ? String.fromCodePoint(code) : '�'
-}
-
-export function decodeEntities(text: string, unknown?: Set<string>): string {
-  return text.replace(
-    /&(#[xX][0-9a-fA-F]+|#\d+|[A-Za-z][A-Za-z0-9]*);/g,
-    (match, entity: string) => {
-      if (/^#x/i.test(entity)) return codePoint(Number.parseInt(entity.slice(2), 16))
-      if (entity.startsWith('#')) return codePoint(Number.parseInt(entity.slice(1), 10))
-      const named = NAMED_ENTITIES.get(entity)
-      if (named === undefined) unknown?.add(match)
-      return named ?? match
-    },
-  )
-}
 
 function collapse(text: string): string {
   return text.replace(/\s+/g, ' ').trim()

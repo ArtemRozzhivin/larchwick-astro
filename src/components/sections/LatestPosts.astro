@@ -1,17 +1,19 @@
 ---
 import { getPosts } from '@lib/sanity/posts'
+import { isUsableLink, type Link } from '@lib/types'
 import PostGrid from '@components/blog/PostGrid.astro'
 import { buttonVariants } from '@components/ui/button'
 
-import Section, { type Tone } from './Section.astro'
+import { itemHeading } from './heading'
+import Section, { type LightTone } from './Section.astro'
 
 interface Props {
   id?: string
   eyebrow?: string
   heading?: string
   count?: number
-  cta?: { label?: string; href?: string }
-  tone?: Tone
+  cta?: Link
+  tone?: LightTone
 }
 
 const { id, eyebrow, heading, count = 3, cta, tone } = Astro.props
@@ -20,9 +22,9 @@ const posts = (await getPosts()).slice(0, count)
 ---
 
 <Section id={id} eyebrow={eyebrow} heading={heading} tone={tone}>
-  <PostGrid posts={posts} headingLevel={heading ? 'h3' : 'h2'} />
+  <PostGrid posts={posts} headingLevel={itemHeading(heading)} />
   {
-    cta?.href && cta.label && (
+    isUsableLink(cta) && (
       <div class="mt-10 text-center">
         <a href={cta.href} class={buttonVariants({ variant: 'secondary' })}>
           {cta.label}

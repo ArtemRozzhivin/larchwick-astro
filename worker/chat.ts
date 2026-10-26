@@ -1,3 +1,9 @@
+import { type ChatEvent, QUESTION_MAX } from '../src/lib/chat/stream.ts'
+import { errorMessage, isTimeout } from '../src/lib/errors.ts'
+import { CONTENT_NAMESPACE, EMBEDDING_MODEL, type Excerpt } from '../src/lib/rag/config.ts'
+import { CONTACT_SLUG, pagePath } from '../src/lib/routes.ts'
+import { type RateLimiter, withinLimit } from './rate-limit.ts'
+
 /**
  * POST /api/chat: the "Ask Larchwick" assistant (PLAN.md Phase 7b). Retrieves the closest
  * passages from the Vectorize index that production builds keep in sync with the site, and streams
@@ -11,21 +17,24 @@ export interface ChatEnv {
       _options: { topK: number; namespace: string; returnMetadata: 'all' },
     ): Promise<{ matches: { id: string; score: number; metadata?: Record<string, unknown> }[] }>
   }
-  CHAT_LIMITER?: { limit(_options: { key: string }): Promise<{ success: boolean }> }
+  CHAT_LIMITER?: RateLimiter
+  /** One counter for every visitor (key `site`): caps the question rate, not the total spend. */
+  CHAT_SITE_LIMITER?: RateLimiter
   ANTHROPIC_API_KEY?: string
   /** "1" on previews only (wrangler.jsonc `previews.vars`): failures also say why, key redacted. */
   CHAT_DEBUG?: string
 }
 
-type ReadyEnv = ChatEnv &
-  Required<Pick<ChatEnv, 'AI' | 'VECTORIZE' | 'CHAT_LIMITER' | 'ANTHROPIC_API_KEY'>>
+// A missing limiter fails closed like any other missing binding: no answers rather than unlimited ones.
+const REQUIRED = [
+  'AI',
+  'VECTORIZE',
+  'CHAT_LIMITER',
+  'CHAT_SITE_LIMITER',
+  'ANTHROPIC_API_KEY',
+] as const
 
-export interface Excerpt {
-  title: string
-  url: string
-  heading: string
-  text: string
-}
+type ReadyEnv = ChatEnv & Required<Pick<ChatEnv, (typeof REQUIRED)[number]>>
 
 export interface Prompt {
   system: string
@@ -34,19 +43,21 @@ export interface Prompt {
 
 type Fetch = (_input: string, _init: RequestInit) => Promise<Response>
 
-export const QUESTION_MAX = 500
 export const TOP_K = 5
 export const MODEL = 'claude-haiku-5-5'
-export const EMBEDDING_MODEL = '@cf/baai/bge-base-en-v1.5'
 // Haiku 5.5 thinks before it answers and the thinking counts toward this cap; low effort keeps it short.
 const MAX_TOKENS = 1024
 const EFFORT = 'low'
+// One deadline for the whole answer, limits and retrieval included. Answers finish well within it;
+// a hung binding or upstream ends in the "unavailable" message instead of a bubble that never settles.
+const DEADLINE_MS = 30_000
+const SITE_KEY = 'site'
 
 export const MESSAGES = {
   invalid: `Please ask a question of up to ${QUESTION_MAX} characters.`,
   busy: "You've asked a lot of questions in a short time. Please wait a minute and try again.",
-  unavailable:
-    "The assistant isn't available right now. Please try again later, or send us a message through our [contact page](/contact/).",
+  siteBusy: 'The assistant is busy right now. Please try again in a minute.',
+  unavailable: `The assistant isn't available right now. Please try again later, or send us a message through our [contact page](${pagePath(CONTACT_SLUG)}).`,
 } as const
 
 const SYSTEM = `You are the website assistant for Larchwick, a small specialty coffee roaster. Larchwick is a fictional business in a demo project.
@@ -60,7 +71,7 @@ Rules:
 - Speak as the Larchwick website. Never mention the excerpts or how you found the information; say "we don't have that on our site" instead.
 - Keep the answer short: one to four sentences of plain text, no headings or lists.
 - After each fact, cite the excerpt it came from in square brackets, like [2].
-- To point the visitor to a page, write a Markdown link with its path, like [our contact page](/contact/). Never write a bare path or a full URL.`
+- To point the visitor to a page, write a Markdown link with its path, like [our contact page](${pagePath(CONTACT_SLUG)}). Never write a bare path or a full URL.`
 
 function json(body: unknown, status: number): Response {
   return new Response(JSON.stringify(body), {
@@ -69,7 +80,7 @@ function json(body: unknown, status: number): Response {
   })
 }
 
-function event(data: Record<string, unknown>): Uint8Array {
+function event(data: ChatEvent): Uint8Array {
   return new TextEncoder().encode(`data: ${JSON.stringify(data)}\n\n`)
 }
 
@@ -94,7 +105,7 @@ export async function retrieve(
   const { data } = await env.AI.run(EMBEDDING_MODEL, { text: [question] })
   const { matches } = await env.VECTORIZE.query(data[0], {
     topK: TOP_K,
-    namespace: 'content',
+    namespace: CONTENT_NAMESPACE,
     returnMetadata: 'all',
   })
   return matches.flatMap((match) => asExcerpt(match.metadata) ?? [])
@@ -131,19 +142,29 @@ export function citedSources(answer: string, excerpts: readonly Excerpt[]): Exce
   })
 }
 
-/** Anthropic's event stream → our events. Only text deltas pass through; nothing else leaks. */
+type Emit = (_data: ChatEvent) => void
+
+/**
+ * Anthropic's event stream → our events. Only text deltas pass through; nothing else leaks. If the
+ * upstream breaks off or times out, the visitor still gets the error event and `done`. Cancelling
+ * the returned stream (the visitor left) cancels the upstream request.
+ */
 export function toClientStream(
   upstream: ReadableStream<Uint8Array>,
   excerpts: readonly Excerpt[],
 ): ReadableStream<Uint8Array> {
+  const reader = upstream.getReader()
   const decoder = new TextDecoder()
   let buffer = ''
   let answer = ''
   let failed = false
-  const handle = (
-    block: string,
-    controller: TransformStreamDefaultController<Uint8Array>,
-  ): void => {
+  let cancelled = false
+  const fail = (emit: Emit): void => {
+    if (failed) return
+    failed = true
+    emit({ type: 'error', message: MESSAGES.unavailable })
+  }
+  const handle = (block: string, emit: Emit): void => {
     const data = block
       .split('\n')
       .find((line) => line.startsWith('data:'))
@@ -158,42 +179,73 @@ export function toClientStream(
     }
     if (parsed.type === 'content_block_delta' && parsed.delta?.type === 'text_delta') {
       answer += parsed.delta.text ?? ''
-      controller.enqueue(event({ type: 'delta', text: parsed.delta.text ?? '' }))
+      emit({ type: 'delta', text: parsed.delta.text ?? '' })
     } else if (parsed.type === 'message_delta' && parsed.delta?.stop_reason === 'max_tokens') {
       console.error('Chat: the answer reached max_tokens')
-      controller.enqueue(event({ type: 'delta', text: '…' }))
+      if (answer.trim()) emit({ type: 'delta', text: '…' })
+      else fail(emit)
     } else if (parsed.type === 'error') {
-      failed = true
-      controller.enqueue(event({ type: 'error', message: MESSAGES.unavailable }))
+      fail(emit)
     }
   }
-  return upstream.pipeThrough(
-    new TransformStream<Uint8Array, Uint8Array>({
-      transform(chunk, controller) {
-        buffer += decoder.decode(chunk, { stream: true })
-        const blocks = buffer.split('\n\n')
-        buffer = blocks.pop() ?? ''
-        for (const block of blocks) handle(block, controller)
-      },
-      flush(controller) {
-        if (buffer.trim()) handle(buffer, controller)
-        if (!failed) {
-          const sources = citedSources(answer, excerpts).map(({ title, url, heading }) => ({
-            title,
-            url,
-            heading,
-          }))
-          controller.enqueue(event({ type: 'sources', sources }))
+  const finish = (emit: Emit): void => {
+    if (!failed) {
+      const sources = citedSources(answer, excerpts).map(({ title, url, heading }) => ({
+        title,
+        url,
+        heading,
+      }))
+      emit({ type: 'sources', sources })
+    }
+    emit({ type: 'done' })
+  }
+  return new ReadableStream<Uint8Array>({
+    // pull() is called again only after it has enqueued something. Many upstream chunks carry no
+    // text (the opening events, ping, thinking, content_block_stop), so it reads on until it has
+    // sent an event or the upstream ends: returning empty-handed would stall the stream for good.
+    async pull(controller) {
+      let sent = false
+      const emit: Emit = (data) => {
+        controller.enqueue(event(data))
+        sent = true
+      }
+      try {
+        for (;;) {
+          const { value, done } = await reader.read()
+          if (cancelled) return
+          if (done) break
+          buffer += decoder.decode(value, { stream: true })
+          const blocks = buffer.split('\n\n')
+          buffer = blocks.pop() ?? ''
+          for (const block of blocks) handle(block, emit)
+          if (sent) return
         }
-        controller.enqueue(event({ type: 'done' }))
-      },
-    }),
-  )
+        buffer += decoder.decode()
+        if (buffer.trim()) handle(buffer, emit)
+      } catch (error) {
+        if (cancelled) return
+        console.error(`Chat: the answer broke off: ${errorMessage(error)}`)
+        fail(emit)
+      }
+      finish(emit)
+      controller.close()
+    },
+    cancel(reason) {
+      cancelled = true
+      return reader.cancel(reason)
+    },
+  })
 }
 
-export async function askClaude(prompt: Prompt, apiKey: string, fetcher: Fetch): Promise<Response> {
+export async function askClaude(
+  prompt: Prompt,
+  apiKey: string,
+  fetcher: Fetch,
+  signal?: AbortSignal,
+): Promise<Response> {
   return fetcher('https://api.anthropic.com/v1/messages', {
     method: 'POST',
+    signal,
     headers: {
       'x-api-key': apiKey,
       'anthropic-version': '2023-06-01',
@@ -209,14 +261,35 @@ export async function askClaude(prompt: Prompt, apiKey: string, fetcher: Fetch):
   })
 }
 
-const REQUIRED = ['AI', 'VECTORIZE', 'CHAT_LIMITER', 'ANTHROPIC_API_KEY'] as const
-
 function missing(env: ChatEnv): string[] {
   return REQUIRED.filter((name) => !env[name])
 }
 
 function isReady(env: ChatEnv): env is ReadyEnv {
   return missing(env).length === 0
+}
+
+/** `work`, or a rejection with the signal's reason once it aborts: bindings take no AbortSignal. */
+function beforeDeadline<T>(work: Promise<T>, signal: AbortSignal): Promise<T> {
+  return new Promise<T>((resolve, reject) => {
+    const abort = (): void => reject(signal.reason)
+    if (signal.aborted) abort()
+    signal.addEventListener('abort', abort, { once: true })
+    void work.then(resolve, reject).finally(() => signal.removeEventListener('abort', abort))
+  })
+}
+
+/**
+ * The limit this question would go over, if any. Per visitor first, so one visitor's burst doesn't
+ * use up the allowance all visitors share.
+ */
+async function overLimit(
+  request: Request,
+  env: Pick<ReadyEnv, 'CHAT_LIMITER' | 'CHAT_SITE_LIMITER'>,
+): Promise<'busy' | 'siteBusy' | undefined> {
+  if (!(await withinLimit(env.CHAT_LIMITER, request))) return 'busy'
+  if (!(await env.CHAT_SITE_LIMITER.limit({ key: SITE_KEY })).success) return 'siteBusy'
+  return undefined
 }
 
 /** Logs why, never the question; previews (CHAT_DEBUG) also return the reason. */
@@ -236,6 +309,7 @@ export async function handleChat(
   request: Request,
   env: ChatEnv,
   fetcher: Fetch = fetch,
+  timeoutMs = DEADLINE_MS,
 ): Promise<Response> {
   if (request.method !== 'POST') {
     return new Response('Method not allowed', { status: 405, headers: { Allow: 'POST' } })
@@ -247,16 +321,16 @@ export async function handleChat(
   const question = await readQuestion(request)
   if (!question) return json({ error: MESSAGES.invalid }, 400)
   if (!isReady(env)) return unavailable(env, `missing ${missing(env).join(', ')}`)
-  const visitor = request.headers.get('CF-Connecting-IP') ?? 'unknown'
-  if (!(await env.CHAT_LIMITER.limit({ key: visitor })).success) {
-    return json({ error: MESSAGES.busy }, 429)
-  }
   try {
-    const excerpts = await retrieve(question, env)
+    const deadline = AbortSignal.timeout(timeoutMs)
+    const limit = await beforeDeadline(overLimit(request, env), deadline)
+    if (limit) return json({ error: MESSAGES[limit] }, 429)
+    const excerpts = await beforeDeadline(retrieve(question, env), deadline)
     const upstream = await askClaude(
       buildPrompt(question, excerpts),
       env.ANTHROPIC_API_KEY,
       fetcher,
+      deadline,
     )
     if (!upstream.ok || !upstream.body) {
       const detail = await upstream.text().catch(() => '')
@@ -270,6 +344,9 @@ export async function handleChat(
       },
     })
   } catch (error) {
-    return unavailable(env, (error as Error).message)
+    return unavailable(
+      env,
+      isTimeout(error) ? `no answer within ${timeoutMs} ms` : errorMessage(error),
+    )
   }
 }

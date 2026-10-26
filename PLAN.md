@@ -5,7 +5,7 @@ time**. Each phase ends with a short "what we did / what's next" and Artem's go-
 next one starts. Tick the boxes as work lands, and log every decision in
 [Decisions](#3-decisions).
 
-Last updated: 2026-10-22 · Current phase: **all phases done**
+Last updated: 2026-10-24 · Current phase: **all phases done**
 
 | #   | Phase                                    | Status      |
 | --- | ---------------------------------------- | ----------- |
@@ -121,6 +121,13 @@ means rewriting history. Phase 0 makes it compliant before anything else is push
 | 2026-10-21 | New Phase 7c, before Phase 8: Google Analytics 4 with a consent banner; nothing from Google loads until the visitor accepts                                                                                                                                                                                              | Artem's request. GA sets cookies and the business sells across the EU, so consent comes first; loading `gtag.js` only after "Accept" also keeps the site as fast as today for everyone who doesn't accept (and for Lighthouse). Before Phase 8 so the performance pass measures the final site. Cloudflare Web Analytics (cookieless, no banner) was considered: page views only, no events or conversions.                                                                                                  |
 | 2026-10-21 | GA4 through `gtag.js` directly, not Google Tag Manager; events sent from our code; production builds only                                                                                                                                                                                                                | Lighter and reviewable in the repo; GTM pays off when marketers add tags without deploys, which this site doesn't need. Previews and local builds never send data. The Measurement ID is public config, not a secret.                                                                                                                                                                                                                                                                                        |
 | 2026-10-22 | Phase 9 (case study and Upwork portfolio entry) removed from the plan, with the case study and the portfolio draft in §1's "done" list; Phase 8's deployed-set measurement dropped                                                                                                                                       | Artem's decision.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| 2026-10-24 | **D-22** The assistant's index finds stale passages by listing its own ids (Vectorize `…/list`, paged) and deletes every id that isn't a current passage; the manifest vector (namespace `meta`) is gone. Passage ids also hash the page title                                                                           | The manifest only knew what the last finished run wrote, so a run that stopped after its upsert left vectors no later run could find. Listing reads what is really stored; the index holds nothing else. The build token needs read (list) access. With the title in the hash, a renamed page is re-indexed; the first `main` build re-embeds all ~95 passages once.                                                                                                                                         |
+| 2026-10-24 | **D-23** The contact form gets a per-visitor rate limit (`CONTACT_LIMITER`, 5 a minute by `CF-Connecting-IP`; since D-27, 2 a minute per visitor key), counted only for posts that would send, and failing closed without the binding                                                                                    | The `Origin` check only stops other sites' forms; any script can set it. The limit slows the drain on the Resend quota (100 emails a day) but doesn't cap it (D-27). Without the binding every post goes to `/contact/error/`, which shows up at once, rather than sending without a limit.                                                                                                                                                                                                                  |
+| 2026-10-24 | **D-24** A tag archive with fewer than 2 posts is noindex and left out of the sitemap (`MIN_INDEXED_TAG_POSTS`); categories are always indexed                                                                                                                                                                           | Such an archive repeats one post's card under another URL. The page still exists, so tag links keep working. Today it applies to `/blog/tag/colombia/` and `/blog/tag/ethiopia/` (sitemap 29 → 27 URLs).                                                                                                                                                                                                                                                                                                     |
+| 2026-10-24 | **D-25** Sitemap `<lastmod>` comes from Sanity `_updatedAt`; a page that lists posts takes the newest post's date; term archives get none (dated since D-28)                                                                                                                                                             | `_updatedAt` changes on every publish, so the date is honest. A listing changes when a post does. An archive has no document of its own, so any date would be invented.                                                                                                                                                                                                                                                                                                                                      |
+| 2026-10-24 | **D-26** The Studio offers the Dark background only where every colour of the section adapts to the larch band (the CTA); the other sections offer Light and Cream; the hero's tone field is hidden                                                                                                                      | Dark text, links and buttons vanished on the dark band. The hero's field is hidden rather than removed, so stored values raise no warning. No stored section used Dark outside the hero and the CTA.                                                                                                                                                                                                                                                                                                         |
+| 2026-10-24 | **D-27** Rate limits key on the visitor (an IPv4 address, an IPv6 /64); the contact form allows 2 a minute with no site-wide or daily cap; the assistant adds `CHAT_SITE_LIMITER` (60 a minute for all visitors per Cloudflare location, one key: a rate, not a total) and one 30 s deadline for the whole request       | Artem's choice for the form, for the demo: one script on one address uses up Resend's free 100 a day in about 50 minutes (3,000 a month in about 25 hours), then real messages land on `/contact/error/`; a Durable Object daily counter or Turnstile is next. An IPv6 visitor usually holds a whole /64. One address can still spend about $40–90 a day on Anthropic: the monthly spend limit caps the total. The deadline covers the limiters and retrieval, so a hung binding ends in "unavailable".      |
+| 2026-10-24 | **D-28** Category and tag archives get `<lastmod>`: the later of the term's `_updatedAt` and the newest post's of all. The sitemap also leaves out pages whose canonical is another URL, and is written without dates if they fail to load                                                                               | An archive changes when its term or one of its posts does, so that date is not invented after all (D-25 left them undated); 27 of 27 URLs are dated. Floored at the newest post of all, not its own posts, so it never moves back when a post leaves it; only deleting the newest post can. A URL in the sitemap tells search engines it is canonical. `@astrojs/sitemap` writes no sitemap at all when `serialize` throws, so a failed date query only logs a warning.                                      |
 
 ### Open
 
@@ -328,7 +335,7 @@ redirect is a **301** that lands on the final URL in **one hop**.
   - duplicate sources
   - a source equal to a built route
   - **any dynamic rule that matches a built route**
-  - more than 2,000 static or 100 dynamic rules
+  - more than 2,000 exact-path (Cloudflare's "static") or 100 dynamic rules
   - a line over 1,000 characters
 
 ## 9. Phases
@@ -785,6 +792,9 @@ the contact page. Decisions 2026-10-17.
   (it already has Workers AI and Vectorize); `RAG_INDEX_TOKEN` overrides it if ever needed. A
   failed indexing run is logged and never fails the build. `npm run rag:passages` writes the
   passages to `.cache/rag/passages.json` for review without sending anything.
+  _2026-10-24 (D-22):_ stale ids are no longer read from a manifest vector (namespace `meta`):
+  the build lists the index's ids and deletes every one that isn't a current passage, and the
+  first run deletes the old manifest. Passage ids now also hash the page title.
 - **Leak guard:** before anything is written, every word of every passage (with its title and
   heading) must appear in the visible `<body>` text of the built page it links to
   (`src/lib/rag/public-check.ts`). If one doesn't, a production build skips the index update and
@@ -809,11 +819,14 @@ Steps (one PR each):
 - [x] R1 — Artem (2026-10-17): Anthropic key in the `larchwick` workspace (free Evaluation plan, so
       nothing can be charged; expires 2026-12-31) as the Cloudflare secret `ANTHROPIC_API_KEY`; the
       build token covers Workers AI and Vectorize; index `larchwick-content` (768, cosine) created.
+      (2026-10-24: the account now has paid credits; a monthly spend limit caps what the assistant
+      can cost.)
 - [x] R2 — Chunker (`src/lib/rag/chunks.ts`, pure, tested) and the `ragIndex()` integration; 87
       passages (6–101 words) from 7 pages, 10 posts and the contact details; 22 test questions in
       `scripts/rag-eval/questions.json` (3 off-topic). Verified in production (2026-10-19): 88 vectors,
       and `npm run rag:inspect` finds all 87 passages identical to the current content (0 missing,
-      0 extra).
+      0 extra). (The 88th was the manifest, removed 2026-10-24, D-22; `rag:inspect` now compares
+      url, title, heading and text, and lists any vector outside `content` as extra.)
 - [x] R3 — `/api/chat` in the Worker (`worker/chat.ts`), with 10 `node:test` tests (AI,
       Vectorize, the limiter and Anthropic faked): POST and same-origin only, question 1–500
       characters, 10 questions a minute per visitor (checked before any spend; the limiter is
@@ -825,6 +838,18 @@ Steps (one PR each):
       the "not available" message.
       When Anthropic refuses (rate limit, free allowance used up, expired key), the answer is a
       friendly "not available right now" with a link to the contact page, never an error page.
+      2026-10-24: the same message after a 30 s timeout on the Claude request (503 before any
+      text, `error` then `done` mid-stream), and when the token cap is reached before any text.
+      Later the same day (D-27): the 30 s deadline covers the whole request (limiters, embedding,
+      Vectorize, Claude); a second limiter, `CHAT_SITE_LIMITER`, allows 60 questions a minute for
+      all visitors together (one key, `site`, counted per Cloudflare location); the per-visitor
+      limiters, chat and contact, key on the visitor (IPv4 address or IPv6 /64); and the stream no
+      longer stalls when an upstream chunk carries no text. Over the site-wide limit the 429 says
+      "The assistant is busy right now"; over the per-visitor one it still asks the visitor to
+      wait. These limits cap a rate, not a total: one address can still spend roughly $40–90 a day,
+      so the monthly spend limit Artem sets in the Anthropic console is what caps the total (then
+      "unavailable" until the month resets). A daily question budget would need a Durable Object
+      (or KV) counter.
 - [x] R4 — Chat panel (`src/components/chat/ChatPanel.astro`, in Layout): a gold launcher
       (icon-only below `sm`) opens a popover panel (bottom sheet on phones, 25rem card from
       `sm`) with suggested questions, the streamed answer without the `[n]` markers (its
@@ -882,6 +907,9 @@ Events (★ = key event in GA):
 | `chat_source_click` | link in an answer clicked                | `link_url`                                                      |
 | `page_not_found`    | 404 page shown                           | – (GA's own `page_location` and `page_referrer` say where from) |
 | scrolls, outbound   | GA enhanced measurement (no code)        | –                                                               |
+
+Since 2026-10-24 the two view events (`generate_lead`, `page_not_found`) are also not sent again
+when the visitor comes back with Back or Forward (`isRepeatView()`).
 
 Steps (one PR each):
 
@@ -1086,7 +1114,8 @@ Lighthouse CLI (pinned `lighthouse@13.5.0`) in the same Brave, headless:
   - `<version_traps>`.
   - `<building_a_page>` and `<colors>`: copy comes from Sanity, and the token names change.
   - forms and hosting.
-- `.claude/docs/claude/*.md`, `.claude/skills/landing/SKILL.md`, `.claude/agents/code-sentinel.md`.
+- `.claude/docs/claude/*.md` and `.claude/skills/landing/SKILL.md`. (`.claude/agents/code-sentinel.md`
+  was removed on 2026-10-24; reviews use the user-level `/review-team` skill.)
 - `.claude/hooks/check-docs-sync.sh`: add `src/lib/sanity/` and `studio/schemaTypes/`.
 - `README.md`, `docs/STRUCTURE.md`, `docs/internal/PROJECT.md`, `docs/pages/*` and
   `.claude/docs/WORKLOG.md`, per CLAUDE.md task-completion.

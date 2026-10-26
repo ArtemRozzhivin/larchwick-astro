@@ -1,3 +1,5 @@
+import { decodeEntities } from './html.ts'
+
 export interface WxrTerm {
   id: number
   slug: string
@@ -13,6 +15,7 @@ export interface WxrItem {
   slug: string
   link: string
   date: string
+  localDate: string
   content: string
   excerpt: string
   parentId: number
@@ -29,22 +32,6 @@ export interface Wxr {
   tags: WxrTerm[]
 }
 
-const XML_ENTITIES = new Map([
-  ['amp', '&'],
-  ['lt', '<'],
-  ['gt', '>'],
-  ['quot', '"'],
-  ['apos', "'"],
-])
-
-function decodeXml(text: string): string {
-  return text.replace(/&(#x[0-9a-f]+|#\d+|[a-z]+);/gi, (match, entity: string) => {
-    if (/^#x/i.test(entity)) return String.fromCodePoint(Number.parseInt(entity.slice(2), 16))
-    if (entity.startsWith('#')) return String.fromCodePoint(Number.parseInt(entity.slice(1), 10))
-    return XML_ENTITIES.get(entity.toLowerCase()) ?? match
-  })
-}
-
 function toIsoUtc(date: string): string {
   return date ? `${date.replace(' ', 'T')}Z` : ''
 }
@@ -58,7 +45,7 @@ export function parseWxr(xml: string): Wxr {
   const readText = (raw: string): string =>
     raw
       .split(/\u0000(\d+)\u0000/)
-      .map((part, index) => (index % 2 === 1 ? (cdata[Number(part)] ?? '') : decodeXml(part)))
+      .map((part, index) => (index % 2 === 1 ? (cdata[Number(part)] ?? '') : decodeEntities(part)))
       .join('')
       .trim()
   const field = (source: string, tag: string): string => {
@@ -66,7 +53,7 @@ export function parseWxr(xml: string): Wxr {
     return match ? readText(match[1]) : ''
   }
   const attribute = (source: string, name: string): string =>
-    decodeXml(new RegExp(`\\b${name}="([^"]*)"`).exec(source)?.[1] ?? '')
+    decodeEntities(new RegExp(`\\b${name}="([^"]*)"`).exec(source)?.[1] ?? '')
   const metaPattern =
     /<wp:postmeta>\s*<wp:meta_key>([\s\S]*?)<\/wp:meta_key>\s*<wp:meta_value>([\s\S]*?)<\/wp:meta_value>\s*<\/wp:postmeta>/g
 
@@ -87,6 +74,7 @@ export function parseWxr(xml: string): Wxr {
     slug: field(item, 'wp:post_name'),
     link: field(item, 'link'),
     date: toIsoUtc(field(item, 'wp:post_date_gmt')),
+    localDate: field(item, 'wp:post_date'),
     content: field(item, 'content:encoded'),
     excerpt: field(item, 'excerpt:encoded'),
     parentId: Number(field(item, 'wp:post_parent') || 0),

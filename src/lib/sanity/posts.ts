@@ -1,6 +1,12 @@
+import { postPath, termPath } from '../routes'
+import { lastModified } from '../seo/sitemap'
 import { sanityFetch } from './client'
-import { POSTS_QUERY, TERMS_QUERY } from './queries'
-import type { POSTS_QUERY_RESULT, TERMS_QUERY_RESULT } from './sanity.types'
+import { PAGE_DATES_QUERY, POSTS_QUERY, TERMS_QUERY } from './queries'
+import type {
+  PAGE_DATES_QUERY_RESULT,
+  POSTS_QUERY_RESULT,
+  TERMS_QUERY_RESULT,
+} from './sanity.types'
 
 export type Post = POSTS_QUERY_RESULT[number]
 export type Term = TERMS_QUERY_RESULT[number]
@@ -19,17 +25,38 @@ export function getTerms(): Promise<TERMS_QUERY_RESULT> {
   return terms
 }
 
-export function postPath(post: Pick<Post, 'slug'>): string {
-  return `/blog/${post.slug}/`
+/** Path → last change of every page, post and term archive, for the sitemap's <lastmod>. */
+export async function getLastModified(): Promise<ReadonlyMap<string, string>> {
+  const [all, pages, terms] = await Promise.all([
+    getPosts(),
+    sanityFetch<PAGE_DATES_QUERY_RESULT>(PAGE_DATES_QUERY),
+    getTerms(),
+  ])
+  const archives = termArchives(all, terms).map(({ term }) => ({
+    path: termPath(term),
+    _updatedAt: term._updatedAt,
+  }))
+  return lastModified(
+    pages,
+    all.map((post) => ({ path: postPath(post), _updatedAt: post._updatedAt })),
+    archives,
+  )
 }
 
-export function termPath(term: Pick<Term, '_type' | 'slug'>): string {
-  return `/blog/${term._type === 'category' ? 'category' : 'tag'}/${term.slug}/`
-}
-
-export function postsWithTerm(all: readonly Post[], term: Term): Post[] {
+function postsWithTerm(all: readonly Post[], term: Term): Post[] {
   const field = term._type === 'category' ? 'categories' : 'tags'
   return all.filter((post) => post[field]?.some((item) => item._id === term._id))
+}
+
+/** The terms that get an archive page (a slug and at least one post), each with its posts. */
+export function termArchives(
+  all: readonly Post[],
+  terms: readonly Term[],
+): { term: Term; posts: Post[] }[] {
+  return terms
+    .filter((term) => term.slug)
+    .map((term) => ({ term, posts: postsWithTerm(all, term) }))
+    .filter(({ posts: listed }) => listed.length > 0)
 }
 
 export function relatedPosts(post: Post, all: readonly Post[], limit = 3): Post[] {
@@ -46,20 +73,6 @@ export function adjacentPosts(
 ): { newer: Post | undefined; older: Post | undefined } {
   const index = all.findIndex((other) => other._id === post._id)
   return { newer: all[index - 1], older: all[index + 1] }
-}
-
-export async function archivePaths(
-  type: 'category' | 'tag',
-): Promise<{ params: { slug: string }; props: { term: Term; posts: Post[] } }[]> {
-  const [all, terms] = await Promise.all([getPosts(), getTerms()])
-  return terms
-    .filter((term) => term._type === type && term.slug)
-    .map((term) => ({ term, posts: postsWithTerm(all, term) }))
-    .filter(({ posts: matching }) => matching.length > 0)
-    .map(({ term, posts: matching }) => ({
-      params: { slug: term.slug ?? '' },
-      props: { term, posts: matching },
-    }))
 }
 
 export function termLabel(title: string | null | undefined): string {

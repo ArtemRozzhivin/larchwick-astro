@@ -76,7 +76,7 @@ describe('redirect rules', () => {
     assert.ok(errors.some((error) => error.includes('/a/ → /old/ is a chain')))
   })
 
-  it('writes static rules before patterns', () => {
+  it('writes exact-path rules before patterns', () => {
     const file = toRedirectsFile([
       { from: '/tag/:slug/', to: '/blog/tag/:slug/', status: 301 },
       { from: '/home/', to: '/', status: 301 },

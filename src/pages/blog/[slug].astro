@@ -1,23 +1,18 @@
 ---
 import { siteConfig } from '@lib/config/site'
 import { blog } from '@lib/content/blog'
-import { imageSource } from '@lib/sanity/image'
-import {
-  adjacentPosts,
-  getPosts,
-  type Post,
-  postPath,
-  relatedPosts,
-  termLabel,
-  termPath,
-} from '@lib/sanity/posts'
+import { BLOG_PATH, postPath } from '@lib/routes'
+import { adjacentPosts, getPosts, type Post, relatedPosts } from '@lib/sanity/posts'
 import { getSiteSettings } from '@lib/sanity/settings'
-import { blogPostingSchema } from '@lib/seo/schema'
+import { canonicalUrl } from '@lib/seo/canonical'
+import { layoutSeo } from '@lib/seo/layout-seo'
+import { blogPostingSchema, breadcrumbListSchema } from '@lib/seo/schema'
 import PostGrid from '@components/blog/PostGrid.astro'
-import PostMeta from '@components/blog/PostMeta.astro'
+import PostHeader from '@components/blog/PostHeader.astro'
+import PostNav from '@components/blog/PostNav.astro'
+import PostTags from '@components/blog/PostTags.astro'
 import RichText from '@components/rich-text/RichText.astro'
 import Section from '@components/sections/Section.astro'
-import SanityImage from '@components/ui/SanityImage.astro'
 import Layout from '@layouts/Layout.astro'
 
 interface Props {
@@ -37,123 +32,47 @@ export async function getStaticPaths() {
 
 const { post, related, newer, older } = Astro.props
 
-const title = post.seo?.metaTitle ?? `${post.title} | ${siteConfig.name}`
-const settings = await getSiteSettings()
-const description = post.seo?.metaDescription ?? post.excerpt ?? settings.description
-const socialImage = post.seo?.ogImage ?? post.mainImage
-const ogImage = socialImage?.asset ? imageSource(socialImage, 1200, 1200 / 630).src : undefined
-const url = new URL(postPath(post), siteConfig.url).href
-const jsonLd = blogPostingSchema({
-  title: post.title ?? '',
-  description,
-  url,
-  publishedAt: post.publishedAt ?? post._updatedAt,
-  modifiedAt: post._updatedAt,
-  image: ogImage,
-  byline: blog.byline,
+const seo = layoutSeo(post.seo, {
+  title: `${post.title} | ${siteConfig.name}`,
+  description: post.excerpt ?? undefined,
+  image: post.mainImage,
 })
-const neighbours = [
-  newer && { label: blog.newerLabel, post: newer },
-  older && { label: blog.olderLabel, post: older },
-].filter((item) => item !== undefined)
+const settings = await getSiteSettings()
+const path = postPath(post)
+const jsonLd = [
+  blogPostingSchema({
+    title: post.title ?? '',
+    description: seo.description ?? settings.description,
+    url: canonicalUrl(seo.canonical ?? path, siteConfig.url),
+    publishedAt: post.publishedAt ?? post._updatedAt,
+    modifiedAt: post._updatedAt,
+    image: seo.ogImage?.src,
+  }),
+  breadcrumbListSchema([
+    { name: blog.breadcrumbs.home, path: '/' },
+    { name: blog.breadcrumbs.blog, path: BLOG_PATH },
+    { name: post.title ?? '', path },
+  ]),
+]
 ---
 
 <Layout
-  title={title}
-  description={description}
+  {...seo}
   ogType="article"
   publishedTime={post.publishedAt ?? undefined}
   modifiedTime={post._updatedAt}
-  ogImage={ogImage}
-  ogImageAlt={post.mainImage?.alt}
   jsonLd={jsonLd}
 >
   <article>
-    <header class="bg-paper pt-10 pb-8 md:pt-14">
-      <div class="container-wide max-w-3xl">
-        <PostMeta post={post} byline class="rise-in" />
-        <h1
-          class="text-espresso font-display rise-in mt-4 text-[3rem] leading-[0.9] font-black text-balance sm:text-7xl"
-          style="--rise-delay: 1"
-        >
-          {post.title}
-        </h1>
-        {
-          post.excerpt && (
-            <p class="rise-in mt-5 text-xl leading-relaxed text-pretty" style="--rise-delay: 2">
-              {post.excerpt}
-            </p>
-          )
-        }
-      </div>
-    </header>
-
-    {
-      post.mainImage && (
-        <div class="bg-paper">
-          <div class="container-wide max-w-5xl">
-            <SanityImage
-              image={post.mainImage}
-              widths={[640, 960, 1280, 1600]}
-              sizes="(min-width: 64rem) 60rem, 100vw"
-              aspectRatio={16 / 9}
-              priority
-              class="border-espresso rounded-photo unveil w-full translate-y-8 border-2"
-            />
-          </div>
-        </div>
-      )
-    }
+    <PostHeader post={post} />
 
     <div class="container-wide max-w-3xl pt-16 pb-12">
       <RichText value={post.body ?? []} class="text-lg" />
-
-      {
-        post.tags && post.tags.length > 0 && (
-          <div class="reveal mt-12 border-t pt-6">
-            <h2 class="text-espresso font-bold">{blog.tagsHeading}</h2>
-            <ul class="mt-3 flex flex-wrap gap-2">
-              {post.tags.map((tag) => (
-                <li>
-                  <a
-                    href={termPath({ _type: 'tag', slug: tag.slug })}
-                    class="border-espresso text-espresso hover:bg-needle inline-block rounded-full border-2 px-3 py-1 text-sm font-bold transition-colors"
-                  >
-                    {termLabel(tag.title)}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-        )
-      }
+      <PostTags tags={post.tags} />
     </div>
   </article>
 
-  {
-    neighbours.length > 0 && (
-      <nav aria-label="Previous and next posts" class="container-wide max-w-3xl pb-12">
-        <ul class="grid gap-4 sm:grid-cols-2">
-          {neighbours.map(({ label, post: neighbour }, index) => (
-            <li
-              class:list={['reveal', label === blog.olderLabel && 'sm:text-right']}
-              style={`--reveal-delay: ${index}`}
-            >
-              <a
-                href={postPath(neighbour)}
-                class="group bg-surface border-espresso hover:shadow-label rounded-label block border-2 p-5 transition-shadow"
-              >
-                <span class="text-sm">{label}</span>
-                <span class="text-espresso group-hover:text-larch font-display mt-1 block text-2xl leading-none font-extrabold">
-                  {neighbour.title}
-                </span>
-              </a>
-            </li>
-          ))}
-        </ul>
-      </nav>
-    )
-  }
+  <PostNav newer={newer} older={older} />
 
   {
     related.length > 0 && (

@@ -2,10 +2,14 @@
 /**
  * Layout primitive every section is built on.
  *
- * Owns the container width, vertical rhythm, and the optional eyebrow/heading/
+ * Owns the page width, vertical rhythm, and the optional eyebrow/heading/
  * intro header, so sections stay consistent without repeating the markup.
  */
+import SectionHeader from './SectionHeader.astro'
+
 export type Tone = 'default' | 'muted' | 'inverted'
+/** The tones of sections whose own text is dark: everything but the larch band. */
+export type LightTone = Exclude<Tone, 'inverted'>
 
 interface Props {
   id?: string
@@ -34,46 +38,18 @@ const TONE_CLASSES: Record<Tone, string> = {
   muted: 'bg-surface text-ink border-y-2 border-espresso',
   inverted: 'bg-larch text-mist',
 }
-
-const hasHeader = Boolean(eyebrow || heading || intro)
-const isCentered = align === 'center'
-const isInverted = tone === 'inverted'
 ---
 
 <section id={id} class:list={['py-8 md:py-12', TONE_CLASSES[tone], className]}>
   <div class:list={['container-wide', width === 'narrow' && 'max-w-3xl']}>
-    {
-      hasHeader && (
-        <header class:list={['mb-8 max-w-2xl md:mb-10', isCentered && 'mx-auto text-center']}>
-          {eyebrow && (
-            <p
-              class:list={[
-                'reveal mb-3 font-bold text-balance',
-                isInverted ? 'text-needle' : 'text-larch',
-              ]}
-            >
-              {eyebrow}
-            </p>
-          )}
-          {heading && (
-            <h2
-              class:list={[
-                'font-display reveal text-[2.6rem] leading-[0.95] font-black text-balance md:text-6xl',
-                isInverted ? 'text-surface' : 'text-espresso',
-              ]}
-              style="--reveal-delay: 1"
-            >
-              {heading}
-            </h2>
-          )}
-          {intro && (
-            <p class="reveal mt-4 text-lg leading-relaxed text-pretty" style="--reveal-delay: 2">
-              {intro}
-            </p>
-          )}
-        </header>
-      )
-    }
+    <SectionHeader
+      eyebrow={eyebrow}
+      heading={heading}
+      intro={intro}
+      align={align}
+      tone={tone}
+      class="mb-8 max-w-2xl md:mb-10"
+    />
     <slot />
   </div>
 </section>

@@ -1,6 +1,6 @@
 import { defineField, defineType } from 'sanity'
 
-import { eyebrowField, optionalHeadingField, sectionPreview, toneField } from '../fields'
+import { eyebrowField, lightToneField, optionalHeadingField, sectionPreview } from '../fields'
 
 export const textBlock = defineType({
   name: 'textBlock',
@@ -15,7 +15,7 @@ export const textBlock = defineType({
       type: 'blockContent',
       validation: (rule) => rule.required(),
     }),
-    toneField,
+    lightToneField,
   ],
   preview: sectionPreview('Text'),
 })

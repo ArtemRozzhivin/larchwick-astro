@@ -2,6 +2,8 @@ import { createHash } from 'node:crypto'
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { join } from 'node:path'
 
+import { request, type RequestOptions } from '../shared/http.ts'
+
 export interface RawResponse {
   url: string
   status: number
@@ -25,9 +27,12 @@ export const MAX_HOPS = 10
 const USER_AGENT = 'larchwick-seo-check/1.0 (read-only crawl; sequential requests)'
 const ACCEPT = 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
 const REDIRECT_STATUSES = new Set([301, 302, 303, 307, 308])
-const MAX_ATTEMPTS = 2
-const RETRY_DELAY_MS = 1000
-const REQUEST_TIMEOUT_MS = 30_000
+const REQUEST: RequestOptions = {
+  userAgent: USER_AGENT,
+  accept: ACCEPT,
+  timeoutMs: 30_000,
+  retryDelayMs: 1000,
+}
 
 export function header(response: RawResponse, name: string): string | null {
   const key = name.toLowerCase()
@@ -37,33 +42,6 @@ export function header(response: RawResponse, name: string): string | null {
 
 export function isTextual(contentType: string | null): boolean {
   return contentType !== null && /^\s*text\/|[/+](?:xml|json)\b|javascript/i.test(contentType)
-}
-
-export function describeError(error: unknown): string {
-  if (!(error instanceof Error)) return String(error)
-  return error.cause instanceof Error ? `${error.message} (${error.cause.message})` : error.message
-}
-
-function sleep(ms: number): Promise<void> {
-  return new Promise((done) => setTimeout(done, ms))
-}
-
-async function request(url: string): Promise<Response> {
-  for (let attempt = 1; ; attempt++) {
-    try {
-      const response = await fetch(url, {
-        redirect: 'manual',
-        headers: { 'User-Agent': USER_AGENT, Accept: ACCEPT },
-        signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS),
-      })
-      const isTransient = response.status === 429 || response.status >= 500
-      if (!isTransient || attempt === MAX_ATTEMPTS) return response
-      await response.body?.cancel()
-    } catch (error) {
-      if (attempt === MAX_ATTEMPTS) throw new Error(`GET ${url} failed: ${describeError(error)}`)
-    }
-    await sleep(RETRY_DELAY_MS)
-  }
 }
 
 function cacheFile(cacheDir: string, url: string): string {
@@ -105,7 +83,7 @@ function parseRaw(text: string, url: string): RawResponse {
 }
 
 async function fetchAndStore(url: string, cacheDir: string): Promise<RawResponse> {
-  const response = await request(url)
+  const response = await request(url, REQUEST)
   const contentType = response.headers.get('content-type')
   const body = isTextual(contentType) ? await response.text() : null
   if (body === null) await response.body?.cancel()

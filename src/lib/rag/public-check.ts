@@ -1,6 +1,6 @@
 /**
  * The leak guard for the assistant's index: every word of a passage must already appear in the
- * visible text (the <body>) of the page it links to, so the index never holds anything the site
+ * rendered text (the <body>) of the page it links to, so the index never holds anything the site
  * doesn't publish (drafts, Studio-only fields, hidden pages).
  */
 const ENTITIES: Readonly<Record<string, string>> = {

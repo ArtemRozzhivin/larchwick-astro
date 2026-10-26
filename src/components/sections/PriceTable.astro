@@ -1,12 +1,9 @@
 ---
-import Section, { type Tone } from './Section.astro'
+import type { PriceTable } from '@lib/sanity/sanity.types'
 
-interface Row {
-  _key?: string
-  name?: string
-  description?: string
-  price?: string
-}
+import Section, { type LightTone } from './Section.astro'
+
+type Row = Pick<NonNullable<PriceTable['rows']>[number], 'name' | 'description' | 'price'>
 
 interface Props {
   id?: string
@@ -15,7 +12,7 @@ interface Props {
   intro?: string
   rows: readonly Row[]
   note?: string
-  tone?: Tone
+  tone?: LightTone
 }
 
 const { id, eyebrow, heading, intro, rows, note, tone } = Astro.props

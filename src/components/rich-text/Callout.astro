@@ -1,14 +1,14 @@
 ---
 import type { Props as NodeProps } from 'astro-portabletext/types'
 
+import { ui } from '@lib/content/ui'
 import type { Callout as CalloutValue } from '@lib/sanity/sanity.types'
 
 type Props = NodeProps<CalloutValue & { _key: string }>
 
 const { node } = Astro.props
 
-const LABELS = { note: 'Note', tip: 'Tip', warning: 'Warning' } as const
-const label = LABELS[node.tone ?? 'tip']
+const label = ui.calloutLabels[node.tone ?? 'tip']
 ---
 
 <aside class="bg-surface border-espresso shadow-label rounded-label my-8 border-2 px-5 py-4">

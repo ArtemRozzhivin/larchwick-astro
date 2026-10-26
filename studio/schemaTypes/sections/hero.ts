@@ -92,7 +92,8 @@ export const hero = defineType({
       description: 'Short ticked points under the buttons, e.g. "Roasted to order".',
       validation: (rule) => rule.max(4),
     }),
-    toneField,
+    // The hero is always the larch band. Hidden, not removed, so stored values raise no warning.
+    defineField({ ...toneField, hidden: true }),
   ],
   preview: sectionPreview('Hero'),
 })

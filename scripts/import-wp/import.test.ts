@@ -2,11 +2,11 @@ import { readFileSync } from 'node:fs'
 import { resolve } from 'node:path'
 import { describe, expect, it } from 'vitest'
 
+import { parseWxr } from '../shared/wxr.ts'
 import { buildDocuments, type DesiredDoc } from './documents.ts'
 import { type AltEntry, mediaItems, type MediaSwap, parseCredits, withSwaps } from './media.ts'
 import { planMutations, stable } from './sync.ts'
 import { ORIGIN } from './testing.ts'
-import { parseWxr } from './wxr.ts'
 
 const ROOT = resolve(import.meta.dirname, '../..')
 const wxr = parseWxr(

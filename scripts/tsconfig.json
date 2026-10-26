@@ -12,5 +12,5 @@
     "verbatimModuleSyntax": true,
     "erasableSyntaxOnly": true
   },
-  "include": ["import-wp/**/*.ts"]
+  "include": ["import-wp/**/*.ts", "shared/**/*.ts"]
 }

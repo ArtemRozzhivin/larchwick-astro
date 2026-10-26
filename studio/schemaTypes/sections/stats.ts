@@ -1,6 +1,6 @@
 import { defineArrayMember, defineField, defineType } from 'sanity'
 
-import { eyebrowField, optionalHeadingField, sectionPreview, toneField } from '../fields'
+import { eyebrowField, lightToneField, optionalHeadingField, sectionPreview } from '../fields'
 
 export const stats = defineType({
   name: 'stats',
@@ -38,7 +38,7 @@ export const stats = defineType({
       ],
       validation: (rule) => rule.required().min(2).max(4),
     }),
-    toneField,
+    lightToneField,
   ],
   preview: sectionPreview('Numbers'),
 })

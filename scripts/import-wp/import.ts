@@ -3,13 +3,13 @@ import { relative, resolve } from 'node:path'
 import { parseArgs } from 'node:util'
 
 import { apiVersion, dataset, projectId } from '../../studio/env.ts'
+import { parseWxr } from '../shared/wxr.ts'
 import { buildDocuments, type DesiredDoc, type Group, GROUPS } from './documents.ts'
 import { type AltEntry, mediaItems, type MediaSwap, parseCredits, withSwaps } from './media.ts'
 import { type Report, summarise, toCsv, toMarkdown } from './report.ts'
 import { commit, existingAssets, existingDocuments, sanityClient, uploadAsset } from './sanity.ts'
 import { planMutations } from './sync.ts'
 import type { MediaAsset } from './types.ts'
-import { parseWxr } from './wxr.ts'
 
 const ROOT = resolve(import.meta.dirname, '../..')
 const DEFAULT_WXR = 'docs/before/larchwick.WordPress.2026-10-07.xml'

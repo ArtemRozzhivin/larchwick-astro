@@ -1,6 +1,8 @@
 ---
 import { blog } from '@lib/content/blog'
-import { type Post, termPath } from '@lib/sanity/posts'
+import { formatPostDate } from '@lib/format/date'
+import { termPath } from '@lib/routes'
+import type { Post } from '@lib/sanity/posts'
 
 interface Props {
   post: Pick<Post, 'publishedAt' | 'categories'>
@@ -10,8 +12,8 @@ interface Props {
 
 const { post, byline = false, class: className } = Astro.props
 
-const dateFormat = new Intl.DateTimeFormat('en-GB', { dateStyle: 'long' })
 const category = post.categories?.[0]
+const bylineText = `${blog.bylineLabel} ${blog.byline}`
 ---
 
 <p class:list={['flex flex-wrap items-center gap-x-3 gap-y-1 text-sm', className]}>
@@ -25,10 +27,6 @@ const category = post.categories?.[0]
       </a>
     )
   }
-  {
-    post.publishedAt && (
-      <time datetime={post.publishedAt}>{dateFormat.format(new Date(post.publishedAt))}</time>
-    )
-  }
-  {byline && <span>By {blog.byline}</span>}
+  {post.publishedAt && <time datetime={post.publishedAt}>{formatPostDate(post.publishedAt)}</time>}
+  {byline && <span>{bylineText}</span>}
 </p>

@@ -3,9 +3,9 @@ import { defineArrayMember, defineField, defineType } from 'sanity'
 import {
   eyebrowField,
   introField,
+  lightToneField,
   optionalHeadingField,
   sectionPreview,
-  toneField,
 } from '../fields'
 
 export const faq = defineType({
@@ -68,7 +68,7 @@ export const faq = defineType({
       ],
       validation: (rule) => rule.required().min(1),
     }),
-    toneField,
+    lightToneField,
   ],
   preview: sectionPreview('FAQ'),
 })

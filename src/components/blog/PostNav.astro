@@ -1,0 +1,42 @@
+---
+import { blog } from '@lib/content/blog'
+import { postPath } from '@lib/routes'
+import type { Post } from '@lib/sanity/posts'
+
+interface Props {
+  newer?: Post
+  older?: Post
+}
+
+const { newer, older } = Astro.props
+
+const neighbours = [
+  newer && { label: blog.newerLabel, post: newer, isOlder: false },
+  older && { label: blog.olderLabel, post: older, isOlder: true },
+].filter((item) => item !== undefined)
+---
+
+{
+  neighbours.length > 0 && (
+    <nav aria-label={blog.postNavLabel} class="container-wide max-w-3xl pb-12">
+      <ul class="grid gap-4 sm:grid-cols-2">
+        {neighbours.map(({ label: direction, post, isOlder }, index) => (
+          <li
+            class:list={['reveal', isOlder && 'sm:text-right']}
+            style={`--reveal-delay: ${index}`}
+          >
+            <a
+              href={postPath(post)}
+              class="group bg-surface border-espresso hover:shadow-label rounded-label block border-2 p-5 transition-shadow"
+            >
+              <span class="text-sm">{direction}</span>
+              <span class="text-espresso group-hover:text-larch font-display mt-1 block text-2xl leading-none font-extrabold">
+                {post.title}
+              </span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  )
+}

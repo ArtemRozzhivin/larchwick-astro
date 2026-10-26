@@ -3,9 +3,9 @@ import { defineArrayMember, defineField, defineType } from 'sanity'
 import {
   eyebrowField,
   introField,
+  lightToneField,
   optionalHeadingField,
   sectionPreview,
-  toneField,
 } from '../fields'
 
 export const priceTable = defineType({
@@ -46,7 +46,7 @@ export const priceTable = defineType({
       validation: (rule) => rule.required().min(1),
     }),
     defineField({ name: 'note', title: 'Note under the table', type: 'string' }),
-    toneField,
+    lightToneField,
   ],
   preview: sectionPreview('Price list'),
 })

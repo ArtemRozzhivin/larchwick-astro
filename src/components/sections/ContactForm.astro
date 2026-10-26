@@ -1,27 +1,33 @@
 ---
 import { siteConfig } from '@lib/config/site'
+import { LIMITS } from '@lib/contact/limits'
+import { contactForm as copy } from '@lib/content/contact'
 import { contactDetails, getSiteSettings } from '@lib/sanity/settings'
 import { buttonVariants } from '@components/ui/button'
+import { fieldVariants } from '@components/ui/field'
 import Icon from '@components/ui/Icon.astro'
 
-import Section, { type Tone } from './Section.astro'
+import { itemHeading } from './heading'
+import Section, { type LightTone } from './Section.astro'
 
 interface Props {
   id?: string
   heading?: string
   intro?: string
   showContactDetails?: boolean
-  tone?: Tone
+  tone?: LightTone
 }
 
-const { id = 'contact', heading, intro, showContactDetails = true, tone } = Astro.props
+const { id, heading, intro, showContactDetails = true, tone } = Astro.props
 
 const { contact } = await getSiteSettings()
 const labels = { ...siteConfig.footer.labels, hours: siteConfig.footer.headings.hours }
 const details = contactDetails(contact, siteConfig.footer.labels)
-const fieldClass =
-  'border-espresso/60 bg-surface text-espresso focus-visible:border-larch focus-visible:outline-larch mt-1.5 block w-full rounded-md border-2 px-3.5 py-2.5'
+const messageLabel = copy.message(new Intl.NumberFormat(siteConfig.lang).format(LIMITS.message))
+const DetailHeading = itemHeading(heading)
+const fieldClass = fieldVariants({ class: 'mt-1.5 block w-full' })
 const labelClass = 'text-espresso font-bold'
+const detailHeadingClass = 'text-espresso font-display text-2xl leading-none font-extrabold'
 ---
 
 <Section id={id} heading={heading} intro={intro} tone={tone}>
@@ -29,44 +35,44 @@ const labelClass = 'text-espresso font-bold'
     <form method="post" action="/api/contact" class="reveal space-y-5">
       <div class="grid gap-5 sm:grid-cols-2">
         <label class={labelClass}>
-          Your name
+          {copy.name}
           <input
             name="name"
             type="text"
             autocomplete="name"
             required
-            maxlength="100"
+            maxlength={LIMITS.name}
             class={fieldClass}
           />
         </label>
         <label class={labelClass}>
-          Your email
+          {copy.email}
           <input
             name="email"
             type="email"
             autocomplete="email"
             required
-            maxlength="254"
+            maxlength={LIMITS.email}
             class={fieldClass}
           />
         </label>
       </div>
       <label class:list={[labelClass, 'block']}>
-        Subject
-        <input name="subject" type="text" required maxlength="150" class={fieldClass} />
+        {copy.subject}
+        <input name="subject" type="text" required maxlength={LIMITS.subject} class={fieldClass} />
       </label>
       <label class:list={[labelClass, 'block']}>
-        Your message (optional, up to 1,500 characters)
-        <textarea name="message" rows="6" maxlength="1500" class={fieldClass}></textarea>
+        {messageLabel}
+        <textarea name="message" rows="6" maxlength={LIMITS.message} class={fieldClass}></textarea>
       </label>
       <div class="hidden" aria-hidden="true">
         <label>
-          Leave this field empty
+          {copy.honeypot}
           <input name="website" type="text" tabindex="-1" autocomplete="off" />
         </label>
       </div>
       <button type="submit" class={buttonVariants({ variant: 'primary', size: 'lg' })}>
-        Send message
+        {copy.submit}
       </button>
     </form>
 
@@ -78,9 +84,7 @@ const labelClass = 'text-espresso font-bold'
         >
           {details.map((detail) => (
             <div>
-              <h2 class="text-espresso font-display text-2xl leading-none font-extrabold">
-                {detail.label}
-              </h2>
+              <DetailHeading class={detailHeadingClass}>{detail.label}</DetailHeading>
               <p class="mt-1 flex items-center gap-2">
                 <Icon name={detail.icon} class="text-larch size-4 shrink-0" />
                 <a href={detail.href} class="underline underline-offset-4">
@@ -91,9 +95,7 @@ const labelClass = 'text-espresso font-bold'
           ))}
           {contact.hours.length > 0 && (
             <div>
-              <h2 class="text-espresso font-display text-2xl leading-none font-extrabold">
-                {labels.hours}
-              </h2>
+              <DetailHeading class={detailHeadingClass}>{labels.hours}</DetailHeading>
               <ul class="mt-1 space-y-1">
                 {contact.hours.map((line) => (
                   <li class="flex items-center gap-2">
