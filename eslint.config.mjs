@@ -14,6 +14,8 @@ export default [
       'build/**',
       'public/**',
       '.cache/**',
+      '.wrangler/**',
+      '.claude/worktrees/**',
       'studio/dist/**',
       'studio/.sanity/**',
       'src/lib/sanity/sanity.types.ts',
