@@ -5,8 +5,9 @@ import { appendFile } from 'node:fs/promises'
 const PRODUCTION_BRANCH = 'main'
 
 /**
- * The `_headers` rule to add for this build, or null. Workers Builds sets WORKERS_CI_BRANCH;
- * local and GitHub CI builds don't, and never deploy, so they stay as production would be.
+ * The `_headers` rule to add for this build, or null. Workers Builds sets WORKERS_CI_BRANCH; a
+ * build without it (local, GitHub CI) is built as production. A local build deployed by hand
+ * as a preview must set it: `npm run preview:deploy` does.
  */
 export function previewNoindexRule(branch: string | undefined): string | null {
   if (!branch || branch === PRODUCTION_BRANCH) return null

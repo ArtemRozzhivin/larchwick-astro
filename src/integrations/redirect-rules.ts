@@ -10,7 +10,7 @@ export interface RedirectDoc {
   permanent?: boolean | null
 }
 
-const LIMITS = { static: 2000, dynamic: 100, lineLength: 1000 } as const
+const LIMITS = { exactPath: 2000, dynamic: 100, lineLength: 1000 } as const
 const OLD_SITEMAPS = [
   '/sitemap_index.xml',
   '/sitemap.xml',
@@ -96,8 +96,8 @@ export function validateRules(rules: readonly Rule[], routes: readonly string[])
     if (seen.has(rule.to) && !isDynamic(rule.to))
       errors.push(`${rule.from} → ${rule.to} is a chain`)
   }
-  if (rules.length - dynamicRules.length > LIMITS.static)
-    errors.push('more than 2,000 static rules')
+  if (rules.length - dynamicRules.length > LIMITS.exactPath)
+    errors.push('more than 2,000 exact-path rules')
   if (dynamicRules.length > LIMITS.dynamic) errors.push('more than 100 dynamic rules')
   return errors
 }

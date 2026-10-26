@@ -1,0 +1,29 @@
+---
+import { blog } from '@lib/content/blog'
+import { termPath } from '@lib/routes'
+import { type Post, termLabel } from '@lib/sanity/posts'
+import { pillVariants } from '@components/ui/link'
+
+interface Props {
+  tags: Post['tags']
+}
+
+const { tags } = Astro.props
+---
+
+{
+  tags && tags.length > 0 && (
+    <div class="reveal mt-12 border-t pt-6">
+      <h2 class="text-espresso font-bold">{blog.tagsHeading}</h2>
+      <ul class="mt-3 flex flex-wrap gap-2">
+        {tags.map((tag) => (
+          <li>
+            <a href={termPath({ _type: 'tag', slug: tag.slug })} class={pillVariants()}>
+              {termLabel(tag.title)}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  )
+}

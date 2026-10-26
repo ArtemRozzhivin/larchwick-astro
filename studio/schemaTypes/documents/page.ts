@@ -1,5 +1,6 @@
 import { defineArrayMember, defineField, defineType } from 'sanity'
 
+import { HOME_SLUG } from '../../homePage'
 import { slugError } from '../fields'
 import { SECTION_TYPES } from '../sections'
 
@@ -27,8 +28,7 @@ export const page = defineType({
       title: 'Slug',
       type: 'slug',
       group: 'content',
-      description:
-        'The address: /<slug>/. The home page uses "home" and lives at /. Changing a slug after publishing needs a redirect.',
+      description: `The address: /<slug>/. The home page uses "${HOME_SLUG}" and lives at /. Changing a slug after publishing needs a redirect.`,
       options: { source: 'title', maxLength: 96 },
       validation: (rule) =>
         rule
@@ -54,7 +54,7 @@ export const page = defineType({
     select: { title: 'title', slug: 'slug.current' },
     prepare: ({ title, slug }) => ({
       title,
-      subtitle: slug === 'home' ? '/' : slug ? `/${slug}/` : 'No slug',
+      subtitle: slug === HOME_SLUG ? '/' : slug ? `/${slug}/` : 'No slug',
     }),
   },
 })

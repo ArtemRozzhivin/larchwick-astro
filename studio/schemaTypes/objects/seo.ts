@@ -1,5 +1,7 @@
 import { defineField, defineType } from 'sanity'
 
+import { isHomePage } from '../../homePage'
+
 export const seo = defineType({
   name: 'seo',
   title: 'SEO',
@@ -30,13 +32,16 @@ export const seo = defineType({
       name: 'ogImage',
       title: 'Social image',
       type: 'image',
-      description: 'Shown when the page is shared (1200 × 630). Leave empty for the site default.',
+      description:
+        'Shown when the page is shared, cropped to 1200 × 630. Empty: a post uses its main image, any other page the site default. An image added here is shared without alt text.',
     }),
+    // The home page is always indexed at /, so its route ignores this field and the canonical.
     defineField({
       name: 'noindex',
       title: 'Hide from search engines',
       type: 'boolean',
       initialValue: false,
+      hidden: ({ document }) => isHomePage(document),
     }),
     defineField({
       name: 'canonical',
@@ -44,6 +49,7 @@ export const seo = defineType({
       type: 'url',
       description:
         "Only if this content was published elsewhere first. Leave empty: the canonical is built from the page's own address.",
+      hidden: ({ document }) => isHomePage(document),
       validation: (rule) => rule.uri({ scheme: ['https'] }),
     }),
   ],
