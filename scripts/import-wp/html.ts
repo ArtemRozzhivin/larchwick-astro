@@ -29,6 +29,10 @@ export function firstElement(nodes: readonly HtmlNode[], tag: string): HtmlEleme
   return elements(nodes, tag)[0]
 }
 
+export function innerOf(html: string, tag: string): HtmlNode[] {
+  return firstElement(parseHtml(html), tag)?.children ?? []
+}
+
 export function textOf(nodes: HtmlNode | readonly HtmlNode[]): string {
   return DomUtils.textContent(Array.isArray(nodes) ? [...nodes] : (nodes as HtmlNode))
     .replace(/\s+/g, ' ')

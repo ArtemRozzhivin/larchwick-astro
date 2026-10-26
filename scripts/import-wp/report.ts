@@ -1,3 +1,4 @@
+import { escapeCell } from '../shared/markdown.ts'
 import type { Built, Group } from './documents.ts'
 import type { MutationPlan } from './sync.ts'
 
@@ -21,10 +22,6 @@ export interface Report {
   links: Built['links']
   redirects: number
   skipped: Built['skipped']
-}
-
-function escapeCell(text: string): string {
-  return text.replace(/\|/g, '\\|').replace(/\n/g, ' ')
 }
 
 export function summarise(

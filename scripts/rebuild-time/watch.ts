@@ -2,11 +2,12 @@ import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { dirname, resolve } from 'node:path'
 import { parseArgs } from 'node:util'
 
+import { siteConfig } from '../../src/lib/config/site.ts'
 import { apiVersion, dataset, projectId } from '../../studio/env.ts'
+import { sleep } from '../shared/http.ts'
 
 const ROOT = resolve(import.meta.dirname, '../..')
 const OUTPUT = 'docs/after/rebuild-times.json'
-const DEFAULT_BASE = 'https://larchwick-astro.larchwick.workers.dev'
 
 interface Run {
   run: number
@@ -45,7 +46,7 @@ function readOptions(): Options | null {
       path: { type: 'string' },
       text: { type: 'string' },
       doc: { type: 'string' },
-      base: { type: 'string', default: DEFAULT_BASE },
+      base: { type: 'string', default: siteConfig.url },
       interval: { type: 'string', default: '5' },
       timeout: { type: 'string', default: '900' },
     },
@@ -103,7 +104,7 @@ async function main(): Promise<void> {
     if (Date.now() - started > options.timeoutMs)
       throw new Error('Timed out before the change went live')
     attempt += 1
-    await new Promise((done) => setTimeout(done, options.intervalMs))
+    await sleep(options.intervalMs)
   }
   const firstLiveAt = new Date().toISOString()
   const published = await publishedAt(options.doc)

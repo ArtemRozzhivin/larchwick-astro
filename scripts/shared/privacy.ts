@@ -21,6 +21,14 @@ export function parseAuthors(data: unknown): Author[] {
   })
 }
 
+/**
+ * Replaces WordPress author logins and display names in text bound for committed files, as typed
+ * or URL-encoded and in any case: `/author/<any of them>` becomes `AUTHOR_PATH`, any other match
+ * `AUTHOR_TEXT`. Callers check `leaks()` on the final output and refuse to write it when that is
+ * true, so a string that missed `scrub()` can't reach a file.
+ *
+ * @throws When `authors` holds no non-empty login or name.
+ */
 export class Scrubber {
   readonly #secrets: string[]
   readonly #authorPath: RegExp

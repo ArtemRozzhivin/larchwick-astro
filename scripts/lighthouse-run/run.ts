@@ -123,7 +123,11 @@ function measure(options: Options, side: Side, page: Page, device: Device, run: 
 
 async function main(): Promise<void> {
   const options = readOptions()
-  if (!existsSync(options.browser)) throw new Error(`No browser at ${options.browser}`)
+  if (!existsSync(options.browser)) {
+    throw new Error(
+      `No browser at ${options.browser}. Set CHROME_PATH (or pass --browser) to the executable of Chrome, Chromium or Brave; the default is Brave's macOS path.`,
+    )
+  }
   if (options.sides.includes('before') && !(await reachable('http://larchwick.local/'))) {
     throw new Error(
       'WordPress does not answer at http://larchwick.local/: start the site in LocalWP.',

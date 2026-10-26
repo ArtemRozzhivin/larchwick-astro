@@ -114,6 +114,28 @@ describe('rich text from post blocks', () => {
     })
   })
 
+  it('reads a pull quote that keeps its text in its own <p>, without inner blocks', () => {
+    const { nodes, context } = convert(
+      '<!-- wp:pullquote --><figure class="wp-block-pullquote"><blockquote><p>Small batches, <em>roasted</em> to order.</p><cite>Mira Holt</cite></blockquote></figure><!-- /wp:pullquote -->',
+    )
+    expect(nodes).toEqual([
+      expect.objectContaining({
+        _type: 'quote',
+        text: 'Small batches, roasted to order.',
+        citation: 'Mira Holt',
+      }),
+    ])
+    expect(context.warnings).toEqual([])
+  })
+
+  it('reports a quote without text instead of dropping it silently', () => {
+    const { nodes, context } = convert(
+      '<!-- wp:pullquote --><figure class="wp-block-pullquote"><blockquote><p></p></blockquote></figure><!-- /wp:pullquote -->',
+    )
+    expect(nodes).toEqual([])
+    expect(context.warnings).toEqual(['pullquote block without text was dropped'])
+  })
+
   it('drops a contact form shortcode inside a post and reports it', () => {
     const { nodes, context } = convert(
       '<!-- wp:paragraph --><p>Write to us:</p><!-- /wp:paragraph --><!-- wp:shortcode -->[contact-form-7 id="6"]<!-- /wp:shortcode -->',
