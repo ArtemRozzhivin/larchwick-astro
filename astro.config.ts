@@ -6,6 +6,8 @@ import { previewNoindex } from './src/integrations/preview-noindex'
 import { ragIndex } from './src/integrations/rag-index'
 import { redirects } from './src/integrations/redirects'
 import { siteConfig } from './src/lib/config/site'
+import { getLastModified } from './src/lib/sanity/posts'
+import { withLastmod } from './src/lib/seo/sitemap'
 
 export default defineConfig({
   // Single source of truth: change the URL in src/lib/config/site.ts.
@@ -50,16 +52,24 @@ export default defineConfig({
     },
   ],
 
-  // Sanity images are downloaded at build time and re-encoded to AVIF/WebP under /_astro/,
-  // so pages load images from our own origin (the CSP allows img-src 'self' only).
+  // Sanity images are downloaded at build time and re-encoded to AVIF/WebP under /_astro/, so
+  // pages load images from our own origin: the CSP's img-src (public/_headers) allows 'self',
+  // data: and Google's analytics domains, not cdn.sanity.io.
   image: {
     remotePatterns: [{ protocol: 'https', hostname: 'cdn.sanity.io' }],
   },
 
-  // redirects() runs after sitemap(): it writes dist/_redirects and drops noindex pages from the sitemap.
+  // sitemap() dates Sanity pages, posts and term archives with <lastmod> from their _updatedAt.
+  // redirects() runs after sitemap(): it writes dist/_redirects and drops noindex pages, and pages
+  // whose canonical is another URL, from the sitemap.
   // previewNoindex() adds X-Robots-Tag: noindex to dist/_headers on Workers Builds preview branches.
   // ragIndex() refreshes the assistant's Vectorize index on production builds (PLAN.md Phase 7b).
-  integrations: [sitemap(), redirects(), previewNoindex(), ragIndex()],
+  integrations: [
+    sitemap({ serialize: withLastmod(getLastModified) }),
+    redirects(),
+    previewNoindex(),
+    ragIndex(),
+  ],
 
   vite: {
     plugins: [tailwindcss()],

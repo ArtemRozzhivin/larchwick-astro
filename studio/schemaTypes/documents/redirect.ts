@@ -1,6 +1,7 @@
 import { defineField, defineType, type ValidationContext } from 'sanity'
 
 import { apiVersion } from '../../env'
+import { HOME_SLUG } from '../../homePage'
 import { hrefError } from '../fields'
 
 const FROM_PATH = /^\/[^\s?#]+\/$/
@@ -12,12 +13,12 @@ async function fromError(from: string | undefined, context: ValidationContext) {
   }
   const id = context.document?._id.replace(/^drafts\./, '') ?? ''
   const client = context.getClient({ apiVersion })
-  const params = { from, id, draftId: `drafts.${id}` }
+  const params = { from, id, draftId: `drafts.${id}`, homeSlug: HOME_SLUG }
   const clashes = await client.fetch<{ duplicates: number; routes: number }>(
     `{
       "duplicates": count(*[_type == "redirect" && from == $from && !(_id in [$id, $draftId])]),
       "routes": count(*[
-        (_type == "page" && slug.current != "home" && "/" + slug.current + "/" == $from) ||
+        (_type == "page" && slug.current != $homeSlug && "/" + slug.current + "/" == $from) ||
         (_type == "post" && "/blog/" + slug.current + "/" == $from)
       ])
     }`,

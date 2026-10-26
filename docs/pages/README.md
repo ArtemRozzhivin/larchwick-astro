@@ -19,13 +19,25 @@ placeholder content · `placeholder` — template content only.
 ## On every page
 
 The "Ask Larchwick" button (bottom right; a round chat icon on phones) opens the AI assistant, which
-answers from this website's content and links the pages it used (PLAN.md Phase 7b). Its copy is in
-`src/lib/content/chat.ts`.
+answers from this website's content and links the pages it used (PLAN.md Phase 7b). Its wording
+is kept in the site's code, not in the Studio. A visitor can ask about 10 questions a minute, and
+all visitors together about 60; beyond the first the panel asks them to wait a minute, beyond the
+second it says the assistant is busy right now. These limits slow questions down but don't cap how
+many come in a day: the monthly spending limit set with the AI provider does, and once it is
+reached the assistant says it isn't available until the next month. If the assistant can't answer
+within 30 seconds, or can't load at all, the panel says it isn't available and links the contact
+page. While an answer is still arriving, its links can't be clicked yet; they work once it is
+complete.
 
 On the first visit a small banner (bottom left; full width on phones) asks whether Google Analytics
 may measure the visit. Nothing is sent to Google before "Accept", and only production sends data
-(PLAN.md Phase 7c). "Privacy" and "Cookie settings" (which reopens the banner) are at the bottom of
-the footer. Its copy is in `src/lib/content/consent.ts`. After "Accept", hero and call-to-action
+(PLAN.md Phase 7c). Escape closes the banner without a choice; it asks again on the next page. On
+small or zoomed screens it scrolls instead of growing past the window. On very short screens (a
+phone held sideways, a page zoomed to 400%) the menu bar scrolls away with the page, and while the
+banner is open each item the keyboard moves to is scrolled into view above it. On an ordinary phone
+screen the open banner can still hide items near the bottom until the visitor chooses or presses
+Escape. "Privacy" and "Cookie settings" (which reopens the banner) are at the bottom of
+the footer. Its wording is kept in the site's code. After "Accept", hero and call-to-action
 buttons, email and phone links and the assistant send events to GA (PLAN.md Phase 7c lists them).
 
 ## Adding a page

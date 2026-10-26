@@ -1,5 +1,6 @@
 ---
 import type { Post } from '@lib/sanity/posts'
+import Section from '@components/sections/Section.astro'
 
 import PostGrid from './PostGrid.astro'
 
@@ -39,8 +40,6 @@ const { eyebrow, heading, intro, posts } = Astro.props
     </header>
   </div>
 </section>
-<section class="py-8 md:py-12">
-  <div class="container-wide">
-    <PostGrid posts={posts} prioritizeFirst />
-  </div>
-</section>
+<Section>
+  <PostGrid posts={posts} prioritizeFirst />
+</Section>

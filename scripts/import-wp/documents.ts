@@ -1,3 +1,4 @@
+import { metaValue, type Wxr, type WxrItem } from '../shared/wxr.ts'
 import { parseBlocks } from './blocks.ts'
 import { createKeyer, hash } from './keys.ts'
 import { type LinkRules, rewriteHref } from './links.ts'
@@ -11,7 +12,6 @@ import type {
   LinkChange,
   MediaAsset,
 } from './types.ts'
-import { metaValue, type Wxr, type WxrItem } from './wxr.ts'
 
 export const GROUPS = ['taxonomy', 'posts', 'pages', 'settings', 'redirects'] as const
 export type Group = (typeof GROUPS)[number]

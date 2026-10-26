@@ -1,5 +1,7 @@
 # Copy to .dev.vars (gitignored) to run the Worker locally: `npm run build && npx wrangler dev`.
-# Production uses the same names as Cloudflare secrets (larchwick-astro → Settings → Variables and Secrets).
+# Production uses the same names as Cloudflare secrets, set with `npx wrangler secret put NAME`
+# (previews: `npx wrangler preview secret put NAME`). Never a plain-text dashboard variable: the
+# next deploy deletes it, which is how CONTACT_TO once vanished and every message hit the error page.
 # Never commit real values.
 
 # Contact form (/api/contact). Without them the form redirects to /contact/error/.

@@ -1,3 +1,5 @@
+import type { WxrItem } from '../shared/wxr.ts'
+
 export const GROUPS = [
   'pages',
   'home-alias',
@@ -50,75 +52,6 @@ const SITEMAPS = [
   '/author-sitemap.xml',
 ]
 
-interface Term {
-  domain: string
-  slug: string
-}
-
-export interface WxrItem {
-  id: number
-  type: string
-  status: string
-  link: string
-  name: string
-  date: string
-  terms: Term[]
-  meta: [string, string][]
-}
-
-const XML_ENTITIES = new Map([
-  ['amp', '&'],
-  ['lt', '<'],
-  ['gt', '>'],
-  ['quot', '"'],
-  ['apos', "'"],
-])
-
-function decodeXml(text: string): string {
-  return text.replace(/&(#x[0-9a-f]+|#\d+|[a-z]+);/gi, (match, entity: string) => {
-    if (/^#x/i.test(entity)) return String.fromCodePoint(Number.parseInt(entity.slice(2), 16))
-    if (entity.startsWith('#')) return String.fromCodePoint(Number.parseInt(entity.slice(1), 10))
-    return XML_ENTITIES.get(entity.toLowerCase()) ?? match
-  })
-}
-
-export function parseWxr(xml: string): WxrItem[] {
-  const cdata: string[] = []
-  const skeleton = xml.replace(
-    /<!\[CDATA\[([\s\S]*?)\]\]>/g,
-    (_match, text: string) => `${cdata.push(text) - 1}`,
-  )
-  const readText = (raw: string): string =>
-    raw
-      .split(/(\d+)/)
-      .map((part, index) => (index % 2 === 1 ? (cdata[Number(part)] ?? '') : decodeXml(part)))
-      .join('')
-      .trim()
-  const field = (item: string, tag: string): string => {
-    const match = new RegExp(`<${tag}>([\\s\\S]*?)</${tag}>`).exec(item)
-    return match ? readText(match[1]) : ''
-  }
-  const metaPattern =
-    /<wp:postmeta>\s*<wp:meta_key>([\s\S]*?)<\/wp:meta_key>\s*<wp:meta_value>([\s\S]*?)<\/wp:meta_value>\s*<\/wp:postmeta>/g
-  const termPattern = /<category\b([^>]*)>/g
-  const attribute = (source: string, name: string): string =>
-    decodeXml(new RegExp(`\\b${name}="([^"]*)"`).exec(source)?.[1] ?? '')
-
-  return [...skeleton.matchAll(/<item>([\s\S]*?)<\/item>/g)].map(([, item]) => ({
-    id: Number(field(item, 'wp:post_id')),
-    type: field(item, 'wp:post_type'),
-    status: field(item, 'wp:status'),
-    link: field(item, 'link'),
-    name: field(item, 'wp:post_name'),
-    date: field(item, 'wp:post_date'),
-    terms: [...item.matchAll(termPattern)].map(([, attributes]) => ({
-      domain: attribute(attributes, 'domain'),
-      slug: attribute(attributes, 'nicename'),
-    })),
-    meta: [...item.matchAll(metaPattern)].map(([, key, value]) => [readText(key), readText(value)]),
-  }))
-}
-
 function pathOf(link: string): string {
   const url = new URL(link)
   return `${url.pathname}${url.search}`
@@ -139,8 +72,8 @@ function termArchives(posts: readonly WxrItem[], domain: string, prefix: string)
 }
 
 function dateArchives(post: WxrItem): string[] {
-  const match = /^(\d{4})-(\d{2})-(\d{2})\b/.exec(post.date)
-  if (!match) throw new Error(`Post ${post.id} has no usable date: "${post.date}"`)
+  const match = /^(\d{4})-(\d{2})-(\d{2})\b/.exec(post.localDate)
+  if (!match) throw new Error(`Post ${post.id} has no usable date: "${post.localDate}"`)
   const [, year, month, day] = match
   return [`/${year}/`, `/${year}/${month}/`, `/${year}/${month}/${day}/`]
 }
@@ -197,16 +130,16 @@ export function buildInventory(
   const categories = termArchives(posts, 'category', 'category')
   const tags = termArchives(posts, 'post_tag', 'tag')
   const authors = authorSlugs.map((slug) => `/author/${slug}/`)
-  const frontPages = pages.filter((page) => pathOf(page.link) === '/' && page.name !== '')
+  const frontPages = pages.filter((page) => pathOf(page.link) === '/' && page.slug !== '')
   const oldSlugs = posts.flatMap((post) =>
-    post.meta.filter(([key, value]) => key === '_wp_old_slug' && value !== post.name),
+    (post.meta.get('_wp_old_slug') ?? []).filter((slug) => slug !== post.slug),
   )
 
   const groups: Record<Group, string[]> = {
     pages: pages.map((page) => pathOf(page.link)),
-    'home-alias': frontPages.map((page) => `/${page.name}/`),
+    'home-alias': frontPages.map((page) => `/${page.slug}/`),
     posts: postPaths,
-    'old-slugs': unique(oldSlugs.map(([, slug]) => `/${slug}/`)),
+    'old-slugs': unique(oldSlugs.map((slug) => `/${slug}/`)),
     categories,
     tags,
     'date-archives': unique(posts.flatMap(dateArchives)),

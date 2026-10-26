@@ -1,4 +1,5 @@
-import { apiVersion, dataset, projectId } from '../../../studio/env'
+// With an extension, so `node --test` can load this module.
+import { apiVersion, dataset, projectId } from '../../../studio/env.ts'
 
 const QUERY_URL = `https://${projectId}.api.sanity.io/v${apiVersion}/data/query/${dataset}`
 

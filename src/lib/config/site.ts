@@ -5,10 +5,12 @@ export const siteConfig = {
   url: 'https://larchwick-astro.larchwick.workers.dev',
   lang: 'en-US',
   locale: 'en_US',
-  // 1200×630 JPEG; every og:image on the site uses that size.
+  // 1200×630 JPEG, the size Sanity social images are cropped to (OG_IMAGE_* in lib/sanity/image.ts).
   ogImage: '/og.jpg',
   ogImageAlt:
     'Larchwick: fresh coffee, roasted in small batches, beside a coffee label for Ethiopia Yirgacheffe',
+  // 512×512 PNG of favicon.svg: the Organization logo in JSON-LD (Google wants a raster, ≥112 px).
+  logo: '/logo.png',
   // Same value as --color-paper in global.css, so the browser bar matches the sticky header.
   themeColor: '#f2f3ef',
 
@@ -16,7 +18,7 @@ export const siteConfig = {
   analytics: { measurementId: 'G-C7SVR1FYHZ' },
 
   header: {
-    labels: { openMenu: 'Open menu', closeMenu: 'Close menu' },
+    labels: { skipToContent: 'Skip to content', openMenu: 'Open menu', closeMenu: 'Close menu' },
   },
 
   footer: {

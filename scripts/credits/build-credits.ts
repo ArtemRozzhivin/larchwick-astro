@@ -1,6 +1,11 @@
 import { readFileSync, writeFileSync } from 'node:fs'
 import { basename, relative, resolve } from 'node:path'
 
+import { decodeEntities } from '../shared/html.ts'
+import { describeError, request, type RequestOptions, sleep } from '../shared/http.ts'
+import { escapeCell, renderTable } from '../shared/markdown.ts'
+import { metaValue, parseWxr, type WxrItem } from '../shared/wxr.ts'
+
 const ROOT = resolve(import.meta.dirname, '../..')
 const DEFAULT_WXR = 'docs/before/larchwick.WordPress.2026-10-07.xml'
 const OUTPUT = resolve(ROOT, 'CREDITS.md')
@@ -10,7 +15,6 @@ const UNSPLASH_LICENSE = 'https://unsplash.com/license'
 const USER_AGENT = 'larchwick-credits/1.0 (CREDITS.md generator; sequential requests)'
 const REQUEST_DELAY_MS = 300
 const RETRY_DELAY_MS = 2000
-const MAX_ATTEMPTS = 2
 const REQUEST_TIMEOUT_MS = 20_000
 const REDIRECT_STATUSES = new Set([301, 302, 307, 308])
 const NOT_FOUND_STATUSES = new Set([404, 410])
@@ -59,17 +63,6 @@ const LUCIDE_NOTICE = [
   'SOFTWARE.',
 ]
 
-interface WxrItem {
-  id: number
-  type: string
-  status: string
-  title: string
-  parentId: number
-  content: string
-  attachmentUrl: string
-  meta: ReadonlyMap<string, string>
-}
-
 interface Attachment {
   id: number
   parentId: number
@@ -97,64 +90,8 @@ interface Row {
   usedOn: string[]
 }
 
-const XML_ENTITIES: Record<string, string> = {
-  amp: '&',
-  lt: '<',
-  gt: '>',
-  quot: '"',
-  apos: "'",
-  nbsp: '\u00a0',
-}
-
-function decodeEntity(entity: string): string {
-  if (entity.startsWith('#x') || entity.startsWith('#X')) {
-    return String.fromCodePoint(Number.parseInt(entity.slice(2), 16))
-  }
-  if (entity.startsWith('#')) return String.fromCodePoint(Number.parseInt(entity.slice(1), 10))
-  return XML_ENTITIES[entity.toLowerCase()] ?? `&${entity};`
-}
-
-function decodeEntities(text: string): string {
-  return text.replace(/&(#x[0-9a-f]+|#\d+|[a-z]+);/gi, (_match, entity: string) =>
-    decodeEntity(entity),
-  )
-}
-
-function parseWxr(xml: string): WxrItem[] {
-  const cdata: string[] = []
-  const skeleton = xml.replace(
-    /<!\[CDATA\[([\s\S]*?)\]\]>/g,
-    (_match, text: string) => `\uE000${cdata.push(text) - 1}\uE001`,
-  )
-  const readText = (raw: string): string =>
-    raw
-      .split(/\uE000(\d+)\uE001/)
-      .map((part, index) => (index % 2 === 1 ? (cdata[Number(part)] ?? '') : decodeEntities(part)))
-      .join('')
-      .trim()
-  const field = (item: string, tag: string): string => {
-    const match = new RegExp(`<${tag}>([\\s\\S]*?)</${tag}>`).exec(item)
-    return match ? readText(match[1]) : ''
-  }
-  const metaPattern =
-    /<wp:postmeta>\s*<wp:meta_key>([\s\S]*?)<\/wp:meta_key>\s*<wp:meta_value>([\s\S]*?)<\/wp:meta_value>\s*<\/wp:postmeta>/g
-
-  return [...skeleton.matchAll(/<item>([\s\S]*?)<\/item>/g)].map(([, item]) => ({
-    id: Number(field(item, 'wp:post_id')),
-    type: field(item, 'wp:post_type'),
-    status: field(item, 'wp:status'),
-    title: field(item, 'title'),
-    parentId: Number(field(item, 'wp:post_parent') || 0),
-    content: field(item, 'content:encoded'),
-    attachmentUrl: field(item, 'wp:attachment_url'),
-    meta: new Map(
-      [...item.matchAll(metaPattern)].map(([, key, value]) => [readText(key), readText(value)]),
-    ),
-  }))
-}
-
 function toAttachment(item: WxrItem): Attachment {
-  const file = item.meta.get('_wp_attached_file') || item.attachmentUrl
+  const file = metaValue(item, '_wp_attached_file') || item.attachmentUrl
   const fileName = basename(file)
   const match = UNSPLASH_ID.exec(fileName)
   if (!match) {
@@ -171,8 +108,8 @@ function toAttachment(item: WxrItem): Attachment {
 }
 
 function elementorData(item: WxrItem): string | null {
-  const data = item.meta.get('_elementor_data') ?? ''
-  const isBuilderPage = item.meta.get('_elementor_edit_mode') === 'builder'
+  const data = metaValue(item, '_elementor_data')
+  const isBuilderPage = metaValue(item, '_elementor_edit_mode') === 'builder'
   return isBuilderPage && data !== '' && data !== '[]' ? data : null
 }
 
@@ -185,7 +122,7 @@ function findUsage(attachment: Attachment, items: readonly WxrItem[]): string[] 
 
   for (const item of items) {
     if (item.status !== 'publish' || !CONTENT_TYPES.has(item.type)) continue
-    if (item.meta.get('_thumbnail_id') === String(attachment.id)) {
+    if (metaValue(item, '_thumbnail_id') === String(attachment.id)) {
       featured.push(`featured image of "${item.title}"`)
     }
     const elementor = elementorData(item)
@@ -200,33 +137,23 @@ function findUsage(attachment: Attachment, items: readonly WxrItem[]): string[] 
   return [...featured, ...inContent, ...inElementor]
 }
 
-function sleep(ms: number): Promise<void> {
-  return new Promise((done) => setTimeout(done, ms))
+const REQUEST: RequestOptions = {
+  userAgent: USER_AGENT,
+  accept: 'text/html',
+  timeoutMs: REQUEST_TIMEOUT_MS,
+  retryDelayMs: RETRY_DELAY_MS,
 }
 
-function describeError(error: unknown): string {
-  return error instanceof Error ? error.message : String(error)
-}
-
-async function request(url: string): Promise<Response> {
-  for (let attempt = 1; ; attempt++) {
-    await sleep(attempt === 1 ? REQUEST_DELAY_MS : RETRY_DELAY_MS)
-    const response = await fetch(url, {
-      redirect: 'manual',
-      headers: { 'User-Agent': USER_AGENT, Accept: 'text/html' },
-      signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS),
-    })
-    const isTransient = response.status === 429 || response.status >= 500
-    if (!isTransient || attempt === MAX_ATTEMPTS) return response
-    await response.body?.cancel()
-  }
+async function fetchPage(url: string): Promise<Response> {
+  await sleep(REQUEST_DELAY_MS)
+  return request(url, REQUEST)
 }
 
 async function checkPhoto(id: string): Promise<Check> {
   const shortUrl = `https://unsplash.com/photos/${id}`
   let first: Response
   try {
-    first = await request(shortUrl)
+    first = await fetchPage(shortUrl)
   } catch (error) {
     return { kind: 'unverified', url: shortUrl, reason: describeError(error) }
   }
@@ -246,7 +173,7 @@ async function checkPhoto(id: string): Promise<Check> {
   }
 
   try {
-    const page = await request(canonicalUrl)
+    const page = await fetchPage(canonicalUrl)
     if (NOT_FOUND_STATUSES.has(page.status)) {
       return { kind: 'not-found', url: canonicalUrl, reason: `HTTP ${page.status}` }
     }
@@ -330,39 +257,6 @@ async function describePhoto(attachment: Attachment): Promise<Photo> {
     nameFromPage: nameOnPage !== null,
     license: html ? licenseFromPage(html) : null,
   }
-}
-
-function textWidth(text: string): number {
-  let width = 0
-  for (const char of text) {
-    const code = char.codePointAt(0) ?? 0
-    if (code < 0x20 || (code >= 0x300 && code <= 0x36f)) continue
-    const isWide =
-      (code >= 0x1100 && code <= 0x115f) ||
-      (code >= 0x2e80 && code <= 0xa4cf) ||
-      (code >= 0xac00 && code <= 0xd7a3) ||
-      (code >= 0xf900 && code <= 0xfaff) ||
-      (code >= 0xff00 && code <= 0xff60) ||
-      (code >= 0x1f300 && code <= 0x1faff) ||
-      code >= 0x20000
-    width += isWide ? 2 : 1
-  }
-  return width
-}
-
-function renderTable(header: readonly string[], rows: readonly (readonly string[])[]): string {
-  const widths = header.map((cell, column) =>
-    Math.max(3, textWidth(cell), ...rows.map((row) => textWidth(row[column] ?? ''))),
-  )
-  const pad = (cell: string, column: number): string =>
-    cell + ' '.repeat(widths[column] - textWidth(cell))
-  const line = (cells: readonly string[]): string => `| ${cells.map(pad).join(' | ')} |`
-  const divider = `| ${widths.map((width) => '-'.repeat(width)).join(' | ')} |`
-  return [line(header), divider, ...rows.map(line)].join('\n')
-}
-
-function escapeCell(text: string): string {
-  return text.replaceAll('|', '\\|')
 }
 
 function linkCell({ attachment, photo }: Row): string {
@@ -477,7 +371,7 @@ function renderCredits(
 async function main(): Promise<void> {
   const wxrPath = resolve(ROOT, process.argv[2] ?? DEFAULT_WXR)
   const wxr = relative(ROOT, wxrPath)
-  const items = parseWxr(readFileSync(wxrPath, 'utf8'))
+  const { items } = parseWxr(readFileSync(wxrPath, 'utf8'))
   const titles = new Map(
     items.filter((item) => item.status === 'publish').map((item) => [item.id, item.title]),
   )

@@ -4,6 +4,7 @@ import {
   firstElement,
   type HtmlElement,
   type HtmlNode,
+  innerOf,
   parseHtml,
   textBlock,
   textOf,
@@ -28,10 +29,6 @@ const HEADING_STYLES: Readonly<Record<number, TextBlock['style']>> = {
 }
 const CITATION = /\s+[—–]\s+([^—–]+)$/
 const IGNORED = new Set(['spacer', 'separator'])
-
-function innerOf(html: string, tag: string): HtmlNode[] {
-  return firstElement(parseHtml(html), tag)?.children ?? []
-}
 
 export function figureFromImage(block: Block, context: ConvertContext): Figure | undefined {
   const wpId = numberAttr(block, 'id')
@@ -86,21 +83,29 @@ export function table(html: string, context: ConvertContext): PortableTable | un
   }
 }
 
+function quoteParagraphs(block: Block, outer: readonly HtmlNode[]): string[] {
+  const inner = block.inner.filter((child) => child.name === 'paragraph')
+  const paragraphs =
+    inner.length > 0
+      ? inner.map((paragraph) => innerOf(paragraph.html, 'p'))
+      : elements(outer, 'p').map((paragraph) => paragraph.children)
+  return paragraphs.map((nodes) => textOf(nodes)).filter(Boolean)
+}
+
 export function quote(block: Block, context: ConvertContext): Quote | undefined {
   const outer = parseHtml(block.html)
   const cite = textOf(firstElement(outer, 'cite')?.children ?? [])
-  const paragraphs = block.inner
-    .filter((inner) => inner.name === 'paragraph')
-    .map((inner) => textOf(innerOf(inner.html, 'p')))
-    .filter(Boolean)
-  let text = paragraphs.join('\n\n')
+  let text = quoteParagraphs(block, outer).join('\n\n')
   let citation = cite
   const inline = CITATION.exec(text)
   if (!citation && inline) {
     citation = inline[1].trim()
     text = text.slice(0, inline.index).trim()
   }
-  if (!text) return undefined
+  if (!text) {
+    context.warn(`${block.name} block without text was dropped`)
+    return undefined
+  }
   return { _type: 'quote', _key: context.key(), text, ...(citation && { citation }) }
 }
 

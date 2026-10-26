@@ -2,32 +2,27 @@ import type { AstroIntegration, AstroIntegrationLogger } from 'astro'
 import { mkdir, readFile, writeFile } from 'node:fs/promises'
 
 import { siteConfig } from '../lib/config/site'
+import { errorMessage } from '../lib/errors'
+import { contactPassages, embeddingText, pagePassages, postPassages } from '../lib/rag/chunks'
+import { CONTENT_NAMESPACE, EMBEDDING_MODEL, type Passage, RAG_INDEX } from '../lib/rag/config'
 import {
-  contactPassages,
-  embeddingText,
-  pagePassages,
-  type Passage,
-  postPassages,
-} from '../lib/rag/chunks'
-import { type IndexMode, indexMode, planIndex } from '../lib/rag/index-plan'
+  type IndexMode,
+  indexMode,
+  LIST_PAGE_SIZE,
+  listAllIds,
+  planIndex,
+  type VectorIdPage,
+} from '../lib/rag/index-plan'
 import { unpublishedWords, visibleText, words } from '../lib/rag/public-check'
+import { CONTACT_SLUG, pagePath, postPath } from '../lib/routes'
 import { sanityFetch } from '../lib/sanity/client'
-import { getPosts, postPath } from '../lib/sanity/posts'
+import { getPosts } from '../lib/sanity/posts'
 import { RAG_PAGES_QUERY } from '../lib/sanity/queries'
 import type { RAG_PAGES_QUERY_RESULT } from '../lib/sanity/sanity.types'
 import { contactDetails, getSiteSettings } from '../lib/sanity/settings'
 
-const INDEX = 'larchwick-content'
-const MODEL = '@cf/baai/bge-base-en-v1.5'
-const CONTENT = 'content'
-const META = 'meta'
-const MANIFEST_ID = 'manifest'
 const EMBED_BATCH = 100
 const DRY_RUN_FILE = '.cache/rag/passages.json'
-
-function pageUrl(slug: string): string {
-  return slug === 'home' ? '/' : `/${slug}/`
-}
 
 async function collectPassages(): Promise<Passage[]> {
   const [pages, posts, settings] = await Promise.all([
@@ -41,7 +36,7 @@ async function collectPassages(): Promise<Passage[]> {
       page.slug
         ? pagePassages({
             title: page.title ?? '',
-            url: pageUrl(page.slug),
+            url: pagePath(page.slug),
             sections: page.sections ?? [],
           })
         : [],
@@ -59,7 +54,7 @@ async function collectPassages(): Promise<Passage[]> {
         }),
       ),
     ...contactPassages({
-      url: '/contact/',
+      url: pagePath(CONTACT_SLUG),
       title: `Contact ${settings.siteName}`,
       description: settings.description,
       lines: [
@@ -73,21 +68,25 @@ async function collectPassages(): Promise<Passage[]> {
 
 interface CloudflareApi {
   embed(_texts: readonly string[]): Promise<number[][]>
-  previousIds(): Promise<string[]>
+  storedIds(): Promise<string[]>
   upsert(_vectors: readonly object[]): Promise<void>
   remove(_ids: readonly string[]): Promise<void>
 }
 
 function cloudflareApi(accountId: string, token: string): CloudflareApi {
   const call = async <T>(
+    method: 'GET' | 'POST',
     path: string,
-    body: string,
+    body?: string,
     contentType = 'application/json',
   ): Promise<T> => {
     const url = `https://api.cloudflare.com/client/v4/accounts/${accountId}${path}`
     const response = await fetch(url, {
-      method: 'POST',
-      headers: { authorization: `Bearer ${token}`, 'content-type': contentType },
+      method,
+      headers: {
+        authorization: `Bearer ${token}`,
+        ...(body !== undefined && { 'content-type': contentType }),
+      },
       body,
     })
     const json = (await response.json()) as { success: boolean; result: T; errors?: unknown[] }
@@ -96,66 +95,54 @@ function cloudflareApi(accountId: string, token: string): CloudflareApi {
     }
     return json.result
   }
-  const vectorize = `/vectorize/v2/indexes/${INDEX}`
+  const vectorize = `/vectorize/v2/indexes/${RAG_INDEX}`
   return {
     async embed(texts) {
       const vectors: number[][] = []
       for (let start = 0; start < texts.length; start += EMBED_BATCH) {
         const batch = texts.slice(start, start + EMBED_BATCH)
         const result = await call<{ data: number[][] }>(
-          `/ai/run/${MODEL}`,
+          'POST',
+          `/ai/run/${EMBEDDING_MODEL}`,
           JSON.stringify({ text: batch }),
         )
         vectors.push(...result.data)
       }
       return vectors
     },
-    async previousIds() {
-      const vectors = await call<{ metadata?: { ids?: string } }[]>(
-        `${vectorize}/get_by_ids`,
-        JSON.stringify({ ids: [MANIFEST_ID] }),
-      )
-      return (vectors[0]?.metadata?.ids ?? '').split(',').filter(Boolean)
+    async storedIds() {
+      return listAllIds((cursor) => {
+        const query = new URLSearchParams({
+          count: String(LIST_PAGE_SIZE),
+          ...(cursor && { cursor }),
+        })
+        return call<VectorIdPage>('GET', `${vectorize}/list?${query}`)
+      })
     },
     async upsert(vectors) {
       if (vectors.length === 0) return
       const ndjson = vectors.map((vector) => JSON.stringify(vector)).join('\n')
-      await call(`${vectorize}/upsert`, ndjson, 'application/x-ndjson')
+      await call('POST', `${vectorize}/upsert`, ndjson, 'application/x-ndjson')
     },
     async remove(ids) {
       if (ids.length === 0) return
-      await call(`${vectorize}/delete_by_ids`, JSON.stringify({ ids }))
+      await call('POST', `${vectorize}/delete_by_ids`, JSON.stringify({ ids }))
     },
   }
 }
 
 async function writeIndex(passages: readonly Passage[], api: CloudflareApi): Promise<string> {
-  const { add, remove } = planIndex(await api.previousIds(), passages)
+  const { add, remove } = planIndex(await api.storedIds(), passages)
   const vectors = await api.embed(add.map(embeddingText))
   await api.upsert(
-    add.map((passage, index) => ({
-      id: passage.id,
-      namespace: CONTENT,
+    add.map(({ id, ...metadata }, index) => ({
+      id,
+      namespace: CONTENT_NAMESPACE,
       values: vectors[index],
-      metadata: {
-        url: passage.url,
-        title: passage.title,
-        heading: passage.heading,
-        text: passage.text,
-      },
+      metadata,
     })),
   )
   await api.remove(remove)
-  // The manifest is the only way to find stale ids later; a unit vector keeps cosine defined.
-  const unit = Array.from({ length: vectors[0]?.length ?? 768 }, (_, index) => (index ? 0 : 1))
-  await api.upsert([
-    {
-      id: MANIFEST_ID,
-      namespace: META,
-      values: unit,
-      metadata: { ids: passages.map((passage) => passage.id).join(',') },
-    },
-  ])
   return `${passages.length} passages: ${add.length} embedded, ${remove.length} removed`
 }
 
@@ -221,7 +208,7 @@ export function ragIndex(): AstroIntegration {
         } catch (error) {
           // The review command should fail loudly; a production build must never be blocked.
           if (mode === 'dry') throw error
-          logger.error(`indexing failed, the site deploys anyway: ${(error as Error).message}`)
+          logger.error(`indexing failed, the site deploys anyway: ${errorMessage(error)}`)
         }
       },
     },

@@ -1,11 +1,10 @@
 ---
-import Section, { type Tone } from './Section.astro'
+import type { Steps } from '@lib/sanity/sanity.types'
 
-interface Step {
-  _key?: string
-  title?: string
-  text?: string
-}
+import { itemHeading } from './heading'
+import Section, { type LightTone } from './Section.astro'
+
+type Step = Pick<NonNullable<Steps['items']>[number], 'title' | 'text'>
 
 interface Props {
   id?: string
@@ -13,12 +12,12 @@ interface Props {
   heading?: string
   intro?: string
   items: readonly Step[]
-  tone?: Tone
+  tone?: LightTone
 }
 
 const { id, eyebrow, heading, intro, items, tone } = Astro.props
 
-const StepHeading = heading ? 'h3' : 'h2'
+const StepHeading = itemHeading(heading)
 ---
 
 <Section id={id} eyebrow={eyebrow} heading={heading} intro={intro} tone={tone} width="narrow">

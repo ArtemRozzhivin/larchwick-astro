@@ -1,4 +1,4 @@
-import { cva } from 'class-variance-authority'
+import { cva, type VariantProps } from 'class-variance-authority'
 
 export const buttonVariants = cva(
   'inline-flex cursor-pointer items-center justify-center gap-2 rounded-md border-2 text-center font-bold transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-offset-3 disabled:pointer-events-none disabled:opacity-50 [&_svg]:size-4 [&_svg]:shrink-0',
@@ -22,6 +22,24 @@ export const buttonVariants = cva(
     },
     defaultVariants: {
       variant: 'primary',
+      size: 'md',
+    },
+  },
+)
+
+export type ButtonVariant = NonNullable<VariantProps<typeof buttonVariants>['variant']>
+
+/** A square button holding only an icon (menu, close); its label is screen-reader text. */
+export const iconButtonVariants = cva(
+  'text-espresso hover:bg-paper flex shrink-0 cursor-pointer items-center justify-center rounded-md transition-colors',
+  {
+    variants: {
+      size: {
+        sm: 'size-10',
+        md: 'size-11',
+      },
+    },
+    defaultVariants: {
       size: 'md',
     },
   },

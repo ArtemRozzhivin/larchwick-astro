@@ -5,6 +5,7 @@ import { sanityFetch } from '../lib/sanity/client'
 import { getPosts } from '../lib/sanity/posts'
 import { REDIRECTS_QUERY } from '../lib/sanity/queries'
 import type { REDIRECTS_QUERY_RESULT } from '../lib/sanity/sanity.types'
+import { filterSitemap, type SitemapExclusion } from '../lib/seo/sitemap'
 import {
   codeRules,
   type RedirectDoc,
@@ -14,28 +15,14 @@ import {
   validateRules,
 } from './redirect-rules'
 
-const NOINDEX = /<meta name="robots" content="[^"]*noindex/
-
-async function isNoindex(dir: URL, path: string): Promise<boolean> {
-  const file = new URL(`.${path}index.html`, dir)
-  const html = await readFile(file, 'utf8').catch(() => '')
-  return NOINDEX.test(html)
-}
-
-async function dropNoindexFromSitemap(dir: URL, site: URL): Promise<number> {
+async function filterSitemapFile(dir: URL, site: URL): Promise<Record<SitemapExclusion, number>> {
   const file = new URL('sitemap-0.xml', dir)
   const xml = await readFile(file, 'utf8')
-  const entries = [...xml.matchAll(/<url><loc>([^<]+)<\/loc>.*?<\/url>/g)]
-  let dropped = 0
-  let next = xml
-  for (const [entry, loc] of entries) {
-    if (await isNoindex(dir, new URL(loc, site).pathname)) {
-      next = next.replace(entry, '')
-      dropped += 1
-    }
-  }
-  if (dropped > 0) await writeFile(file, next)
-  return dropped
+  const filtered = await filterSitemap(xml, (loc) =>
+    readFile(new URL(`.${new URL(loc, site).pathname}index.html`, dir), 'utf8').catch(() => ''),
+  )
+  if (filtered.xml !== xml) await writeFile(file, filtered.xml)
+  return filtered.dropped
 }
 
 export function redirects(): AstroIntegration {
@@ -74,8 +61,10 @@ export function redirects(): AstroIntegration {
         if (errors.length > 0) throw new Error(`_redirects is invalid:\n${errors.join('\n')}`)
         await writeFile(new URL('_redirects', dir), toRedirectsFile(rules))
         logger.info(`wrote ${rules.length} redirect rules`)
-        const dropped = await dropNoindexFromSitemap(dir, site)
-        logger.info(`removed ${dropped} noindex pages from the sitemap`)
+        const { noindex, canonicalElsewhere } = await filterSitemapFile(dir, site)
+        logger.info(
+          `removed ${noindex} noindex pages and ${canonicalElsewhere} pages canonical elsewhere from the sitemap`,
+        )
       },
     },
   }

@@ -47,6 +47,10 @@ The menu on the left: **Site settings** (name, menu, contact details, opening ho
      card's **Roast** sets the bag colour, and photos are not shown).
    - **Call to action**: a heading, or a **Quote** with **Who said it**, plus one or two buttons.
      Only quote fictional people: Larchwick is a demo business.
+   - **Background**: most sections offer **Light** (the page colour) or **Cream** (a pale band
+     with dark lines above and below). Only the **Call to action** also offers **Dark** (a green
+     band); on it, Light is a white band with a dark border and Cream is the gold band. The hero
+     has no background option: it is always the green band.
 4. Click **Publish**.
 
 ## Change a page's search and sharing details
@@ -56,11 +60,19 @@ The menu on the left: **Site settings** (name, menu, contact details, opening ho
    - **Meta title**: the title in search results, under 60 characters. Empty uses the page
      title.
    - **Meta description**: the snippet under the title, 70–160 characters.
-   - **Social image**: shown when the page is shared, 1200 × 630. Empty uses the site default.
+   - **Social image**: shown when the page is shared, cropped to 1200 × 630. Empty on a post
+     uses its **Main image** (with the main image's alt text); empty on a page, or on a post
+     without a main image, uses the site's default image. A social image you add here is shared
+     without alt text.
    - **Hide from search engines**: tick only for pages that shouldn't be found (it also leaves
-     them out of the sitemap).
+     them out of the sitemap). Home doesn't show this field: it is always found.
    - **Canonical URL**: leave empty unless this content was first published on another site.
+     A page that points elsewhere is also left out of the sitemap. Home doesn't show this field.
 3. Click **Publish**.
+
+Categories and tags have no SEO tab. Their **Description** is shown as the intro on the archive
+page and is also its search description; left empty, the archive has no intro and a generated
+description. A tag that only one post uses is kept out of search engines automatically.
 
 ## Add a redirect
 

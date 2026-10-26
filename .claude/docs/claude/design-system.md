@@ -6,13 +6,17 @@ nothing — a JS config is ignored unless referenced with @config.
 
 Structure:
   @import 'tailwindcss' source('..')   scans src/ only
+  @source not …                        minus *.test.ts and src/integrations/
   @theme { --color-*, --radius-*, --shadow-* }
+  @custom-variant short                max-height 32rem: landscape phones, high zoom
   @theme inline { --font-* }           font-display / font-sans → the Fonts API variables
-  @layer base                          * { border-border }; scroll-padding-top; :focus-visible
+  @layer base                          * { border-border }; scroll padding; :focus-visible
   @utility container-wide              the page container
   @utility reveal                      scroll-driven fade-up (see <motion>)
   @utility bag-crimp                   the striped top seal of a coffee bag
   @keyframes rise, press               reveal and the label stamp
+  @layer components                    .drawer, .chat-panel, .consent-banner (positions,
+                                       and one popover rise-in rule for the panel and banner)
 
 Look: "Larch and label" (PLAN.md Phase 10). A larch is the conifer whose needles
 turn gold in autumn: larch green bands, needle gold accents, espresso text on
@@ -55,6 +59,11 @@ Never:
 Rebranding must stay a one-file change. Every hardcoded colour breaks that
 promise, which is the whole reason the tokens exist.
 
+Opacity modifiers on a token are fine (border-espresso/15 under the header,
+border-mist/15 in the footer); a class for a token that doesn't exist
+(border-heading) silently falls back to the default border colour, so check the
+name against @theme.
+
 The only colour outside global.css is siteConfig.themeColor (the theme-color
 meta), which repeats --color-paper. public/favicon.svg and public/og.jpg carry
 the palette as image assets.
@@ -91,6 +100,10 @@ needle on paper is about 1.7:1, so gold is never text, and never the only state
 signal, on a light background: the active nav underline is larch, and gold is the
 hover underline only. espresso on larch is 1.86:1, so a button sitting on larch
 uses a surface focus ring (the accent variant does).
+
+The chat launcher floats over every band, light and dark, so its focus state is
+not the ring alone: on keyboard focus it fills espresso with surface text (as on
+hover), and the currentColor ring turns surface with it.
 </contrast>
 
 <focus>
@@ -141,8 +154,17 @@ Hero: a larch band with rounded-b-band; py-16 md:py-24 (cover), py-14 md:py-20
 the photo fills the right half of the band edge to edge from lg (absolute,
 object-cover, min-h-[32rem]); below lg it runs full width under the text.
 
-The header is sticky (top-0, paper at 95% with a light blur), and
-scroll-padding-top in the base layer keeps anchors below it. Below md the menu
+The header is sticky (top-0) on solid paper, with no backdrop blur (a blur
+re-composites the header on every scroll frame), and
+scroll-padding-top in the base layer keeps anchors below it. On short viewports
+(`short:`, max-height 32rem: a landscape phone, 400% zoom) it scrolls with the
+page instead (`short:relative`, scroll-padding-top 0): stuck to the top, it and
+the consent banner would cover every focus stop. While the banner is open there,
+`scroll-padding-bottom: calc(100dvh - 4rem)` makes the browser scroll each
+focused element into the 4rem strip the banner leaves free at the top. Known
+gap: at normal phone heights (e.g. 375×667) the open banner can still cover
+focus stops near the bottom of the screen until the visitor chooses or presses
+Escape. Below md the menu
 is a sidebar: a native popover (`popovertarget`, no JavaScript) styled by
 `.drawer` in global.css. It slides in from the right over a dimmed backdrop and
 its links follow one after another (@starting-style). Escape, an outside click
@@ -185,11 +207,24 @@ Variant-driven components use cva. src/components/ui/button.ts is the reference:
            inverse-outline  surface outline and text (on larch bands)
   size     sm | md | lg     (default primary, md)
 
-Buttons are rounded-md with a 2px border and bold text.
+Buttons are rounded-md with a 2px border and bold text. ButtonVariant is the
+variant type; CtaButtons (src/components/ui/CtaButtons.astro) renders the hero's
+and the CTA band's row of large buttons from Sanity links, one variant per
+button. iconButtonVariants is the square icon-only button (menu, close); its base
+classes include shrink-0, so a flex row never squeezes it.
+
+Other shared class strings: fieldVariants (src/components/ui/field.ts) for text
+inputs and textareas, espresso/60 border and larch focus; inlineLinkClass (larch
+text, needle underline) and pillVariants() (espresso-bordered chips: post tags,
+chat suggestions and sources) in src/components/ui/link.ts. SpecList is the
+label/value rows of a coffee label and a card's details.
 
 CoffeeLabel (src/components/ui/CoffeeLabel.astro) is the label card: name,
 origin line, label/value rows, a bottom line and an optional stamp ("small line"
 newline "big line"). The home hero shows it when the hero's `label` is filled in.
+The name's right padding clears the stamp (pr-20, pr-24 from sm) and its size
+shrinks fluidly below about 370px wide, so a long word fits at 320px; the hero
+grid is one grid-cols-1 column below lg, so the label can't widen it.
 
 CTA takes an optional quote and citation, shown large in place of a heading
 (About: the founder's quote sits in the band with its buttons). Without a
@@ -202,12 +237,36 @@ ChatPanel (src/components/chat/) is the assistant: a needle (gold) launcher
 with an espresso border, icon-only below sm, and a popover panel styled as a
 label (surface, 2px espresso border, rounded-label, shadow-label). Questions are
 larch bubbles on the right; answers are paper bubbles with a border, errors use
-stamp. `.chat-panel` in global.css positions it (bottom sheet on phones, 25rem
-card from sm) and fades it up 1rem on open (none for reduced motion).
+stamp. The "Looking through the site" status is static ink text beside a larch
+dot that pulses only with motion-safe (pulsing text would drop below 4.5:1). `.chat-panel` in global.css positions it (bottom sheet on phones,
+25rem card from sm) and fades it up 1rem on open (none for reduced motion); on
+short viewports (the `short:` variant) the whole panel scrolls instead of only
+the conversation.
+
+The consent banner (`.consent-banner`) is a 26rem card bottom left from sm, full
+width on phones, capped at the viewport's height minus its margins and scrolling
+inside; it rises in with the same rule as the chat panel. On short viewports
+(`short:`, e.g. 400% zoom) its max-height leaves the top 4rem free at every
+width (`100dvh - 4.5rem`, `- 5.5rem` from sm, less the 0.5rem / 1.5rem bottom
+inset): it sits in the top layer, and the strip has to hold the focused skip
+link (top-3, 2.5rem tall) and its ring. The base layer's scroll padding (see
+the header, above) moves other focused elements into the same strip.
 
 CardGrid has two layouts: `cards` (label cards with photo, details, points) and
 `bags` (coffee bags coloured by each card's `roast`, with the crimped top).
 </components>
+
+<tones>
+Section tones: default (paper, "Light" in the Studio), muted (surface between
+2px espresso rules, "Cream") and inverted (larch, "Dark"). Dark is offered only
+where every colour in the block adapts to the larch band: today the CTA
+(toneField), whose tone colours its rounded band instead (default surface with an
+espresso border, muted needle, inverted larch). Every other section uses lightToneField (Light/Cream) and types
+`tone` as LightTone, exported by Section.astro, because its dark text, links or
+buttons would vanish on larch. The Hero is always the larch band; its tone field
+is hidden in the Studio. SectionHeader (used by Section and ImageText) switches
+the eyebrow to needle and the heading to surface on inverted.
+</tones>
 
 <dark_mode>
 There is no dark mode. The site is light only, and no dark variant or dark

@@ -3,6 +3,8 @@ export type Consent = 'granted' | 'denied'
 
 export const CONSENT_KEY = 'larchwick-analytics-consent'
 export const CONSENT_BANNER_ID = 'consent-banner'
+/** The page's `<main>` (Layout.astro): focus lands there when the banner closes with focus inside. */
+export const MAIN_ID = 'main'
 
 /**
  * The Measurement ID to build into the pages, or undefined. Only production builds (Workers

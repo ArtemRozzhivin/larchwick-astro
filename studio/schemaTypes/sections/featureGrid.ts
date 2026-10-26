@@ -3,9 +3,9 @@ import { defineArrayMember, defineField, defineType } from 'sanity'
 import {
   eyebrowField,
   introField,
+  lightToneField,
   optionalHeadingField,
   sectionPreview,
-  toneField,
 } from '../fields'
 
 const ICONS = ['coffee', 'sprout', 'flame', 'truck', 'check', 'mail', 'phone', 'clock']
@@ -47,7 +47,7 @@ export const featureGrid = defineType({
       ],
       validation: (rule) => rule.required().min(2),
     }),
-    toneField,
+    lightToneField,
   ],
   preview: sectionPreview('Features'),
 })

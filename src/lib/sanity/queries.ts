@@ -34,9 +34,18 @@ export const TERMS_QUERY = defineQuery(
   `*[_type in ["category", "tag"] && defined(slug.current)] | order(title asc){
     _id,
     _type,
+    _updatedAt,
     title,
     "slug": slug.current,
     description
+  }`,
+)
+
+export const PAGE_DATES_QUERY = defineQuery(
+  `*[_type == "page" && defined(slug.current)]{
+    "slug": slug.current,
+    _updatedAt,
+    "listsPosts": slug.current == "blog" || count(sections[_type == "latestPosts"]) > 0
   }`,
 )
 

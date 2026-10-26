@@ -1,5 +1,5 @@
+import type { WxrItem } from '../shared/wxr.ts'
 import type { MediaAsset } from './types.ts'
-import type { WxrItem } from './wxr.ts'
 
 export interface AltEntry {
   file: string

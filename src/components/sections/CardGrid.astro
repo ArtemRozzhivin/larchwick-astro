@@ -1,28 +1,19 @@
 ---
-import type { SanityImageValue } from '@lib/sanity/image'
+import { ui } from '@lib/content/ui'
+import type { CardGrid as CardGridValue } from '@lib/sanity/sanity.types'
+import { isUsableLink, type Link } from '@lib/types'
 import { buttonVariants } from '@components/ui/button'
 import Icon from '@components/ui/Icon.astro'
 import SanityImage from '@components/ui/SanityImage.astro'
+import SpecList from '@components/ui/SpecList.astro'
 
-import Section, { type Tone } from './Section.astro'
+import { itemHeading } from './heading'
+import Section, { type LightTone } from './Section.astro'
 
-interface Link {
-  label?: string
-  href?: string
-}
-
-interface Card {
-  _key?: string
-  roast?: 'light' | 'medium' | 'dark' | 'seasonal'
-  image?: SanityImageValue
-  eyebrow?: string
-  title?: string
-  text?: string
-  specs?: readonly { _key?: string; label?: string; value?: string }[]
-  points?: readonly string[]
-  price?: string
-  cta?: Link
-}
+type Card = Pick<
+  NonNullable<CardGridValue['cards']>[number],
+  'roast' | 'image' | 'eyebrow' | 'title' | 'text' | 'specs' | 'points' | 'price' | 'cta'
+>
 
 interface Props {
   id?: string
@@ -32,7 +23,7 @@ interface Props {
   cards: readonly Card[]
   layout?: 'cards' | 'bags'
   cta?: Link
-  tone?: Tone
+  tone?: LightTone
 }
 
 const { id, eyebrow, heading, intro, cards, layout = 'cards', cta, tone } = Astro.props
@@ -43,18 +34,12 @@ const GRID_CLASSES: Record<number, string> = {
   4: 'sm:grid-cols-2 lg:grid-cols-4',
 }
 const gridClass = GRID_CLASSES[cards.length] ?? 'md:grid-cols-2 lg:grid-cols-3'
-const CardHeading = heading ? 'h3' : 'h2'
+const CardHeading = itemHeading(heading)
 const BAG_TONES: Record<NonNullable<Card['roast']>, string> = {
   light: 'bg-roast-light text-espresso',
   medium: 'bg-roast-medium text-espresso',
   dark: 'bg-roast-dark text-surface',
   seasonal: 'bg-larch text-surface',
-}
-const ROAST_LABELS: Record<NonNullable<Card['roast']>, string> = {
-  light: 'Light roast',
-  medium: 'Medium roast',
-  dark: 'Dark roast',
-  seasonal: 'Seasonal',
 }
 const isBags = layout === 'bags'
 ---
@@ -77,10 +62,10 @@ const isBags = layout === 'bags'
             </CardHeading>
             {card.text && <p class="mt-3 mb-6 leading-relaxed text-pretty">{card.text}</p>}
             <p class="mt-auto flex justify-between gap-4 border-t-2 border-current pt-3 font-bold">
-              <span>{ROAST_LABELS[card.roast ?? 'medium']}</span>
+              <span>{ui.roastLabels[card.roast ?? 'medium']}</span>
               {card.price && <span>{card.price}</span>}
             </p>
-            {card.cta?.href && card.cta.label && (
+            {isUsableLink(card.cta) && (
               <a href={card.cta.href} class="mt-3 font-bold underline underline-offset-4">
                 {card.cta.label}
               </a>
@@ -111,14 +96,7 @@ const isBags = layout === 'bags'
               </CardHeading>
               {card.text && <p class="mt-3 leading-relaxed text-pretty">{card.text}</p>}
               {card.specs && card.specs.length > 0 && (
-                <dl class="border-espresso mt-5 grid grid-cols-[auto_1fr] border-t-2 text-sm">
-                  {card.specs.map((spec) => (
-                    <>
-                      <dt class="border-b py-1.5 pr-4 font-bold">{spec.label}</dt>
-                      <dd class="border-b py-1.5">{spec.value}</dd>
-                    </>
-                  ))}
-                </dl>
+                <SpecList items={card.specs} size="sm" class="mt-5" />
               )}
               {card.points && card.points.length > 0 && (
                 <ul class="mt-5 space-y-2">
@@ -131,7 +109,7 @@ const isBags = layout === 'bags'
                 </ul>
               )}
               {card.price && <p class="text-espresso mt-5 font-bold">{card.price}</p>}
-              {card.cta?.href && card.cta.label && (
+              {isUsableLink(card.cta) && (
                 <div class="mt-auto pt-6">
                   <a
                     href={card.cta.href}
@@ -148,7 +126,7 @@ const isBags = layout === 'bags'
     )
   }
   {
-    cta?.href && cta.label && (
+    isUsableLink(cta) && (
       <div class="reveal mt-10">
         <a href={cta.href} class={buttonVariants({ variant: 'primary' })}>
           {cta.label}

@@ -3,23 +3,14 @@
  * Uses native <details>/<summary>, so the accordion works with zero JavaScript
  * and stays keyboard accessible for free.
  */
-import type { BlockContent } from '@lib/sanity/sanity.types'
+import type { Faq } from '@lib/sanity/sanity.types'
 import RichText from '@components/rich-text/RichText.astro'
 import Icon from '@components/ui/Icon.astro'
 
-import Section, { type Tone } from './Section.astro'
+import { itemHeading } from './heading'
+import Section, { type LightTone } from './Section.astro'
 
-interface FaqItem {
-  _key?: string
-  question?: string
-  answer?: BlockContent
-}
-
-interface FaqGroup {
-  _key?: string
-  heading?: string
-  items?: readonly FaqItem[]
-}
+type FaqGroup = Pick<NonNullable<Faq['groups']>[number], 'heading' | 'items'>
 
 interface Props {
   id?: string
@@ -27,12 +18,12 @@ interface Props {
   heading?: string
   intro?: string
   groups: readonly FaqGroup[]
-  tone?: Tone
+  tone?: LightTone
 }
 
-const { id = 'faq', eyebrow, heading, intro, groups, tone } = Astro.props
+const { id, eyebrow, heading, intro, groups, tone } = Astro.props
 
-const GroupHeading = heading ? 'h3' : 'h2'
+const GroupHeading = itemHeading(heading)
 ---
 
 <Section id={id} eyebrow={eyebrow} heading={heading} intro={intro} tone={tone} width="narrow">

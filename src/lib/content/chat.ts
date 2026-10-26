@@ -1,10 +1,12 @@
+import { siteConfig } from '@lib/config/site'
+
 /**
  * All copy for the "Ask Larchwick" assistant (PLAN.md Phase 7b). Rendered by
  * `src/components/chat/ChatPanel.astro`; the messages the Worker sends are in `worker/chat.ts`.
  */
 export const chat = {
-  button: 'Ask Larchwick',
-  title: 'Ask Larchwick',
+  button: `Ask ${siteConfig.name}`,
+  title: `Ask ${siteConfig.name}`,
   intro:
     'Questions about our coffees, shipping, subscriptions, wholesale or brewing? I answer from this website and link the pages I used.',
   suggestionsLabel: 'Try asking',

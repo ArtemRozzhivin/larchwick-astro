@@ -97,9 +97,16 @@ function sendPending(): void {
   }
 }
 
-function isReload(): boolean {
+type NavigationType = PerformanceNavigationTiming['type']
+
+/** A reload, or Back/Forward to a page the visitor already saw: its view was already counted. */
+export function isRepeatView(type: NavigationType | undefined): boolean {
+  return type === 'reload' || type === 'back_forward'
+}
+
+function navigationType(): NavigationType | undefined {
   const [entry] = performance.getEntriesByType('navigation') as PerformanceNavigationTiming[]
-  return entry?.type === 'reload'
+  return entry?.type
 }
 
 export function startTracking(): void {
@@ -115,8 +122,8 @@ export function startTracking(): void {
     const method = link && contactMethod(link.getAttribute('href') ?? '')
     if (method) track('contact_click', { contact_method: method })
   })
-  // A reload of the thanks page is not a second lead.
-  if (isReload()) return
+  // Reloading the thanks page, or coming Back to it, is not a second lead.
+  if (isRepeatView(navigationType())) return
   for (const element of document.querySelectorAll<HTMLElement>('[data-track-view]')) {
     track(element.dataset.trackView ?? '', trackParams(element.dataset))
   }

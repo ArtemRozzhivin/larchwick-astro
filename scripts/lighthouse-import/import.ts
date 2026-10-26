@@ -3,7 +3,9 @@ import { dirname, join, relative, resolve, sep } from 'node:path'
 import { parseArgs } from 'node:util'
 import { gunzipSync, gzipSync } from 'node:zlib'
 
-import { type Author, parseAuthors, Scrubber } from '../seo-check/privacy.ts'
+import { describeError } from '../shared/http.ts'
+import { renderTable } from '../shared/markdown.ts'
+import { type Author, parseAuthors, Scrubber } from '../shared/privacy.ts'
 
 const ROOT = resolve(import.meta.dirname, '../..')
 const WORDPRESS_USERS_URL = 'http://larchwick.local/wp-json/wp/v2/users?per_page=100'
@@ -140,10 +142,6 @@ interface MetricsRow extends RunId {
   requestCount: number
   scriptTransferSize: number
   httpsAuditScores: Record<HttpsAudit, number | null>
-}
-
-function describeError(error: unknown): string {
-  return error instanceof Error ? error.message : String(error)
 }
 
 function isSide(value: unknown): value is Side {
@@ -458,16 +456,6 @@ function layoutShift(value: number): string {
 
 function unique(values: readonly string[]): string[] {
   return [...new Set(values)].sort()
-}
-
-function renderTable(header: readonly string[], rows: readonly (readonly string[])[]): string {
-  const widths = header.map((cell, column) =>
-    Math.max(3, cell.length, ...rows.map((row) => row[column].length)),
-  )
-  const line = (cells: readonly string[]): string =>
-    `| ${cells.map((cell, column) => cell.padEnd(widths[column])).join(' | ')} |`
-  const divider = `| ${widths.map((width) => '-'.repeat(width)).join(' | ')} |`
-  return [line(header), divider, ...rows.map(line)].join('\n')
 }
 
 function renderDevice(device: Device, rows: readonly MetricsRow[]): string[] {

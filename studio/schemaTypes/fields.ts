@@ -44,19 +44,30 @@ export const introField = defineField({
   description: 'Optional sentence or two under the heading.',
 })
 
+const LIGHT_TONES = [
+  { title: 'Light', value: 'default' },
+  { title: 'Cream', value: 'muted' },
+]
+
+/** Light, Cream or Dark: only for sections whose every colour adapts to the dark (larch) band. */
 export const toneField = defineField({
   name: 'tone',
   title: 'Background',
   type: 'string',
   options: {
-    list: [
-      { title: 'Light', value: 'default' },
-      { title: 'Cream', value: 'muted' },
-      { title: 'Dark', value: 'inverted' },
-    ],
+    list: [...LIGHT_TONES, { title: 'Dark', value: 'inverted' }],
     layout: 'radio',
     direction: 'horizontal',
   },
+  initialValue: 'default',
+})
+
+/** Light or Cream: for sections with dark text, links or buttons that would vanish on the dark band. */
+export const lightToneField = defineField({
+  name: 'tone',
+  title: 'Background',
+  type: 'string',
+  options: { list: LIGHT_TONES, layout: 'radio', direction: 'horizontal' },
   initialValue: 'default',
 })
 

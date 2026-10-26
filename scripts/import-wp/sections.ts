@@ -4,7 +4,7 @@ import {
   elements,
   firstElement,
   type HtmlElement,
-  type HtmlNode,
+  innerOf,
   isItalicOnly,
   parseHtml,
   textOf,
@@ -35,10 +35,6 @@ const CONTACT_FIELDS: readonly [RegExp, keyof ContactDetails][] = [
   [/phone/i, 'phone'],
   [/hours/i, 'hours'],
 ]
-
-function innerOf(html: string, tag: string): HtmlNode[] {
-  return firstElement(parseHtml(html), tag)?.children ?? []
-}
 
 function headingText(block: Block): string {
   return textOf(parseHtml(block.html))

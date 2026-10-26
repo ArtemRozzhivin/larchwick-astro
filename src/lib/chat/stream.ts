@@ -1,9 +1,11 @@
+import type { Excerpt } from '../rag/config.ts'
+
 /** Pure helpers for the chat client: reading /api/chat's event stream (see worker/chat.ts). */
-export interface Source {
-  title: string
-  url: string
-  heading: string
-}
+
+/** The longest question /api/chat accepts: the input's `maxlength` and the Worker's check. */
+export const QUESTION_MAX = 500
+
+export type Source = Pick<Excerpt, 'title' | 'url' | 'heading'>
 
 export type ChatEvent =
   | { type: 'delta'; text: string }

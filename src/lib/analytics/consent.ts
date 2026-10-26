@@ -1,4 +1,11 @@
-import { analyticsCookies, type Consent, CONSENT_KEY, cookieDomains, readConsent } from './config'
+import {
+  analyticsCookies,
+  type Consent,
+  CONSENT_KEY,
+  cookieDomains,
+  MAIN_ID,
+  readConsent,
+} from './config'
 
 /**
  * The consent banner's behaviour (ConsentBanner.astro). Nothing from Google loads until the
@@ -88,17 +95,29 @@ export function startConsent(banner: HTMLElement): void {
     }
     focusOnOpen = true
   })
+  const close = (): void => {
+    const hadFocus = banner.contains(document.activeElement)
+    banner.hidePopover()
+    if (returnFocus) returnFocus.focus()
+    else if (hadFocus) document.getElementById(MAIN_ID)?.focus({ preventScroll: true })
+    returnFocus = null
+  }
   for (const button of banner.querySelectorAll<HTMLButtonElement>('[data-consent]')) {
     button.addEventListener('click', () => {
       const choice: Consent = button.dataset.consent === 'granted' ? 'granted' : 'denied'
       storeConsent(choice)
-      banner.hidePopover()
-      returnFocus?.focus()
-      returnFocus = null
+      close()
       if (!id) return
       if (choice === 'granted') startAnalytics(id)
       else stopAnalytics(id)
     })
   }
+  // Escape hides the banner without a choice, so it asks again on the next page. Another open
+  // popover (the menu, the assistant) takes the Escape first.
+  document.addEventListener('keydown', (event) => {
+    if (event.key !== 'Escape' || event.defaultPrevented || !banner.matches(':popover-open')) return
+    if (document.querySelectorAll(':popover-open').length > 1) return
+    close()
+  })
   if (!consent) banner.showPopover()
 }

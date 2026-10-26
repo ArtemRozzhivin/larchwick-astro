@@ -2,21 +2,33 @@
 dev=npm run dev
 build=npm run build
 preview=npm run preview
+preview_deploy=npm run preview:deploy
+                             build as a preview of the current branch (WORKERS_CI_BRANCH set,
+                             so noindex) and run npx wrangler preview; refuses on main
+test=npm test                node --test: the Worker handlers, the redirect rules and the
+                             pure helpers in src/lib (worker/**/*.test.ts, src/**/*.test.ts)
 check=npm run check          astro check — types + .astro templates
 lint=npm run lint
 lint_fix=npm run lint:fix
 format=npm run format
 format_check=npm run format:check
-verify=npm run verify        check + lint + format:check
+verify=npm run verify        check + lint + format:check + npm test
 credits=npm run credits      rebuild CREDITS.md
 seo_crawl=npm run seo:crawl  crawl the WordPress "before" site
+rebuild_watch=npm run rebuild:watch
+                             measure publish → live time against production
+                             (docs/after/rebuild-times.json)
 studio=npm run studio        Sanity Studio on http://localhost:3333 (studio/ has its own
                              package.json: npm install --prefix studio once)
 studio_typegen=npm run studio:typegen
                              schema extract + typegen → src/lib/sanity/sanity.types.ts
 import_wp=npm run import:wp     WordPress → Sanity, dry run by default; -- --write to apply
                              (scripts/ has its own package.json: npm install --prefix scripts once;
-                             tests: npm --prefix scripts test)
+                             tests: npm --prefix scripts test; npm --prefix scripts run check
+                             type-checks import-wp/ and shared/)
+lighthouse_run=npm run lighthouse:run
+                             the paired Lighthouse session; set CHROME_PATH (Chrome, Chromium or
+                             Brave) unless Brave is at its macOS default path
 lighthouse_import=npm run lighthouse:import
                              file saved Lighthouse JSON reports into docs/
 
@@ -25,16 +37,19 @@ Cloudflare build.
 
 Serve the built site the way Cloudflare does: npm run build && npx wrangler dev
 (npx downloads wrangler; it is not a dependency). Deploys are not run by hand: Workers Builds
-deploys main on every push and uploads a preview version for other branches.
+deploys main on every push and uploads a preview version for other branches. If a preview
+must be uploaded by hand, use npm run preview:deploy: a plain local build has no
+WORKERS_CI_BRANCH and would be built as production (indexable).
 
-There is no test runner in this template. Verification is astro check + lint +
-format + a successful build.
+Tests: npm test (Node's built-in runner, no Vitest at the root) and, for the importer,
+npm --prefix scripts test (Vitest). CI runs both, plus check, lint, format:check and the
+build. Verification is astro check + lint + format + the tests + a successful build.
 </commands>
 
 <git_hooks>
 pre_commit=lint-staged (eslint --fix + prettier) then npm run check
 commit_msg=commitlint, @commitlint/config-conventional
-pre_push=blocks direct push to main, then format:check + lint + check + build
+pre_push=blocks direct push to main, then format:check + lint + check + npm test + build
 
 Managed by husky (npm run prepare on install). Do not write hooks into .git/hooks
 by hand — .husky/ is the source of truth.
@@ -101,9 +116,9 @@ Caveat: it inspects the uncommitted working tree only.
 </stop_hook>
 
 <agents>
-code-sentinel — review a diff before merge: shipped JavaScript, duplicated
-sections, accessibility, SEO, types, conventions. Run it after finishing a page
-or section, before asking about a PR.
+The project has no agents of its own. Reviews use the review team, a user-level
+skill outside this repo: /review-team dev reviews the diff against dev before a
+PR; /review-team --all reviews the whole project.
 </agents>
 
 <skills>

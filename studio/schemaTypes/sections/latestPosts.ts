@@ -1,6 +1,6 @@
 import { defineField, defineType } from 'sanity'
 
-import { eyebrowField, optionalHeadingField, sectionPreview, toneField } from '../fields'
+import { eyebrowField, lightToneField, optionalHeadingField, sectionPreview } from '../fields'
 
 export const latestPosts = defineType({
   name: 'latestPosts',
@@ -18,7 +18,7 @@ export const latestPosts = defineType({
       validation: (rule) => rule.required().integer().min(1).max(6),
     }),
     defineField({ name: 'cta', title: 'Button', type: 'linkItem' }),
-    toneField,
+    lightToneField,
   ],
   preview: sectionPreview('Latest posts'),
 })
