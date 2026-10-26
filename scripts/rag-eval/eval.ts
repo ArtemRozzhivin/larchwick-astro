@@ -2,11 +2,12 @@ import { execFileSync } from 'node:child_process'
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { dirname, resolve } from 'node:path'
 
-import { EMBEDDING_MODEL, MODEL, TOP_K } from '../../worker/chat.ts'
+import { siteConfig } from '../../src/lib/config/site.ts'
+import { CONTENT_NAMESPACE, EMBEDDING_MODEL, RAG_INDEX } from '../../src/lib/rag/config.ts'
+import { MODEL, TOP_K } from '../../worker/chat.ts'
 
 const ROOT = resolve(import.meta.dirname, '../..')
-const PRODUCTION = 'https://larchwick-astro.larchwick.workers.dev'
-const INDEX = 'larchwick-content'
+const PRODUCTION = siteConfig.url
 const QUESTIONS = 'scripts/rag-eval/questions.json'
 const PRODUCTION_REPORT = 'docs/after/rag-eval.json'
 const OTHER_REPORT = '.cache/rag/eval.json'
@@ -98,12 +99,15 @@ async function retrieve(
   const { data } = (await call(`/accounts/${accountId}/ai/run/${EMBEDDING_MODEL}`, {
     text: [question],
   })) as { data: number[][] }
-  const { matches } = (await call(`/accounts/${accountId}/vectorize/v2/indexes/${INDEX}/query`, {
-    vector: data[0],
-    topK: TOP_K,
-    namespace: 'content',
-    returnMetadata: 'all',
-  })) as { matches: { metadata?: { url?: string } }[] }
+  const { matches } = (await call(
+    `/accounts/${accountId}/vectorize/v2/indexes/${RAG_INDEX}/query`,
+    {
+      vector: data[0],
+      topK: TOP_K,
+      namespace: CONTENT_NAMESPACE,
+      returnMetadata: 'all',
+    },
+  )) as { matches: { metadata?: { url?: string } }[] }
   return matches.map((match) => match.metadata?.url ?? '')
 }
 

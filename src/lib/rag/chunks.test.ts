@@ -109,9 +109,27 @@ describe('rag passages', () => {
     assert.equal(splitLong(['short', 'lines'], 350).length, 1)
   })
 
-  it('keeps ids stable for unchanged text and changes them when the text changes', () => {
-    assert.equal(passageId('/a/', 'H', 'text'), passageId('/a/', 'H', 'text'))
-    assert.notEqual(passageId('/a/', 'H', 'text'), passageId('/a/', 'H', 'text!'))
-    assert.match(passageId('/a/', 'H', 'text'), /^[0-9a-f]{32}$/)
+  it('keeps ids stable for an unchanged passage and changes them when anything stored changes', () => {
+    const stored = { url: '/a/', title: 'About', heading: 'H', text: 'text' }
+    assert.equal(passageId(stored), passageId({ ...stored }))
+    assert.match(passageId(stored), /^[0-9a-f]{32}$/)
+    for (const changed of [
+      { ...stored, url: '/b/' },
+      { ...stored, title: 'About us' },
+      { ...stored, heading: 'H2' },
+      { ...stored, text: 'text!' },
+    ]) {
+      assert.notEqual(passageId(changed), passageId(stored), JSON.stringify(changed))
+    }
+  })
+
+  it('re-indexes a page whose title was renamed', () => {
+    const page = {
+      url: '/about/',
+      sections: [{ _type: 'textBlock', heading: 'Us', body: [block('Hi.')] }],
+    }
+    const [before] = pagePassages({ ...page, title: 'About' })
+    const [after] = pagePassages({ ...page, title: 'About Larchwick' })
+    assert.notEqual(before.id, after.id)
   })
 })
