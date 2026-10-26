@@ -2,9 +2,13 @@
 /**
  * The mobile menu is a native popover (popovertarget): no JavaScript, and the browser handles
  * Escape, outside clicks and focus. It slides in as a sidebar (.drawer in global.css).
+ *
+ * On short viewports (a landscape phone, 400% zoom) the header scrolls with the page: stuck to
+ * the top, it and the consent banner would cover every focus stop (scroll-padding in global.css).
  */
 import { siteConfig } from '@lib/config/site'
 import { getSiteSettings } from '@lib/sanity/settings'
+import { iconButtonVariants } from '@components/ui/button'
 import Icon from '@components/ui/Icon.astro'
 
 type AriaCurrent = 'page' | 'true' | undefined
@@ -25,14 +29,13 @@ const navItems = settings.navigation.map((item) => ({
 
 const { labels } = siteConfig.header
 const MENU_ID = 'site-menu'
-const ICON_BUTTON =
-  'text-espresso hover:bg-paper flex size-11 cursor-pointer items-center justify-center rounded-md transition-colors'
+const ICON_BUTTON = iconButtonVariants()
 
 const LINK_BASE =
   'rounded-sm border-b-3 border-transparent pb-1 transition-colors hover:border-needle aria-[current]:border-larch'
 ---
 
-<header class="bg-paper/95 border-espresso/15 sticky top-0 z-50 border-b backdrop-blur-sm">
+<header class="bg-paper border-espresso/15 short:relative sticky top-0 z-50 border-b">
   <div class="container-wide flex h-16 items-center justify-between gap-6 md:h-20">
     <a href="/" class="text-larch font-display rounded-sm text-[1.9rem] leading-none font-black">
       {settings.siteName}
@@ -73,7 +76,7 @@ const LINK_BASE =
           type="button"
           popovertarget={MENU_ID}
           popovertargetaction="hide"
-          class:list={[ICON_BUTTON, 'hover:bg-border']}
+          class={ICON_BUTTON}
         >
           <span class="sr-only">{labels.closeMenu}</span>
           <Icon name="x" class="size-6" />

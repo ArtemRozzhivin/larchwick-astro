@@ -1,6 +1,6 @@
 import { defineField, defineType } from 'sanity'
 
-import { introField, optionalHeadingField, sectionPreview, toneField } from '../fields'
+import { introField, lightToneField, optionalHeadingField, sectionPreview } from '../fields'
 
 export const contactForm = defineType({
   name: 'contactForm',
@@ -17,7 +17,7 @@ export const contactForm = defineType({
       description: 'Uses the details from Site settings.',
       initialValue: true,
     }),
-    toneField,
+    lightToneField,
   ],
   preview: sectionPreview('Contact form'),
 })

@@ -2,6 +2,8 @@
 /**
  * The coffee bag label: the brand's main graphic device. The stamp presses on once, on load.
  */
+import SpecList from './SpecList.astro'
+
 export interface CoffeeLabelValue {
   name?: string
   origin?: string
@@ -40,20 +42,16 @@ const stampBig = stampRest.join(' ')
       </p>
     )
   }
-  <p class="font-display pr-24 text-[2.6rem] leading-[0.9] font-black">{label.name}</p>
-  {label.origin && <p class="text-larch mt-2.5 font-bold">{label.origin}</p>}
   {
-    label.details && label.details.length > 0 && (
-      <dl class="border-espresso mt-6 grid grid-cols-[auto_1fr] border-t-2">
-        {label.details.map((detail) => (
-          <>
-            <dt class="border-border border-b py-2 pr-5 font-bold">{detail.label}</dt>
-            <dd class="border-border border-b py-2">{detail.value}</dd>
-          </>
-        ))}
-      </dl>
-    )
+    /* The padding clears the stamp; on phones it, and the type under 370px, get smaller so long words fit */
   }
+  <p
+    class="font-display pr-20 text-[clamp(2rem,22vw_-_2.5rem,2.6rem)] leading-[0.9] font-black break-words sm:pr-24"
+  >
+    {label.name}
+  </p>
+  {label.origin && <p class="text-larch mt-2.5 font-bold">{label.origin}</p>}
+  {label.details && label.details.length > 0 && <SpecList items={label.details} class="mt-6" />}
   <p class="mt-5 flex justify-between gap-4 font-bold">
     <span>{label.footnote}</span>
     <span>{brand}</span>

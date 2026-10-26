@@ -1,0 +1,40 @@
+---
+/**
+ * A row of large buttons from Sanity links (the hero, the call-to-action band). Links without a
+ * label or an address are skipped; each click is tracked as `cta_click` with its location.
+ */
+import { isUsableLink, type Link } from '@lib/types'
+
+import { type ButtonVariant, buttonVariants } from './button'
+
+interface Props {
+  links: readonly (Link | undefined)[]
+  /** One per rendered button, in order: the first is the main one. */
+  variants: readonly ButtonVariant[]
+  location: string
+  class?: string
+  style?: string
+}
+
+const { links, variants, location, class: className, style } = Astro.props
+
+const usable = links.filter(isUsableLink)
+---
+
+{
+  usable.length > 0 && (
+    <div class:list={['flex flex-col gap-3 sm:flex-row', className]} style={style}>
+      {usable.map((link, index) => (
+        <a
+          href={link.href}
+          class={buttonVariants({ variant: variants[index], size: 'lg' })}
+          data-track="cta_click"
+          data-track-cta-label={link.label}
+          data-track-cta-location={location}
+        >
+          {link.label}
+        </a>
+      ))}
+    </div>
+  )
+}

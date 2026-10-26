@@ -1,15 +1,11 @@
 ---
 import type { SanityImageValue } from '@lib/sanity/image'
 import { getSiteSettings } from '@lib/sanity/settings'
-import { buttonVariants } from '@components/ui/button'
+import type { Link } from '@lib/types'
 import CoffeeLabel, { type CoffeeLabelValue } from '@components/ui/CoffeeLabel.astro'
+import CtaButtons from '@components/ui/CtaButtons.astro'
 import Icon from '@components/ui/Icon.astro'
 import SanityImage from '@components/ui/SanityImage.astro'
-
-interface Cta {
-  label?: string
-  href?: string
-}
 
 interface Props {
   id?: string
@@ -19,14 +15,14 @@ interface Props {
   text?: string
   image?: SanityImageValue
   label?: CoffeeLabelValue
-  primaryCta?: Cta
-  secondaryCta?: Cta
+  primaryCta?: Link
+  secondaryCta?: Link
   trustList?: readonly string[]
   priority?: boolean
 }
 
 const {
-  id = 'hero',
+  id,
   variant = 'cover',
   eyebrow,
   heading,
@@ -41,7 +37,6 @@ const {
 
 const { siteName } = await getSiteSettings()
 const isCover = variant === 'cover'
-const ctas = [primaryCta, secondaryCta].filter((cta) => cta?.href && cta.label)
 const photo = !label && image ? { ...image, decorative: true } : undefined
 const hasLabel = Boolean(label?.name)
 ---
@@ -53,9 +48,10 @@ const hasLabel = Boolean(label?.name)
     photo && 'lg:flex lg:min-h-[32rem] lg:items-center',
   ]}
 >
+  {/* minmax(0, 1fr): an auto column grows to the label's longest word and clips the text */}
   <div
     class:list={[
-      'container-wide grid items-center gap-12',
+      'container-wide grid grid-cols-1 items-center gap-12',
       isCover ? 'py-16 md:py-24' : 'py-14 md:py-20',
       hasLabel && 'lg:grid-cols-[1.15fr_1fr]',
     ]}
@@ -91,26 +87,13 @@ const hasLabel = Boolean(label?.name)
         )
       }
 
-      {
-        ctas.length > 0 && (
-          <div class="rise-in mt-9 flex flex-col gap-3 sm:flex-row" style="--rise-delay: 3">
-            {ctas.map((cta, index) => (
-              <a
-                href={cta?.href}
-                class={buttonVariants({
-                  variant: index === 0 ? 'accent' : 'inverse-outline',
-                  size: 'lg',
-                })}
-                data-track="cta_click"
-                data-track-cta-label={cta?.label}
-                data-track-cta-location="hero"
-              >
-                {cta?.label}
-              </a>
-            ))}
-          </div>
-        )
-      }
+      <CtaButtons
+        links={[primaryCta, secondaryCta]}
+        variants={['accent', 'inverse-outline']}
+        location="hero"
+        class="rise-in mt-9"
+        style="--rise-delay: 3"
+      />
 
       {
         trustList.length > 0 && (

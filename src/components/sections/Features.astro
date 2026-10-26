@@ -1,15 +1,12 @@
 ---
+import type { FeatureGrid } from '@lib/sanity/sanity.types'
 import { isIconName } from '@lib/types'
 import Icon from '@components/ui/Icon.astro'
 
-import Section, { type Tone } from './Section.astro'
+import { itemHeading } from './heading'
+import Section, { type LightTone } from './Section.astro'
 
-interface Feature {
-  _key?: string
-  icon?: string
-  title?: string
-  text?: string
-}
+type Feature = Pick<NonNullable<FeatureGrid['items']>[number], 'icon' | 'title' | 'text'>
 
 interface Props {
   id?: string
@@ -17,17 +14,17 @@ interface Props {
   heading?: string
   intro?: string
   items: readonly Feature[]
-  tone?: Tone
+  tone?: LightTone
 }
 
-const { id = 'features', eyebrow, heading, intro, items, tone } = Astro.props
+const { id, eyebrow, heading, intro, items, tone } = Astro.props
 
 const GRID_CLASSES: Record<number, string> = {
   2: 'sm:grid-cols-2',
   4: 'sm:grid-cols-2 lg:grid-cols-4',
 }
 const gridClass = GRID_CLASSES[items.length] ?? 'md:grid-cols-3'
-const ItemHeading = heading ? 'h3' : 'h2'
+const ItemHeading = itemHeading(heading)
 ---
 
 <Section id={id} eyebrow={eyebrow} heading={heading} intro={intro} tone={tone}>

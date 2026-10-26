@@ -8,6 +8,7 @@ import { CONSENT_BANNER_ID, measurementId } from '@lib/analytics/config'
 import { siteConfig } from '@lib/config/site'
 import { consent } from '@lib/content/consent'
 import { buttonVariants } from '@components/ui/button'
+import { inlineLinkClass } from '@components/ui/link'
 
 const id = measurementId(process.env, siteConfig.analytics.measurementId)
 ---
@@ -26,12 +27,7 @@ const id = measurementId(process.env, siteConfig.analytics.measurementId)
   </h2>
   <p id="consent-text" class="mt-2 text-sm leading-relaxed">
     {consent.text}
-    <a
-      href={consent.privacy.href}
-      class="text-larch decoration-needle hover:text-espresso font-semibold underline decoration-2 underline-offset-4"
-    >
-      {consent.privacy.label}
-    </a>
+    <a href={consent.privacy.href} class={inlineLinkClass}>{consent.privacy.label}</a>
   </p>
   <div class="mt-4 flex gap-3">
     <button type="button" data-consent="granted" class={buttonVariants({ size: 'sm' })}>

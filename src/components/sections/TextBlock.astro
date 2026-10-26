@@ -2,14 +2,14 @@
 import type { BlockContent } from '@lib/sanity/sanity.types'
 import RichText from '@components/rich-text/RichText.astro'
 
-import Section, { type Tone } from './Section.astro'
+import Section, { type LightTone } from './Section.astro'
 
 interface Props {
   id?: string
   eyebrow?: string
   heading?: string
   body?: BlockContent
-  tone?: Tone
+  tone?: LightTone
 }
 
 const { id, eyebrow, heading, body = [], tone } = Astro.props

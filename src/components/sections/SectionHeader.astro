@@ -1,0 +1,66 @@
+---
+import type { Tone } from './Section.astro'
+
+interface Props {
+  eyebrow?: string
+  heading?: string
+  intro?: string
+  align?: 'left' | 'center'
+  tone?: Tone
+  /** Reveal steps taken by something above the header, so its lines rise after it. */
+  revealDelay?: number
+  class?: string
+}
+
+const {
+  eyebrow,
+  heading,
+  intro,
+  align = 'left',
+  tone = 'default',
+  revealDelay = 0,
+  class: className,
+} = Astro.props
+
+const hasHeader = Boolean(eyebrow || heading || intro)
+const isInverted = tone === 'inverted'
+
+function revealStyle(step: number): string | undefined {
+  const delay = revealDelay + step
+  return delay > 0 ? `--reveal-delay: ${delay}` : undefined
+}
+---
+
+{
+  hasHeader && (
+    <header class:list={[className, align === 'center' && 'mx-auto text-center']}>
+      {eyebrow && (
+        <p
+          class:list={[
+            'reveal mb-3 font-bold text-balance',
+            isInverted ? 'text-needle' : 'text-larch',
+          ]}
+          style={revealStyle(0)}
+        >
+          {eyebrow}
+        </p>
+      )}
+      {heading && (
+        <h2
+          class:list={[
+            'font-display reveal text-[2.6rem] leading-[0.95] font-black text-balance md:text-6xl',
+            isInverted ? 'text-surface' : 'text-espresso',
+          ]}
+          style={revealStyle(1)}
+        >
+          {heading}
+        </h2>
+      )}
+      {intro && (
+        <p class="reveal mt-4 text-lg leading-relaxed text-pretty" style={revealStyle(2)}>
+          {intro}
+        </p>
+      )}
+    </header>
+  )
+}

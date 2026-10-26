@@ -1,6 +1,6 @@
 import { defineField, defineType } from 'sanity'
 
-import { eyebrowField, headingField, sectionPreview, toneField } from '../fields'
+import { eyebrowField, headingField, lightToneField, sectionPreview } from '../fields'
 
 export const imageText = defineType({
   name: 'imageText',
@@ -31,7 +31,7 @@ export const imageText = defineType({
       initialValue: 'left',
     }),
     defineField({ name: 'cta', title: 'Button', type: 'linkItem' }),
-    toneField,
+    lightToneField,
   ],
   preview: sectionPreview('Image and text'),
 })

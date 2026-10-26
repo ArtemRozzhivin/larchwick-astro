@@ -1,18 +1,16 @@
 ---
-import Section, { type Tone } from './Section.astro'
+import type { Stats } from '@lib/sanity/sanity.types'
 
-interface Stat {
-  _key?: string
-  value?: string
-  label?: string
-}
+import Section, { type LightTone } from './Section.astro'
+
+type Stat = Pick<NonNullable<Stats['items']>[number], 'value' | 'label'>
 
 interface Props {
   id?: string
   eyebrow?: string
   heading?: string
   items: readonly Stat[]
-  tone?: Tone
+  tone?: LightTone
 }
 
 const { id, eyebrow, heading, items, tone } = Astro.props
